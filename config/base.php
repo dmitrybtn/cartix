@@ -1,20 +1,19 @@
 <?php
 
-$params = require __DIR__ . '/params.php';
-$db = require __DIR__ . '/db.php';
-$cp = require __DIR__ . '/../vendor/dmitrybtn/yii2-cp/config.php';
+return \yii\helpers\ArrayHelper::merge(require __DIR__ . '/../vendor/dmitrybtn/yii2-cp/config.php', [
 
-$config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
+    'defaultRoute' => 'site/index',
     'bootstrap' => ['log'],
+    'language' => 'ru-RU',
+
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
     'components' => [
         'request' => [
-            // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => '2DhAfOf8hglIJ-hxwDCQixZ6s5i6iDqo',
         ],
         'cache' => [
@@ -44,8 +43,7 @@ $config = [
                 ],
             ],
         ],
-        'db' => $db,
-        
+
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
@@ -55,8 +53,14 @@ $config = [
             ],
         ],
     ],
-    'params' => $params,
-];
+
+]);
+
+/*
+ [
+
+
+
 
 if (YII_ENV_DEV) {
     // configuration adjustments for 'dev' environment
@@ -75,4 +79,5 @@ if (YII_ENV_DEV) {
     ];
 }
 
-return $config;
+return \yii\helpers\ArrayHelper::merge($cp, $config);;
+*/
