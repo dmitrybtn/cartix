@@ -45,6 +45,11 @@ return \yii\helpers\ArrayHelper::merge(require __DIR__ . '/../vendor/dmitrybtn/y
             ],
         ],
 
+        'assetManager' => [
+            'forceCopy' => true,
+            'appendTimestamp' => true,
+        ],
+
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
