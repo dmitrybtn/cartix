@@ -2,7 +2,8 @@
 
 return \yii\helpers\ArrayHelper::merge(require __DIR__ . '/../vendor/dmitrybtn/yii2-cp/config.php', [
 
-    'id' => 'basic',
+    'id' => 'ph-cartix',
+    'name' => 'Техкарты МГИ',
     'basePath' => dirname(__DIR__),
     'defaultRoute' => 'site/index',
     'bootstrap' => ['log'],
@@ -21,7 +22,7 @@ return \yii\helpers\ArrayHelper::merge(require __DIR__ . '/../vendor/dmitrybtn/y
         ],
 
         'user' => [
-            'class' => 'dmitrybtn\cp\users\components\User',
+            'class' => 'dmitrybtn\cp\User',
         ],
 
         'errorHandler' => [
