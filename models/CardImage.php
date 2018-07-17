@@ -10,6 +10,7 @@ use igogo5yo\uploadfromurl\UploadFromUrl;
 
 use yii\helpers\FileHelper;
 use yii\web\UploadedFile;
+use yii\imagine\Image;
 
 //*****************************************************************************
 class CardImage extends \yii\db\ActiveRecord
@@ -121,6 +122,28 @@ class CardImage extends \yii\db\ActiveRecord
 
 		if ($this->file->saveAs(Yii::getAlias('@webroot/uploads') . '/' . $url))
 			$this->file = $url;
+	}
+
+	//-------------------------------------------------------------------------
+	public function thumbnail($width, $height)
+	//-------------------------------------------------------------------------
+	{
+		$p = pathinfo($this->file); 
+
+		$dir = $p['dirname'];
+		$file = $dir . '/' . $p['filename'] . '-' . $width . 'x' . $height . '.' . $p['extension'];
+
+		if (!is_file(Yii::getAlias('@webroot/assets/thumbnails/' . $file))) {
+
+			FileHelper::createDirectory(Yii::getAlias('@webroot/assets/thumbnails/' . $dir), 0777);
+
+			$objThumb = Image::thumbnail('@webroot/uploads/' . $this->file, $width, $width);
+			$objThumb->save(Yii::getAlias('@webroot/assets/thumbnails/' . $file), ['quality' => 80]);
+
+		}
+
+		return Yii::getAlias('@web/assets/thumbnails/' . $file);
+
 	}
 
 	//*************************************************************************

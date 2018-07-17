@@ -22,3 +22,5 @@ use yii\widgets\DetailView;
     ]) ?>
 
 </div>
+
+<?php echo Html::img($modCardImage->thumbnail(150, 150), ['alt' => 'Экскурсия']) ?>

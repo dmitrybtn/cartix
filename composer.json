@@ -19,7 +19,8 @@
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0",
         "dmitrybtn/yii2-cp": "dev-master",
-        "igogo5yo/yii2-upload-from-url": "^1.4"
+        "igogo5yo/yii2-upload-from-url": "^1.4",
+        "yiisoft/yii2-imagine": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
