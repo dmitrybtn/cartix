@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "175964a5e094f23973f8674817080009",
+    "content-hash": "110d63bf03a46ca556ee7b995b0f0258",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -254,6 +254,53 @@
                 "html"
             ],
             "time": "2018-02-23T01:58:20+00:00"
+        },
+        {
+            "name": "igogo5yo/yii2-upload-from-url",
+            "version": "v1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/igogo5yo/yii2-upload-from-url.git",
+                "reference": "331a461fd2788ea7b845e4cd485e3d05ba3d047f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/igogo5yo/yii2-upload-from-url/zipball/331a461fd2788ea7b845e4cd485e3d05ba3d047f",
+                "reference": "331a461fd2788ea7b845e4cd485e3d05ba3d047f",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0.0"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "igogo5yo\\uploadfromurl\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Skliar Ihor",
+                    "email": "skliar.ihor@gmail.com"
+                }
+            ],
+            "description": "UploadFromUrl extension for Yii Framework 2",
+            "keywords": [
+                "framework",
+                "igogo5yo",
+                "upload file",
+                "upload link",
+                "upload url",
+                "yii2"
+            ],
+            "time": "2018-01-16T07:37:34+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

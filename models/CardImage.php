@@ -5,6 +5,12 @@ namespace app\models;
 use Yii;
 use dmitrybtn\cp\SortBehavior;
 
+use igogo5yo\uploadfromurl\FileFromUrlValidator;
+use igogo5yo\uploadfromurl\UploadFromUrl;
+
+use yii\helpers\FileHelper;
+use yii\web\UploadedFile;
+
 //*****************************************************************************
 class CardImage extends \yii\db\ActiveRecord
 //*****************************************************************************
@@ -37,6 +43,8 @@ class CardImage extends \yii\db\ActiveRecord
 		return [
 			
 			[['url'], 'url'],
+			['file', FileFromUrlValidator::className(), 'mimeTypes' => 'image/*', 'on' => 'url'],
+			['file', 'file', 'mimeTypes' => 'image/*', 'on' => 'file'],
 
 
 			/*
@@ -64,6 +72,16 @@ class CardImage extends \yii\db\ActiveRecord
 		];
 	}
 
+	//-------------------------------------------------------------------------
+	public function beforeSave($insert)
+	//-------------------------------------------------------------------------
+	{
+		if ($insert)
+			$this->upload();		
+
+		return parent::beforeSave($insert);
+	}
+
 	//*************************************************************************
 	// Связанные записи
 	//*************************************************************************
@@ -85,6 +103,24 @@ class CardImage extends \yii\db\ActiveRecord
 	//-------------------------------------------------------------------------
 	{
 		return $this->name;
+	}
+
+	//-------------------------------------------------------------------------
+	public function upload()
+	//-------------------------------------------------------------------------
+	{
+		if ($this->file instanceof UploadedFile) $src = $this->file->tempName;
+		elseif ($this->file instanceof UploadFromUrl) $src = $this->file->url;
+		
+		$name = sprintf('%x', crc32(file_get_contents($src))) . $this->file->size . '.' . $this->file->extension;
+
+		$dir = $name[3];
+		$url = $dir . '/' . $name;
+
+		FileHelper::createDirectory(Yii::getAlias('@webroot/uploads/' . $dir), 0777);
+
+		if ($this->file->saveAs(Yii::getAlias('@webroot/uploads') . '/' . $url))
+			$this->file = $url;
 	}
 
 	//*************************************************************************

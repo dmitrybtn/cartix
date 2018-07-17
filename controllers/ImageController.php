@@ -6,6 +6,9 @@ use Yii;
 use dmitrybtn\cp\SortAction;
 use app\models\CardImage;
 
+use igogo5yo\uploadfromurl\UploadFromUrl;
+use yii\web\UploadedFile;
+
 //*****************************************************************************
 class ImageController extends \dmitrybtn\cp\Controller
 //*****************************************************************************
@@ -106,11 +109,20 @@ class ImageController extends \dmitrybtn\cp\Controller
 	//-------------------------------------------------------------------------
 	{
 		$this->model = new CardImage();
+		$this->model->id_card = 1;
 
 		if ($this->model->load(Yii::$app->request->post()))	{
 
 			if (Yii::$app->request->isAjax) 
 				return $this->ajaxValidate($this->model);
+
+			if ($this->model->url) {
+				$this->model->scenario = 'url';
+				$this->model->file = UploadFromUrl::getInstance($this->model, 'url');
+			} else {
+				$this->model->scenario = 'file';
+				$this->model->file = UploadedFile::getInstance($this->model, 'file');
+			}
 
 			if ($this->model->save()) 
 				return $this->redirect(['view', 'id' => $this->model->id]); 

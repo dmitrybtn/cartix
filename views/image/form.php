@@ -13,11 +13,9 @@
 		'returnUrl' => $returnUrl,	
 	]); ?>
 
-		<?php echo $form->field($modCardImage, 'id_card')->textInput() ?>
-		<?php echo $form->field($modCardImage, 'id_sort')->textInput() ?>
 		<?php echo $form->field($modCardImage, 'name')->textInput(['maxlength' => true]) ?>
 		<?php echo $form->field($modCardImage, 'url')->textInput(['maxlength' => true]) ?>
-		<?php echo $form->field($modCardImage, 'file')->textInput(['maxlength' => true]) ?>
+		<?php echo $form->field($modCardImage, 'file')->fileInput() ?>
 		<?php echo $form->field($modCardImage, 'description')->textarea(['rows' => 6]) ?>
 		
 		<?php echo $form->controls() ?>
