@@ -9,6 +9,7 @@ use igogo5yo\uploadfromurl\FileFromUrlValidator;
 use igogo5yo\uploadfromurl\UploadFromUrl;
 
 use yii\helpers\FileHelper;
+
 use yii\web\UploadedFile;
 use yii\imagine\Image;
 
@@ -44,8 +45,10 @@ class CardImage extends \yii\db\ActiveRecord
 		return [
 			
 			[['url'], 'url'],
-			['file', FileFromUrlValidator::className(), 'mimeTypes' => 'image/*', 'on' => 'url'],
-			['file', 'file', 'mimeTypes' => 'image/*', 'on' => 'file'],
+
+			['file', FileFromUrlValidator::className(), 'mimeTypes' => 'image/*', 'on' => 'url', 'message' => 'Не очень похоже на картинку...'],
+			['file', 'file', 'mimeTypes' => 'image/*', 'on' => 'file', 'message' => 'Не очень похоже на картинку...'],
+			['file', 'required', 'message' => 'Укажите либо URL, либо файл. Ну хоть что-нибудь!', 'on' => ['file', 'url']],
 
 
 			/*
@@ -131,7 +134,7 @@ class CardImage extends \yii\db\ActiveRecord
 		$p = pathinfo($this->file); 
 
 		$dir = $p['dirname'];
-		$file = $dir . '/' . $p['filename'] . '-' . $width . 'x' . $height . '.' . $p['extension'];
+		$file = $dir . '/' . $p['filename'] . '-' . $width . 'x' . $height . '.jpg';
 
 		if (!is_file(Yii::getAlias('@webroot/assets/thumbnails/' . $file))) {
 
@@ -143,7 +146,6 @@ class CardImage extends \yii\db\ActiveRecord
 		}
 
 		return Yii::getAlias('@web/assets/thumbnails/' . $file);
-
 	}
 
 	//*************************************************************************

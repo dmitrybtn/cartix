@@ -45,6 +45,12 @@ class Card extends \yii\db\ActiveRecord
 		return $this->hasMany(CardObject::className(), ['id_card' => 'id'])->inverseOf('card');
 	}
 
+	public function getImages()
+	{
+		return $this->hasMany(CardImage::className(), ['id_card' => 'id'])->inverseOf('card');
+	}
+
+
 	//*************************************************************************
 	// Пользовательские методы
 	//*************************************************************************
