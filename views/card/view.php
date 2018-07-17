@@ -10,7 +10,7 @@ use app\models\CardTransfer;
 
 <table class='table table-striped table-bordered'>
 	<tr>
-		<th>Остановка (объект)</th>
+		<th>Остановка или объект</th>
 		<th class='action-column action-column-5'>Опции</th>
 	</tr>
 
