@@ -8,6 +8,8 @@ use yii\widgets\ActiveForm;
 
 use app\models\CardTransfer;
 use app\models\CardImage;
+use app\widgets\Gallery;
+
 ?>
 
 <?php $modImage = new CardImage ?>
@@ -32,22 +34,49 @@ use app\models\CardImage;
 	</div>
 <?php echo Html::endForm() ?>
 
-<div class="row">
-<?php foreach ($modCard->images as $modImage): ?>
 
-	<div class="col-xs-4 col-md-2 col-sm-3">
-		<a href="#" class="thumbnail">
-			<?php echo Html::img($modImage->thumbnail(300, 300), ['alt' => 'Экскурсия']) ?>
-		</a>
-	</div>
+<?php 
 
-	
-<?php endforeach ?>	
-</div>
+	$arrImages = [];
+	foreach ($modCard->images as $modImage) {
+		$arrImages[] = [
+			'image' => Yii::getAlias('@web/uploads/' . $modImage->file),
+            'title' => 'Image Title 2',
+            'size' => $modImage->size,
+            'thumb' => $modImage->thumbnail(300, 300),
+            'caption' => 
+            	$modImage->id . 
+            	'<div class="pull-right">' . 
+					Html::a('<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>', ['/image/sort', 'id' => $modImage->id]) . ' ' .
+					Html::a('<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>', ['/image/sort', 'id' => $modImage->id, 'inv' => 1]) . ' ' .
+	            	Html::a('<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>', ['/image/delete', 'id' => $modImage->id], ['data-confirm' => 'Точно?', 'data-method' => 'post']) .
+            	'</div>'
+		];	
+	}
+
+?>
 
 
 
-<?php if (0): ?>
+<?= Gallery::widget([
+    'items' => $arrImages,
+    'clientOptions' => [
+    	'bgOpacity' => 0.9,
+    	'spacing' => 0.9,
+
+		'closeEl' => true,
+		'captionEl' => false,
+		'fullscreenEl' => false,
+		'zoomEl' => true,
+		'shareEl' => false,
+		'counterEl' => true,
+		'arrowEl' => true,
+		'preloaderEl' => true,
+
+    ]
+])
+?>
+
 	
 
 	<?php Pjax::begin(); ?>
@@ -98,4 +127,3 @@ use app\models\CardImage;
 
 	<?php Pjax::end(); ?>
 
-<?php endif ?>

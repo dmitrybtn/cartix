@@ -54,7 +54,7 @@ class ObjectController extends \dmitrybtn\cp\Controller
 	{
 		return [
 			['label' => $this->model->transfer->card->getTitle(), 'url' => ['/card/view', 'id' => $this->model->transfer->card->id]],
-			['label' => 'Техкарты', 'url' => ['/card/index']],
+			// ['label' => 'Техкарты', 'url' => ['/card/index']],
 		];
 	}
 

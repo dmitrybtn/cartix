@@ -30,7 +30,7 @@ class CardController extends \dmitrybtn\cp\Controller
 	//-------------------------------------------------------------------------
 	{
 		return [
-			'index' => 'Техкарты',
+			'index' => 'Мои техкарты',
 			'create' => 'Добавить',
 			'update' => 'Редактировать',
 			'delete' => 'Удалить',
@@ -52,7 +52,7 @@ class CardController extends \dmitrybtn\cp\Controller
 				$breads[] = ['action' => 'view', 'params' => ['id' => $this->model->id]];
 				
 			default:
-				$breads[] = ['action' => 'index'];
+				// $breads[] = ['action' => 'index'];
 		}
 
 		return $breads;
@@ -65,6 +65,8 @@ class CardController extends \dmitrybtn\cp\Controller
 	{
 		$modCard = new Card(['scenario' => 'search']);
 		$modCard->search_string = $ss;
+
+		$this->showBreads = false;
 
 		$this->menu = [
 			['label' => 'Опции'],

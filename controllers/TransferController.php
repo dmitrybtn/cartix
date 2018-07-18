@@ -55,7 +55,7 @@ class TransferController extends \dmitrybtn\cp\Controller
 	{
 		return [
 			['label' => $this->model->card->getTitle(), 'url' => ['/card/view', 'id' => $this->model->card->id]],
-			['label' => 'Техкарты', 'url' => ['/card/index']],
+			// ['label' => 'Техкарты', 'url' => ['/card/index']],
 		];
 	}
 

@@ -5,7 +5,7 @@ return \yii\helpers\ArrayHelper::merge(require __DIR__ . '/../vendor/dmitrybtn/y
     'id' => 'ph-cartix',
     'name' => 'Техкарты МГИ',
     'basePath' => dirname(__DIR__),
-    'defaultRoute' => 'site/index',
+    'defaultRoute' => 'card/index',
     'bootstrap' => ['log'],
     'language' => 'ru-RU',
 

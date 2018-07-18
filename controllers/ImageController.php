@@ -43,55 +43,6 @@ class ImageController extends \dmitrybtn\cp\Controller
 	}
 
 	//-------------------------------------------------------------------------
-	public function titles()
-	//-------------------------------------------------------------------------
-	{
-		return [
-			'index' => 'Администрирование',
-			'create' => 'Добавить',
-			'update' => 'Редактировать',
-			'delete' => 'Удалить',
-			'view' => $this->model ? $this->model->getTitle() : 'Просмотр',
-		];
-	}
-
-	//-------------------------------------------------------------------------
-	public function breads($actionId)
-	//-------------------------------------------------------------------------
-	{
-		$breads = [];
-
-		switch ($actionId) {			
-			case 'index':
-				break;
-
-			case 'update':
-				$breads[] = ['action' => 'view', 'params' => ['id' => $this->model->id]];
-				
-			default:
-				$breads[] = ['action' => 'index'];
-		}
-
-		return $breads;
-	}
-
-
-	//-------------------------------------------------------------------------
-	public function actionView($id)
-	//-------------------------------------------------------------------------
-	{
-		$this->model = $this->find($id);
-
-		$this->menu = [
-			['label' => 'Опции'],
-			['action' => 'update', 'params' => ['id' => $this->model->id]],
-			['action' => 'delete', 'params' => ['id' => $this->model->id], 'linkOptions' => ['data' => ['confirm' => 'Точно?', 'method' => 'POST']]],
-		];
-
-		return $this->render('view', ['modCardImage' => $this->model]);
-	}
-
-	//-------------------------------------------------------------------------
 	public function actionCreate($id)
 	//-------------------------------------------------------------------------
 	{
@@ -106,7 +57,7 @@ class ImageController extends \dmitrybtn\cp\Controller
 			if ($this->model->validate()) {
 				if ($this->model->url) {
 					$this->model->scenario = 'url';
-					$this->model->file = UploadFromUrl::getInstance($this->model, 'url');
+					$this->model->file = UploadFromUrl::initWithUrl($this->model->url);
 				} else {
 					$this->model->scenario = 'file';
 					$this->model->file = UploadedFile::getInstance($this->model, 'file');
@@ -118,26 +69,6 @@ class ImageController extends \dmitrybtn\cp\Controller
 		}	
 
 		return $this->goReferrer(); 
-	}
-
-	//-------------------------------------------------------------------------
-	public function actionUpdate($id)
-	//-------------------------------------------------------------------------
-	{
-		$this->model = $this->find($id);
-
-		$returnUrl = Yii::$app->request->post('returnUrl', $this->getReferrer(['view', 'id' => $this->model->id]));
-
-		if ($this->model->load(Yii::$app->request->post()))	{
-			
-			if (Yii::$app->request->isAjax) 
-				return $this->ajaxValidate($this->model);
-			
-			if ($this->model->save()) 
-				return $this->redirect($returnUrl);
-		}	
-
-		return $this->render('form', ['modCardImage' => $this->model, 'returnUrl' => $returnUrl]);
 	}
 
 	//-------------------------------------------------------------------------
@@ -155,7 +86,7 @@ class ImageController extends \dmitrybtn\cp\Controller
 
 		}
 
-		return $this->redirect(['index']);
+		return $this->goReferrer();
 	}
 
 	//-------------------------------------------------------------------------

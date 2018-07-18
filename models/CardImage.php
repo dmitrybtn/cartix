@@ -80,8 +80,14 @@ class CardImage extends \yii\db\ActiveRecord
 	public function beforeSave($insert)
 	//-------------------------------------------------------------------------
 	{
-		if ($insert)
-			$this->upload();		
+		if ($insert) {
+			$this->upload();
+
+			$p = getimagesize(Yii::getAlias('@webroot/uploads/' . $this->file));
+
+			$this->width = $p[0];
+			$this->height = $p[1];
+		}
 
 		return parent::beforeSave($insert);
 	}
@@ -146,6 +152,13 @@ class CardImage extends \yii\db\ActiveRecord
 		}
 
 		return Yii::getAlias('@web/assets/thumbnails/' . $file);
+	}
+
+	//-------------------------------------------------------------------------
+	public function getSize()
+	//-------------------------------------------------------------------------
+	{
+		return $this->width . 'x' . $this->height;
 	}
 
 	//*************************************************************************
