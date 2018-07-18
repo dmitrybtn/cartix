@@ -21,7 +21,8 @@
         "dmitrybtn/yii2-cp": "dev-master",
         "igogo5yo/yii2-upload-from-url": "^1.4",
         "yiisoft/yii2-imagine": "*",
-        "powerkernel/yii2-photoswipe": "*"
+        "powerkernel/yii2-photoswipe": "*",
+        "vova07/yii2-imperavi-widget": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

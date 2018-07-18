@@ -3,6 +3,15 @@
 $config = \yii\helpers\ArrayHelper::merge(require __DIR__ . '/base.php', [
     'components' => [
         'db' => require __DIR__ . '/db.php',
+
+        'request' => [
+            'cookieValidationKey' => '2DhAfOf8hglIJ-hxwDCQixZ6s5i6iDqo',
+        ],
+
+        'errorHandler' => [
+            'errorAction' => 'site/error',
+        ],
+
     ],
 ]);
 

@@ -19,6 +19,8 @@ class CardImage extends \yii\db\ActiveRecord
 {
 	public $search_string;
 
+	public const MARKER = 'ФОТО';
+
 	//*************************************************************************
 	// AR - методы
 	//*************************************************************************
@@ -160,6 +162,24 @@ class CardImage extends \yii\db\ActiveRecord
 	{
 		return $this->width . 'x' . $this->height;
 	}
+
+	//-------------------------------------------------------------------------
+	public function getMarker()
+	//-------------------------------------------------------------------------
+	{
+		return self::MARKER . '-' . $this->id;
+	}
+
+
+	//-------------------------------------------------------------------------
+	public static function extract($strText, $merge = false)
+	//-------------------------------------------------------------------------
+	{
+		preg_match_all('/' . self::MARKER . '-(\d+)/u', $strText, $arrMatches);
+
+		return $merge ? array_values(array_unique($arrMatches[1])) : $arrMatches[1];
+	}
+
 
 	//*************************************************************************
 	// Поиск

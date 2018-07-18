@@ -47,7 +47,7 @@ $dataProvider = new ActiveDataProvider(['query' => $modCard->search(), 'paginati
 		'layout' => "{items}",		
 		'itemOptions' => ['class' => 'item'],
 		'itemView' => function ($modCard, $key, $index, $widget) {
-			return '<div class="well well-small">' . Html::a(Html::encode($modCard->name), ['view', 'id' => $modCard->id]) . '</div>';
+			return '<div class="well well-small">' . Html::a(Html::encode($modCard->name), ['view', 'id' => $modCard->id], ['data-pjax' => 0]) . '</div>';
 		},
 	]) ?>	
 

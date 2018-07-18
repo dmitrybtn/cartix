@@ -14,9 +14,7 @@ return \yii\helpers\ArrayHelper::merge(require __DIR__ . '/../vendor/dmitrybtn/y
         '@npm'   => '@vendor/npm-asset',
     ],
     'components' => [
-        'request' => [
-            'cookieValidationKey' => '2DhAfOf8hglIJ-hxwDCQixZ6s5i6iDqo',
-        ],
+
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
@@ -25,9 +23,6 @@ return \yii\helpers\ArrayHelper::merge(require __DIR__ . '/../vendor/dmitrybtn/y
             'class' => 'dmitrybtn\cp\User',
         ],
 
-        'errorHandler' => [
-            'errorAction' => 'site/error',
-        ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
             // send all mails to a file by default. You have to set

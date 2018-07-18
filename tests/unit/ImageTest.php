@@ -9,20 +9,19 @@ use yii\helpers\FileHelper;
 class ImageTest extends \Codeception\Test\Unit
 {
 
-	public function _before()
+	public function testExtract()
 	{
-		FileHelper::createDirectory(Yii::getAlias('@webroot/uploads/t'));
-		
-		copy(Yii::getAlias('@app/tests/_data/test.jpg'), Yii::getAlias('@webroot/uploads/t/test.jpg'));
+		$arrImages = CardImage::extract('Превед ФОТО-1ФОТО-2569, медвед ФОТО-2 йа креведко');
+
+		$this->assertEquals([1, 2569, 2], $arrImages);
 	}
 
 
-	public function testInitial()
+	public function testExtractMerged()
 	{
-		/*
-		$objImage = new CardImage;
-		$objImage->image = 't/image.jpg'; 
-		*/
+		$arrImages = CardImage::extract('Превед ФОТО-1ФОТО-258, медвед ФОТО-1 йа ФОТО-5 креведко ФОТО-258', true);
+
+		$this->assertEquals([1, 258, 5], $arrImages);
 	}
 	
 }

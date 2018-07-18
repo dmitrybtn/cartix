@@ -8,6 +8,10 @@ $config = \yii\helpers\ArrayHelper::merge(require __DIR__ . '/base.php', [
             'useFileTransport' => true,
         ],
 
+        'errorHandler' => [
+            'errorAction' => 'site/error',
+        ],
+
         'assetManager' => [
             'basePath' => __DIR__ . '/../web/assets',
         ],

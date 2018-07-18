@@ -1,6 +1,8 @@
 <?php 
 	use dmitrybtn\cp\Html;
 	use dmitrybtn\cp\ActiveForm;
+
+	use vova07\imperavi\Widget as Imperavi;
 ?>
 
 <div class="form-autofocus">
@@ -18,11 +20,27 @@
 		<div class="col-md-2"><?php echo $form->field($modCardObject, 'time')->textInput() ?></div>
 	</div>
 
-	
-		
+		<?php echo $form->field($modCardObject, 'information')->widget(Imperavi::className(), [
+			'settings' => [
+				'minHeight' => 300,
+				'buttons' =>  ['html',  'formatting',  'bold',  'italic',  'unorderedlist',  'orderedlist',  'link'],
+				'formatting' => ['p'],
+				'formattingAdd' => [
+					[
+						'tag' => 'p',
+						'title' => 'Заголовок',
+						'class' => 'header',
+					]
+
+				]
+			]
+		]) ?>
+
 		<?php echo $form->field($modCardObject, 'instruction')->textarea(['rows' => 6]) ?>
-		<?php echo $form->field($modCardObject, 'information')->textarea(['rows' => 6]) ?>
 		
 		<?php echo $form->controls() ?>
 	<?php ActiveForm::end(); ?>
 </div>
+
+
+ 

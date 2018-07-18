@@ -56,10 +56,26 @@ class CardObject extends \yii\db\ActiveRecord
 		];
 	}
 
+	//-------------------------------------------------------------------------
+	public function afterSave($insert, $changedAttributes)
+	//-------------------------------------------------------------------------
+	{
+		// if (isset($changedAttributes['information']))
+			$this->saveImages();
+
+		return parent::afterSave($insert, $changedAttributes);
+	}
+
 	//*************************************************************************
 	// Связанные записи
 	//*************************************************************************
 
+	//-------------------------------------------------------------------------
+	public function getCard()
+	//-------------------------------------------------------------------------
+	{
+		return $this->transfer->card;
+	}
 
 	//-------------------------------------------------------------------------
 	public function getTransfer()
@@ -77,6 +93,40 @@ class CardObject extends \yii\db\ActiveRecord
 	//-------------------------------------------------------------------------
 	{
 		return $this->name;
+	}
+
+	//-------------------------------------------------------------------------
+	public function saveImages()
+	//-------------------------------------------------------------------------
+	{
+		CardObjectImage::deleteAll(['id_object' => $this->id]);
+
+		$arrImageKeys = $this->card->getImages()->select('id')->column();
+
+		foreach (CardImage::extract($this->information) as $id_sort => $id_image) {
+
+			if (in_array($id_image, $arrImageKeys)) {
+				$modObjectImage = new CardObjectImage;
+				$modObjectImage->id_object = $this->id;
+				$modObjectImage->id_image = $id_image;
+				$modObjectImage->id_sort = $id_sort;
+				$modObjectImage->save();
+			}
+		}
+	}
+
+
+	//-------------------------------------------------------------------------
+	public function getInformationParsed()
+	//-------------------------------------------------------------------------
+	{
+		$strText = $this->information;
+		
+		$arrImageKeys = CardImage::extract($this->information, true);
+
+		d($arrImageKeys);
+
+		return $strText;		
 	}
 
 	//*************************************************************************

@@ -89,8 +89,45 @@ class CardController extends \dmitrybtn\cp\Controller
 			['action' => 'delete', 'params' => ['id' => $this->model->id], 'linkOptions' => ['data' => ['confirm' => 'Точно?', 'method' => 'POST']]],
 		];
 
-		return $this->render('view', ['modCard' => $this->model]);
+		return $this->render('view-plan', ['modCard' => $this->model]);
 	}
+
+	//-------------------------------------------------------------------------
+	public function actionViewImages($id)
+	//-------------------------------------------------------------------------
+	{
+		$this->model = $this->find($id);
+
+		$this->title = $this->title('view');
+
+		$this->menu = [
+			['label' => 'Опции'],
+			['label' => 'Добавить остановку', 'url' => ['/transfer/create', 'id' => $this->model->id]],
+			['action' => 'update', 'params' => ['id' => $this->model->id]],
+			['action' => 'delete', 'params' => ['id' => $this->model->id], 'linkOptions' => ['data' => ['confirm' => 'Точно?', 'method' => 'POST']]],
+		];
+
+		return $this->render('view-images', ['modCard' => $this->model]);
+	}
+
+	//-------------------------------------------------------------------------
+	public function actionViewText($id)
+	//-------------------------------------------------------------------------
+	{
+		$this->model = $this->find($id);
+
+		$this->title = $this->title('view');
+
+		$this->menu = [
+			['label' => 'Опции'],
+			['label' => 'Добавить остановку', 'url' => ['/transfer/create', 'id' => $this->model->id]],
+			['action' => 'update', 'params' => ['id' => $this->model->id]],
+			['action' => 'delete', 'params' => ['id' => $this->model->id], 'linkOptions' => ['data' => ['confirm' => 'Точно?', 'method' => 'POST']]],
+		];
+
+		return $this->render('view-text', ['modCard' => $this->model]);
+	}
+
 
 	//-------------------------------------------------------------------------
 	public function actionCreate()

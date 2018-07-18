@@ -40,9 +40,9 @@ class Card extends \yii\db\ActiveRecord
 	// Связанные записи
 	//*************************************************************************
 
-	public function getObjects()
+	public function getTransfers()
 	{
-		return $this->hasMany(CardObject::className(), ['id_card' => 'id'])->inverseOf('card');
+		return $this->hasMany(CardTransfer::className(), ['id_card' => 'id'])->inverseOf('card');
 	}
 
 	public function getImages()
