@@ -32,7 +32,7 @@ $dataProvider = new ActiveDataProvider(['query' => $modCardObject->search()->sor
 			['attribute' => 'time', 'format' => 'datetime', 'contentOptions' => $h = [], 'headerOptions' => $h],
 			['attribute' => 'name', 'contentOptions' => $h = [], 'headerOptions' => $h],
 			// ['attribute' => 'instruction', 'format' => 'ntext', 'contentOptions' => $h = [], 'headerOptions' => $h],
-			// ['attribute' => 'information', 'format' => 'ntext', 'contentOptions' => $h = [], 'headerOptions' => $h],
+			// ['attribute' => 'text', 'format' => 'ntext', 'contentOptions' => $h = [], 'headerOptions' => $h],
 
 			[
 				'class' => 'yii\grid\ActionColumn',

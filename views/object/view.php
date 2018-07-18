@@ -17,7 +17,7 @@ use yii\widgets\DetailView;
             'time:datetime',
             'name',
             'instruction:ntext',
-            'information:ntext',
+            'text:ntext',
         ],
     ]) ?>
 

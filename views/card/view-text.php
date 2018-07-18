@@ -14,9 +14,9 @@ use yii\helpers\Html;
 			<?php foreach ($modTransfer->objects as $modObject): ?>
 				<div class="object--header"><?php echo Html::encode($modObject->name) ?></div>
 				
-				<?php if ($modObject->information): ?>
-					<div class="object--information">
-						<?php echo Yii::$app->formatter->asHtml($modObject->information) ?>
+				<?php if ($modObject->text): ?>
+					<div class="object--text">
+						<?php echo Yii::$app->formatter->asHtml($modObject->textParsed) ?>
 					</div>
 				<?php endif ?>
 

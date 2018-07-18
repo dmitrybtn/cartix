@@ -20,7 +20,7 @@
 		<div class="col-md-2"><?php echo $form->field($modCardObject, 'time')->textInput() ?></div>
 	</div>
 
-		<?php echo $form->field($modCardObject, 'information')->widget(Imperavi::className(), [
+		<?php echo $form->field($modCardObject, 'text')->widget(Imperavi::className(), [
 			'settings' => [
 				'minHeight' => 300,
 				'buttons' =>  ['html',  'formatting',  'bold',  'italic',  'unorderedlist',  'orderedlist',  'link'],

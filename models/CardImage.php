@@ -170,6 +170,12 @@ class CardImage extends \yii\db\ActiveRecord
 		return self::MARKER . '-' . $this->id;
 	}
 
+	//-------------------------------------------------------------------------
+	public static function marker($id)
+	//-------------------------------------------------------------------------
+	{
+		return self::MARKER . '-' . $id;
+	}
 
 	//-------------------------------------------------------------------------
 	public static function extract($strText, $merge = false)

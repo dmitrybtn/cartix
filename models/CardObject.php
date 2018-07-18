@@ -23,7 +23,7 @@ class CardObject extends \yii\db\ActiveRecord
 			'time' => 'Время (мин)',
 			'name' => 'Наименование объекта',
 			'instruction' => 'Методические указания',
-			'information' => 'Информационная справка',
+			'text' => 'Информационная справка',
 		];
 	}
 
@@ -34,7 +34,7 @@ class CardObject extends \yii\db\ActiveRecord
 		return [
 			[['name'], 'required'],
 			[['time'], 'integer'],
-			[['instruction', 'information'], 'string'],
+			[['instruction', 'text'], 'string'],
 			[['name'], 'string', 'max' => 255],
 
 			[['id_transfer'], 'exist', 'skipOnError' => true, 'targetClass' => CardTransfer::className(), 'targetAttribute' => ['id_transfer' => 'id']],
@@ -60,7 +60,7 @@ class CardObject extends \yii\db\ActiveRecord
 	public function afterSave($insert, $changedAttributes)
 	//-------------------------------------------------------------------------
 	{
-		// if (isset($changedAttributes['information']))
+		// if (isset($changedAttributes['text']))
 			$this->saveImages();
 
 		return parent::afterSave($insert, $changedAttributes);
@@ -95,17 +95,22 @@ class CardObject extends \yii\db\ActiveRecord
 		return $this->name;
 	}
 
+	protected function getCardImageKeys()
+	{
+		return $this->card->getImages()->select('id')->column();
+	}
+
 	//-------------------------------------------------------------------------
 	public function saveImages()
 	//-------------------------------------------------------------------------
 	{
 		CardObjectImage::deleteAll(['id_object' => $this->id]);
 
-		$arrImageKeys = $this->card->getImages()->select('id')->column();
+		$arrCardImages = $this->getCardImageKeys();
 
-		foreach (CardImage::extract($this->information) as $id_sort => $id_image) {
+		foreach (CardImage::extract($this->text) as $id_sort => $id_image) {
 
-			if (in_array($id_image, $arrImageKeys)) {
+			if (in_array($id_image, $arrCardImages)) {
 				$modObjectImage = new CardObjectImage;
 				$modObjectImage->id_object = $this->id;
 				$modObjectImage->id_image = $id_image;
@@ -117,16 +122,20 @@ class CardObject extends \yii\db\ActiveRecord
 
 
 	//-------------------------------------------------------------------------
-	public function getInformationParsed()
+	public function getTextParsed()
 	//-------------------------------------------------------------------------
 	{
-		$strText = $this->information;
-		
-		$arrImageKeys = CardImage::extract($this->information, true);
+		$arrCardImages = $this->getCardImageKeys();
 
-		d($arrImageKeys);
+		$arrSearch = [];
+		$arrReplace = [];
 
-		return $strText;		
+		foreach (CardImage::extract($this->text, true) as $id_image) {
+			$arrSearch[] = CardImage::marker($id_image);
+			$arrReplace[] = in_array($id_image, $arrCardImages) ? 'НОРМ' : 'ХУЙ';
+		}
+
+		return str_replace($arrSearch, $arrReplace, $this->text);		
 	}
 
 	//*************************************************************************
