@@ -1,9 +1,9 @@
 .level-1 {padding-left: 45px !important;}
 
-.redactor-editor {border: none;}
+.redactor-editor {}
+.redactor-editor:focus {}
 
 .redactor-box {border: 2px solid #dce4ec; box-shadow: none; border-radius: 4px;}
-.redactor-editor:focus {border-color: #F39C12;}
 
 .redactor-toolbar {box-shadow: none; border-bottom: 1px solid #dce4ec;}
 
@@ -19,6 +19,17 @@
 	line-height: 1.42857143em;
 }
 
-.transfer--header {font-size: 22px; font-weight: bold;}
 
-.object--header {font-size: 19px; font-weight: bold;}
+.well_list {border-top: 1px solid #ecf0f1; padding: 9px; font-size: 17px; line-height: 1.3em;}
+.well_list a {}
+
+.well_list-1 a {font-weight: bold;}
+.well_list-2 {padding-left: 25px;}
+.well_list--options {font-size: 12px; margin-top: 4px; margin-bottom: -4px; color: #7b8a8b;}
+
+
+
+.transfer--header {font-size: 25px; line-height: 1.2em; font-weight: bold; text-align: center; margin: 30px 0 0px;}
+.object--header {font-size: 20px; font-weight: bold; margin: 15px 0 8px;}
+.object--text {font-size: 20px; font-family: Times;}
+

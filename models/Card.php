@@ -45,11 +45,17 @@ class Card extends \yii\db\ActiveRecord
 		return $this->hasMany(CardTransfer::className(), ['id_card' => 'id'])->inverseOf('card');
 	}
 
-	public function getImages()
+	//-------------------------------------------------------------------------
+	public function getImages($unlisted = false)
+	//-------------------------------------------------------------------------
 	{
-		return $this->hasMany(CardImage::className(), ['id_card' => 'id'])->inverseOf('card')->sorted();
-	}
+		$objQuery = $this->hasMany(CardImage::className(), ['id_card' => 'id'])->inverseOf('card')->sorted();
 
+		if ($unlisted)
+			$objQuery = $objQuery->leftJoin('cards_objects_images', 'id_image = id')->where('id_object IS NULL');
+
+		return $objQuery;
+	}
 
 	//*************************************************************************
 	// Пользовательские методы

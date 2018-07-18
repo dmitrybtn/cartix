@@ -26,9 +26,7 @@ $dataProvider = new ActiveDataProvider(['query' => $modCard->search(), 'paginati
 		'dataProvider' => $dataProvider,
 		'layout' => "{items}",
 		'columns' => [
-			['attribute' => 'id', 'contentOptions' => $h = [], 'headerOptions' => $h],
 			['attribute' => 'name', 'contentOptions' => $h = [], 'headerOptions' => $h],
-			['attribute' => 'map', 'contentOptions' => $h = [], 'headerOptions' => $h],
 
 			[
 				'class' => 'yii\grid\ActionColumn',

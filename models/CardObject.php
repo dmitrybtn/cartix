@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use dmitrybtn\cp\SortBehavior;
+use yii\helpers\Html;
 
 //*****************************************************************************
 class CardObject extends \yii\db\ActiveRecord
@@ -23,7 +24,7 @@ class CardObject extends \yii\db\ActiveRecord
 			'time' => 'Время (мин)',
 			'name' => 'Наименование объекта',
 			'instruction' => 'Методические указания',
-			'text' => 'Информационная справка',
+			'text' => 'Рассказ',
 		];
 	}
 
@@ -57,6 +58,15 @@ class CardObject extends \yii\db\ActiveRecord
 	}
 
 	//-------------------------------------------------------------------------
+	public function beforeSave($insert)
+	//-------------------------------------------------------------------------
+	{
+		$this->size = mb_strlen(strip_tags($this->text), 'utf8');
+
+		return parent::beforeSave($insert);
+	}
+
+	//-------------------------------------------------------------------------
 	public function afterSave($insert, $changedAttributes)
 	//-------------------------------------------------------------------------
 	{
@@ -84,6 +94,20 @@ class CardObject extends \yii\db\ActiveRecord
 		return $this->hasOne(CardTransfer::className(), ['id' => 'id_transfer']);
 	}
 
+	//-------------------------------------------------------------------------
+	public function getImages()
+	//-------------------------------------------------------------------------
+	{
+		return $this->hasMany(CardImage::className(), ['id' => 'id_image'])->viaTable('cards_objects_images', ['id_object' => 'id']);
+	}
+
+	//-------------------------------------------------------------------------
+	public function getObjectImages()
+	//-------------------------------------------------------------------------
+	{
+		return $this->hasMany(CardObjectImage::className(), ['id_object' => 'id'])->orderBy('id_sort')->with('image');
+	}
+
 	//*************************************************************************
 	// Пользовательские методы
 	//*************************************************************************
@@ -95,7 +119,9 @@ class CardObject extends \yii\db\ActiveRecord
 		return $this->name;
 	}
 
+	//-------------------------------------------------------------------------
 	protected function getCardImageKeys()
+	//-------------------------------------------------------------------------
 	{
 		return $this->card->getImages()->select('id')->column();
 	}
@@ -131,8 +157,11 @@ class CardObject extends \yii\db\ActiveRecord
 		$arrReplace = [];
 
 		foreach (CardImage::extract($this->text, true) as $id_image) {
-			$arrSearch[] = CardImage::marker($id_image);
-			$arrReplace[] = in_array($id_image, $arrCardImages) ? 'НОРМ' : 'ХУЙ';
+			
+			$strMarker = CardImage::marker($id_image);
+
+			$arrSearch[] = $strMarker;
+			$arrReplace[] = in_array($id_image, $arrCardImages) ? Html::a($strMarker, '#', ['class' => 'lightbox']) : Html::tag('span', $strMarker, ['class' => 'text-danger']);
 		}
 
 		return str_replace($arrSearch, $arrReplace, $this->text);		

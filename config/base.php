@@ -41,7 +41,7 @@ return \yii\helpers\ArrayHelper::merge(require __DIR__ . '/../vendor/dmitrybtn/y
         ],
 
         'assetManager' => [
-            'forceCopy' => true,
+            'forceCopy' => false,
             'appendTimestamp' => true,
         ],
 
