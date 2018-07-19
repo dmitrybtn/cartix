@@ -15,8 +15,8 @@ use app\widgets\GallereyModal;
 
 	<?php $arrImages = [] ?>
 
-	<?php Pjax::begin() ?>
-		<?php echo Html::beginForm('', 'post', ['data-pjax' => 1, 'enctype' => 'multipart/form-data']) ?>
+	<?php // Pjax::begin() ?>
+		<?php echo Html::beginForm('', 'post', ['id' => 'form-image-upload', 'data-pjax' => 1, 'enctype' => 'multipart/form-data']) ?>
 			<?php echo Html::errorSummary($modNewImage, ['header' => '<p>Не удалось загрузить картинку:</p>']) ?>
 			<div class="well well-sm">
 				<div class="row">
@@ -31,7 +31,7 @@ use app\widgets\GallereyModal;
 					</div>
 					
 					<div class="col-md-2">
-						<?php echo Html::submitButton('Загрузить', ['class' => 'btn btn-primary btn-block']) ?>		
+						<?php echo Html::submitButton('Загрузить', ['class' => 'form-image-upload--submit btn btn-primary btn-block', 'data-loading-text' => 'Загружаю...']) ?>		
 					</div>				
 				</div>		
 			</div>
@@ -64,7 +64,7 @@ use app\widgets\GallereyModal;
 			<?php endforeach ?>		
 		</div>
 
-	<?php Pjax::end() ?>
+	<?php // Pjax::end() ?>
 
 	<?php $id_image_previous = null ?>
 	<?php foreach ($modCard->getTransfers()->with('objects.objectImages')->all() as $modTransfer): ?>	
@@ -125,5 +125,16 @@ use app\widgets\GallereyModal;
 		'selector' => '.lightbox',
 	    'images' => $arrImages,
 	]) ?>
+
+
+	<script>
+		$(function ($) {
+			$(document).on('submit', '#form-image-upload', function() {
+				$('.form-image-upload--submit').html('Загружаю...');
+
+				return true;
+			})
+		});
+	</script>
 
 <?php $this->endContent() ?>

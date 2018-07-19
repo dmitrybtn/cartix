@@ -5,7 +5,7 @@ use yii\grid\GridView;
 use yii\widgets\LinkPager;
 use yii\widgets\ListView;
 
-$dataProvider = new ActiveDataProvider(['query' => $modCard->search(), 'pagination' => ['pageSize' => 20], 'sort' => false]);
+$dataProvider = new ActiveDataProvider(['query' => $modCard->search()->sorted(), 'pagination' => ['pageSize' => 20], 'sort' => false]);
 
 ?>
 

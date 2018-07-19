@@ -25,13 +25,8 @@
 				'minHeight' => 300,
 				'buttons' =>  ['html',  'formatting',  'bold',  'italic',  'unorderedlist',  'orderedlist',  'link'],
 				'formatting' => ['p'],
-				'formattingAdd' => [
-					[
-						'tag' => 'p',
-						'title' => 'Заголовок',
-						'class' => 'header',
-					]
-
+				'formattingAdd' => [				
+					['title' => 'Очистить формат', 'func' => 'inline.removeFormat'],
 				]
 			]
 		]) ?>

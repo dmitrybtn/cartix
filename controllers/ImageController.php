@@ -6,11 +6,6 @@ use Yii;
 use dmitrybtn\cp\SortAction;
 use app\models\CardImage;
 
-use igogo5yo\uploadfromurl\UploadFromUrl;
-use yii\web\UploadedFile;
-use yii\helpers\Html;
-
-
 //*****************************************************************************
 class ImageController extends \dmitrybtn\cp\Controller
 //*****************************************************************************
@@ -40,35 +35,6 @@ class ImageController extends \dmitrybtn\cp\Controller
 				],
 			],
 		];
-	}
-
-	//-------------------------------------------------------------------------
-	public function actionCreate($id)
-	//-------------------------------------------------------------------------
-	{
-		$this->model = new CardImage();
-		$this->model->id_card = $id;
-
-		if ($this->model->load(Yii::$app->request->post()))	{
-
-			if (Yii::$app->request->isAjax) 
-				return $this->ajaxValidate($this->model);
-
-			if ($this->model->validate()) {
-				if ($this->model->url) {
-					$this->model->scenario = 'url';
-					$this->model->file = UploadFromUrl::initWithUrl($this->model->url);
-				} else {
-					$this->model->scenario = 'file';
-					$this->model->file = UploadedFile::getInstance($this->model, 'file');
-				}
-			}
-
-			if (!$this->model->save()) 
-				Yii::$app->session->addFlash('error', Html::errorSummary($this->model, ['header' => '<p>Не удалось загрузить картинку:</p>']));
-		}	
-
-		return $this->goReferrer(); 
 	}
 
 	//-------------------------------------------------------------------------

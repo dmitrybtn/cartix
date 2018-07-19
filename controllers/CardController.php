@@ -137,7 +137,6 @@ class CardController extends \dmitrybtn\cp\Controller
 
 		$this->menu = [
 			['label' => 'Опции'],
-			['label' => 'Добавить остановку', 'url' => ['/transfer/create', 'id' => $this->model->id]],
 			['action' => 'update', 'params' => ['id' => $this->model->id]],
 			['action' => 'delete', 'params' => ['id' => $this->model->id], 'linkOptions' => ['data' => ['confirm' => 'Точно?', 'method' => 'POST']]],
 		];
@@ -155,7 +154,6 @@ class CardController extends \dmitrybtn\cp\Controller
 
 		$this->menu = [
 			['label' => 'Опции'],
-			['label' => 'Добавить остановку', 'url' => ['/transfer/create', 'id' => $this->model->id]],
 			['action' => 'update', 'params' => ['id' => $this->model->id]],
 			['action' => 'delete', 'params' => ['id' => $this->model->id], 'linkOptions' => ['data' => ['confirm' => 'Точно?', 'method' => 'POST']]],
 		];
