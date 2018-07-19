@@ -19,7 +19,7 @@ use yii\bootstrap\Nav;
 
 <div class="visible-xs-block" style='height: 50px;'></div>
 
-<?php /* $this->beginBlock('footer') ?>
+<?php $this->beginBlock('footer') ?>
 
 
 	<footer class='footer-mobile'>
@@ -34,4 +34,4 @@ use yii\bootstrap\Nav;
 		]); ?>		
 	</footer>
 
-<?php $this->endBlock() */ ?>
+<?php $this->endBlock() ?>

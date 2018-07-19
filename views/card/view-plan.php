@@ -4,13 +4,16 @@ use yii\helpers\Html;
 use yii\widgets\Pjax;
 
 use app\models\CardTransfer;
-use yii\bootstrap\Dropdown;
+
+use yii\bootstrap\BootstrapPluginAsset;
+
+BootstrapPluginAsset::register($this);
 ?>
 
 
 <?php $this->beginContent('@app/views/card/view.php', ['modCard' => $modCard]) ?>
 
-	<?php Pjax::begin(['scrollTo' => true]) ?>
+	<?php Pjax::begin() ?>
 
 		<table class='table table-striped table-bordered hidden-xs'>
 			<tr>
@@ -30,13 +33,10 @@ use yii\bootstrap\Dropdown;
 					<td></td>
 					<td class='action-column action-column-5'>
 						<?php echo Html::a('<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>', ['/object/create', 'id' => $modTransfer->id]) ?>
-
 						<?php echo Html::a('<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>', ['/transfer/update', 'id' => $modTransfer->id]) ?>
-
 						<?php echo Html::a('<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>', ['/transfer/sort', 'id' => $modTransfer->id]) ?>
 						<?php echo Html::a('<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>', ['/transfer/sort', 'id' => $modTransfer->id, 'inv' => 1]) ?>
 						<?php echo Html::a('<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>', ['/transfer/delete', 'id' => $modTransfer->id], ['data-confirm' => 'Точно?', 'data-method' => 'post']) ?>
-
 					</td>
 				</tr>
 
@@ -71,18 +71,15 @@ use yii\bootstrap\Dropdown;
 
 					<div class="dropdown">
 						<a href="#" data-toggle="dropdown" class="dropdown-toggle"><?php echo Html::encode($modTransfer->name) ?></a>
-						<?php
-							echo Dropdown::widget([
-								'items' => [
-									['label' => 'К тексту', 'url' => ['/card/view-text', 'id' => $modCard->id, '#' => 'transfer-' . $modTransfer->id]],
-									// ['label' => 'Добавить объект', 'url' => ['/object/create', 'id' => $modTransfer->id]],
-									['label' => 'Редактировать', 'url' => ['/transfer/update', 'id' => $modTransfer->id]],
-									['label' => 'Передвинуть вверх', 'url' => ['/transfer/sort', 'id' => $modTransfer->id]],
-									['label' => 'Передвинуть вниз', 'url' => ['/transfer/sort', 'id' => $modTransfer->id, 'inv' => 1]],
-									['label' => 'Удалить', 'url' => ['/transfer/delete', 'id' => $modTransfer->id, 'inv' => 1], 'linkOptions' => ['data-confirm' => 'Точно?', 'data-method' => 'post']],
-								],
-							]);
-						?>
+
+						<ul class="dropdown-menu">
+							<li><?php echo Html::a('К тексту', ['/card/view-text', 'id' => $modCard->id, '#' => 'transfer-' . $modTransfer->id]) ?></li>
+							<li><?php echo Html::a('Добавить объект', ['/object/create', 'id' => $modTransfer->id]) ?></li>
+							<li><?php echo Html::a('Редактировать', ['/transfer/update', 'id' => $modTransfer->id]) ?></li>
+							<li><?php echo Html::a('Передвинуть выше', ['/transfer/sort', 'id' => $modTransfer->id]) ?></li>
+							<li><?php echo Html::a('Передвинуть ниже', ['/transfer/sort', 'id' => $modTransfer->id, 'inv' => 1]) ?></li>
+							<li><?php echo Html::a('Удалить', ['/transfer/delete', 'id' => $modTransfer->id], ['data-confirm' => 'Точно?', 'data-method' => 'post']) ?></li>
+						</ul>						
 					</div>
 
 					<?php if ($modTransfer->time): ?>
@@ -97,39 +94,30 @@ use yii\bootstrap\Dropdown;
 
 						<div class="dropdown">
 							<a href="#" data-toggle="dropdown" class="dropdown-toggle"><?php echo Html::encode($modObject->name) ?></a>
-							<?php
-								echo Dropdown::widget([
-									'items' => [
-										['label' => 'К тексту', 'url' => ['/card/view-text', 'id' => $modCard->id, '#' => 'object-' . $modObject->id]],
-										['label' => 'Редактировать', 'url' => ['/object/update', 'id' => $modObject->id]],
-										['label' => 'Передвинуть вверх', 'url' => ['/object/sort', 'id' => $modObject->id]],
-										['label' => 'Передвинуть вниз', 'url' => ['/object/sort', 'id' => $modObject->id, 'inv' => 1]],
-										['label' => 'Удалить', 'url' => ['/object/delete', 'id' => $modObject->id, 'inv' => 1], 'linkOptions' => ['data-confirm' => 'Точно?', 'data-method' => 'post']],
-									],
-								]);
-							?>
+
+							<ul class="dropdown-menu">
+								<li><?php echo Html::a('К тексту', ['/card/view-text', 'id' => $modCard->id, '#' => 'object-' . $modObject->id]) ?></li>
+								<li><?php echo Html::a('Редактировать', ['/object/update', 'id' => $modObject->id]) ?></li>
+								<li><?php echo Html::a('Передвинуть выше', ['/object/sort', 'id' => $modObject->id]) ?></li>
+								<li><?php echo Html::a('Передвинуть ниже', ['/object/sort', 'id' => $modObject->id, 'inv' => 1]) ?></li>
+								<li><?php echo Html::a('Удалить', ['/object/delete', 'id' => $modObject->id], ['data-confirm' => 'Точно?', 'data-method' => 'post']) ?></li>
+							</ul>						
 						</div>
 
-							<div class="well_list--options">
-								<?php if ($modObject->time): ?>
-									Рассказ: <?php echo $modObject->time ?> мин.
-								<?php endif ?>
+						<div class="well_list--options">
+							<?php if ($modObject->time): ?>
+								Рассказ: <?php echo $modObject->time ?> мин.
+							<?php endif ?>
 
-								<?php if ($modObject->size): ?>
-									Объем: <?php echo Yii::$app->formatter->asInteger($modObject->size) ?> зн.
-								<?php endif ?>
-							</div>						
+							<?php if ($modObject->size): ?>
+								Объем: <?php echo Yii::$app->formatter->asInteger($modObject->size) ?> зн.
+							<?php endif ?>
+						</div>						
 
 					</div>				
 				<?php endforeach ?>
 			<?php endforeach ?>			
 		</div>
-
-		<script>
-			jQuery(function ($) {
-				$('.dropdown-toggle').dropdown();
-			});			
-		</script>
 
 	<?php Pjax::end() ?>
 
