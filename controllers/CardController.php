@@ -3,7 +3,12 @@
 namespace app\controllers;
 
 use Yii;
+
 use app\models\Card;
+use app\models\CardImage;
+
+use igogo5yo\uploadfromurl\UploadFromUrl;
+use yii\web\UploadedFile;
 
 //*****************************************************************************
 class CardController extends \dmitrybtn\cp\Controller
@@ -32,8 +37,8 @@ class CardController extends \dmitrybtn\cp\Controller
 		return [
 			'index' => 'Мои техкарты',
 			'create' => 'Добавить',
-			'update' => 'Редактировать',
-			'delete' => 'Удалить',
+			'update' => 'Настройки техкарты',
+			'delete' => 'Удалить техкарту',
 			'view' => $this->model ? $this->model->getTitle() : 'Просмотр',
 		];
 	}
@@ -97,8 +102,38 @@ class CardController extends \dmitrybtn\cp\Controller
 	//-------------------------------------------------------------------------
 	{
 		$this->model = $this->find($id);
-
 		$this->title = $this->title('view');
+
+		$modNewImage = new CardImage;
+		$modNewImage->id_card = $id;
+
+		if (Yii::$app->request->post('url')) {
+			$modNewImage->url = Yii::$app->request->post('url');
+
+			if ($modNewImage->validate()) {
+				$modNewImage->scenario = 'url';
+				$modNewImage->file = UploadFromUrl::initWithUrl($modNewImage->url);
+
+				if ($modNewImage->save())
+					return Yii::$app->getResponse()->redirect($this->getReferrer(), 302, false);
+			}
+		} elseif ($arrFiles = UploadedFile::getInstancesByName('file')) {
+			
+			$notSaved = 0;
+
+			foreach ($arrFiles as $objFile) {
+				$modImage = new CardImage;
+				$modImage->id_card = $id;
+				$modImage->file = $objFile; 
+
+				if (!$modImage->save()) $notSaved++;
+			}
+
+			if ($notSaved)
+				Yii::$app->session->addFlash('error', "Не удалось загрузить $notSaved изображений");
+
+			return Yii::$app->getResponse()->redirect($this->getReferrer(), 302, false);
+		}
 
 		$this->menu = [
 			['label' => 'Опции'],
@@ -107,7 +142,7 @@ class CardController extends \dmitrybtn\cp\Controller
 			['action' => 'delete', 'params' => ['id' => $this->model->id], 'linkOptions' => ['data' => ['confirm' => 'Точно?', 'method' => 'POST']]],
 		];
 
-		return $this->render('view-images', ['modCard' => $this->model]);
+		return $this->render('view-images', ['modCard' => $this->model, 'modNewImage' => $modNewImage]);
 	}
 
 	//-------------------------------------------------------------------------

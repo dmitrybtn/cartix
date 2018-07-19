@@ -86,7 +86,7 @@ class ImageController extends \dmitrybtn\cp\Controller
 
 		}
 
-		return $this->goReferrer();
+		return Yii::$app->getResponse()->redirect($this->getReferrer(), 302, false);
 	}
 
 	//-------------------------------------------------------------------------

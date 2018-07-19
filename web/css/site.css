@@ -29,9 +29,9 @@
 
 
 
-.transfer--header {font-size: 25px; line-height: 1.2em; font-weight: bold; text-align: center; margin: 30px 0 0px;}
+.transfer--header {font-size: 25px; line-height: 1.2em; font-weight: bold; text-align: center;}
 .object--header {font-size: 20px; font-weight: bold; margin: 15px 0 8px;}
-.object--text {font-size: 20px; font-family: Times;}
+.object--text {font-size: 18px; /*font-family: Times; */ margin-bottom: 25px;}
 
 .nav-footer-card li {width: 33.33%;}
 .nav-footer-card li a {text-align: center;}

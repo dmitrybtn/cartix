@@ -48,8 +48,8 @@ class CardImage extends \yii\db\ActiveRecord
 			
 			[['url'], 'url'],
 
-			['file', FileFromUrlValidator::className(), 'mimeTypes' => 'image/*', 'on' => 'url', 'message' => 'Не очень похоже на картинку...'],
-			['file', 'file', 'mimeTypes' => 'image/*', 'on' => 'file', 'message' => 'Не очень похоже на картинку...'],
+			['file', FileFromUrlValidator::className(), 'mimeTypes' => 'image/*', 'on' => 'url', 'wrongMimeType' => 'Не очень похоже на картинку...'],
+			['file', 'file', 'mimeTypes' => 'image/*', 'on' => 'file', 'wrongMimeType' => 'Не очень похоже на картинку...'],
 			['file', 'required', 'message' => 'Укажите либо URL, либо файл. Ну хоть что-нибудь!', 'on' => ['file', 'url']],
 
 

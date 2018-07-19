@@ -14,9 +14,20 @@ namespace app\widgets;
  */
 class GallereyModal extends \powerkernel\photoswipe\Modal
 {
-    public $selector = '.modal';
+    public $selector = '.lightbox';
     public $images = [];
-    public $clientOptions = []; // photoswipe options, see http://photoswipe.com/documentation/options.html
+    public $clientOptions = [
+        'bgOpacity' => 0.9,
+        'spacing' => 0.9,
+        'closeEl' => true,
+        'captionEl' => true,
+        'fullscreenEl' => false,
+        'zoomEl' => true,
+        'shareEl' => false,
+        'counterEl' => true,
+        'arrowEl' => true,
+        'preloaderEl' => true,
+    ]; // photoswipe options, see http://photoswipe.com/documentation/options.html
 
 
     /**
