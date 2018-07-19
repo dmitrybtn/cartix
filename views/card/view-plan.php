@@ -10,7 +10,7 @@ use yii\bootstrap\Dropdown;
 
 <?php $this->beginContent('@app/views/card/view.php', ['modCard' => $modCard]) ?>
 
-	<?php Pjax::begin(); ?>
+	<?php Pjax::begin(['scrollTo' => true]) ?>
 
 		<table class='table table-striped table-bordered hidden-xs'>
 			<tr>
@@ -64,6 +64,7 @@ use yii\bootstrap\Dropdown;
 
 		</table>
 
+		
 		<div class="visible-xs-block">
 			<?php foreach ($arrTransfers as $modTransfer): ?>
 				<div class="well_list-plan well_list well_list-1">
@@ -74,6 +75,7 @@ use yii\bootstrap\Dropdown;
 							echo Dropdown::widget([
 								'items' => [
 									['label' => 'К тексту', 'url' => ['/card/view-text', 'id' => $modCard->id, '#' => 'transfer-' . $modTransfer->id]],
+									// ['label' => 'Добавить объект', 'url' => ['/object/create', 'id' => $modTransfer->id]],
 									['label' => 'Редактировать', 'url' => ['/transfer/update', 'id' => $modTransfer->id]],
 									['label' => 'Передвинуть вверх', 'url' => ['/transfer/sort', 'id' => $modTransfer->id]],
 									['label' => 'Передвинуть вниз', 'url' => ['/transfer/sort', 'id' => $modTransfer->id, 'inv' => 1]],
@@ -123,8 +125,14 @@ use yii\bootstrap\Dropdown;
 			<?php endforeach ?>			
 		</div>
 
+		<script>
+			jQuery(function ($) {
+				$('.dropdown-toggle').dropdown();
+			});			
+		</script>
 
 	<?php Pjax::end() ?>
+
 
 <?php $this->endContent() ?>
 
