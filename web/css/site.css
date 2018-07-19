@@ -33,3 +33,5 @@
 .object--header {font-size: 20px; font-weight: bold; margin: 15px 0 8px;}
 .object--text {font-size: 20px; font-family: Times;}
 
+.nav-footer-card li {width: 33.33%;}
+.nav-footer-card li a {text-align: center;}

@@ -214,7 +214,7 @@
             "source": {
                 "type": "git",
                 "url": "/Users/dmitry/sites/yii2-cp/htdocs/yii2-cp",
-                "reference": "75a477b000dd9643d8c4d89df071ed6ef96d2118"
+                "reference": "308aa13e87fa0b22f055747ab221b950375ec28f"
             },
             "require": {
                 "yiisoft/yii2-jui": "~2.0.0"
@@ -225,7 +225,7 @@
                     "dmitrybtn\\cp\\": "src"
                 }
             },
-            "time": "2018-07-16 11:22:47"
+            "time": "2018-07-19 07:06:20"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -970,16 +970,16 @@
         },
         {
             "name": "codeception/base",
-            "version": "2.4.3",
+            "version": "2.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeception/base.git",
-                "reference": "a1416d3cd829bf8decb491143b3e8f8e02ee827f"
+                "reference": "ed252a26bbb939e9c55465dbec4a0c7481728023"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Codeception/base/zipball/a1416d3cd829bf8decb491143b3e8f8e02ee827f",
-                "reference": "a1416d3cd829bf8decb491143b3e8f8e02ee827f",
+                "url": "https://api.github.com/repos/Codeception/base/zipball/ed252a26bbb939e9c55465dbec4a0c7481728023",
+                "reference": "ed252a26bbb939e9c55465dbec4a0c7481728023",
                 "shasum": ""
             },
             "require": {
@@ -1055,7 +1055,7 @@
                 "functional testing",
                 "unit testing"
             ],
-            "time": "2018-06-26T14:35:46+00:00"
+            "time": "2018-07-16T09:12:13+00:00"
         },
         {
             "name": "codeception/phpunit-wrapper",

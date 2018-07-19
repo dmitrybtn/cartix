@@ -12,7 +12,7 @@ use app\widgets\GallereyModal;
 		<?php $arrImages = [] ?>
 		<?php foreach ($modCard->getTransfers()->with('objects')->all() as $modTransfer): ?>
 
-			<?php echo Html::a('asdfasdf', '', ['name' => 'transfer-' . $modTransfer->id, 'style' => 'position: absolute; display: block; top: -48px;']) ?>
+			<?php echo Html::a('', '', ['name' => 'transfer-' . $modTransfer->id, 'style' => 'position: absolute; display: block; top: -48px;']) ?>
 			<div class="transfer--header" style='position: relative;'>
 				<?php echo Html::encode($modTransfer->name) ?>		
 			</div>
