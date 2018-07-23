@@ -40,7 +40,9 @@ class Card extends \yii\db\ActiveRecord
 	// Связанные записи
 	//*************************************************************************
 
+	//-------------------------------------------------------------------------
 	public function getTransfers()
+	//-------------------------------------------------------------------------
 	{
 		return $this->hasMany(CardTransfer::className(), ['id_card' => 'id'])->inverseOf('card');
 	}
@@ -56,6 +58,18 @@ class Card extends \yii\db\ActiveRecord
 
 		return $objQuery;
 	}
+
+	//-------------------------------------------------------------------------
+	public function getImagesKeys()
+	//-------------------------------------------------------------------------
+	{
+		if ($this->_imagesKeys === null)
+			$this->_imagesKeys = $this->getImages()->select('id')->column();
+
+		return $this->_imagesKeys;
+		
+	} private $_imagesKeys;	
+
 
 	//*************************************************************************
 	// Пользовательские методы

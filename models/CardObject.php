@@ -91,7 +91,7 @@ class CardObject extends \yii\db\ActiveRecord
 	public function getTransfer()
 	//-------------------------------------------------------------------------
 	{
-		return $this->hasOne(CardTransfer::className(), ['id' => 'id_transfer']);
+		return $this->hasOne(CardTransfer::className(), ['id' => 'id_transfer'])->inverseOf('objects');
 	}
 
 	//-------------------------------------------------------------------------
@@ -120,19 +120,12 @@ class CardObject extends \yii\db\ActiveRecord
 	}
 
 	//-------------------------------------------------------------------------
-	protected function getCardImageKeys()
-	//-------------------------------------------------------------------------
-	{
-		return $this->card->getImages()->select('id')->column();
-	}
-
-	//-------------------------------------------------------------------------
 	public function saveImages()
 	//-------------------------------------------------------------------------
 	{
 		CardObjectImage::deleteAll(['id_object' => $this->id]);
 
-		$arrCardImages = $this->getCardImageKeys();
+		$arrCardImages = $this->card->getImagesKeys();
 
 		foreach (CardImage::extract($this->text) as $id_sort => $id_image) {
 
@@ -151,7 +144,7 @@ class CardObject extends \yii\db\ActiveRecord
 	public function getTextParsed()
 	//-------------------------------------------------------------------------
 	{
-		$arrCardImages = $this->getCardImageKeys();
+		$arrCardImages = $this->card->getImagesKeys();
 
 		$arrSearch = [];
 		$arrReplace = [];

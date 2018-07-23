@@ -63,16 +63,25 @@ class CardTransfer extends \yii\db\ActiveRecord
 	public function getCard()
 	//-------------------------------------------------------------------------
 	{
-		return $this->hasOne(Card::className(), ['id' => 'id_card']);
+		return $this->hasOne(Card::className(), ['id' => 'id_card'])->inverseOf('transfers');
 	}
 
 	//-------------------------------------------------------------------------
 	public function getObjects()
 	//-------------------------------------------------------------------------
 	{
-		return $this->hasMany(CardObject::className(), ['id_transfer' => 'id'])->sorted();
+		return $this->hasMany(CardObject::className(), ['id_transfer' => 'id'])->inverseOf('transfer')->sorted();
 	}
 
+	public function getObjectsTime()
+	{
+		$r = 0;
+
+		foreach ($this->objects as $modObject) 
+			$r += $modObject->time;
+
+		return $r;
+	}
 
 	//*************************************************************************
 	// Пользовательские методы

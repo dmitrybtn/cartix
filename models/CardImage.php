@@ -215,6 +215,6 @@ class CardImageQuery extends \yii\db\ActiveQuery
 	public function sorted()
 	//-------------------------------------------------------------------------
 	{
-		return $this->addOrderBy('id DESC');
+		return $this->addOrderBy('id');
 	}
 }

@@ -19,7 +19,6 @@ BootstrapPluginAsset::register($this);
 			<tr>
 				<th>Остановка или объект</th>
 				<th class='number'>Время</th>
-				<th class='number'>Объем</th>
 				<th class='action-column action-column-5'></th>
 			</tr>
 			
@@ -28,9 +27,16 @@ BootstrapPluginAsset::register($this);
 			<?php foreach ($arrTransfers as $modTransfer): ?>
 
 				<tr>
-					<td><?php echo $modTransfer->name ?></td>
+					<td>
+						<?php echo $modTransfer->name ?>
+
+						<?php if ($t = $modTransfer->objectsTime): ?>
+							<span class='pull-right text-muted'>
+								Рассказ: <?php echo $t ?> мин.
+							</span>							
+						<?php endif ?>
+					</td>
 					<td class="number"><?php echo $modTransfer->time ?></td>
-					<td></td>
 					<td class='action-column action-column-5'>
 						<?php echo Html::a('<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>', ['/object/create', 'id' => $modTransfer->id]) ?>
 						<?php echo Html::a('<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>', ['/transfer/update', 'id' => $modTransfer->id]) ?>
@@ -43,9 +49,14 @@ BootstrapPluginAsset::register($this);
 				<?php foreach ($modTransfer->objects as $modObject): ?>
 
 					<tr>
-						<td class='level-1'><?php echo $modObject->name ?></td>
+						<td class='level-1'>
+							<?php echo $modObject->name ?>
+						
+							<?php if ($modObject->size): ?>
+								<span class='pull-right text-muted'>Объем: <?php echo Yii::$app->formatter->asInteger($modObject->size) ?> зн.</span>
+							<?php endif ?>
+						</td>
 						<td class="number"><?php echo $modObject->time ?></td>
-						<td class='number'><?php if ($modObject->size) echo Yii::$app->formatter->asInteger($modObject->size) ?></td>
 						<td class='action-column action-column-5' style='text-align: right;'>
 
 							<?php echo Html::a('<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>', ['/object/update', 'id' => $modObject->id]) ?>
@@ -82,11 +93,15 @@ BootstrapPluginAsset::register($this);
 						</ul>						
 					</div>
 
-					<?php if ($modTransfer->time): ?>
 						<div class="well_list--options">
-							Переход: <?php echo $modTransfer->time ?> мин.
+							<?php if ($modTransfer->time): ?>
+								Переход: <?php echo $modTransfer->time ?> мин.
+							<?php endif ?>
+
+							<?php if ($t = $modTransfer->objectsTime): ?>
+								Рассказ: <?php echo $t ?> мин.
+							<?php endif ?>
 						</div>					
-					<?php endif ?>
 				</div>
 
 				<?php foreach ($modTransfer->objects as $modObject): ?>

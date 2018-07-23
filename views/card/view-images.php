@@ -76,11 +76,11 @@ use app\widgets\GallereyModal;
 
 			<?php if ($modObject->objectImages): ?>
 				<?php if (!$showTransfer): ?>
-					<div class="transfer--header"><?php echo Html::encode($modTransfer->name) ?></div>
+					<div class="card_text--header_transfer"><?php echo Html::encode($modTransfer->name) ?></div>
 					<?php $showTransfer = true ?>
 				<?php endif ?>
 
-				<div class="object--header"><?php echo Html::encode($modObject->name) ?></div>			
+				<div class="card_text--header_object"><?php echo Html::encode($modObject->name) ?></div>			
 			<?php endif ?>
 			
 			<div class="row">

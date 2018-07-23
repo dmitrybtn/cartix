@@ -29,9 +29,13 @@
 
 
 
-.transfer--header {font-size: 25px; line-height: 1.2em; font-weight: bold; text-align: center;}
-.object--header {font-size: 20px; font-weight: bold; margin: 15px 0 8px;}
-.object--text {font-size: 18px; /*font-family: Times; */ margin-bottom: 25px;}
+.card_text--header_transfer {font-size: 25px; line-height: 1.2em; margin: 15px 0 8px; font-weight: bold; text-align: center;}
+.card_text--header_object {font-size: 20px; font-weight: bold; margin: 15px 0 8px;}
+
+.card_text--text, 
+.card_text--instruction {font-size: 17px; /*font-family: Times; */ margin-bottom: 25px;}
+
+.card_text--instruction {margin: 0 0 10.5px;}
 
 .nav-footer-card li {width: 33.33%;}
 .nav-footer-card li a {text-align: center;}

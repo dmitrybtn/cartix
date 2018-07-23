@@ -25,6 +25,7 @@
 				'minHeight' => 300,
 				'buttons' =>  ['html',  'formatting',  'bold',  'italic',  'unorderedlist',  'orderedlist',  'link'],
 				'formatting' => ['p'],
+				'toolbarFixedTopOffset' => 58,
 				'formattingAdd' => [				
 					['title' => 'Очистить формат', 'func' => 'inline.removeFormat'],
 				]
