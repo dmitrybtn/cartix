@@ -8,24 +8,11 @@ settings:
     bootstrap: _bootstrap.php
     memory_limit: 1024M
     colors: true
-params:
-    - config/base_test.php    
 modules:
     config:
         Yii2:
-            entryScript: index-test.php            
             configFile: 'config/base_test.php'
             cleanup: false
-        Db:          
-          dsn: '%components.db.dsn%'
-          user: '%components.db.username%'
-          password: '%components.db.password%'
-          # dump: 'tests/_data/dump.sql'
-          # params: config/cept_db.php
-          populate: true
-          cleanup: false
-          reconnect: false
-          populator: 'mysql -u $user --password=$password $dbname < tests/_data/dump.sql'
 
 
 # To enable code coverage:

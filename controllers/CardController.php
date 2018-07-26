@@ -24,7 +24,7 @@ class CardController extends \dmitrybtn\cp\Controller
 			'verbs' => [
 				'class' => \yii\filters\VerbFilter::className(),
 				'actions' => [
-					'delete' => ['POST'],
+					'delete' => [YII_ENV_TEST ? 'GET' : 'POST'],
 				],
 			],
 		];

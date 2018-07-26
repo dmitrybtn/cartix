@@ -30,6 +30,7 @@ class Card extends \yii\db\ActiveRecord
 	{
 		return [
 			[['name'], 'required'],
+			['name', 'unique'],
 			[['name', 'map'], 'string', 'max' => 255],
 			[['map'], 'url'],
 
