@@ -27,7 +27,7 @@ BootstrapPluginAsset::register($this);
 			<?php foreach ($arrTransfers as $modTransfer): ?>
 
 				<tr data-transfer-key='<?php echo $modTransfer->id ?>'>
-					<td>
+					<td class='card_plan--transfer'>
 						<?php echo $modTransfer->name ?>
 
 						<?php if ($t = $modTransfer->objectsTime): ?>
@@ -48,8 +48,8 @@ BootstrapPluginAsset::register($this);
 
 				<?php foreach ($modTransfer->objects as $modObject): ?>
 
-					<tr>
-						<td class='level-1'>
+					<tr data-object-key='<?php echo $modObject->id ?>'>
+						<td class='level-1 card_plan--object'>
 							<?php echo $modObject->name ?>
 						
 							<?php if ($modObject->size): ?>
@@ -58,13 +58,10 @@ BootstrapPluginAsset::register($this);
 						</td>
 						<td class="number"><?php echo $modObject->time ?></td>
 						<td class='action-column action-column-5' style='text-align: right;'>
-
-							<?php echo Html::a('<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>', ['/object/update', 'id' => $modObject->id]) ?>
-
+							<?php echo Html::a('<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>', ['/object/update', 'id' => $modObject->id], ['class' => 'update']) ?>
 							<?php echo Html::a('<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>', ['/object/sort', 'id' => $modObject->id]) ?>
 							<?php echo Html::a('<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>', ['/object/sort', 'id' => $modObject->id, 'inv' => 1]) ?>
-							<?php echo Html::a('<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>', ['/object/delete', 'id' => $modObject->id], ['data-confirm' => 'Точно?', 'data-method' => 'post']) ?>
-
+							<?php echo Html::a('<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>', ['/object/delete', 'id' => $modObject->id], ['class' => 'delete', 'data-confirm' => 'Точно?', 'data-method' => 'post']) ?>
 						</td>
 					</tr>
 					
@@ -78,7 +75,7 @@ BootstrapPluginAsset::register($this);
 		
 		<div class="visible-xs-block">
 			<?php foreach ($arrTransfers as $modTransfer): ?>
-				<div class="well_list-plan well_list well_list-1">
+				<div class="well_list-plan well_list well_list-1 card_plan-mobile--transfer">
 
 					<div class="dropdown">
 						<a href="#" data-toggle="dropdown" class="dropdown-toggle"><?php echo Html::encode($modTransfer->name) ?></a>
@@ -105,7 +102,7 @@ BootstrapPluginAsset::register($this);
 				</div>
 
 				<?php foreach ($modTransfer->objects as $modObject): ?>
-					<div class="well_list-plan well_list well_list-2">
+					<div class="well_list-plan well_list well_list-2 card_plan-mobile--object">
 
 						<div class="dropdown">
 							<a href="#" data-toggle="dropdown" class="dropdown-toggle"><?php echo Html::encode($modObject->name) ?></a>
