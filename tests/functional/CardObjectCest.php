@@ -15,6 +15,9 @@ class CardObjectCest extends CardBase
 	{
         parent::clear($I);
 
+        parent::createCard($I);
+        parent::createTransfer($I);
+
         $I->dontSeeRecord(CardObject::className());
 	}
 
@@ -23,14 +26,8 @@ class CardObjectCest extends CardBase
      */
     public function create(\FunctionalTester $I)
     {
-        parent::createCard($I);
-        parent::createTransfer($I);
         parent::createObject($I);
     }
-
-
-
-
 
     /**
      *  @depends create
