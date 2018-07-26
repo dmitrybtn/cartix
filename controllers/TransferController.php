@@ -45,7 +45,6 @@ class TransferController extends \dmitrybtn\cp\Controller
 			'create' => 'Добавить остановку',
 			'update' => 'Редактировать остановку',
 			'delete' => 'Удалить',
-			'view' => $this->model ? $this->model->getTitle() : 'Просмотр',
 		];
 	}
 
