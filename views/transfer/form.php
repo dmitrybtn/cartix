@@ -10,7 +10,6 @@
 		'enableAjaxValidation' => true,
 		'validateOnBlur' => false,
 		'validateOnChange' => false,
-		'returnUrl' => $returnUrl,	
 	]); ?>
 
 		<div class="row">
@@ -20,6 +19,6 @@
 
 		<?php echo $form->field($modCardTransfer, 'instruction')->textarea(['rows' => 4, 'placeholder' => 'Указания по организации перехода к данной точке']) ?>
 		
-		<?php echo $form->controls() ?>
+		<?php echo $form->controls($returnUrl) ?>
 	<?php ActiveForm::end(); ?>
 </div>

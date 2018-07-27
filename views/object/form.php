@@ -12,7 +12,6 @@
 		'enableAjaxValidation' => true,
 		'validateOnBlur' => false,
 		'validateOnChange' => false,
-		'returnUrl' => $returnUrl,	
 	]); ?>
 
 	<div class="row">
@@ -34,7 +33,7 @@
 
 		<?php echo $form->field($modCardObject, 'instruction')->textarea(['rows' => 6]) ?>
 		
-		<?php echo $form->controls() ?>
+		<?php echo $form->controls($returnUrl) ?>
 	<?php ActiveForm::end(); ?>
 </div>
 

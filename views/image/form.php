@@ -10,7 +10,6 @@
 		'enableAjaxValidation' => true,
 		'validateOnBlur' => false,
 		'validateOnChange' => false,
-		'returnUrl' => $returnUrl,	
 	]); ?>
 
 		<?php echo $form->field($modCardImage, 'name')->textInput(['maxlength' => true]) ?>
@@ -18,6 +17,6 @@
 		<?php echo $form->field($modCardImage, 'file')->fileInput() ?>
 		<?php echo $form->field($modCardImage, 'description')->textarea(['rows' => 6]) ?>
 		
-		<?php echo $form->controls() ?>
+		<?php echo $form->controls($returnUrl) ?>
 	<?php ActiveForm::end(); ?>
 </div>

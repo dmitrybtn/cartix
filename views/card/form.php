@@ -10,12 +10,11 @@
 		'enableAjaxValidation' => true,
 		'validateOnBlur' => false,
 		'validateOnChange' => false,
-		'returnUrl' => $returnUrl,	
 	]); ?>
 
 		<?php echo $form->field($modCard, 'name')->textInput(['maxlength' => true]) ?>
 		<?php echo $form->field($modCard, 'map')->textInput(['maxlength' => true]) ?>
 		
-		<?php echo $form->controls() ?>
+		<?php echo $form->controls($returnUrl) ?>
 	<?php ActiveForm::end(); ?>
 </div>
