@@ -5,12 +5,12 @@ use app\widgets\GallereyModal;
 
 ?>
 
-<?php $this->beginContent('@app/views/card/view.php', ['modCard' => $modCard]) ?>
+<?php $this->beginContent('@app/views/card/view.php', ['model' => $model]) ?>
 
 	<div class="card">
 
 		<?php $arrImages = [] ?>
-		<?php foreach ($modCard->getTransfers()->with('objects', 'objects.objectImages', 'objects.objectImages.image')->all() as $modTransfer): ?>
+		<?php foreach ($model->getTransfers()->with('objects', 'objects.objectImages', 'objects.objectImages.image')->all() as $modTransfer): ?>
 
 			<?php echo Html::a('', '', ['name' => 'transfer-' . $modTransfer->id, 'style' => 'position: absolute; display: block; top: -48px;']) ?>
 			<div class="card_text--header_transfer" style='position: relative;'>

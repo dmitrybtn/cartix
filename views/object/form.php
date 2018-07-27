@@ -15,11 +15,11 @@
 	]); ?>
 
 	<div class="row">
-		<div class="col-md-10"><?php echo $form->field($modCardObject, 'name')->textInput(['maxlength' => true]) ?></div>
-		<div class="col-md-2"><?php echo $form->field($modCardObject, 'time')->textInput() ?></div>
+		<div class="col-md-10"><?php echo $form->field($model, 'name')->textInput(['maxlength' => true]) ?></div>
+		<div class="col-md-2"><?php echo $form->field($model, 'time')->textInput() ?></div>
 	</div>
 
-		<?php echo $form->field($modCardObject, 'text')->widget(Imperavi::className(), [
+		<?php echo $form->field($model, 'text')->widget(Imperavi::className(), [
 			'settings' => [
 				'minHeight' => 300,
 				'buttons' =>  ['html',  'formatting',  'bold',  'italic',  'unorderedlist',  'orderedlist',  'link'],
@@ -31,7 +31,7 @@
 			]
 		]) ?>
 
-		<?php echo $form->field($modCardObject, 'instruction')->textarea(['rows' => 6]) ?>
+		<?php echo $form->field($model, 'instruction')->textarea(['rows' => 6]) ?>
 		
 		<?php echo $form->controls($returnUrl) ?>
 	<?php ActiveForm::end(); ?>

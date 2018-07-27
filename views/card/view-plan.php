@@ -11,7 +11,7 @@ BootstrapPluginAsset::register($this);
 ?>
 
 
-<?php $this->beginContent('@app/views/card/view.php', ['modCard' => $modCard]) ?>
+<?php $this->beginContent('@app/views/card/view.php', ['model' => $model]) ?>
 
 	<?php Pjax::begin() ?>
 
@@ -22,7 +22,7 @@ BootstrapPluginAsset::register($this);
 				<th class='action-column action-column-5'></th>
 			</tr>
 			
-			<?php $arrTransfers = CardTransfer::find()->where(['id_card' => $modCard->id])->sorted()->with('objects')->all() ?>
+			<?php $arrTransfers = CardTransfer::find()->where(['id_card' => $model->id])->sorted()->with('objects')->all() ?>
 
 			<?php foreach ($arrTransfers as $modTransfer): ?>
 
@@ -81,7 +81,7 @@ BootstrapPluginAsset::register($this);
 						<a href="#" data-toggle="dropdown" class="dropdown-toggle"><?php echo Html::encode($modTransfer->name) ?></a>
 
 						<ul class="dropdown-menu">
-							<li><?php echo Html::a('К тексту', ['/card/view-text', 'id' => $modCard->id, '#' => 'transfer-' . $modTransfer->id]) ?></li>
+							<li><?php echo Html::a('К тексту', ['/card/view-text', 'id' => $model->id, '#' => 'transfer-' . $modTransfer->id]) ?></li>
 							<li><?php echo Html::a('Добавить объект', ['/object/create', 'id' => $modTransfer->id]) ?></li>
 							<li><?php echo Html::a('Редактировать', ['/transfer/update', 'id' => $modTransfer->id]) ?></li>
 							<li><?php echo Html::a('Передвинуть выше', ['/transfer/sort', 'id' => $modTransfer->id]) ?></li>
@@ -108,7 +108,7 @@ BootstrapPluginAsset::register($this);
 							<a href="#" data-toggle="dropdown" class="dropdown-toggle"><?php echo Html::encode($modObject->name) ?></a>
 
 							<ul class="dropdown-menu">
-								<li><?php echo Html::a('К тексту', ['/card/view-text', 'id' => $modCard->id, '#' => 'object-' . $modObject->id]) ?></li>
+								<li><?php echo Html::a('К тексту', ['/card/view-text', 'id' => $model->id, '#' => 'object-' . $modObject->id]) ?></li>
 								<li><?php echo Html::a('Редактировать', ['/object/update', 'id' => $modObject->id]) ?></li>
 								<li><?php echo Html::a('Передвинуть выше', ['/object/sort', 'id' => $modObject->id]) ?></li>
 								<li><?php echo Html::a('Передвинуть ниже', ['/object/sort', 'id' => $modObject->id, 'inv' => 1]) ?></li>

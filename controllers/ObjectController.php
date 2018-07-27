@@ -7,7 +7,7 @@ use dmitrybtn\cp\SortAction;
 use app\models\CardObject;
 
 //*****************************************************************************
-class ObjectController extends \dmitrybtn\cp\Controller
+class ObjectController extends \dmitrybtn\cp\CrudController
 //*****************************************************************************
 {
 	public $model;
@@ -24,38 +24,21 @@ class ObjectController extends \dmitrybtn\cp\Controller
 	}
 
 	//-------------------------------------------------------------------------
-	public function behaviors()
-	//-------------------------------------------------------------------------
-	{
-		return [
-			'verbs' => [
-				'class' => \yii\filters\VerbFilter::className(),
-				'actions' => [
-					'delete' => [YII_ENV_TEST ? 'GET' : 'POST'],
-				],
-			],
-		];
-	}
-
-	//-------------------------------------------------------------------------
-	public function titles()
+	public static function title($actionId, $model = null)
 	//-------------------------------------------------------------------------
 	{
 		return [
 			'create' => 'Добавить объект',
 			'update' => 'Редактировать объект',
 			'delete' => 'Удалить',
-		];
+		][$actionId];
 	}
 
 	//-------------------------------------------------------------------------
-	public function breads($actionId)
+	public static function breads($actionId, $model = null)
 	//-------------------------------------------------------------------------
 	{
-		return [
-			['label' => $this->model->transfer->card->getTitle(), 'url' => ['/card/view', 'id' => $this->model->transfer->card->id]],
-			// ['label' => 'Техкарты', 'url' => ['/card/index']],
-		];
+		return CardController::breads('outer', $model->card);
 	}
 
 
@@ -75,7 +58,7 @@ class ObjectController extends \dmitrybtn\cp\Controller
 				return $this->redirect(['/card/view', 'id' => $this->model->transfer->card->id]); 
 		}	
 
-		return $this->render('form', ['modCardObject' => $this->model, 'returnUrl' => $this->getReferrer(['index'])]);
+		return $this->render('form', ['returnUrl' => $this->getReferrer(['index'])]);
 	}
 
 	//-------------------------------------------------------------------------
@@ -95,25 +78,26 @@ class ObjectController extends \dmitrybtn\cp\Controller
 				return $this->redirect($returnUrl);
 		}	
 
-		return $this->render('form', ['modCardObject' => $this->model, 'returnUrl' => $returnUrl]);
+		return $this->render('form', ['returnUrl' => $returnUrl]);
 	}
 
 	//-------------------------------------------------------------------------
 	public function actionDelete($id)
 	//-------------------------------------------------------------------------
 	{
-		try {		
+		if (Yii::$app->request->isPost || YII_ENV_TEST) {
+			try {		
 
-			$this->find($id)->delete();
+				$this->find($id)->delete();
+				return Yii::$app->getResponse()->redirect($this->getReferrer(), 302, false);
 
-		} catch (\Exception $e) {
+			} catch (\Exception $e) {
 
-			Yii::$app->session->setFlash('error', $e->getMessage());
-			return $this->goReferrer();
+				Yii::$app->session->setFlash('error', $e->getMessage());
+				return Yii::$app->getResponse()->redirect($this->getReferrer());
 
-		}
-
-		return Yii::$app->getResponse()->redirect($this->getReferrer(), 302, false);
+			}		
+		} throw new \yii\web\MethodNotAllowedHttpException('Неверный формат запроса!');
 	}
 
 	//-------------------------------------------------------------------------

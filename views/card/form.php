@@ -12,8 +12,8 @@
 		'validateOnChange' => false,
 	]); ?>
 
-		<?php echo $form->field($modCard, 'name')->textInput(['maxlength' => true]) ?>
-		<?php echo $form->field($modCard, 'map')->textInput(['maxlength' => true]) ?>
+		<?php echo $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+		<?php echo $form->field($model, 'map')->textInput(['maxlength' => true]) ?>
 		
 		<?php echo $form->controls($returnUrl) ?>
 	<?php ActiveForm::end(); ?>

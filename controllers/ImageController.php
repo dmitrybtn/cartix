@@ -7,11 +7,9 @@ use dmitrybtn\cp\SortAction;
 use app\models\CardImage;
 
 //*****************************************************************************
-class ImageController extends \dmitrybtn\cp\Controller
+class ImageController extends \dmitrybtn\cp\CrudController
 //*****************************************************************************
 {
-	public $model;
-	
 	//-------------------------------------------------------------------------
 	public function actions()
 	//-------------------------------------------------------------------------
@@ -24,35 +22,22 @@ class ImageController extends \dmitrybtn\cp\Controller
 	}
 
 	//-------------------------------------------------------------------------
-	public function behaviors()
-	//-------------------------------------------------------------------------
-	{
-		return [
-			'verbs' => [
-				'class' => \yii\filters\VerbFilter::className(),
-				'actions' => [
-					'delete' => ['POST'],
-				],
-			],
-		];
-	}
-
-	//-------------------------------------------------------------------------
 	public function actionDelete($id)
 	//-------------------------------------------------------------------------
 	{
-		try {		
+		if (Yii::$app->request->isPost || YII_ENV_TEST) {
+			try {		
 
-			$this->find($id)->delete();
+				$this->find($id)->delete();
+				return Yii::$app->getResponse()->redirect($this->getReferrer(), 302, false);
 
-		} catch (\Exception $e) {
+			} catch (\Exception $e) {
 
-			Yii::$app->session->setFlash('error', $e->getMessage());
-			return $this->goReferrer();
+				Yii::$app->session->setFlash('error', $e->getMessage());
+				return Yii::$app->getResponse()->redirect($this->getReferrer());
 
-		}
-
-		return Yii::$app->getResponse()->redirect($this->getReferrer(), 302, false);
+			}		
+		} throw new \yii\web\MethodNotAllowedHttpException('Неверный формат запроса!');
 	}
 
 	//-------------------------------------------------------------------------

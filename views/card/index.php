@@ -5,7 +5,7 @@ use yii\grid\GridView;
 use yii\widgets\LinkPager;
 use yii\widgets\ListView;
 
-$dataProvider = new ActiveDataProvider(['query' => $modCard->search()->sorted(), 'pagination' => ['pageSize' => 20], 'sort' => false]);
+$dataProvider = new ActiveDataProvider(['query' => $model->search()->sorted(), 'pagination' => ['pageSize' => 20], 'sort' => false]);
 
 ?>
 
@@ -14,7 +14,7 @@ $dataProvider = new ActiveDataProvider(['query' => $modCard->search()->sorted(),
 	<?php echo Html::beginForm(['index'], 'get') ?>
 		<div class="well well-sm">
 			<div class="row">
-				<div class="col-md-10 col-sm-vmargin"><?php echo Html::input('text', 'ss', $modCard->search_string, ['class' => 'form-control', 'placeholder' => 'Что будем искать?']) ?></div>
+				<div class="col-md-10 col-sm-vmargin"><?php echo Html::input('text', 'ss', $model->search_string, ['class' => 'form-control', 'placeholder' => 'Что будем искать?']) ?></div>
 				<div class="col-md-2"><?php echo Html::submitButton('Искать', ['class' => 'btn btn-primary btn-block']) ?></div>				
 			</div>		
 		</div>
@@ -44,8 +44,8 @@ $dataProvider = new ActiveDataProvider(['query' => $modCard->search()->sorted(),
 		'dataProvider' => $dataProvider,
 		'layout' => "{items}",		
 		'itemOptions' => ['class' => 'item'],
-		'itemView' => function ($modCard, $key, $index, $widget) {
-			return '<div class="well well-small">' . Html::a(Html::encode($modCard->name), ['view', 'id' => $modCard->id], ['data-pjax' => 0]) . '</div>';
+		'itemView' => function ($model, $key, $index, $widget) {
+			return '<div class="well well-small">' . Html::a(Html::encode($model->name), ['view', 'id' => $model->id], ['data-pjax' => 0]) . '</div>';
 		},
 	]) ?>	
 

@@ -11,7 +11,7 @@ use app\widgets\GallereyModal;
 ?>
 
 
-<?php $this->beginContent('@app/views/card/view.php', ['modCard' => $modCard]) ?>
+<?php $this->beginContent('@app/views/card/view.php', ['model' => $model]) ?>
 
 	<?php $arrImages = [] ?>
 
@@ -39,7 +39,7 @@ use app\widgets\GallereyModal;
 
 
 		<div class="row">
-			<?php foreach ($modCard->getImages(true)->all() as $modImage): ?>
+			<?php foreach ($model->getImages(true)->all() as $modImage): ?>
 				<div class="col-sm-3 col-md-3">
 					<div class="thumbnail">
 						<a href="#" class='lightbox'>
@@ -67,7 +67,7 @@ use app\widgets\GallereyModal;
 	<?php // Pjax::end() ?>
 
 	<?php $id_image_previous = null ?>
-	<?php foreach ($modCard->getTransfers()->with('objects.objectImages')->all() as $modTransfer): ?>	
+	<?php foreach ($model->getTransfers()->with('objects.objectImages')->all() as $modTransfer): ?>	
 		<?php $showTransfer = false ?>
 
 		

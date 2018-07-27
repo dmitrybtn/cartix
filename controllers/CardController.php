@@ -11,27 +11,11 @@ use igogo5yo\uploadfromurl\UploadFromUrl;
 use yii\web\UploadedFile;
 
 //*****************************************************************************
-class CardController extends \dmitrybtn\cp\Controller
+class CardController extends \dmitrybtn\cp\CrudController
 //*****************************************************************************
 {
-	public $model;
-
 	//-------------------------------------------------------------------------
-	public function behaviors()
-	//-------------------------------------------------------------------------
-	{
-		return [
-			'verbs' => [
-				'class' => \yii\filters\VerbFilter::className(),
-				'actions' => [
-					'delete' => [YII_ENV_TEST ? 'GET' : 'POST'],
-				],
-			],
-		];
-	}
-
-	//-------------------------------------------------------------------------
-	public function titles()
+	public static function title($actionId, $model = null)
 	//-------------------------------------------------------------------------
 	{
 		return [
@@ -39,12 +23,12 @@ class CardController extends \dmitrybtn\cp\Controller
 			'create' => 'Добавить',
 			'update' => 'Настройки техкарты',
 			'delete' => 'Удалить техкарту',
-			'view' => $this->model ? $this->model->getTitle() : 'Просмотр',
-		];
+			'view' => $model->name ?? 'Просмотр',
+		][$actionId];
 	}
 
 	//-------------------------------------------------------------------------
-	public function breads($actionId)
+	public static function breads($actionId, $model = null)
 	//-------------------------------------------------------------------------
 	{
 		$breads = [];
@@ -53,11 +37,11 @@ class CardController extends \dmitrybtn\cp\Controller
 			case 'index':
 				break;
 
+			case 'outer';
 			case 'update':
-				$breads[] = ['action' => 'view', 'params' => ['id' => $this->model->id]];
+				$breads[] = ['label' => self::title('view', $model), 'url' => ['/card/view', 'id' => $model->id]];
 				
 			default:
-				// $breads[] = ['action' => 'index'];
 		}
 
 		return $breads;
@@ -68,17 +52,17 @@ class CardController extends \dmitrybtn\cp\Controller
 	public function actionIndex($ss = '')
 	//-------------------------------------------------------------------------
 	{
-		$modCard = new Card(['scenario' => 'search']);
-		$modCard->search_string = $ss;
+		$this->model = new Card(['scenario' => 'search']);
+		$this->model->search_string = $ss;
 
 		$this->showBreads = false;
 
 		$this->menu = [
 			['label' => 'Опции'],
-			['action' => 'create'],
+			['label' => self::title('create'), 'url' => ['create']],
 		];
 		
-		return $this->render('index', ['modCard' => $modCard]);
+		return $this->render('index');
 	}
 
 	//-------------------------------------------------------------------------
@@ -89,9 +73,9 @@ class CardController extends \dmitrybtn\cp\Controller
 
 		$this->menu = [
 			['label' => 'Опции'],
-			['label' => 'Добавить остановку', 'url' => ['/transfer/create', 'id' => $this->model->id]],
-			['action' => 'update', 'params' => ['id' => $this->model->id]],
-			['action' => 'delete', 'params' => ['id' => $this->model->id], 'linkOptions' => ['data' => ['confirm' => 'Точно?', 'method' => 'POST']]],
+			['label' => TransferController::title('create'), 'url' => ['/transfer/create', 'id' => $this->model->id]],
+			['label' => self::title('update'), 'url' => ['update', 'id' => $this->model->id]],
+			['label' => self::title('delete'), 'url' => ['delete', 'id' => $this->model->id], 'linkOptions' => ['data' => ['confirm' => 'Точно?', 'method' => 'POST']]],
 		];
 
 		return $this->render('view-plan', ['modCard' => $this->model]);
@@ -102,7 +86,7 @@ class CardController extends \dmitrybtn\cp\Controller
 	//-------------------------------------------------------------------------
 	{
 		$this->model = $this->find($id);
-		$this->title = $this->title('view');
+		$this->title = self::title('view');
 
 		$modNewImage = new CardImage;
 		$modNewImage->id_card = $id;
@@ -137,8 +121,8 @@ class CardController extends \dmitrybtn\cp\Controller
 
 		$this->menu = [
 			['label' => 'Опции'],
-			['action' => 'update', 'params' => ['id' => $this->model->id]],
-			['action' => 'delete', 'params' => ['id' => $this->model->id], 'linkOptions' => ['data' => ['confirm' => 'Точно?', 'method' => 'POST']]],
+			['label' => self::title('update'), 'url' => ['update', 'id' => $this->model->id]],
+			['label' => self::title('delete'), 'url' => ['delete', 'id' => $this->model->id], 'linkOptions' => ['data' => ['confirm' => 'Точно?', 'method' => 'POST']]],
 		];
 
 		return $this->render('view-images', ['modCard' => $this->model, 'modNewImage' => $modNewImage]);
@@ -150,12 +134,12 @@ class CardController extends \dmitrybtn\cp\Controller
 	{
 		$this->model = $this->find($id);
 
-		$this->title = $this->title('view');
+		$this->title = self::title('view');
 
 		$this->menu = [
 			['label' => 'Опции'],
-			['action' => 'update', 'params' => ['id' => $this->model->id]],
-			['action' => 'delete', 'params' => ['id' => $this->model->id], 'linkOptions' => ['data' => ['confirm' => 'Точно?', 'method' => 'POST']]],
+			['label' => self::title('update'), 'url' => ['update', 'id' => $this->model->id]],
+			['label' => self::title('delete'), 'url' => ['delete', 'id' => $this->model->id], 'linkOptions' => ['data' => ['confirm' => 'Точно?', 'method' => 'POST']]],
 		];
 
 		return $this->render('view-text', ['modCard' => $this->model]);
@@ -177,7 +161,7 @@ class CardController extends \dmitrybtn\cp\Controller
 				return $this->redirect(['view', 'id' => $this->model->id]); 
 		}	
 
-		return $this->render('form', ['modCard' => $this->model, 'returnUrl' => $this->getReferrer(['index'])]);
+		return $this->render('form', ['returnUrl' => $this->getReferrer(['index'])]);
 	}
 
 	//-------------------------------------------------------------------------
@@ -204,18 +188,19 @@ class CardController extends \dmitrybtn\cp\Controller
 	public function actionDelete($id)
 	//-------------------------------------------------------------------------
 	{
-		try {		
+		if (Yii::$app->request->isPost || YII_ENV_TEST) {
+			try {		
 
-			$this->find($id)->delete();
+				$this->find($id)->delete();
+				return Yii::$app->getResponse()->redirect($this->getReferrer(), 302, false);
 
-		} catch (\Exception $e) {
+			} catch (\Exception $e) {
 
-			Yii::$app->session->setFlash('error', $e->getMessage());
-			return $this->goReferrer();
+				Yii::$app->session->setFlash('error', $e->getMessage());
+				return Yii::$app->getResponse()->redirect($this->getReferrer());
 
-		}
-
-		return $this->redirect(['index']);
+			}		
+		} throw new \yii\web\MethodNotAllowedHttpException('Неверный формат запроса!');
 	}
 
 	//-------------------------------------------------------------------------
