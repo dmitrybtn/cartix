@@ -20,9 +20,36 @@ return \yii\helpers\ArrayHelper::merge(require __DIR__ . '/../vendor/dmitrybtn/y
         ],
 
         'user' => [
-            'class' => 'dmitrybtn\cp\User',
+            'class' => 'dmitrybtn\cp\users\components\User',
         ],
 
+        'authManager' => [
+            'class' => 'dmitrybtn\cp\users\components\UserAuth',
+            'roles' => [
+
+                'guest' => [
+                    'name' => 'Гость',
+                    'rights' => [
+                        'users/login/login'
+                    ]
+                ],
+
+                'user' => [
+                    'name' => 'Пользователь',
+                    'parent' => 'guest',
+                    'rights' => [
+                        'site|crud|sort/*',
+
+                        'users/profile|login/*',
+                    ]
+                ],
+
+                'root' => [
+                    'name' => 'Разработчик',
+                ],
+            ]            
+        ],
+                
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
             // send all mails to a file by default. You have to set
@@ -54,31 +81,11 @@ return \yii\helpers\ArrayHelper::merge(require __DIR__ . '/../vendor/dmitrybtn/y
             ],
         ],
     ],
-
+    'modules' => [
+        'users' => [
+            'class' => 'dmitrybtn\cp\users\Users',
+        ],
+    ]
 ]);
 
-/*
- [
 
-
-
-
-if (YII_ENV_DEV) {
-    // configuration adjustments for 'dev' environment
-    $config['bootstrap'][] = 'debug';
-    $config['modules']['debug'] = [
-        'class' => 'yii\debug\Module',
-        // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
-    ];
-
-    $config['bootstrap'][] = 'gii';
-    $config['modules']['gii'] = [
-        'class' => 'yii\gii\Module',
-        // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
-    ];
-}
-
-return \yii\helpers\ArrayHelper::merge($cp, $config);;
-*/
