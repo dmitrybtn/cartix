@@ -13,29 +13,30 @@ use app\widgets\GallereyModal;
 
 <?php $this->beginContent('@app/views/card/view.php', ['model' => $model]) ?>
 
-	<?php $arrImages = [] ?>
+		<?php $arrImages = [] ?>
 
-	<?php // Pjax::begin() ?>
-		<?php echo Html::beginForm('', 'post', ['id' => 'form-image-upload', 'data-pjax' => 1, 'enctype' => 'multipart/form-data']) ?>
-			<?php echo Html::errorSummary($modNewImage, ['header' => '<p>Не удалось загрузить картинку:</p>']) ?>
-			<div class="well well-sm">
-				<div class="row">
-					
-					<div class="col-md-7 col-sm-vmargin">
-						<?php echo Html::textInput('url', $modNewImage->url, ['class' => 'form-control', 'placeholder' => 'Введите URL картинки или загрузите файл']) ?>					
-					</div>
+		<?php if ($model->isMy): ?>
+			<?php echo Html::beginForm('', 'post', ['id' => 'form-image-upload', 'data-pjax' => 1, 'enctype' => 'multipart/form-data']) ?>
+				<?php echo Html::errorSummary($modNewImage, ['header' => '<p>Не удалось загрузить картинку:</p>']) ?>
+				<div class="well well-sm">
+					<div class="row">
+						
+						<div class="col-md-7 col-sm-vmargin">
+							<?php echo Html::textInput('url', $modNewImage->url, ['class' => 'form-control', 'placeholder' => 'Введите URL картинки или загрузите файл']) ?>					
+						</div>
 
-					<div class="col-md-3 col-sm-vmargin">
-						<?php echo Html::fileInput('file[]', null, ['multiple' => true, 'accept' => 'image/*']) ?>
-							
-					</div>
-					
-					<div class="col-md-2">
-						<?php echo Html::submitButton('Загрузить', ['class' => 'form-image-upload--submit btn btn-primary btn-block', 'data-loading-text' => 'Загружаю...']) ?>		
-					</div>				
-				</div>		
-			</div>
-		<?php echo Html::endForm() ?>
+						<div class="col-md-3 col-sm-vmargin">
+							<?php echo Html::fileInput('file[]', null, ['multiple' => true, 'accept' => 'image/*']) ?>
+								
+						</div>
+						
+						<div class="col-md-2">
+							<?php echo Html::submitButton('Загрузить', ['class' => 'form-image-upload--submit btn btn-primary btn-block', 'data-loading-text' => 'Загружаю...']) ?>		
+						</div>				
+					</div>		
+				</div>
+			<?php echo Html::endForm() ?>
+		<?php endif ?>
 
 
 		<div class="row">
@@ -49,7 +50,7 @@ use app\widgets\GallereyModal;
 						<div class="caption">
 							<?php echo $modImage->marker ?>
 							<div class="pull-right">
-				            	<?php echo Html::a('<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>', ['/image/delete', 'id' => $modImage->id], ['data-confirm' => 'Точно?', 'data-method' => 'post']) ?>					
+				            	<?php if ($model->isMy) echo Html::a('<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>', ['/image/delete', 'id' => $modImage->id], ['data-confirm' => 'Точно?', 'data-method' => 'post']) ?>					
 							</div>						
 						</div>
 
@@ -64,7 +65,6 @@ use app\widgets\GallereyModal;
 			<?php endforeach ?>		
 		</div>
 
-	<?php // Pjax::end() ?>
 
 	<?php $id_image_previous = null ?>
 	<?php foreach ($model->getTransfers()->with('objects.objectImages')->all() as $modTransfer): ?>	

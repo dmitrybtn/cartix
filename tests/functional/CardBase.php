@@ -3,12 +3,24 @@
 namespace app\tests\functional;
 
 use app\models\{Card, CardTransfer, CardObject};
+use app\tests\fixtures\UsersFixture;
 
 class CardBase
 {
 	public $id_card;
     public $id_transfer;
     public $id_object;
+
+
+    public function _before(\FunctionalTester $I)
+    {
+        $I->haveFixtures([
+            'users' => UsersFixture::className(),
+        ]);
+
+        $I->amLoggedInAs($I->grabFixture('users', 'root')->id);
+    }
+
 
     /**
      *

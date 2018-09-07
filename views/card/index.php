@@ -5,7 +5,7 @@ use yii\grid\GridView;
 use yii\widgets\LinkPager;
 use yii\widgets\ListView;
 
-$dataProvider = new ActiveDataProvider(['query' => $model->search()->sorted(), 'pagination' => ['pageSize' => 20], 'sort' => false]);
+$dataProvider = new ActiveDataProvider(['query' => $model->search()->with('user')->sorted(), 'pagination' => ['pageSize' => 20], 'sort' => false]);
 
 ?>
 
@@ -27,11 +27,12 @@ $dataProvider = new ActiveDataProvider(['query' => $model->search()->sorted(), '
 		'layout' => "{items}",
 		'columns' => [
 			['attribute' => 'name', 'contentOptions' => $h = [], 'headerOptions' => $h],
+			['attribute' => 'user.name', 'label' => 'Автор', 'contentOptions' => $h = ['style' => 'width: 250px;'], 'headerOptions' => $h],
 
 			[
 				'class' => 'yii\grid\ActionColumn',
-				'template' => '{view} {update} {delete}',
-				'contentOptions' => $h = ['class' => 'action-column action-column-3'],
+				'template' => '{view}',
+				'contentOptions' => $h = ['class' => 'action-column action-column-1'],
 				'headerOptions' => $h,
 				'buttons' => [
 				]
@@ -45,7 +46,12 @@ $dataProvider = new ActiveDataProvider(['query' => $model->search()->sorted(), '
 		'layout' => "{items}",		
 		'itemOptions' => ['class' => 'item'],
 		'itemView' => function ($model, $key, $index, $widget) {
-			return '<div class="well well-small">' . Html::a(Html::encode($model->name), ['view', 'id' => $model->id], ['data-pjax' => 0]) . '</div>';
+			return '<div class="well_list-plan well_list well_list-1 card_plan-mobile--transfer">' . 
+						Html::a(Html::encode($model->name), ['view', 'id' => $model->id], ['data-pjax' => 0]) . 
+						'<div class="well_list--options">' .
+							$model->user->name .
+						'</div>' .
+				   '</div>';
 		},
 	]) ?>	
 

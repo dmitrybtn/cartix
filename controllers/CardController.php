@@ -47,6 +47,15 @@ class CardController extends \dmitrybtn\cp\CrudController
 		return $breads;
 	}
 
+	//-------------------------------------------------------------------------
+	public static function checkCard($modCard, $throw = false)
+	//-------------------------------------------------------------------------
+	{
+		if (!$modCard->isMy) {
+			if ($throw) throw new \yii\web\ForbiddenHttpException('Можно редактировать только свои техкарты');
+			else return false;
+		} else return true;
+	}
 
 	//-------------------------------------------------------------------------
 	public function actionIndex($ss = '')
@@ -73,9 +82,9 @@ class CardController extends \dmitrybtn\cp\CrudController
 
 		$this->menu = [
 			['label' => 'Опции'],
-			['label' => TransferController::title('create'), 'url' => ['/transfer/create', 'id' => $this->model->id]],
-			['label' => self::title('update'), 'url' => ['update', 'id' => $this->model->id]],
-			['label' => self::title('delete'), 'url' => ['delete', 'id' => $this->model->id], 'linkOptions' => ['data' => ['confirm' => 'Точно?', 'method' => 'POST']]],
+			['label' => TransferController::title('create'), 'url' => ['/transfer/create', 'id' => $this->model->id], 'visible' => static::checkCard($this->model)],
+			['label' => self::title('update'), 'url' => ['update', 'id' => $this->model->id], 'visible' => static::checkCard($this->model)],
+			['label' => self::title('delete'), 'url' => ['delete', 'id' => $this->model->id], 'linkOptions' => ['data' => ['confirm' => 'Точно?', 'method' => 'POST']], 'visible' => static::checkCard($this->model)],
 		];
 
 		return $this->render('view-plan', ['modCard' => $this->model]);
@@ -86,7 +95,7 @@ class CardController extends \dmitrybtn\cp\CrudController
 	//-------------------------------------------------------------------------
 	{
 		$this->model = $this->find($id);
-		$this->title = self::title('view');
+		$this->title = self::title('view', $this->model);
 
 		$modNewImage = new CardImage;
 		$modNewImage->id_card = $id;
@@ -121,8 +130,6 @@ class CardController extends \dmitrybtn\cp\CrudController
 
 		$this->menu = [
 			['label' => 'Опции'],
-			['label' => self::title('update'), 'url' => ['update', 'id' => $this->model->id]],
-			['label' => self::title('delete'), 'url' => ['delete', 'id' => $this->model->id], 'linkOptions' => ['data' => ['confirm' => 'Точно?', 'method' => 'POST']]],
 		];
 
 		return $this->render('view-images', ['modCard' => $this->model, 'modNewImage' => $modNewImage]);
@@ -134,12 +141,10 @@ class CardController extends \dmitrybtn\cp\CrudController
 	{
 		$this->model = $this->find($id);
 
-		$this->title = self::title('view');
+		$this->title = self::title('view', $this->model);
 
 		$this->menu = [
 			['label' => 'Опции'],
-			['label' => self::title('update'), 'url' => ['update', 'id' => $this->model->id]],
-			['label' => self::title('delete'), 'url' => ['delete', 'id' => $this->model->id], 'linkOptions' => ['data' => ['confirm' => 'Точно?', 'method' => 'POST']]],
 		];
 
 		return $this->render('view-text', ['modCard' => $this->model]);
@@ -170,6 +175,8 @@ class CardController extends \dmitrybtn\cp\CrudController
 	{
 		$this->model = $this->find($id);
 
+		static::checkCard($this->model, true);
+
 		$returnUrl = Yii::$app->request->post('returnUrl', $this->getReferrer(['view', 'id' => $this->model->id]));
 
 		if ($this->model->load(Yii::$app->request->post()))	{
@@ -191,7 +198,12 @@ class CardController extends \dmitrybtn\cp\CrudController
 		if (Yii::$app->request->isPost || YII_ENV_TEST) {
 			try {		
 
-				$this->find($id)->delete();
+				$modCard = $this->find($id);
+
+				static::checkCard($modCard, true);
+
+				$modCard->delete();
+
 				return Yii::$app->getResponse()->redirect($this->getReferrer(), 302, false);
 
 			} catch (\Exception $e) {

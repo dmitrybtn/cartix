@@ -30,7 +30,8 @@ return \yii\helpers\ArrayHelper::merge(require __DIR__ . '/../vendor/dmitrybtn/y
                 'guest' => [
                     'name' => 'Гость',
                     'rights' => [
-                        'users/login/login'
+                        'users/login/login',
+                        'card/view|view-images|view-text',
                     ]
                 ],
 
