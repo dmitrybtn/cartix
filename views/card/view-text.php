@@ -50,6 +50,7 @@ use app\widgets\GallereyModal;
 						'src' => Yii::getAlias('@web/uploads/' . $modObjectImage->image->file),
 						'width' => $modObjectImage->image->width,
 						'height' => $modObjectImage->image->height,
+						'alt' => Html::encode($modObjectImage->comment),
 					];
 				} ?>
 			<?php endforeach ?>
@@ -68,7 +69,7 @@ use app\widgets\GallereyModal;
 	    	'spacing' => 0.9,
 
 			'closeEl' => true,
-			'captionEl' => false,
+			'captionEl' => true,
 			'fullscreenEl' => false,
 			'zoomEl' => true,
 			'shareEl' => false,

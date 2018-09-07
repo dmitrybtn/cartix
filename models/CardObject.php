@@ -95,13 +95,6 @@ class CardObject extends \yii\db\ActiveRecord
 	}
 
 	//-------------------------------------------------------------------------
-	public function getImages()
-	//-------------------------------------------------------------------------
-	{
-		return $this->hasMany(CardImage::className(), ['id' => 'id_image'])->viaTable('cards_objects_images', ['id_object' => 'id']);
-	}
-
-	//-------------------------------------------------------------------------
 	public function getObjectImages()
 	//-------------------------------------------------------------------------
 	{
@@ -127,14 +120,18 @@ class CardObject extends \yii\db\ActiveRecord
 
 		$arrCardImages = $this->card->getImagesKeys();
 
-		foreach (CardImage::extract($this->text) as $id_sort => $id_image) {
+		$id_sort = 0;
+		foreach (CardImage::extract($this->text) as $id_image => $comment) {
 
 			if (in_array($id_image, $arrCardImages)) {
 				$modObjectImage = new CardObjectImage;
 				$modObjectImage->id_object = $this->id;
 				$modObjectImage->id_image = $id_image;
 				$modObjectImage->id_sort = $id_sort;
+				$modObjectImage->comment = $comment;
 				$modObjectImage->save();
+
+				$id_sort++;
 			}
 		}
 	}
@@ -144,6 +141,7 @@ class CardObject extends \yii\db\ActiveRecord
 	public function getTextParsed()
 	//-------------------------------------------------------------------------
 	{
+		/*
 		$arrCardImages = $this->card->getImagesKeys();
 
 		$arrSearch = [];
@@ -157,7 +155,10 @@ class CardObject extends \yii\db\ActiveRecord
 			$arrReplace[] = in_array($id_image, $arrCardImages) ? Html::a($strMarker, '#', ['class' => 'lightbox']) : Html::tag('span', $strMarker, ['class' => 'text-danger']);
 		}
 
-		return str_replace($arrSearch, $arrReplace, $this->text);		
+		return str_replace($arrSearch, $arrReplace, $this->text);
+		*/
+
+		return CardImage::replace($this->text, Html::a('$0', '#', ['class' => 'lightbox']));
 	}
 
 	//*************************************************************************

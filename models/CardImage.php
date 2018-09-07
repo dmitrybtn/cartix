@@ -19,7 +19,7 @@ class CardImage extends \yii\db\ActiveRecord
 {
 	public $search_string;
 
-	public const MARKER = 'ФОТО';
+	public const MARKER = 'Ф';
 
 	//*************************************************************************
 	// AR - методы
@@ -167,23 +167,35 @@ class CardImage extends \yii\db\ActiveRecord
 	public function getMarker()
 	//-------------------------------------------------------------------------
 	{
-		return self::MARKER . '-' . $this->id;
+		return static::marker($this->id);
 	}
 
 	//-------------------------------------------------------------------------
 	public static function marker($id)
 	//-------------------------------------------------------------------------
 	{
-		return self::MARKER . '-' . $id;
+		return '[' . self::MARKER . '-' . $id . ']';
 	}
 
 	//-------------------------------------------------------------------------
 	public static function extract($strText, $merge = false)
 	//-------------------------------------------------------------------------
 	{
-		preg_match_all('/' . self::MARKER . '-(\d+)/u', $strText, $arrMatches);
+		$r = [];
 
-		return $merge ? array_values(array_unique($arrMatches[1])) : $arrMatches[1];
+		$cnt = preg_match_all('/\[' . self::MARKER . '-(\d+)([,\s]+(.+))?\]/uU', $strText, $arrMatches);
+
+		for ($i = 0; $i < $cnt; $i++)
+			$r[$arrMatches[1][$i]] = $arrMatches[3][$i];
+
+		return $r;
+	}
+
+	//-------------------------------------------------------------------------
+	public static function replace($strText, $wrapper)
+	//-------------------------------------------------------------------------
+	{
+		return preg_replace('/\[' . self::MARKER . '-(\d+)([,\s]+(.+))?\]/uU', $wrapper, $strText);
 	}
 
 

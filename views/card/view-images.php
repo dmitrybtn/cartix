@@ -11,6 +11,14 @@ use app\widgets\GallereyModal;
 ?>
 
 
+<?php 
+
+$strText = 'Превед [Ф-1] [Ф-2569], медвед [Ф-2] йа креведко';
+
+
+d(CardImage::replace($strText, '234'));
+ ?>
+
 <?php $this->beginContent('@app/views/card/view.php', ['model' => $model]) ?>
 
 		<?php $arrImages = [] ?>
@@ -108,7 +116,7 @@ use app\widgets\GallereyModal;
 							'src' => Yii::getAlias('@web/uploads/' . $modImage->file),
 							'width' => $modImage->width,
 							'height' => $modImage->height,
-							'alt' => Html::encode($modObject->name),
+							'alt' => Html::encode($modObjectImage->comment),
 						] ?>
 
 					<?php endif ?>
