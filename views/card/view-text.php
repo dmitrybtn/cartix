@@ -1,7 +1,6 @@
 <?php
 
 use yii\helpers\Html;
-use app\widgets\GallereyModal;
 
 ?>
 
@@ -48,38 +47,20 @@ use app\widgets\GallereyModal;
 				<?php foreach ($modObject->objectImages as $modObjectImage) {
 					$arrImages[] = [
 						'src' => Yii::getAlias('@web/uploads/' . $modObjectImage->image->file),
-						'width' => $modObjectImage->image->width,
-						'height' => $modObjectImage->image->height,
-						'alt' => Html::encode($modObjectImage->comment),
+						'w' => $modObjectImage->image->width,
+						'h' => $modObjectImage->image->height,
+						'title' => Html::encode($modObjectImage->comment),
 					];
 				} ?>
+
 			<?php endforeach ?>
-
-			
 		<?php endforeach ?>
-		
-
 	</div>
 
-	<?php echo GallereyModal::widget([
-		'selector' => '.lightbox',
-	    'images' => $arrImages,
-	    'clientOptions' => [
-	    	'bgOpacity' => 0.9,
-	    	'spacing' => 0.9,
-
-			'closeEl' => true,
-			'captionEl' => true,
-			'fullscreenEl' => false,
-			'zoomEl' => true,
-			'shareEl' => false,
-			'counterEl' => true,
-			'arrowEl' => true,
-			'preloaderEl' => true,
-
-	    ]
+	
+	<?php echo \app\widgets\photoswipe\Photoswipe::widget([
+		'images' => $arrImages,
 	]) ?>
-
 
 <?php $this->endContent() ?>
 

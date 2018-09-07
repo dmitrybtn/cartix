@@ -4,20 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\Pjax;
 
 use yii\widgets\ActiveForm;
-
 use app\models\CardImage;
-use app\widgets\GallereyModal;
+
 
 ?>
 
 
-<?php 
 
-$strText = 'Превед [Ф-1] [Ф-2569], медвед [Ф-2] йа креведко';
-
-
-d(CardImage::replace($strText, '234'));
- ?>
 
 <?php $this->beginContent('@app/views/card/view.php', ['model' => $model]) ?>
 
@@ -51,7 +44,7 @@ d(CardImage::replace($strText, '234'));
 			<?php foreach ($model->getImages(true)->all() as $modImage): ?>
 				<div class="col-sm-3 col-md-3">
 					<div class="thumbnail">
-						<a href="#" class='lightbox'>
+						<a href="#" class='photoswipe'>
 							<?php echo Html::img($modImage->thumbnail(300, 300), ['width' => '300px', 'height' => '300px']) ?>
 						</a>
 
@@ -67,8 +60,8 @@ d(CardImage::replace($strText, '234'));
 
 				<?php $arrImages[] = [
 					'src' => Yii::getAlias('@web/uploads/' . $modImage->file),
-					'width' => $modImage->width,
-					'height' => $modImage->height,
+					'w' => $modImage->width,
+					'h' => $modImage->height,
 				] ?>
 			<?php endforeach ?>		
 		</div>
@@ -101,7 +94,7 @@ d(CardImage::replace($strText, '234'));
 
 						<div class="col-sm-3 col-md-3">
 							<div class="thumbnail">
-								<a href="#" class='lightbox'>
+								<a href="#" class='photoswipe'>
 									<?php echo Html::img($modImage->thumbnail(300, 300)) ?>
 								</a>
 
@@ -114,9 +107,9 @@ d(CardImage::replace($strText, '234'));
 
 						<?php $arrImages[] = [
 							'src' => Yii::getAlias('@web/uploads/' . $modImage->file),
-							'width' => $modImage->width,
-							'height' => $modImage->height,
-							'alt' => Html::encode($modObjectImage->comment),
+							'w' => $modImage->width,
+							'h' => $modImage->height,
+							'title' => Html::encode($modObjectImage->comment),
 						] ?>
 
 					<?php endif ?>
@@ -129,11 +122,9 @@ d(CardImage::replace($strText, '234'));
 	<?php endforeach ?>
 
 
-	<?php echo GallereyModal::widget([
-		'selector' => '.lightbox',
-	    'images' => $arrImages,
+	<?php echo \app\widgets\photoswipe\Photoswipe::widget([
+		'images' => $arrImages,
 	]) ?>
-
 
 	<script>
 		$(function ($) {

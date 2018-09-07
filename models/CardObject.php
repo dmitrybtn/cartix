@@ -158,7 +158,7 @@ class CardObject extends \yii\db\ActiveRecord
 		return str_replace($arrSearch, $arrReplace, $this->text);
 		*/
 
-		return CardImage::replace($this->text, Html::a('$0', '#', ['class' => 'lightbox']));
+		return CardImage::replace($this->text, Html::a('$0', '#', ['class' => 'photoswipe']));
 	}
 
 	//*************************************************************************
