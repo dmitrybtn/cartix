@@ -13,10 +13,10 @@ use yii\helpers\Url;
 class CardController extends \dmitrybtn\cp\Controller
 //*****************************************************************************
 {
-	public $card;
-	public $mode;
 
+	//-------------------------------------------------------------------------
 	public function to($url = '')
+	//-------------------------------------------------------------------------
 	{
 		if (!is_array($url))
 			throw new \yii\web\NotFoundHttpException('Некорректное использование построителя ссылок!');
@@ -24,44 +24,55 @@ class CardController extends \dmitrybtn\cp\Controller
 		$url[0] = '/card/' . ltrim($url[0], '/');
 
 		$url['id_card'] = $this->card->id;
-		$url['mode'] = $this->mode;
+		$url['id_mode'] = $this->id_mode;
 
 		return $url;
 	}
 
-	public function init()
-	{	
-		$id = Yii::$app->request->get('id_card');
-
-		if (($this->card = Card::findOne($id)) === null)
-			throw new \yii\web\NotFoundHttpException('Карта не найдена!');
-
-		$this->mode = Yii::$app->request->get('mode');
+	//-------------------------------------------------------------------------
+	public function getId_mode()
+	//-------------------------------------------------------------------------
+	{
+		return Yii::$app->request->get('id_mode');
 	}
-	
 
+	//-------------------------------------------------------------------------
+	public function getCard()
+	//-------------------------------------------------------------------------
+	{
+		if ($this->_card === null) {
+			
+			$id = Yii::$app->request->get('id_card');
+
+			if (($this->_card = Card::findOne($id)) === null)
+				throw new \yii\web\NotFoundHttpException('Карта не найдена!');
+		}
+
+		return $this->_card;
+
+	} private $_card;
+
+
+	//-------------------------------------------------------------------------
     public function getTitle()
+	//-------------------------------------------------------------------------
     {       
         return $this->card->name;
     } 
-
 
 	//-------------------------------------------------------------------------
     public function getBreads()
 	//-------------------------------------------------------------------------
     {
 		return [
-			['label' => $this->mode, 'url' => ['/site/index']],
+			['label' => ListController::modes($this->id_mode), 'url' => ['/card/list/index', 'id_mode' => $this->id_mode]],
 		];    	
     }
-
-
 
 	public function actionView()
 	{
 		return $this->render('@app/views/card/card-plan.php');
 	}
-
 
 	public function actionText()
 	{

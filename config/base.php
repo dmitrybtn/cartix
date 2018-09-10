@@ -81,7 +81,9 @@ return \yii\helpers\ArrayHelper::merge(require __DIR__ . '/../vendor/dmitrybtn/y
                 'class' => 'yii\web\UrlNormalizer',
             ],           
             'rules' => [
-                '<mode:(my|common)>/<id_card>/<controller>/<action>' => 'card/<controller>/<action>',
+
+                'card/<id_mode>' => 'card/list/index',
+                'card/<id_mode>/<id_card>/<controller>/<action>' => 'card/<controller>/<action>',
             ],
         ],
     ],
