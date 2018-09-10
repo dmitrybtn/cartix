@@ -4,6 +4,8 @@ use yii\helpers\Html;
 
 ?>
 
+
+
 <?php $this->beginContent('@app/views/card/view.php', ['model' => $model]) ?>
 
 	<div class="card">
@@ -27,7 +29,14 @@ use yii\helpers\Html;
 				<div class="card_text--header_object" style='position: relative;'>
 					<?php echo Html::a('', '', ['name' => 'object-' . $modObject->id, 'style' => 'position: absolute; display: block; top: -48px;']) ?>
 
-					<?php echo Html::encode($modObject->name) ?>						
+					<?php echo Html::encode($modObject->name) ?>
+					
+					<?php if ($model->isMy): ?>
+						<span class='pull-right card_text--instruction text-muted'>
+							<?php echo Html::a('<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>', ['/object/update', 'id' => $modObject->id], ['class' => 'update']) ?>
+						</span>
+					<?php endif ?>
+
 				</div>
 
 				<?php if ($modObject->instruction): ?>

@@ -178,7 +178,7 @@ class CardImage extends \yii\db\ActiveRecord
 	}
 
 	//-------------------------------------------------------------------------
-	public static function extract($strText, $merge = false)
+	public static function extract($strText)
 	//-------------------------------------------------------------------------
 	{
 		$r = [];
@@ -186,16 +186,22 @@ class CardImage extends \yii\db\ActiveRecord
 		$cnt = preg_match_all('/\[' . self::MARKER . '-(\d+)([,\s]+(.+))?\]/uU', $strText, $arrMatches);
 
 		for ($i = 0; $i < $cnt; $i++)
-			$r[$arrMatches[1][$i]] = $arrMatches[3][$i];
+			$r[$arrMatches[1][$i]] = trim($arrMatches[3][$i]);
 
 		return $r;
 	}
 
 	//-------------------------------------------------------------------------
-	public static function replace($strText, $wrapper)
+	public static function replace($strText, $ids, $success, $error)
 	//-------------------------------------------------------------------------
+	// Заменяет маркеры для картинок, указанных в ids на строку success, а остальные на error
 	{
-		return preg_replace('/\[' . self::MARKER . '-(\d+)([,\s]+(.+))?\]/uU', $wrapper, $strText);
+		return preg_replace_callback(
+			'/\[' . self::MARKER . '-(\d+)([,\s]+(.+))?\]/uU',
+			function($m) use($ids, $success, $error) {
+				return preg_replace('/\[' . self::MARKER . '-(\d+)([,\s]+(.+))?\]/uU', (in_array($m[1], $ids) ? $success : $error), $m[0]);
+			}, 
+			$strText);
 	}
 
 

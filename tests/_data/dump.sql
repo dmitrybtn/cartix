@@ -30,7 +30,7 @@ CREATE TABLE `cards` (
   PRIMARY KEY (`id`),
   KEY `id_user` (`id_user`),
   CONSTRAINT `cards_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -53,7 +53,7 @@ CREATE TABLE `cards_images` (
   PRIMARY KEY (`id`),
   KEY `id_card` (`id_card`),
   CONSTRAINT `cards_images_ibfk_1` FOREIGN KEY (`id_card`) REFERENCES `cards` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=80 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=118 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -75,7 +75,7 @@ CREATE TABLE `cards_objects` (
   PRIMARY KEY (`id`),
   KEY `id_card` (`id_transfer`),
   CONSTRAINT `cards_objects_ibfk_1` FOREIGN KEY (`id_transfer`) REFERENCES `cards_transfers` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -89,6 +89,7 @@ CREATE TABLE `cards_objects_images` (
   `id_object` int(11) unsigned NOT NULL,
   `id_image` int(11) unsigned NOT NULL,
   `id_sort` int(11) unsigned NOT NULL,
+  `comment` text NOT NULL,
   PRIMARY KEY (`id_object`,`id_image`,`id_sort`),
   KEY `id_image` (`id_image`),
   CONSTRAINT `cards_objects_images_ibfk_1` FOREIGN KEY (`id_object`) REFERENCES `cards_objects` (`id`) ON DELETE CASCADE,
@@ -113,7 +114,7 @@ CREATE TABLE `cards_transfers` (
   PRIMARY KEY (`id`),
   KEY `id_card` (`id_card`),
   CONSTRAINT `cards_transfers_ibfk_1` FOREIGN KEY (`id_card`) REFERENCES `cards` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -132,7 +133,7 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `auth` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -144,4 +145,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-08-02  9:49:18
+-- Dump completed on 2018-09-07 13:16:12

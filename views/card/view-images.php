@@ -99,7 +99,7 @@ use app\models\CardImage;
 								</a>
 
 								<div class="caption">
-									<?php echo $modImage->marker ?>					
+									<?php echo $modImage->marker ?>
 								</div>
 
 							</div>
