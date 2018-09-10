@@ -1,6 +1,6 @@
 <?php
 
-namespace app\controllers\card;
+namespace app\controllers\cards;
 
 use Yii;
 use dmitrybtn\cp\SortAction;
@@ -64,7 +64,7 @@ class ImageController extends BaseController
 			['label' => 'Опции'],
 		];
 
-		return $this->render('@app/views/card/card/view-images', ['modNewImage' => $modNewImage]);
+		return $this->render('@app/views/cards/card/view-images', ['modNewImage' => $modNewImage]);
 	}
 
 

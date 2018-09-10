@@ -1,6 +1,6 @@
 <?php
 
-namespace app\controllers\card;
+namespace app\controllers\cards;
 
 use Yii;
 
@@ -34,7 +34,7 @@ class BaseController extends \dmitrybtn\cp\CrudController
 		if (!is_array($url))
 			throw new \yii\web\NotFoundHttpException('Некорректное использование построителя ссылок!');
 
-		// $url[0] = '/card/' . ltrim($url[0], '/');
+		// $url[0] = '/cards/' . ltrim($url[0], '/');
 
 		$url['id_card'] = $this->card->id;
 		$url['id_mode'] = $this->id_mode;
@@ -78,7 +78,7 @@ class BaseController extends \dmitrybtn\cp\CrudController
 
         // Добавить ссылку на режим
         if ($this->id_mode)
-        	array_unshift($arrBreads, ['label' => static::mode($this->id_mode), 'url' => ['/card/index', 'id_mode' => $this->id_mode]]);
+        	array_unshift($arrBreads, ['label' => static::mode($this->id_mode), 'url' => ['/cards/index', 'id_mode' => $this->id_mode]]);
 
         return $arrBreads;
     }
