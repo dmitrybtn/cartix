@@ -63,14 +63,14 @@ class CardController extends BaseController
 			['label' => self::title('delete'), 'url' => $this->to(['delete']), 'linkOptions' => ['data' => ['confirm' => 'Точно?', 'method' => 'POST']], 'visible' => $this->checkCard()],
 		];
 
-		return $this->render('@app/views/card/card-plan.php');
+		return $this->render('view-plan');
 	}
 
 	//-------------------------------------------------------------------------
 	public function actionText()
 	//-------------------------------------------------------------------------
 	{
-		return $this->render('@app/views/card/card-text.php');
+		return $this->render('view-text');
 	}
 
 	//-------------------------------------------------------------------------

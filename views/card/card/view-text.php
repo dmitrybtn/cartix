@@ -6,12 +6,12 @@ use yii\helpers\Html;
 
 
 
-<?php $this->beginContent('@app/views/card/view.php', ['model' => $model]) ?>
+<?php $this->beginContent('@app/views/card/card/view.php', ['model' => $this->context->card]) ?>
 
 	<div class="card">
 
 		<?php $arrImages = [] ?>
-		<?php foreach ($model->getTransfers()->with('objects', 'objects.objectImages', 'objects.objectImages.image')->all() as $modTransfer): ?>
+		<?php foreach ($this->context->card->getTransfers()->with('objects', 'objects.objectImages', 'objects.objectImages.image')->all() as $modTransfer): ?>
 
 			<?php echo Html::a('', '', ['name' => 'transfer-' . $modTransfer->id, 'style' => 'position: absolute; display: block; top: -48px;']) ?>
 			<div class="card_text--header_transfer" style='position: relative;'>
@@ -31,7 +31,7 @@ use yii\helpers\Html;
 
 					<?php echo Html::encode($modObject->name) ?>
 					
-					<?php if ($model->isMy): ?>
+					<?php if ($this->context->card->isMy): ?>
 						<span class='pull-right card_text--instruction text-muted'>
 							<?php echo Html::a('<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>', ['/object/update', 'id' => $modObject->id], ['class' => 'update']) ?>
 						</span>

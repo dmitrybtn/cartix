@@ -47,7 +47,7 @@ class CardController extends \dmitrybtn\cp\Controller
 			['label' => self::title('create'), 'url' => ['create', 'id_mode' => $this->id_mode], 'visible' => $this->id_mode == 'my'],
 		];
 		
-		return $this->render('@app/views/card/list.php', ['modCard' => $modCard]);
+		return $this->render('@app/views/card/card/list.php', ['modCard' => $modCard]);
 	}
 
 	//-------------------------------------------------------------------------

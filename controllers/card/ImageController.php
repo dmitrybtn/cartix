@@ -64,7 +64,7 @@ class ImageController extends BaseController
 			['label' => 'Опции'],
 		];
 
-		return $this->render('@app/views/card/card-images', ['modNewImage' => $modNewImage]);
+		return $this->render('@app/views/card/card/view-images', ['modNewImage' => $modNewImage]);
 	}
 
 

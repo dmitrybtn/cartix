@@ -12,7 +12,7 @@ BootstrapPluginAsset::register($this);
 ?>
 
 
-<?php $this->beginContent('@app/views/card/card.php') ?>
+<?php $this->beginContent('@app/views/card/card/view.php') ?>
 
 	<?php Pjax::begin() ?>
 
