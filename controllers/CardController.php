@@ -12,6 +12,7 @@ class CardController extends \dmitrybtn\cp\Controller
 //*****************************************************************************
 {
 	public $id_mode;
+	public $card;
 
 
 	//-------------------------------------------------------------------------
@@ -19,7 +20,7 @@ class CardController extends \dmitrybtn\cp\Controller
 	//-------------------------------------------------------------------------
 	{
 		return [
-			'create' => 'Добавить',
+			'create' => 'Добавить техкарту',
 		][$actionId];
 	}
 
@@ -43,7 +44,7 @@ class CardController extends \dmitrybtn\cp\Controller
 
 		$this->menu = [
 			['label' => 'Опции'],
-			['label' => self::title('create'), 'url' => ['create', 'id_mode' => $this->id_mode]],
+			['label' => self::title('create'), 'url' => ['create', 'id_mode' => $this->id_mode], 'visible' => $this->id_mode == 'my'],
 		];
 		
 		return $this->render('@app/views/card/list.php', ['modCard' => $modCard]);
@@ -53,15 +54,15 @@ class CardController extends \dmitrybtn\cp\Controller
 	public function actionCreate()
 	//-------------------------------------------------------------------------
 	{
-		$this->model = new Card();
+		$this->card = new Card();
 
-		if ($this->model->load(Yii::$app->request->post()))	{
+		if ($this->card->load(Yii::$app->request->post()))	{
 
 			if (Yii::$app->request->isAjax) 
-				return $this->ajaxValidate($this->model);
+				return $this->ajaxValidate($this->card);
 
-			if ($this->model->save()) 
-				return $this->redirect(['view', 'id' => $this->model->id]); 
+			if ($this->card->save()) 
+				return $this->redirect(['/card/card/view', 'id_card' => $this->card->id, 'id_mode' => $this->id_mode]); 
 		}	
 
 		return $this->render('form', ['returnUrl' => $this->getReferrer(['index'])]);
