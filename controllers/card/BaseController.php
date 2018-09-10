@@ -10,7 +10,7 @@ use yii\helpers\Url;
 
 
 //*****************************************************************************
-class CardController extends BaseController
+class BaseController extends \dmitrybtn\cp\Controller
 //*****************************************************************************
 {
 	//-------------------------------------------------------------------------
@@ -29,24 +29,54 @@ class CardController extends BaseController
 	}
 
 	//-------------------------------------------------------------------------
-    public function getTitle()
+	public function getId_mode()
 	//-------------------------------------------------------------------------
-    {       
-        return $this->card->name;
+	{
+		return Yii::$app->request->get('id_mode');
+	}
+
+	//-------------------------------------------------------------------------
+	public function getCard()
+	//-------------------------------------------------------------------------
+	{
+		if ($this->_card === null) {
+			
+			$id = Yii::$app->request->get('id_card');
+
+			if (($this->_card = Card::findOne($id)) === null)
+				throw new \yii\web\NotFoundHttpException('Карта не найдена!');
+		}
+
+		return $this->_card;
+
+	} private $_card;
+
+
+	//-------------------------------------------------------------------------
+	public static function mode($id_mode)
+	//-------------------------------------------------------------------------
+	{
+		return [
+			'my' => 'Мои техкарты',
+			'common' => 'Общие',
+			'subscr' => 'Мои подписки',
+		][$id_mode];
+	}
+
+	//-------------------------------------------------------------------------
+    public function getBreads()
+	//-------------------------------------------------------------------------
+    {
+        if ($this->_breads === null) {
+            
+			$r = [];
+
+			if ($this->id_mode)
+				$r[] = ['label' => static::mode($this->id_mode), 'url' => ['/card/list/index', 'id_mode' => $this->id_mode]];
+
+            $this->setBreads($r);
+        }
+
+        return $this->_breads;
     } 
-
-	//-------------------------------------------------------------------------
-	public function actionView()
-	//-------------------------------------------------------------------------
-	{
-		return $this->render('@app/views/card/card-plan.php');
-	}
-
-	//-------------------------------------------------------------------------
-	public function actionText()
-	//-------------------------------------------------------------------------
-	{
-		return $this->render('@app/views/card/card-text.php');
-	}
-
 }

@@ -13,7 +13,7 @@ use yii\helpers\Html;
     'items' => [
         ['label' => 'План', 'url' => $this->context->to(['/card/view'])],
         ['label' => 'Текст', 'url' => $this->context->to(['/card/text'])],
-        ['label' => 'Картинки', 'url' => $this->context->to(['/images/view'])],
+        ['label' => 'Картинки', 'url' => $this->context->to(['/image/view'])],
     ],
 ]); ?>
 
