@@ -10,9 +10,23 @@ use yii\helpers\Url;
 
 
 //*****************************************************************************
-class BaseController extends \dmitrybtn\cp\Controller
+class BaseController extends \dmitrybtn\cp\CrudController
 //*****************************************************************************
 {
+	public $id_mode;
+	public $card;
+
+	//-------------------------------------------------------------------------
+	public function init()
+	//-------------------------------------------------------------------------
+	{
+		$this->id_mode = Yii::$app->request->get('id_mode');
+
+		if (($this->card = Card::findOne(Yii::$app->request->get('id_card'))) === null)
+			throw new \yii\web\NotFoundHttpException('Карта не найдена!');
+	}
+
+
 	//-------------------------------------------------------------------------
 	public function to($url = '')
 	//-------------------------------------------------------------------------
@@ -20,36 +34,13 @@ class BaseController extends \dmitrybtn\cp\Controller
 		if (!is_array($url))
 			throw new \yii\web\NotFoundHttpException('Некорректное использование построителя ссылок!');
 
-		$url[0] = '/card/' . ltrim($url[0], '/');
+		// $url[0] = '/card/' . ltrim($url[0], '/');
 
 		$url['id_card'] = $this->card->id;
 		$url['id_mode'] = $this->id_mode;
 
 		return $url;
 	}
-
-	//-------------------------------------------------------------------------
-	public function getId_mode()
-	//-------------------------------------------------------------------------
-	{
-		return Yii::$app->request->get('id_mode');
-	}
-
-	//-------------------------------------------------------------------------
-	public function getCard()
-	//-------------------------------------------------------------------------
-	{
-		if ($this->_card === null) {
-			
-			$id = Yii::$app->request->get('id_card');
-
-			if (($this->_card = Card::findOne($id)) === null)
-				throw new \yii\web\NotFoundHttpException('Карта не найдена!');
-		}
-
-		return $this->_card;
-
-	} private $_card;
 
 
 	//-------------------------------------------------------------------------
@@ -63,20 +54,34 @@ class BaseController extends \dmitrybtn\cp\Controller
 		][$id_mode];
 	}
 
+
+	//-------------------------------------------------------------------------
+	public function checkCard($throw = false)
+	//-------------------------------------------------------------------------
+	{
+		if (!$this->card->isMy) {
+			if ($throw) throw new \yii\web\ForbiddenHttpException('Можно редактировать только свои техкарты');
+			else return false;
+		} else return true;
+	}
+
+
 	//-------------------------------------------------------------------------
     public function getBreads()
 	//-------------------------------------------------------------------------
     {
-        if ($this->_breads === null) {
-            
-			$r = [];
+        $arrBreads = parent::getBreads();
 
-			if ($this->id_mode)
-				$r[] = ['label' => static::mode($this->id_mode), 'url' => ['/card/list/index', 'id_mode' => $this->id_mode]];
+        // Применить преобразование URL
+        foreach ($arrBreads as $k => $sttBread) 
+        	$arrBreads[$k]['url'] = $this->to($sttBread['url']);
 
-            $this->setBreads($r);
-        }
+        // Добавить ссылку на режим
+        if ($this->id_mode)
+        	array_unshift($arrBreads, ['label' => static::mode($this->id_mode), 'url' => ['/card/index', 'id_mode' => $this->id_mode]]);
 
-        return $this->_breads;
-    } 
+        return $arrBreads;
+    }
+
+
 }

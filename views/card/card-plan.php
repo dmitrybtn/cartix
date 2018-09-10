@@ -6,6 +6,7 @@ use yii\widgets\Pjax;
 use app\models\CardTransfer;
 
 use yii\bootstrap\BootstrapPluginAsset;
+use yii\bootstrap\Html as BHtml;
 
 BootstrapPluginAsset::register($this);
 ?>
@@ -43,11 +44,11 @@ BootstrapPluginAsset::register($this);
 
 					<?php if ($this->context->card->isMy): ?>
 						<td class='action-column action-column-5'>
-							<?php echo Html::a('<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>', ['/object/create', 'id' => $modTransfer->id], ['class' => 'create']) ?>
-							<?php echo Html::a('<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>', ['/transfer/update', 'id' => $modTransfer->id], ['class' => 'update']) ?>
-							<?php echo Html::a('<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>', ['/transfer/sort', 'id' => $modTransfer->id], ['class' => 'lift']) ?>
-							<?php echo Html::a('<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>', ['/transfer/sort', 'id' => $modTransfer->id, 'inv' => 1], ['class' => 'drop']) ?>
-							<?php echo Html::a('<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>', ['/transfer/delete', 'id' => $modTransfer->id], ['class' => 'delete', 'data-confirm' => 'Точно?', 'data-method' => 'POST']) ?>
+							<?php echo Html::a(BHtml::icon('plus'), $this->context->to(['/card/object/create', 'id' => $modTransfer->id]), ['class' => 'create']) ?>
+							<?php echo Html::a(BHtml::icon('pencil'), $this->context->to(['/card/transfer/update', 'id' => $modTransfer->id]), ['class' => 'update']) ?>
+							<?php echo Html::a(BHtml::icon('arrow-up'), $this->context->to(['/card/transfer/sort', 'id' => $modTransfer->id]), ['class' => 'lift']) ?>
+							<?php echo Html::a(BHtml::icon('arrow-down'), $this->context->to(['/card/transfer/sort', 'id' => $modTransfer->id, 'inv' => 1]), ['class' => 'drop']) ?>
+							<?php echo Html::a(BHtml::icon('trash'), $this->context->to(['/card/transfer/delete', 'id' => $modTransfer->id]), ['class' => 'delete', 'data-confirm' => 'Точно?', 'data-method' => 'POST']) ?>
 						</td>
 					<?php endif ?>
 
@@ -68,10 +69,10 @@ BootstrapPluginAsset::register($this);
 
 						<?php if ($this->context->card->isMy): ?>
 							<td class='action-column action-column-5' style='text-align: right;'>
-								<?php echo Html::a('<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>', ['/object/update', 'id' => $modObject->id], ['class' => 'update']) ?>
-								<?php echo Html::a('<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>', ['/object/sort', 'id' => $modObject->id]) ?>
-								<?php echo Html::a('<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>', ['/object/sort', 'id' => $modObject->id, 'inv' => 1]) ?>
-								<?php echo Html::a('<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>', ['/object/delete', 'id' => $modObject->id], ['class' => 'delete', 'data-confirm' => 'Точно?', 'data-method' => 'post']) ?>
+								<?php echo Html::a(BHtml::icon('pencil'), $this->context->to(['/card/object/update', 'id' => $modObject->id]), ['class' => 'update']) ?>
+								<?php echo Html::a(BHtml::icon('arrow-up'), $this->context->to(['/card/object/sort', 'id' => $modObject->id])) ?>
+								<?php echo Html::a(BHtml::icon('arrow-down'), $this->context->to(['/card/object/sort', 'id' => $modObject->id, 'inv' => 1])) ?>
+								<?php echo Html::a(BHtml::icon('trash'), $this->context->to(['/card/object/delete', 'id' => $modObject->id]), ['class' => 'delete', 'data-confirm' => 'Точно?', 'data-method' => 'post']) ?>
 							</td>
 						<?php endif ?>
 
@@ -95,12 +96,12 @@ BootstrapPluginAsset::register($this);
 							<a href="#" data-toggle="dropdown" class="dropdown-toggle"><?php echo Html::encode($modTransfer->name) ?></a>
 
 							<ul class="dropdown-menu">
-								<li><?php echo Html::a('К тексту', ['/card/view-text', 'id' => $this->context->card->id, '#' => 'transfer-' . $modTransfer->id]) ?></li>
-								<li><?php echo Html::a('Добавить объект', ['/object/create', 'id' => $modTransfer->id]) ?></li>
-								<li><?php echo Html::a('Редактировать', ['/transfer/update', 'id' => $modTransfer->id]) ?></li>
-								<li><?php echo Html::a('Передвинуть выше', ['/transfer/sort', 'id' => $modTransfer->id]) ?></li>
-								<li><?php echo Html::a('Передвинуть ниже', ['/transfer/sort', 'id' => $modTransfer->id, 'inv' => 1]) ?></li>
-								<li><?php echo Html::a('Удалить', ['/transfer/delete', 'id' => $modTransfer->id], ['data-confirm' => 'Точно?', 'data-method' => 'post']) ?></li>
+								<li><?php echo Html::a('К тексту', $this->context->to(['/card/card/text', 'id' => $this->context->card->id, '#' => 'transfer-' . $modTransfer->id])) ?></li>
+								<li><?php echo Html::a('Добавить объект', $this->context->to(['/card/object/create', 'id' => $modTransfer->id])) ?></li>
+								<li><?php echo Html::a('Редактировать', $this->context->to(['/card/transfer/update', 'id' => $modTransfer->id])) ?></li>
+								<li><?php echo Html::a('Передвинуть выше', $this->context->to(['/card/transfer/sort', 'id' => $modTransfer->id])) ?></li>
+								<li><?php echo Html::a('Передвинуть ниже', $this->context->to(['/card/transfer/sort', 'id' => $modTransfer->id, 'inv' => 1])) ?></li>
+								<li><?php echo Html::a('Удалить', $this->context->to(['/card/transfer/delete', 'id' => $modTransfer->id]), ['data-confirm' => 'Точно?', 'data-method' => 'post']) ?></li>
 							</ul>						
 						</div>
 					
@@ -130,15 +131,15 @@ BootstrapPluginAsset::register($this);
 								<a href="#" data-toggle="dropdown" class="dropdown-toggle"><?php echo Html::encode($modObject->name) ?></a>
 
 								<ul class="dropdown-menu">
-									<li><?php echo Html::a('К тексту', ['/card/view-text', 'id' => $this->context->card->id, '#' => 'object-' . $modObject->id]) ?></li>
-									<li><?php echo Html::a('Редактировать', ['/object/update', 'id' => $modObject->id]) ?></li>
-									<li><?php echo Html::a('Передвинуть выше', ['/object/sort', 'id' => $modObject->id]) ?></li>
-									<li><?php echo Html::a('Передвинуть ниже', ['/object/sort', 'id' => $modObject->id, 'inv' => 1]) ?></li>
-									<li><?php echo Html::a('Удалить', ['/object/delete', 'id' => $modObject->id], ['data-confirm' => 'Точно?', 'data-method' => 'post']) ?></li>
+									<li><?php echo Html::a('К тексту', $this->context->to(['/card/view-text', 'id' => $this->context->card->id, '#' => 'object-' . $modObject->id])) ?></li>
+									<li><?php echo Html::a('Редактировать', $this->context->to(['/object/update', 'id' => $modObject->id])) ?></li>
+									<li><?php echo Html::a('Передвинуть выше', $this->context->to(['/object/sort', 'id' => $modObject->id])) ?></li>
+									<li><?php echo Html::a('Передвинуть ниже', $this->context->to(['/object/sort', 'id' => $modObject->id, 'inv' => 1])) ?></li>
+									<li><?php echo Html::a('Удалить', $this->context->to(['/object/delete', 'id' => $modObject->id], ['data-confirm' => 'Точно?', 'data-method' => 'post'])) ?></li>
 								</ul>						
 							</div>
 						<?php else: ?>
-							<?php echo Html::a(Html::encode($modObject->name), ['/card/view-text', 'id' => $this->context->card->id, '#' => 'object-' . $modObject->id]) ?>							
+							<?php echo Html::a(Html::encode($modObject->name), $this->context->to(['/card/view-text', 'id' => $this->context->card->id, '#' => 'object-' . $modObject->id])) ?>							
 						<?php endif ?>
 
 

@@ -13,32 +13,56 @@ use yii\helpers\Url;
 class CardController extends BaseController
 //*****************************************************************************
 {
+
 	//-------------------------------------------------------------------------
-	public function to($url = '')
+	public function init()
 	//-------------------------------------------------------------------------
 	{
-		if (!is_array($url))
-			throw new \yii\web\NotFoundHttpException('Некорректное использование построителя ссылок!');
+		parent::init();
 
-		$url[0] = '/card/' . ltrim($url[0], '/');
-
-		$url['id_card'] = $this->card->id;
-		$url['id_mode'] = $this->id_mode;
-
-		return $url;
+		$this->model = $this->card;
 	}
 
 	//-------------------------------------------------------------------------
-    public function getTitle()
+	public static function title($actionId, $modCard = null)
 	//-------------------------------------------------------------------------
-    {       
-        return $this->card->name;
-    } 
+	{
+		return [
+			'update' => 'Настройки техкарты',
+			'delete' => 'Удалить техкарту'
+		][$actionId] ?? $modCard->name;
+	}
+
+	//-------------------------------------------------------------------------
+	public static function breads($actionId, $modCard = '')
+	//-------------------------------------------------------------------------
+	{
+		$breads = [];
+
+		switch ($actionId) {			
+			case 'index':
+				break;
+
+			case 'update':
+			case 'outer':
+				$breads[] = ['label' => static::title('view', $modCard), 'url' => ['/card/card/view']];				
+		}
+
+		return $breads;
+	}
+
 
 	//-------------------------------------------------------------------------
 	public function actionView()
 	//-------------------------------------------------------------------------
 	{
+		$this->menu = [
+			['label' => 'Опции'],
+			['label' => TransferController::title('create'), 'url' => $this->to(['/card/transfer/create']), 'visible' => $this->checkCard()],
+			['label' => self::title('update'), 'url' => $this->to(['update']), 'visible' => $this->checkCard()],
+			['label' => self::title('delete'), 'url' => $this->to(['delete']), 'linkOptions' => ['data' => ['confirm' => 'Точно?', 'method' => 'POST']], 'visible' => $this->checkCard()],
+		];
+
 		return $this->render('@app/views/card/card-plan.php');
 	}
 
@@ -47,6 +71,49 @@ class CardController extends BaseController
 	//-------------------------------------------------------------------------
 	{
 		return $this->render('@app/views/card/card-text.php');
+	}
+
+	//-------------------------------------------------------------------------
+	public function actionUpdate()
+	//-------------------------------------------------------------------------
+	{
+		$this->checkCard(true);
+
+		$returnUrl = Yii::$app->request->post('returnUrl', $this->getReferrer(['view', 'id' => $this->card->id]));
+
+		if ($this->card->load(Yii::$app->request->post()))	{
+			
+			if (Yii::$app->request->isAjax) 
+				return $this->ajaxValidate($this->card);
+			
+			if ($this->card->save()) 
+				return $this->redirect($returnUrl);
+		}	
+
+		return $this->render('@app/views/card/form.php', ['returnUrl' => $returnUrl]);
+	}
+
+	//-------------------------------------------------------------------------
+	public function actionDelete()
+	//-------------------------------------------------------------------------
+	{
+		if (Yii::$app->request->isPost || YII_ENV_TEST) {
+
+			$url = ['/card/index', 'id_mode' => $this->id_mode];
+
+			try {		
+
+				$this->checkCard(true);
+				$this->card->delete();
+				return Yii::$app->getResponse()->redirect($url, 302, false);
+
+			} catch (\Exception $e) {
+
+				Yii::$app->session->setFlash('error', $e->getMessage());
+				return Yii::$app->getResponse()->redirect($url);
+
+			}		
+		} throw new \yii\web\MethodNotAllowedHttpException('Неверный формат запроса!');
 	}
 
 }
