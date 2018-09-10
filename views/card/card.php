@@ -11,7 +11,7 @@ use yii\helpers\Html;
     'options' => ['class' =>'nav-tabs hidden-xs hidden-sm', 'style' => 'margin-bottom: 15px;'],
     'activateItems' => true,
     'items' => [
-        ['label' => 'План', 'url' => $this->context->to(['/card/plan'])],
+        ['label' => 'План', 'url' => $this->context->to(['/card/view'])],
         ['label' => 'Текст', 'url' => $this->context->to(['/card/text'])],
         ['label' => 'Картинки', 'url' => $this->context->to(['/images/view'])],
     ],
