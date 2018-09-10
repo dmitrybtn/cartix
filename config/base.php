@@ -77,8 +77,11 @@ return \yii\helpers\ArrayHelper::merge(require __DIR__ . '/../vendor/dmitrybtn/y
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'enableStrictParsing' => false,
+            'normalizer' => [
+                'class' => 'yii\web\UrlNormalizer',
+            ],           
             'rules' => [
-
+                'card/<id_card>/<controller>/<action>' => 'card/<controller>/<action>',
             ],
         ],
     ],
