@@ -63,7 +63,7 @@ class ViewController extends \app\controllers\card\BaseController
 			['label' => CardController::title('delete'), 'url' => $this->to(['/card/one/card/delete']), 'linkOptions' => ['data' => ['confirm' => 'Точно?', 'method' => 'POST']], 'visible' => $this->checkCard()],
 
 
-			['label' => $this->card->is_common ? 'Убрать из базы' : 'Добавить в базу', 'url' => $this->to(['/card/one/card/common'])],
+			['label' => $this->card->is_common ? 'Убрать из базы' : 'Добавить в базу', 'url' => $this->to(['/card/admin/common'])],
 
 			['label' => $this->card->subscribe ? 'Отписаться' : 'Подписаться', 'url' => $this->to(['/card/one/card/subscribe']), 'visible' => !Yii::$app->user->isGuest && !$this->checkCard()],
 
@@ -88,7 +88,6 @@ class ViewController extends \app\controllers\card\BaseController
 		$modNewImage = new CardImage;
 		$modNewImage->id_card = $this->card->id;
 
-		/*
 		if (Yii::$app->request->post('url')) {
 			$modNewImage->url = Yii::$app->request->post('url');
 
@@ -105,7 +104,7 @@ class ViewController extends \app\controllers\card\BaseController
 
 			foreach ($arrFiles as $objFile) {
 				$modImage = new CardImage;
-				$modImage->id_card = $id;
+				$modImage->id_card = $this->card->id;
 				$modImage->file = $objFile; 
 
 				if (!$modImage->save()) $notSaved++;
@@ -116,7 +115,6 @@ class ViewController extends \app\controllers\card\BaseController
 
 			return Yii::$app->getResponse()->redirect($this->getReferrer(), 302, false);
 		}
-		*/
 
 		$this->title = $this->card->name;
 

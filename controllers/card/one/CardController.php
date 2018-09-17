@@ -61,16 +61,6 @@ class CardController extends \app\controllers\card\BaseController
 	}
 
 	//-------------------------------------------------------------------------
-	public function actionCommon()
-	//-------------------------------------------------------------------------
-	{
-		$this->card->is_common = (int)(!(bool)$this->card->is_common);
-		$this->card->save();
-
-		return $this->goReferrer();
-	}
-
-	//-------------------------------------------------------------------------
 	public function actionUpdate()
 	//-------------------------------------------------------------------------
 	{

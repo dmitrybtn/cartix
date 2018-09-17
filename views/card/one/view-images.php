@@ -51,7 +51,7 @@ use app\models\CardImage;
 						<div class="caption">
 							<?php echo $modImage->marker ?>
 							<div class="pull-right">
-				            	<?php if ($this->context->card->isMy) echo Html::a('<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>', ['/image/delete', 'id' => $modImage->id], ['data-confirm' => 'Точно?', 'data-method' => 'post']) ?>					
+				            	<?php if ($this->context->card->isMy) echo Html::a('<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>', $this->context->to(['card/one/image/delete', 'id' => $modImage->id]), ['data-confirm' => 'Точно?', 'data-method' => 'post']) ?>					
 							</div>						
 						</div>
 
