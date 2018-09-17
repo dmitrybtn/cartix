@@ -17,7 +17,7 @@ use app\models\CardImage;
 		<?php $arrImages = [] ?>
 
 		<?php if ($this->context->card->isMy): ?>
-			<?php echo Html::beginForm('', 'post', ['id' => 'form-image-upload', 'data-pjax' => 1, 'enctype' => 'multipart/form-data']) ?>
+			<?php echo Html::beginForm($this->context->to(['/card/one/image/upload']), 'post', ['id' => 'form-image-upload', 'data-pjax' => 1, 'enctype' => 'multipart/form-data']) ?>
 				<?php echo Html::errorSummary($modNewImage, ['header' => '<p>Не удалось загрузить картинку:</p>']) ?>
 				<div class="well well-sm">
 					<div class="row">

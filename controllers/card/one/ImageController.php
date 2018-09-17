@@ -24,13 +24,20 @@ class ImageController extends \app\controllers\card\BaseController
 	}
 
 	//-------------------------------------------------------------------------
-	public function actionView()
+	public function actionUpload()
 	//-------------------------------------------------------------------------
 	{
+		
+		Yii::$app->session->addFlash('error', 'Превед медвед');
+
+		return $this->goReferrer();
+
+		/*
 		$modNewImage = new CardImage;
 		$modNewImage->id_card = $this->card->id;
 
 		if (Yii::$app->request->post('url')) {
+
 			$modNewImage->url = Yii::$app->request->post('url');
 
 			if ($modNewImage->validate()) {
@@ -40,6 +47,7 @@ class ImageController extends \app\controllers\card\BaseController
 				if ($modNewImage->save())
 					return Yii::$app->getResponse()->redirect($this->getReferrer(), 302, false);
 			}
+
 		} elseif ($arrFiles = UploadedFile::getInstancesByName('file')) {
 			
 			$notSaved = 0;
@@ -65,6 +73,7 @@ class ImageController extends \app\controllers\card\BaseController
 		];
 
 		return $this->render('@app/views/card/one/view-images.php', ['modNewImage' => $modNewImage]);
+		*/
 	}
 
 
