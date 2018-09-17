@@ -5,7 +5,7 @@ use yii\grid\GridView;
 use yii\widgets\LinkPager;
 use yii\widgets\ListView;
 
-$dataProvider = new ActiveDataProvider(['query' => $modCard->search()->with('user')->sorted(), 'pagination' => ['pageSize' => 20], 'sort' => false]);
+$dataProvider = new ActiveDataProvider(['query' => $modCard->search()->mode($this->context->id_mode)->with('user')->sorted(), 'pagination' => ['pageSize' => 20], 'sort' => false]);
 
 ?>
 
@@ -35,7 +35,7 @@ $dataProvider = new ActiveDataProvider(['query' => $modCard->search()->with('use
 				'contentOptions' => $h = ['class' => 'action-column action-column-1'],
 				'headerOptions' => $h,
 				'urlCreator' => function($action, $modCard) {					
-					return ['/cards/card/view', 'id_card' => $modCard->id, 'id_mode' => Yii::$app->controller->id_mode];
+					return ['/cards/card/view', 'id_card' => $modCard->sid, 'id_mode' => Yii::$app->controller->id_mode];
 				},
 				'buttons' => [
 				]

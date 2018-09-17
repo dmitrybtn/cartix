@@ -20,7 +20,7 @@ class Card extends \yii\db\ActiveRecord
 	public function init()
 	//-------------------------------------------------------------------------
 	{
-		// $this->id_user = Yii::$app->user->id;
+		$this->id_user = Yii::$app->user->id;
 	}
 
 	//-------------------------------------------------------------------------
@@ -116,9 +116,8 @@ class Card extends \yii\db\ActiveRecord
 	public function getSid()
 	//-------------------------------------------------------------------------
 	{
-		return 'c' . $this->id . 'x' . $this->secret;
+		return $this->secret . $this->id;
 	}
-
 
 	//-------------------------------------------------------------------------
 	public function getTitle()
@@ -151,6 +150,29 @@ class Card extends \yii\db\ActiveRecord
 class CardQuery extends \yii\db\ActiveQuery
 //*****************************************************************************
 {
+	//-------------------------------------------------------------------------
+	public function bySid($sid)
+	//-------------------------------------------------------------------------
+	{
+		return $this->andWhere(['id' => substr($sid, 7), 'secret' => substr($sid, 0, 7)]);
+	}
+
+
+	//-------------------------------------------------------------------------
+	public function mode($id_mode)
+	//-------------------------------------------------------------------------
+	{
+		if ($id_mode == 'my')
+			$this->andWhere(['id_user' => Yii::$app->user->id]);
+
+
+		if ($id_mode == 'subscr')
+			$this->andWhere(['not', ['id_user' => Yii::$app->user->id]]);
+
+
+		return $this;
+	}
+
 	//-------------------------------------------------------------------------
 	public function sorted()
 	//-------------------------------------------------------------------------

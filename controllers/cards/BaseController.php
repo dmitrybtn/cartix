@@ -22,7 +22,7 @@ class BaseController extends \dmitrybtn\cp\CrudController
 	{
 		$this->id_mode = Yii::$app->request->get('id_mode');
 
-		if (($this->card = Card::findOne(Yii::$app->request->get('id_card'))) === null)
+		if (($this->card = Card::find()->bySid(Yii::$app->request->get('id_card'))->one()) === null)
 			throw new \yii\web\NotFoundHttpException('Карта не найдена!');
 
 	}
@@ -37,7 +37,7 @@ class BaseController extends \dmitrybtn\cp\CrudController
 
 		// $url[0] = '/cards/' . ltrim($url[0], '/');
 
-		$url['id_card'] = $this->card->id;
+		$url['id_card'] = $this->card->sid;
 		$url['id_mode'] = $this->id_mode;
 
 		return $url;

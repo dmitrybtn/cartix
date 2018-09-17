@@ -44,11 +44,10 @@ class CardBase
         $I->expect('New record exists');
         $I->seeRecord(Card::className(), ['name' => 'New card']);
 
-        $this->id_card = $I->grabRecord(Card::className(), ['name' => 'New card'])->id;
+        $this->id_card = $I->grabRecord(Card::className(), ['name' => 'New card'])->sid;
 
         $I->expect('Redirect to view page');
         $I->seeInCurrentUrl('/cards/' . $this->id_card);
-
     }
 
 

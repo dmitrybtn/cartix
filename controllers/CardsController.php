@@ -62,7 +62,7 @@ class CardsController extends \dmitrybtn\cp\Controller
 				return $this->ajaxValidate($this->card);
 
 			if ($this->card->save()) 
-				return $this->redirect(['/cards/card/view', 'id_card' => $this->card->id, 'id_mode' => $this->id_mode]); 
+				return $this->redirect(['/cards/card/view', 'id_card' => $this->card->sid, 'id_mode' => $this->id_mode]); 
 		}	
 
 		return $this->render('@app/views/cards/card/form.php', ['returnUrl' => $this->getReferrer(['index'])]);
