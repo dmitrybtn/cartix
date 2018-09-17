@@ -62,6 +62,9 @@ class CardController extends BaseController
 			['label' => self::title('update'), 'url' => $this->to(['update']), 'visible' => $this->checkCard()],
 			['label' => self::title('delete'), 'url' => $this->to(['delete']), 'linkOptions' => ['data' => ['confirm' => 'Точно?', 'method' => 'POST']], 'visible' => $this->checkCard()],
 
+
+			['label' => $this->card->is_common ? 'Убрать из базы' : 'Добавить в базу', 'url' => $this->to(['common'])],
+
 			['label' => $this->card->subscribe ? 'Отписаться' : 'Подписаться', 'url' => $this->to(['subscribe']), 'visible' => !Yii::$app->user->isGuest && !$this->checkCard()],
 
 		];
@@ -86,6 +89,17 @@ class CardController extends BaseController
 
 		return $this->goReferrer();
 	}
+
+	//-------------------------------------------------------------------------
+	public function actionCommon()
+	//-------------------------------------------------------------------------
+	{
+		$this->card->is_common = (int)(!(bool)$this->card->is_common);
+		$this->card->save();
+
+		return $this->goReferrer();
+	}
+
 
 
 	//-------------------------------------------------------------------------

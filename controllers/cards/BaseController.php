@@ -25,6 +25,8 @@ class BaseController extends \dmitrybtn\cp\CrudController
 		if (($this->card = Card::find()->bySid(Yii::$app->request->get('id_card'))->one()) === null)
 			throw new \yii\web\NotFoundHttpException('Карта не найдена!');
 
+        if (Yii::$app->user->isGuest)
+        	$this->showBreads = false;
 	}
 
 
@@ -71,6 +73,7 @@ class BaseController extends \dmitrybtn\cp\CrudController
     public function getBreads()
 	//-------------------------------------------------------------------------
     {
+
         $arrBreads = parent::getBreads();
 
         // Применить преобразование URL

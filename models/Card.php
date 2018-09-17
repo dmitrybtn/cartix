@@ -193,18 +193,19 @@ class CardQuery extends \yii\db\ActiveQuery
 	public function mode($id_mode)
 	//-------------------------------------------------------------------------
 	{
-		if ($id_mode == 'my')
-			$this->andWhere(['id_user' => Yii::$app->user->id]);
+		switch ($id_mode) {
+			case 'my':
+				
+				return $this->andWhere(['id_user' => Yii::$app->user->id]);
 
+			case 'common':
+				
+				return $this->andWhere(['is_common' => 1]);
 
-		if ($id_mode == 'subscr') {
-
-			$this->leftJoin('cards_subscribes', 'cards.id = cards_subscribes.id_card');
-			$this->andWhere(['cards_subscribes.id_user' => Yii::$app->user->id]);
+			case 'subscr':
+				
+				return $this->leftJoin('cards_subscribes', 'cards.id = cards_subscribes.id_card')->andWhere(['cards_subscribes.id_user' => Yii::$app->user->id]);
 		}
-
-
-		return $this;
 	}
 
 	//-------------------------------------------------------------------------

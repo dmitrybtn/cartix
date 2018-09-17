@@ -25,6 +25,7 @@ DROP TABLE IF EXISTS `cards`;
 CREATE TABLE `cards` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `id_user` int(11) unsigned NOT NULL,
+  `is_common` int(11) unsigned NOT NULL,
   `name` varchar(255) NOT NULL,
   `map` varchar(255) NOT NULL,
   `secret` varchar(255) NOT NULL,
@@ -163,4 +164,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-09-17 11:57:59
+-- Dump completed on 2018-09-17 12:43:35
