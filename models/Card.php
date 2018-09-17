@@ -58,6 +58,37 @@ class Card extends \yii\db\ActiveRecord
 		return parent::beforeSave($insert);
 	}
 
+	//-------------------------------------------------------------------------
+	public function getSubscribe()
+	//-------------------------------------------------------------------------
+	{
+		if ($this->_subscribe === null) {
+			$this->_subscribe = CardSubscribe::findOne(['id_card' => $this->id, 'id_user' => Yii::$app->user->id]);
+
+			if ($this->_subscribe === null)
+				$this->_subscribe = false;
+		}
+
+		return $this->_subscribe;
+
+	} private $_subscribe;
+
+
+	//-------------------------------------------------------------------------
+	public function subscribeToggle()
+	//-------------------------------------------------------------------------
+	{
+		if ($this->subscribe === false) {
+
+			$modSubscribe = new CardSubscribe;
+			$modSubscribe->id_card = $this->id;
+			$modSubscribe->id_user = Yii::$app->user->id;
+			$modSubscribe->save();
+
+		} else $this->subscribe->delete();
+
+		$this->_subscribe = null;
+	}
 
 	//*************************************************************************
 	// Связанные записи
@@ -166,8 +197,11 @@ class CardQuery extends \yii\db\ActiveQuery
 			$this->andWhere(['id_user' => Yii::$app->user->id]);
 
 
-		if ($id_mode == 'subscr')
-			$this->andWhere(['not', ['id_user' => Yii::$app->user->id]]);
+		if ($id_mode == 'subscr') {
+
+			$this->leftJoin('cards_subscribes', 'cards.id = cards_subscribes.id_card');
+			$this->andWhere(['cards_subscribes.id_user' => Yii::$app->user->id]);
+		}
 
 
 		return $this;

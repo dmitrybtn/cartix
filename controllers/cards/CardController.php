@@ -61,6 +61,9 @@ class CardController extends BaseController
 			['label' => TransferController::title('create'), 'url' => $this->to(['/cards/transfer/create']), 'visible' => $this->checkCard()],
 			['label' => self::title('update'), 'url' => $this->to(['update']), 'visible' => $this->checkCard()],
 			['label' => self::title('delete'), 'url' => $this->to(['delete']), 'linkOptions' => ['data' => ['confirm' => 'Точно?', 'method' => 'POST']], 'visible' => $this->checkCard()],
+
+			['label' => $this->card->subscribe ? 'Отписаться' : 'Подписаться', 'url' => $this->to(['subscribe']), 'visible' => !$this->checkCard()],
+
 		];
 
 		return $this->render('view-plan');
@@ -71,6 +74,13 @@ class CardController extends BaseController
 	//-------------------------------------------------------------------------
 	{
 		return $this->render('view-text');
+	}
+
+	public function actionSubscribe()
+	{
+		$this->card->subscribeToggle();
+
+		return $this->goReferrer();
 	}
 
 	//-------------------------------------------------------------------------
