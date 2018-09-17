@@ -1,14 +1,13 @@
 <?php
 
-namespace app\controllers;
+namespace app\controllers\card;
 
 use Yii;
 
-use app\controllers\cards\BaseController;
 use app\models\Card;
 
 //*****************************************************************************
-class CardsController extends \dmitrybtn\cp\Controller
+class ListController extends \dmitrybtn\cp\Controller
 //*****************************************************************************
 {
 	public $id_mode;
@@ -47,7 +46,7 @@ class CardsController extends \dmitrybtn\cp\Controller
 			['label' => self::title('create'), 'url' => ['create', 'id_mode' => $this->id_mode], 'visible' => $this->id_mode == 'my'],
 		];
 		
-		return $this->render('@app/views/cards/card/list.php', ['modCard' => $modCard]);
+		return $this->render('index', ['modCard' => $modCard]);
 	}
 
 	//-------------------------------------------------------------------------
@@ -62,10 +61,10 @@ class CardsController extends \dmitrybtn\cp\Controller
 				return $this->ajaxValidate($this->card);
 
 			if ($this->card->save()) 
-				return $this->redirect(['/cards/card/view', 'id_card' => $this->card->sid, 'id_mode' => $this->id_mode]); 
+				return $this->redirect(['/card/view/card/view', 'id_card' => $this->card->sid, 'id_mode' => $this->id_mode]); 
 		}	
 
-		return $this->render('@app/views/cards/card/form.php', ['returnUrl' => $this->getReferrer(['index'])]);
+		return $this->render('@app/views/card/form.php', ['returnUrl' => $this->getReferrer(['index'])]);
 	}
 
 }

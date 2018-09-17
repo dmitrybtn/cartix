@@ -35,7 +35,7 @@ $dataProvider = new ActiveDataProvider(['query' => $modCard->search()->mode($thi
 				'contentOptions' => $h = ['class' => 'action-column action-column-1'],
 				'headerOptions' => $h,
 				'urlCreator' => function($action, $modCard) {					
-					return ['/cards/card/plan', 'id_card' => $modCard->sid, 'id_mode' => Yii::$app->controller->id_mode];
+					return ['/card/view/card/plan', 'id_card' => $modCard->sid, 'id_mode' => Yii::$app->controller->id_mode];
 				},
 				'buttons' => [
 				]

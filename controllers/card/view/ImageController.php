@@ -1,6 +1,6 @@
 <?php
 
-namespace app\controllers\cards;
+namespace app\controllers\card\view;
 
 use Yii;
 use dmitrybtn\cp\SortAction;
@@ -9,7 +9,7 @@ use igogo5yo\uploadfromurl\UploadFromUrl;
 use yii\web\UploadedFile;
 
 //*****************************************************************************
-class ImageController extends BaseController
+class ImageController extends \app\controllers\card\BaseController
 //*****************************************************************************
 {
 	//-------------------------------------------------------------------------
@@ -64,7 +64,7 @@ class ImageController extends BaseController
 			['label' => 'Опции'],
 		];
 
-		return $this->render('@app/views/cards/card/view-images', ['modNewImage' => $modNewImage]);
+		return $this->render('@app/views/card/view/view-images.php', ['modNewImage' => $modNewImage]);
 	}
 
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\controllers\cards;
+namespace app\controllers\card\view;
 
 use Yii;
 
@@ -10,7 +10,7 @@ use yii\helpers\Url;
 
 
 //*****************************************************************************
-class CardController extends BaseController
+class CardController extends \app\controllers\card\BaseController
 //*****************************************************************************
 {
 
@@ -45,7 +45,7 @@ class CardController extends BaseController
 
 			case 'update':
 			case 'outer':
-				$breads[] = ['label' => static::title('view', $modCard), 'url' => ['/cards/card/view']];				
+				$breads[] = ['label' => static::title('view', $modCard), 'url' => ['/card/view/card/view']];				
 		}
 
 		return $breads;
@@ -58,7 +58,7 @@ class CardController extends BaseController
 	{
 		$this->menu = [
 			['label' => 'Опции'],
-			['label' => TransferController::title('create'), 'url' => $this->to(['/cards/transfer/create']), 'visible' => $this->checkCard()],
+			['label' => TransferController::title('create'), 'url' => $this->to(['/card/view/transfer/create']), 'visible' => $this->checkCard()],
 			['label' => self::title('update'), 'url' => $this->to(['update']), 'visible' => $this->checkCard()],
 			['label' => self::title('delete'), 'url' => $this->to(['delete']), 'linkOptions' => ['data' => ['confirm' => 'Точно?', 'method' => 'POST']], 'visible' => $this->checkCard()],
 
@@ -69,7 +69,7 @@ class CardController extends BaseController
 
 		];
 
-		return $this->render('view-plan');
+		return $this->render('@app/views/card/view/view-plan.php');
 	}
 
 
@@ -77,7 +77,7 @@ class CardController extends BaseController
 	public function actionText()
 	//-------------------------------------------------------------------------
 	{
-		return $this->render('view-text');
+		return $this->render('@app/views/card/view/view-text.php');
 	}
 
 
@@ -119,7 +119,7 @@ class CardController extends BaseController
 				return $this->redirect($returnUrl);
 		}	
 
-		return $this->render('form', ['returnUrl' => $returnUrl]);
+		return $this->render('@app/views/card/form.php', ['returnUrl' => $returnUrl]);
 	}
 
 
@@ -129,7 +129,7 @@ class CardController extends BaseController
 	{
 		if (Yii::$app->request->isPost || YII_ENV_TEST) {
 
-			$url = ['/cards/index', 'id_mode' => $this->id_mode];
+			$url = ['/card/list/index', 'id_mode' => $this->id_mode];
 
 			try {		
 

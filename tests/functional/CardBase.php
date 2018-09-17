@@ -47,7 +47,7 @@ class CardBase
         $this->id_card = $I->grabRecord(Card::className(), ['name' => 'New card'])->sid;
 
         $I->expect('Redirect to view page');
-        $I->seeInCurrentUrl('/cards/' . $this->id_card);
+        $I->seeInCurrentUrl('/card/view/' . $this->id_card);
     }
 
 
@@ -66,7 +66,7 @@ class CardBase
         $I->seeRecord(CardTransfer::className(), ['name' => 'New transfer']);
 
         $I->expect('Redirect to view page');
-        $I->seeInCurrentUrl('/cards/' . $this->id_card);
+        $I->seeInCurrentUrl('/card/view/' . $this->id_card);
 
         $this->id_transfer = $I->grabRecord(CardTransfer::className(), ['name' => 'New transfer'])->id;
     }
@@ -86,7 +86,7 @@ class CardBase
         $I->seeRecord(CardObject::className(), ['name' => 'New object']);
 
         $I->expect('Redirect to view page');
-        $I->seeInCurrentUrl('/cards/' . $this->id_card);
+        $I->seeInCurrentUrl('/card/view/' . $this->id_card);
 
         $this->id_object = $I->grabRecord(CardObject::className(), ['name' => 'New object'])->id;        
     }

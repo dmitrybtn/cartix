@@ -1,13 +1,13 @@
 <?php
 
-namespace app\controllers\cards;
+namespace app\controllers\card\view;
 
 use Yii;
 use dmitrybtn\cp\SortAction;
 use app\models\CardObject;
 
 //*****************************************************************************
-class ObjectController extends BaseController
+class ObjectController extends \app\controllers\card\BaseController
 //*****************************************************************************
 {
 	//-------------------------------------------------------------------------
@@ -53,7 +53,7 @@ class ObjectController extends BaseController
 				return $this->ajaxValidate($this->model);
 
 			if ($this->model->save()) 
-				return $this->redirect($this->to(['/cards/card/view'])); 
+				return $this->redirect($this->to(['/card/view/card/view'])); 
 		}	
 
 		return $this->render('form', ['returnUrl' => $this->getReferrer(['index'])]);
@@ -65,7 +65,7 @@ class ObjectController extends BaseController
 	{
 		$this->model = $this->find($id);
 
-		$returnUrl = Yii::$app->request->post('returnUrl', $this->getReferrer($this->to(['/cards/card/view', 'id' => $this->model->id])));
+		$returnUrl = Yii::$app->request->post('returnUrl', $this->getReferrer($this->to(['/card/view/card/view', 'id' => $this->model->id])));
 
 		if ($this->model->load(Yii::$app->request->post()))	{
 			

@@ -94,7 +94,7 @@ return \yii\helpers\ArrayHelper::merge(require __DIR__ . '/../vendor/dmitrybtn/y
             ],           
             'rules' => [
 
-
+                /*
                 'cards/<action:(index|create)>' => 'cards/<action>',
 
                 'cards/<id_card>' => 'cards/card/plan',
@@ -107,7 +107,7 @@ return \yii\helpers\ArrayHelper::merge(require __DIR__ . '/../vendor/dmitrybtn/y
                         'action' => 'view',
                     ],
                 ],
-
+                */
 
 
 

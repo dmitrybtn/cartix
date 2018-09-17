@@ -1,13 +1,13 @@
 <?php
 
-namespace app\controllers\cards;
+namespace app\controllers\card\view;
 
 use Yii;
 use dmitrybtn\cp\SortAction;
 use app\models\CardTransfer;
 
 //*****************************************************************************
-class TransferController extends BaseController
+class TransferController extends \app\controllers\card\BaseController
 //*****************************************************************************
 {
 	//-------------------------------------------------------------------------
@@ -53,7 +53,7 @@ class TransferController extends BaseController
 				return $this->ajaxValidate($this->model);
 
 			if ($this->model->save()) 
-				return $this->redirect($this->to(['/cards/card/view'])); 
+				return $this->redirect($this->to(['/card/view/card/view'])); 
 		}	
 
 		return $this->render('form', ['returnUrl' => $this->getReferrer(['index'])]);
