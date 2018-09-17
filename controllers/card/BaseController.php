@@ -37,7 +37,7 @@ class BaseController extends \dmitrybtn\cp\CrudController
 		if (!is_array($url))
 			throw new \yii\web\NotFoundHttpException('Некорректное использование построителя ссылок!');
 
-		// $url[0] = '/card/view/' . ltrim($url[0], '/');
+		// $url[0] = '/card/one/' . ltrim($url[0], '/');
 
 		$url['id_card'] = $this->card->sid;
 		$url['id_mode'] = $this->id_mode;

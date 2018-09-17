@@ -1,6 +1,6 @@
 <?php
 
-namespace app\controllers\card\view;
+namespace app\controllers\card\one;
 
 use Yii;
 
@@ -45,12 +45,11 @@ class CardController extends \app\controllers\card\BaseController
 
 			case 'update':
 			case 'outer':
-				$breads[] = ['label' => static::title('view', $modCard), 'url' => ['/card/view/card/view']];				
+				$breads[] = ['label' => static::title('view', $modCard), 'url' => ['/card/one/card/view']];				
 		}
 
 		return $breads;
 	}
-
 
 	//-------------------------------------------------------------------------
 	public function actionPlan()
@@ -58,7 +57,7 @@ class CardController extends \app\controllers\card\BaseController
 	{
 		$this->menu = [
 			['label' => 'Опции'],
-			['label' => TransferController::title('create'), 'url' => $this->to(['/card/view/transfer/create']), 'visible' => $this->checkCard()],
+			['label' => TransferController::title('create'), 'url' => $this->to(['/card/one/transfer/create']), 'visible' => $this->checkCard()],
 			['label' => self::title('update'), 'url' => $this->to(['update']), 'visible' => $this->checkCard()],
 			['label' => self::title('delete'), 'url' => $this->to(['delete']), 'linkOptions' => ['data' => ['confirm' => 'Точно?', 'method' => 'POST']], 'visible' => $this->checkCard()],
 
@@ -69,7 +68,7 @@ class CardController extends \app\controllers\card\BaseController
 
 		];
 
-		return $this->render('@app/views/card/view/view-plan.php');
+		return $this->render('@app/views/card/one/view-plan.php');
 	}
 
 
@@ -77,7 +76,7 @@ class CardController extends \app\controllers\card\BaseController
 	public function actionText()
 	//-------------------------------------------------------------------------
 	{
-		return $this->render('@app/views/card/view/view-text.php');
+		return $this->render('@app/views/card/one/view-text.php');
 	}
 
 
@@ -100,8 +99,6 @@ class CardController extends \app\controllers\card\BaseController
 		return $this->goReferrer();
 	}
 
-
-
 	//-------------------------------------------------------------------------
 	public function actionUpdate()
 	//-------------------------------------------------------------------------
@@ -121,7 +118,6 @@ class CardController extends \app\controllers\card\BaseController
 
 		return $this->render('@app/views/card/form.php', ['returnUrl' => $returnUrl]);
 	}
-
 
 	//-------------------------------------------------------------------------
 	public function actionDelete()

@@ -61,7 +61,7 @@ class ListController extends \dmitrybtn\cp\Controller
 				return $this->ajaxValidate($this->card);
 
 			if ($this->card->save()) 
-				return $this->redirect(['/card/view/card/view', 'id_card' => $this->card->sid, 'id_mode' => $this->id_mode]); 
+				return $this->redirect(['/card/one/card/view', 'id_card' => $this->card->sid, 'id_mode' => $this->id_mode]); 
 		}	
 
 		return $this->render('@app/views/card/form.php', ['returnUrl' => $this->getReferrer(['index'])]);

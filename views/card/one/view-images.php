@@ -12,7 +12,7 @@ use app\models\CardImage;
 
 
 
-<?php $this->beginContent('@app/views/card/view/view.php') ?>
+<?php $this->beginContent('@app/views/card/one/view.php') ?>
 
 		<?php $arrImages = [] ?>
 

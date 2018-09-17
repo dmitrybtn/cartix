@@ -1,13 +1,13 @@
 <?php
 
-namespace app\controllers\card\view;
+namespace app\controllers\card\one;
 
 use Yii;
 use dmitrybtn\cp\SortAction;
-use app\models\CardTransfer;
+use app\models\CardObject;
 
 //*****************************************************************************
-class TransferController extends \app\controllers\card\BaseController
+class ObjectController extends \app\controllers\card\BaseController
 //*****************************************************************************
 {
 	//-------------------------------------------------------------------------
@@ -26,8 +26,8 @@ class TransferController extends \app\controllers\card\BaseController
 	//-------------------------------------------------------------------------
 	{
 		return [
-			'create' => 'Добавить остановку',
-			'update' => 'Редактировать остановку',
+			'create' => 'Добавить объект',
+			'update' => 'Редактировать объект',
 			'delete' => 'Удалить',
 		][$actionId];
 	}
@@ -41,11 +41,11 @@ class TransferController extends \app\controllers\card\BaseController
 
 
 	//-------------------------------------------------------------------------
-	public function actionCreate()
+	public function actionCreate($id)
 	//-------------------------------------------------------------------------
 	{
-		$this->model = new CardTransfer();
-		$this->model->id_card = $this->card->id;
+		$this->model = new CardObject();
+		$this->model->id_transfer = $id;
 
 		if ($this->model->load(Yii::$app->request->post()))	{
 
@@ -53,7 +53,7 @@ class TransferController extends \app\controllers\card\BaseController
 				return $this->ajaxValidate($this->model);
 
 			if ($this->model->save()) 
-				return $this->redirect($this->to(['/card/view/card/view'])); 
+				return $this->redirect($this->to(['/card/one/card/view'])); 
 		}	
 
 		return $this->render('form', ['returnUrl' => $this->getReferrer(['index'])]);
@@ -65,7 +65,7 @@ class TransferController extends \app\controllers\card\BaseController
 	{
 		$this->model = $this->find($id);
 
-		$returnUrl = Yii::$app->request->post('returnUrl', $this->getReferrer(['view', 'id' => $this->model->id]));
+		$returnUrl = Yii::$app->request->post('returnUrl', $this->getReferrer($this->to(['/card/one/card/view', 'id' => $this->model->id])));
 
 		if ($this->model->load(Yii::$app->request->post()))	{
 			
@@ -76,7 +76,7 @@ class TransferController extends \app\controllers\card\BaseController
 				return $this->redirect($returnUrl);
 		}	
 
-		return $this->render('form', [$this->model, 'returnUrl' => $returnUrl]);
+		return $this->render('form', ['returnUrl' => $returnUrl]);
 	}
 
 	//-------------------------------------------------------------------------
@@ -98,16 +98,13 @@ class TransferController extends \app\controllers\card\BaseController
 		} throw new \yii\web\MethodNotAllowedHttpException('Неверный формат запроса!');
 	}
 
-
 	//-------------------------------------------------------------------------
 	public function find($id)
 	//-------------------------------------------------------------------------
 	{
-		if (($modCardTransfer = CardTransfer::findOne($id)) !== null) {
-			
-			if ($modCardTransfer->id_card == $this->card->id) return $modCardTransfer;
+		if (($modCardObject = CardObject::findOne($id)) !== null) {
+			if ($modCardObject->transfer->id_card == $this->card->id) return $modCardObject;
 			else throw new \yii\web\NotFoundHttpException('Техкарта не найдена');
-
-		} else throw new \yii\web\NotFoundHttpException('The requested page does not exist.');
+		} else throw new \yii\web\NotFoundHttpException('The requested page does not exist.');		
 	}
 }
