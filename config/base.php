@@ -94,6 +94,25 @@ return \yii\helpers\ArrayHelper::merge(require __DIR__ . '/../vendor/dmitrybtn/y
             ],           
             'rules' => [
 
+
+
+                '<module:(users)>/<controller>/<action>' => '<module>/<controller>/<action>',
+
+                'site/<action>' => 'site/<action>',
+
+                'list/<action>' => 'card/list/<action>',
+
+                '<id_card>' => 'card/one/view/plan',
+                '<id_card>/<action>' => 'card/one/view/<action>',
+                '<id_card>/<controller>/<action>' => 'card/one/<controller>/<action>',
+
+
+                /*
+                '<id_card:(^site|^users|^list)>/<action>' => 'card/one/view/<action>',
+                '<id_card:(^site|^users|^list)>/<controller>/<action>' => 'card/one/<controller>/<action>',
+                */
+
+
                 /*
                 'cards/<action:(index|create)>' => 'cards/<action>',
 

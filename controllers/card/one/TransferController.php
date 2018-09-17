@@ -53,7 +53,7 @@ class TransferController extends \app\controllers\card\BaseController
 				return $this->ajaxValidate($this->model);
 
 			if ($this->model->save()) 
-				return $this->redirect($this->to(['/card/one/card/view'])); 
+				return $this->redirect($this->to(['/card/one/view/plan'])); 
 		}	
 
 		return $this->render('form', ['returnUrl' => $this->getReferrer(['index'])]);

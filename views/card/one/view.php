@@ -11,9 +11,9 @@ use yii\helpers\Html;
     'options' => ['class' =>'nav-tabs hidden-xs hidden-sm', 'style' => 'margin-bottom: 15px;'],
     'activateItems' => true,
     'items' => [
-        ['label' => 'План', 'url' => $this->context->to(['/card/one/card/plan'])],
-        ['label' => 'Текст', 'url' => $this->context->to(['/card/one/card/text'])],
-        ['label' => 'Картинки', 'url' => $this->context->to(['/card/one/image/view'])],
+        ['label' => 'План', 'url' => $this->context->to(['card/one/view/plan'])],
+        ['label' => 'Текст', 'url' => $this->context->to(['card/one/view/text'])],
+        ['label' => 'Картинки', 'url' => $this->context->to(['card/one/view/images'])],
     ],
 ]); ?>
 
@@ -29,9 +29,9 @@ use yii\helpers\Html;
 		    'options' => ['class' =>'nav-footer nav-footer-card'],
 		    'activateItems' => true,
 		    'items' => [
-		        ['label' => 'План', 'url' => $this->context->to(['/card/one/card/plan'])],
-		        ['label' => 'Текст', 'url' => $this->context->to(['/card/one/card/text'])],
-		        ['label' => 'Картинки', 'url' => $this->context->to(['/card/one/image/view'])],
+		        ['label' => 'План', 'url' => $this->context->to(['card/one/view/plan'])],
+		        ['label' => 'Текст', 'url' => $this->context->to(['card/one/view/text'])],
+		        ['label' => 'Картинки', 'url' => $this->context->to(['card/one/view/images'])],
 		    ],
 		]); ?>		
 	</footer>

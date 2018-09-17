@@ -75,7 +75,7 @@ class CardSubscribeCest extends CardBase
     {
         $I->amLoggedInAs($id_user = $I->grabFixture('users', 'user')->id);
 
-        $I->amOnPage(['cards/index', 'id_mode' => 'subscr']);
+        $I->amOnPage(['card/list/index', 'id_mode' => 'subscr']);
 
         $I->see('Ничего не найдено', '#card_index--grid');
     }
@@ -102,7 +102,7 @@ class CardSubscribeCest extends CardBase
     {
         $I->amLoggedInAs($id_user = $I->grabFixture('users', 'user')->id);
 
-        $I->amOnPage(['cards/index', 'id_mode' => 'subscr']);
+        $I->amOnPage(['card/list/index', 'id_mode' => 'subscr']);
 
         $I->see('New card', '#card_index--grid');
     }

@@ -46,8 +46,8 @@ class CardBase
 
         $this->id_card = $I->grabRecord(Card::className(), ['name' => 'New card'])->sid;
 
-        // $I->expect('Redirect to view page');
-        // $I->seeInCurrentUrl('/card/one/' . $this->id_card);
+        $I->expect('Redirect to view page');
+        $I->seeInCurrentUrl($this->id_card);
     }
 
 
@@ -64,9 +64,6 @@ class CardBase
         $I->click('Сохранить', '#card-transfer-form');
 
         $I->seeRecord(CardTransfer::className(), ['name' => 'New transfer']);
-
-        // $I->expect('Redirect to view page');
-        // $I->seeInCurrentUrl('/card/one/' . $this->id_card);
 
         $this->id_transfer = $I->grabRecord(CardTransfer::className(), ['name' => 'New transfer'])->id;
     }
@@ -85,15 +82,12 @@ class CardBase
 
         $I->seeRecord(CardObject::className(), ['name' => 'New object']);
 
-        // $I->expect('Redirect to view page');
-        // $I->seeInCurrentUrl('/card/one/' . $this->id_card);
-
         $this->id_object = $I->grabRecord(CardObject::className(), ['name' => 'New object'])->id;        
     }
 
 
     protected function openCard($I, $action = 'plan', $id_mode = null)
     {
-        $I->amOnPage(['card/view/card/' . $action, 'id_card' => $this->id_card, 'id_mode' => $id_mode]);
+        $I->amOnPage(['card/one/view/' . $action, 'id_card' => $this->id_card, 'id_mode' => $id_mode]);
     }
 }

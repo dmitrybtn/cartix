@@ -45,40 +45,11 @@ class CardController extends \app\controllers\card\BaseController
 
 			case 'update':
 			case 'outer':
-				$breads[] = ['label' => static::title('view', $modCard), 'url' => ['/card/one/card/view']];				
+				$breads[] = ['label' => static::title('view', $modCard), 'url' => ['/card/one/view/plan']];				
 		}
 
 		return $breads;
 	}
-
-	//-------------------------------------------------------------------------
-	public function actionPlan()
-	//-------------------------------------------------------------------------
-	{
-		$this->menu = [
-			['label' => 'Опции'],
-			['label' => TransferController::title('create'), 'url' => $this->to(['/card/one/transfer/create']), 'visible' => $this->checkCard()],
-			['label' => self::title('update'), 'url' => $this->to(['update']), 'visible' => $this->checkCard()],
-			['label' => self::title('delete'), 'url' => $this->to(['delete']), 'linkOptions' => ['data' => ['confirm' => 'Точно?', 'method' => 'POST']], 'visible' => $this->checkCard()],
-
-
-			['label' => $this->card->is_common ? 'Убрать из базы' : 'Добавить в базу', 'url' => $this->to(['common'])],
-
-			['label' => $this->card->subscribe ? 'Отписаться' : 'Подписаться', 'url' => $this->to(['subscribe']), 'visible' => !Yii::$app->user->isGuest && !$this->checkCard()],
-
-		];
-
-		return $this->render('@app/views/card/one/view-plan.php');
-	}
-
-
-	//-------------------------------------------------------------------------
-	public function actionText()
-	//-------------------------------------------------------------------------
-	{
-		return $this->render('@app/views/card/one/view-text.php');
-	}
-
 
 	//-------------------------------------------------------------------------
 	public function actionSubscribe()
