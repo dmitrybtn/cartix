@@ -90,7 +90,7 @@ class CardController extends BaseController
 				return $this->redirect($returnUrl);
 		}	
 
-		return $this->render('@app/views/cards/form.php', ['returnUrl' => $returnUrl]);
+		return $this->render('form', ['returnUrl' => $returnUrl]);
 	}
 
 	//-------------------------------------------------------------------------

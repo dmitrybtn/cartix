@@ -82,9 +82,33 @@ return \yii\helpers\ArrayHelper::merge(require __DIR__ . '/../vendor/dmitrybtn/y
             ],           
             'rules' => [
 
-                'cards/<id_mode>/<action>' => 'cards/<action>',
+
+                'cards/<action:(index|create)>' => 'cards/<action>',
+
+                'cards/<id_card>' => 'cards/card/view',
+                'cards/<id_card>/text' => 'cards/card/text',
+
+
+                [
+                    'pattern' => 'cards/<id_card>/<controller>/<action>',
+                    'route' => 'cards/<controller>/<action>',
+                    'defaults' => [
+                        'action' => 'view',
+                    ],
+                ],
+
+
+                // 
+
+                // 
+
+                /*
                 'cards/<id_mode>/<id_card>/<controller>/<action>' => 'cards/<controller>/<action>',
+
+
                 'cards/<id_card>/<controller>/<action>' => 'cards/<controller>/<action>',
+                */
+
 
             ],
         ],

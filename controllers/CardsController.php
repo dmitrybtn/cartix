@@ -65,7 +65,7 @@ class CardsController extends \dmitrybtn\cp\Controller
 				return $this->redirect(['/cards/card/view', 'id_card' => $this->card->id, 'id_mode' => $this->id_mode]); 
 		}	
 
-		return $this->render('form', ['returnUrl' => $this->getReferrer(['index'])]);
+		return $this->render('@app/views/cards/card/form.php', ['returnUrl' => $this->getReferrer(['index'])]);
 	}
 
 }

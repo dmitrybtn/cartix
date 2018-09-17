@@ -24,6 +24,7 @@ class BaseController extends \dmitrybtn\cp\CrudController
 
 		if (($this->card = Card::findOne(Yii::$app->request->get('id_card'))) === null)
 			throw new \yii\web\NotFoundHttpException('Карта не найдена!');
+
 	}
 
 

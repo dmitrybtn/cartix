@@ -51,7 +51,7 @@ class CardCest extends CardBase
         $I->click('Сохранить', '#card-form');
 
         $I->seeRecord(Card::className(), ['name' => 'New updated card']);
-        $I->seeInCurrentUrl('/card/view');
+        $I->seeInCurrentUrl('/cards/' . $this->id_card);
     }
 
     /**
@@ -59,7 +59,7 @@ class CardCest extends CardBase
      */
     public function index(\FunctionalTester $I)
     {
-    	$I->amOnPage(['card/index']);
+    	$I->amOnPage(['cards/index', 'id_mode' => 'my']);
 
     	$I->see('New updated card');
     }

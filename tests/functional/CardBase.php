@@ -35,8 +35,8 @@ class CardBase
      */
     protected function createCard(\FunctionalTester $I)
     {
-    	$I->amOnPage(['card/index']);
-    	$I->click('Добавить');
+    	$I->amOnPage(['cards/index', 'id_mode' => 'my']);
+    	$I->click('Добавить техкарту');
 
     	$I->fillField('#card-name', 'New card');
         $I->click('Сохранить', '#card-form');
@@ -44,10 +44,11 @@ class CardBase
         $I->expect('New record exists');
         $I->seeRecord(Card::className(), ['name' => 'New card']);
 
-        $I->expect('Redirect to view page');
-        $I->seeInCurrentUrl('/card/view');
-
         $this->id_card = $I->grabRecord(Card::className(), ['name' => 'New card'])->id;
+
+        $I->expect('Redirect to view page');
+        $I->seeInCurrentUrl('/cards/' . $this->id_card);
+
     }
 
 
@@ -56,7 +57,7 @@ class CardBase
      */
     protected function createTransfer(\FunctionalTester $I)
     {
-        $I->amOnPage(['card/view', 'id' => $this->id_card]);
+        $I->amOnPage(['cards/card/view', 'id_card' => $this->id_card, 'id_mode' => 'my']);
         $I->click('Добавить остановку');
 
         $I->fillField('#cardtransfer-name', 'New transfer');
@@ -64,7 +65,8 @@ class CardBase
 
         $I->seeRecord(CardTransfer::className(), ['name' => 'New transfer']);
 
-        $I->seeInCurrentUrl('/card/view');
+        $I->expect('Redirect to view page');
+        $I->seeInCurrentUrl('/cards/' . $this->id_card);
 
         $this->id_transfer = $I->grabRecord(CardTransfer::className(), ['name' => 'New transfer'])->id;
     }
@@ -78,10 +80,13 @@ class CardBase
 
         $I->click('a.create', "tr[data-transfer-key=$this->id_transfer]");
         
-        $I->fillField('#cardobject-name', 'New object');
-        
+        $I->fillField('#cardobject-name', 'New object');       
         $I->click('Сохранить', '#card-object-form');
+
         $I->seeRecord(CardObject::className(), ['name' => 'New object']);
+
+        $I->expect('Redirect to view page');
+        $I->seeInCurrentUrl('/cards/' . $this->id_card);
 
         $this->id_object = $I->grabRecord(CardObject::className(), ['name' => 'New object'])->id;        
     }
@@ -89,6 +94,6 @@ class CardBase
 
     protected function openCard($I, $action = 'view')
     {
-        $I->amOnPage(['card/' . $action, 'id' => $this->id_card]);
+        $I->amOnPage(['cards/card/' . $action, 'id_card' => $this->id_card, 'id_mode' => 'my']);
     }
 }

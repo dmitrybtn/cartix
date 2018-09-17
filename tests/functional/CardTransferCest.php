@@ -45,7 +45,7 @@ class CardTransferCest extends CardBase
      */
     public function viewInText(\FunctionalTester $I)
     {
-        $this->openCard($I, 'view-text');
+        $this->openCard($I, 'text');
 
         $I->see('New transfer', '.card_text--header_transfer');
     }
