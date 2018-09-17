@@ -91,8 +91,8 @@ class CardBase
     }
 
 
-    protected function openCard($I, $action = 'view')
+    protected function openCard($I, $action = 'view', $id_mode = null)
     {
-        $I->amOnPage(['cards/card/' . $action, 'id_card' => $this->id_card, 'id_mode' => 'my']);
+        $I->amOnPage(['cards/card/' . $action, 'id_card' => $this->id_card, 'id_mode' => $id_mode]);
     }
 }

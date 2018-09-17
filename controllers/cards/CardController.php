@@ -62,12 +62,13 @@ class CardController extends BaseController
 			['label' => self::title('update'), 'url' => $this->to(['update']), 'visible' => $this->checkCard()],
 			['label' => self::title('delete'), 'url' => $this->to(['delete']), 'linkOptions' => ['data' => ['confirm' => 'Точно?', 'method' => 'POST']], 'visible' => $this->checkCard()],
 
-			['label' => $this->card->subscribe ? 'Отписаться' : 'Подписаться', 'url' => $this->to(['subscribe']), 'visible' => !$this->checkCard()],
+			['label' => $this->card->subscribe ? 'Отписаться' : 'Подписаться', 'url' => $this->to(['subscribe']), 'visible' => !Yii::$app->user->isGuest && !$this->checkCard()],
 
 		];
 
 		return $this->render('view-plan');
 	}
+
 
 	//-------------------------------------------------------------------------
 	public function actionText()
@@ -76,12 +77,16 @@ class CardController extends BaseController
 		return $this->render('view-text');
 	}
 
+
+	//-------------------------------------------------------------------------
 	public function actionSubscribe()
+	//-------------------------------------------------------------------------
 	{
 		$this->card->subscribeToggle();
 
 		return $this->goReferrer();
 	}
+
 
 	//-------------------------------------------------------------------------
 	public function actionUpdate()
@@ -102,6 +107,7 @@ class CardController extends BaseController
 
 		return $this->render('form', ['returnUrl' => $returnUrl]);
 	}
+
 
 	//-------------------------------------------------------------------------
 	public function actionDelete()

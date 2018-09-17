@@ -69,7 +69,7 @@ class CardCest extends CardBase
      */
     public function delete(\FunctionalTester $I)
     {
-        $this->openCard($I);
+        $this->openCard($I, 'view', 'my');
         $I->click('Удалить техкарту');
 
         $I->dontSeeRecord(Card::className());
