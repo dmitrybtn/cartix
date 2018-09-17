@@ -53,7 +53,7 @@ class CardController extends BaseController
 
 
 	//-------------------------------------------------------------------------
-	public function actionView()
+	public function actionPlan()
 	//-------------------------------------------------------------------------
 	{
 		$this->menu = [

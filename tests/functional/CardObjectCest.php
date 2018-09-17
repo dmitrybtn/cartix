@@ -34,7 +34,7 @@ class CardObjectCest extends CardBase
      */
     public function viewInPlan(\FunctionalTester $I)
     {
-        $this->openCard($I, 'view');
+        $this->openCard($I);
 
         $I->see('New object', '.card_plan--object');
         $I->see('New object', '.card_plan-mobile--object');

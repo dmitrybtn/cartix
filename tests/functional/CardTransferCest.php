@@ -34,7 +34,7 @@ class CardTransferCest extends CardBase
      */
     public function viewInPlan(\FunctionalTester $I)
     {
-        $this->openCard($I, 'view');
+        $this->openCard($I);
 
         $I->see('New transfer', '.card_plan--transfer');
         $I->see('New transfer', '.card_plan-mobile--transfer');

@@ -56,7 +56,8 @@ class CardBase
      */
     protected function createTransfer(\FunctionalTester $I)
     {
-        $I->amOnPage(['cards/card/view', 'id_card' => $this->id_card, 'id_mode' => 'my']);
+        $this->openCard($I);
+
         $I->click('Добавить остановку');
 
         $I->fillField('#cardtransfer-name', 'New transfer');
@@ -91,7 +92,7 @@ class CardBase
     }
 
 
-    protected function openCard($I, $action = 'view', $id_mode = null)
+    protected function openCard($I, $action = 'plan', $id_mode = null)
     {
         $I->amOnPage(['cards/card/' . $action, 'id_card' => $this->id_card, 'id_mode' => $id_mode]);
     }

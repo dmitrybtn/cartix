@@ -85,9 +85,8 @@ return \yii\helpers\ArrayHelper::merge(require __DIR__ . '/../vendor/dmitrybtn/y
 
                 'cards/<action:(index|create)>' => 'cards/<action>',
 
-                'cards/<id_card>' => 'cards/card/view',
+                'cards/<id_card>' => 'cards/card/plan',
                 'cards/<id_card>/text' => 'cards/card/text',
-
 
                 [
                     'pattern' => 'cards/<id_card>/<controller>/<action>',
