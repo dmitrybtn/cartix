@@ -6,6 +6,9 @@ use yii\widgets\Pjax;
 use yii\widgets\ActiveForm;
 use app\models\CardImage;
 
+use app\controllers\card\one\ImageController;
+
+$arrImages = [];
 
 ?>
 
@@ -14,16 +17,16 @@ use app\models\CardImage;
 
 <?php $this->beginContent('@app/views/card/one/view.php') ?>
 
-		<?php $arrImages = [] ?>
-
-		<?php if ($this->context->card->isMy): ?>
+		<!-- Форма загрузки картинок -->
+		<?php if (ImageController::checkMy('upload')): ?>
 			<?php echo Html::beginForm($this->context->to(['/card/one/image/upload']), 'post', ['id' => 'form-image-upload', 'data-pjax' => 1, 'enctype' => 'multipart/form-data']) ?>
-				<?php echo Html::errorSummary($modNewImage, ['header' => '<p>Не удалось загрузить картинку:</p>']) ?>
+				
+				
 				<div class="well well-sm">
 					<div class="row">
 						
 						<div class="col-md-7 col-sm-vmargin">
-							<?php echo Html::textInput('url', $modNewImage->url, ['class' => 'form-control', 'placeholder' => 'Введите URL картинки или загрузите файл']) ?>					
+							<?php echo Html::textInput('url', '', ['class' => 'form-control', 'placeholder' => 'Введите URL картинки или загрузите файл']) ?>					
 						</div>
 
 						<div class="col-md-3 col-sm-vmargin">
@@ -37,6 +40,14 @@ use app\models\CardImage;
 					</div>		
 				</div>
 			<?php echo Html::endForm() ?>
+
+			<?php if ($arrErrors = Yii::$app->session->getFlash('image-upload')): ?>
+				<div class="alert alert-danger">
+					<p>При загрузке возникли проблемы:</p>
+					<?php echo Html::ul($arrErrors) ?>
+				</div>
+			<?php endif ?>
+
 		<?php endif ?>
 
 

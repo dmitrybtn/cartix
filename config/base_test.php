@@ -23,7 +23,6 @@ $config = \yii\helpers\ArrayHelper::merge(require __DIR__ . '/base.php', [
     ],
 ]);
 
-unset($config['components']['authManager']);
 
 if (YII_ENV_DEV) {
     // configuration adjustments for 'dev' environment

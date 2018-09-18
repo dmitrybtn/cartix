@@ -16,8 +16,6 @@ class CardSubscribeCest extends CardBase
         $I->haveFixtures([
             'users' => UsersFixture::className(),
         ]);
-
-        // $I->amLoggedInAs($I->grabFixture('users', 'root')->id);
     }
 
 

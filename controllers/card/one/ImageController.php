@@ -13,26 +13,11 @@ class ImageController extends \app\controllers\card\BaseController
 //*****************************************************************************
 {
 	//-------------------------------------------------------------------------
-	public function actions()
-	//-------------------------------------------------------------------------
-	{
-		return [
-			'sort' => [
-				'class' => SortAction::class,
-			]
-		];
-	}
-
-	//-------------------------------------------------------------------------
 	public function actionUpload()
 	//-------------------------------------------------------------------------
 	{
-		
-		Yii::$app->session->addFlash('error', 'Превед медвед');
+		$arrErrors = [];
 
-		return $this->goReferrer();
-
-		/*
 		$modNewImage = new CardImage;
 		$modNewImage->id_card = $this->card->id;
 
@@ -44,9 +29,10 @@ class ImageController extends \app\controllers\card\BaseController
 				$modNewImage->scenario = 'url';
 				$modNewImage->file = UploadFromUrl::initWithUrl($modNewImage->url);
 
-				if ($modNewImage->save())
-					return Yii::$app->getResponse()->redirect($this->getReferrer(), 302, false);
-			}
+				if (!$modNewImage->save())
+					$arrErrors[] = array_values($modNewImage->getFirstErrors())[0];
+
+			} else $arrErrors[] = array_values($modNewImage->getFirstErrors())[0];
 
 		} elseif ($arrFiles = UploadedFile::getInstancesByName('file')) {
 			
@@ -54,26 +40,18 @@ class ImageController extends \app\controllers\card\BaseController
 
 			foreach ($arrFiles as $objFile) {
 				$modImage = new CardImage;
-				$modImage->id_card = $id;
+				$modImage->scenario = 'file';
+				$modImage->id_card = $this->card->id;
 				$modImage->file = $objFile; 
 
-				if (!$modImage->save()) $notSaved++;
-			}
-
-			if ($notSaved)
-				Yii::$app->session->addFlash('error', "Не удалось загрузить $notSaved изображений");
-
-			return Yii::$app->getResponse()->redirect($this->getReferrer(), 302, false);
+				if (!$modImage->save()) 
+					$arrErrors[] = $objFile->name . ": " . array_values($modImage->getFirstErrors())[0];
+			}	
 		}
 
-		$this->title = $this->card->name;
+		Yii::$app->session->setFlash('image-upload', $arrErrors);	
 
-		$this->menu = [
-			['label' => 'Опции'],
-		];
-
-		return $this->render('@app/views/card/one/view-images.php', ['modNewImage' => $modNewImage]);
-		*/
+		return $this->goReferrer();
 	}
 
 

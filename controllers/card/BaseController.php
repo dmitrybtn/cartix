@@ -29,6 +29,33 @@ class BaseController extends \dmitrybtn\cp\CrudController
         	$this->showBreads = false;
 	}
 
+	//-------------------------------------------------------------------------
+	public static function needMy()
+	//-------------------------------------------------------------------------
+	// Возвращает true если для выполнения действия нужно быть владельцем карты
+	{
+		return true;
+	}
+
+	//-------------------------------------------------------------------------
+	public static function checkMy($action)
+	//-------------------------------------------------------------------------
+	// Проверяет необходимость быть владельцем карточки
+	{
+		return static::needMy($action) ? Yii::$app->controller->card->isMy : true;
+	}
+
+
+	//-------------------------------------------------------------------------
+	public function beforeAction($action)
+	//-------------------------------------------------------------------------
+	{
+		if (!static::checkMy($action->id))
+			throw new \yii\web\ForbiddenHttpException('Действие доступно только владельцу техкарты');
+
+		return parent::beforeAction($action);
+	}
+
 
 	//-------------------------------------------------------------------------
 	public function to($url = '')
@@ -36,8 +63,6 @@ class BaseController extends \dmitrybtn\cp\CrudController
 	{
 		if (!is_array($url))
 			throw new \yii\web\NotFoundHttpException('Некорректное использование построителя ссылок!');
-
-		// $url[0] = '/card/one/' . ltrim($url[0], '/');
 
 		$url['id_card'] = $this->card->sid;
 		$url['id_mode'] = $this->id_mode;
@@ -59,17 +84,6 @@ class BaseController extends \dmitrybtn\cp\CrudController
 
 
 	//-------------------------------------------------------------------------
-	public function checkCard($throw = false)
-	//-------------------------------------------------------------------------
-	{
-		if (!$this->card->isMy) {
-			if ($throw) throw new \yii\web\ForbiddenHttpException('Можно редактировать только свои техкарты');
-			else return false;
-		} else return true;
-	}
-
-
-	//-------------------------------------------------------------------------
     public function getBreads()
 	//-------------------------------------------------------------------------
     {
@@ -87,5 +101,16 @@ class BaseController extends \dmitrybtn\cp\CrudController
         return $arrBreads;
     }
 
+	//-------------------------------------------------------------------------
+    public function getHeaderMobile()
+	//-------------------------------------------------------------------------
+    {
+        $val = 16;
+
+        if (mb_strlen($title = $this->title, 'utf8') > $val) 
+        	$title = trim(mb_substr($title, 0, $val, 'utf8')) . '...';
+
+        return $this->_headerMobile === null ? $title : $this->_headerMobile;
+    } private $_headerMobile;
 
 }

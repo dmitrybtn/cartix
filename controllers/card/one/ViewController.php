@@ -9,10 +9,6 @@ use app\models\CardImage;
 
 use yii\helpers\Url;
 
-use igogo5yo\uploadfromurl\UploadFromUrl;
-use yii\web\UploadedFile;
-
-
 //*****************************************************************************
 class ViewController extends \app\controllers\card\BaseController
 //*****************************************************************************
@@ -25,6 +21,14 @@ class ViewController extends \app\controllers\card\BaseController
 		parent::init();
 
 		$this->model = $this->card;
+	}
+
+	//-------------------------------------------------------------------------
+	public static function needMy()
+	//-------------------------------------------------------------------------
+	// Возвращает true если для выполнения действия нужно быть владельцем карты
+	{
+		return false;
 	}
 
 	//-------------------------------------------------------------------------
@@ -58,14 +62,14 @@ class ViewController extends \app\controllers\card\BaseController
 	{
 		$this->menu = [
 			['label' => 'Опции'],
-			['label' => TransferController::title('create'), 'url' => $this->to(['/card/one/transfer/create']), 'visible' => $this->checkCard()],
-			['label' => CardController::title('update'), 'url' => $this->to(['/card/one/card/update']), 'visible' => $this->checkCard()],
-			['label' => CardController::title('delete'), 'url' => $this->to(['/card/one/card/delete']), 'linkOptions' => ['data' => ['confirm' => 'Точно?', 'method' => 'POST']], 'visible' => $this->checkCard()],
+			['label' => TransferController::title('create'), 'url' => $this->to(['/card/one/transfer/create']), 'visible' => TransferController::checkMy('create')],
+			['label' => CardController::title('update'), 'url' => $this->to(['/card/one/card/update']), 'visible' => CardController::checkMy('update')],
+			['label' => CardController::title('delete'), 'url' => $this->to(['/card/one/card/delete']), 'linkOptions' => ['data' => ['confirm' => 'Точно?', 'method' => 'POST']], 'visible' => CardController::checkMy('delete')],
 
 
 			['label' => $this->card->is_common ? 'Убрать из базы' : 'Добавить в базу', 'url' => $this->to(['/card/admin/common'])],
 
-			['label' => $this->card->subscribe ? 'Отписаться' : 'Подписаться', 'url' => $this->to(['/card/one/card/subscribe']), 'visible' => !Yii::$app->user->isGuest && !$this->checkCard()],
+			['label' => $this->card->subscribe ? 'Отписаться' : 'Подписаться', 'url' => $this->to(['/card/one/card/subscribe']), 'visible' => !$this->card->isMy],
 
 		];
 
@@ -85,44 +89,7 @@ class ViewController extends \app\controllers\card\BaseController
 	public function actionImages()
 	//-------------------------------------------------------------------------
 	{
-		$modNewImage = new CardImage;
-		$modNewImage->id_card = $this->card->id;
-
-		if (Yii::$app->request->post('url')) {
-			$modNewImage->url = Yii::$app->request->post('url');
-
-			if ($modNewImage->validate()) {
-				$modNewImage->scenario = 'url';
-				$modNewImage->file = UploadFromUrl::initWithUrl($modNewImage->url);
-
-				if ($modNewImage->save())
-					return Yii::$app->getResponse()->redirect($this->getReferrer(), 302, false);
-			}
-		} elseif ($arrFiles = UploadedFile::getInstancesByName('file')) {
-			
-			$notSaved = 0;
-
-			foreach ($arrFiles as $objFile) {
-				$modImage = new CardImage;
-				$modImage->id_card = $this->card->id;
-				$modImage->file = $objFile; 
-
-				if (!$modImage->save()) $notSaved++;
-			}
-
-			if ($notSaved)
-				Yii::$app->session->addFlash('error', "Не удалось загрузить $notSaved изображений");
-
-			return Yii::$app->getResponse()->redirect($this->getReferrer(), 302, false);
-		}
-
-		$this->title = $this->card->name;
-
-		$this->menu = [
-			['label' => 'Опции'],
-		];
-
-		return $this->render('@app/views/card/one/view-images.php', ['modNewImage' => $modNewImage]);
+		return $this->render('@app/views/card/one/view-images.php');
 	}
 
 }

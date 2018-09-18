@@ -96,7 +96,7 @@ BootstrapPluginAsset::register($this);
 							<a href="#" data-toggle="dropdown" class="dropdown-toggle"><?php echo Html::encode($modTransfer->name) ?></a>
 
 							<ul class="dropdown-menu">
-								<li><?php echo Html::a('К тексту', $this->context->to(['/card/one/card/text', 'id' => $this->context->card->id, '#' => 'transfer-' . $modTransfer->id])) ?></li>
+								<li><?php echo Html::a('К тексту', $this->context->to(['/card/one/view/text', 'id' => $this->context->card->id, '#' => 'transfer-' . $modTransfer->id])) ?></li>
 								<li><?php echo Html::a('Добавить объект', $this->context->to(['/card/one/object/create', 'id' => $modTransfer->id])) ?></li>
 								<li><?php echo Html::a('Редактировать', $this->context->to(['/card/one/transfer/update', 'id' => $modTransfer->id])) ?></li>
 								<li><?php echo Html::a('Передвинуть выше', $this->context->to(['/card/one/transfer/sort', 'id' => $modTransfer->id])) ?></li>
@@ -106,7 +106,7 @@ BootstrapPluginAsset::register($this);
 						</div>
 					
 					<?php else: ?>
-						<?php echo Html::a(Html::encode($modTransfer->name), $this->context->to(['/card/one/card/text', '#' => 'transfer-' . $modTransfer->id])) ?>
+						<?php echo Html::a(Html::encode($modTransfer->name), $this->context->to(['/card/one/view/text', '#' => 'transfer-' . $modTransfer->id])) ?>
 					<?php endif ?>
 
 
@@ -131,7 +131,7 @@ BootstrapPluginAsset::register($this);
 								<a href="#" data-toggle="dropdown" class="dropdown-toggle"><?php echo Html::encode($modObject->name) ?></a>
 
 								<ul class="dropdown-menu">
-									<li><?php echo Html::a('К тексту', $this->context->to(['/card/one/card/text', '#' => 'object-' . $modObject->id])) ?></li>
+									<li><?php echo Html::a('К тексту', $this->context->to(['/card/one/view/text', '#' => 'object-' . $modObject->id])) ?></li>
 									<li><?php echo Html::a('Редактировать', $this->context->to(['/card/one/object/update', 'id' => $modObject->id])) ?></li>
 									<li><?php echo Html::a('Передвинуть выше', $this->context->to(['/card/one/object/sort', 'id' => $modObject->id])) ?></li>
 									<li><?php echo Html::a('Передвинуть ниже', $this->context->to(['/card/one/object/sort', 'id' => $modObject->id, 'inv' => 1])) ?></li>
@@ -139,7 +139,7 @@ BootstrapPluginAsset::register($this);
 								</ul>						
 							</div>
 						<?php else: ?>
-							<?php echo Html::a(Html::encode($modObject->name), $this->context->to(['/card/card/text', '#' => 'object-' . $modObject->id])) ?>							
+							<?php echo Html::a(Html::encode($modObject->name), $this->context->to(['/card/one/view/text', '#' => 'object-' . $modObject->id])) ?>							
 						<?php endif ?>
 
 

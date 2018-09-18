@@ -24,12 +24,24 @@ class CardController extends \app\controllers\card\BaseController
 	}
 
 	//-------------------------------------------------------------------------
+	public static function needMy($action = null)
+	//-------------------------------------------------------------------------
+	// Действия, доступные только владельцу карты
+	{
+		return in_array($action, [
+			'update',
+			'delete',
+		]);
+	}
+
+
+	//-------------------------------------------------------------------------
 	public static function title($actionId, $modCard = null)
 	//-------------------------------------------------------------------------
 	{
 		return [
 			'update' => 'Настройки техкарты',
-			'delete' => 'Удалить техкарту'
+			'delete' => 'Удалить техкарту',
 		][$actionId] ?? $modCard->name;
 	}
 
@@ -64,8 +76,6 @@ class CardController extends \app\controllers\card\BaseController
 	public function actionUpdate()
 	//-------------------------------------------------------------------------
 	{
-		$this->checkCard(true);
-
 		$returnUrl = Yii::$app->request->post('returnUrl', $this->getReferrer(['view', 'id' => $this->card->id]));
 
 		if ($this->card->load(Yii::$app->request->post()))	{
@@ -90,7 +100,6 @@ class CardController extends \app\controllers\card\BaseController
 
 			try {		
 
-				$this->checkCard(true);
 				$this->card->delete();
 				return Yii::$app->getResponse()->redirect($url, 302, false);
 
