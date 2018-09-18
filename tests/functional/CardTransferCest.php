@@ -4,7 +4,7 @@ namespace app\tests\functional;
 
 require_once 'CardBase.php';
 
-use app\models\{Card, CardTransfer};
+use app\modules\cards\models\{Card, CardTransfer};
 
 class CardTransferCest extends CardBase
 {

@@ -2,7 +2,7 @@
 
 namespace app\tests\functional;
 
-use app\models\{Card, CardTransfer, CardObject};
+use app\modules\cards\models\{Card, CardTransfer, CardObject};
 use app\tests\fixtures\UsersFixture;
 
 class CardBase
@@ -35,7 +35,7 @@ class CardBase
      */
     protected function createCard(\FunctionalTester $I)
     {
-    	$I->amOnPage(['card/list/index', 'id_mode' => 'my']);
+    	$I->amOnPage(['/cards/list/index', 'id_mode' => 'my']);
     	$I->click('Добавить техкарту');
 
     	$I->fillField('#card-name', 'New card');
@@ -88,6 +88,6 @@ class CardBase
 
     protected function openCard($I, $action = 'plan', $id_mode = null)
     {
-        $I->amOnPage(['card/one/view/' . $action, 'id_card' => $this->id_card, 'id_mode' => $id_mode]);
+        $I->amOnPage(['/cards/one/view/' . $action, 'id_card' => $this->id_card, 'id_mode' => $id_mode]);
     }
 }

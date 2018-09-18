@@ -4,7 +4,7 @@ namespace app\tests\functional;
 
 require_once 'CardBase.php';
 
-use app\models\Card;
+use app\modules\cards\models\Card;
 
 class CardCest extends CardBase
 {
@@ -59,7 +59,7 @@ class CardCest extends CardBase
      */
     public function index(\FunctionalTester $I)
     {
-    	$I->amOnPage(['card/list/index', 'id_mode' => 'my']);
+    	$I->amOnPage(['/cards/list/index', 'id_mode' => 'my']);
 
     	$I->see('New updated card');
     }

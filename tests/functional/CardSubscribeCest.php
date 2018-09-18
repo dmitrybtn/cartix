@@ -4,7 +4,7 @@ namespace app\tests\functional;
 
 require_once 'CardBase.php';
 
-use app\models\{CardSubscribe};
+use app\modules\cards\models\{CardSubscribe};
 use app\tests\fixtures\UsersFixture;
 
 
@@ -73,7 +73,7 @@ class CardSubscribeCest extends CardBase
     {
         $I->amLoggedInAs($id_user = $I->grabFixture('users', 'user')->id);
 
-        $I->amOnPage(['card/list/index', 'id_mode' => 'subscr']);
+        $I->amOnPage(['/cards/list/index', 'id_mode' => 'subscr']);
 
         $I->see('Ничего не найдено', '#card_index--grid');
     }
@@ -100,7 +100,7 @@ class CardSubscribeCest extends CardBase
     {
         $I->amLoggedInAs($id_user = $I->grabFixture('users', 'user')->id);
 
-        $I->amOnPage(['card/list/index', 'id_mode' => 'subscr']);
+        $I->amOnPage(['/cards/list/index', 'id_mode' => 'subscr']);
 
         $I->see('New card', '#card_index--grid');
     }

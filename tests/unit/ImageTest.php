@@ -3,7 +3,7 @@
 namespace app\tests\unit;
 
 use Yii;
-use app\models\CardImage;
+use app\modules\cards\models\CardImage;
 use yii\helpers\FileHelper;
 
 class ImageTest extends \Codeception\Test\Unit

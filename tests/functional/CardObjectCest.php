@@ -4,7 +4,7 @@ namespace app\tests\functional;
 
 require_once 'CardBase.php';
 
-use app\models\CardObject;
+use app\modules\cards\models\CardObject;
 
 class CardObjectCest extends CardBase
 {
