@@ -43,7 +43,7 @@ return \yii\helpers\ArrayHelper::merge(require __DIR__ . '/../vendor/dmitrybtn/y
                     'rights' => [
                         'users/login/login',
 
-                        'card/one/view/*',
+                        'cards/one/view/*',
                     ]
                 ],
 
@@ -54,8 +54,8 @@ return \yii\helpers\ArrayHelper::merge(require __DIR__ . '/../vendor/dmitrybtn/y
                         'site/index',
                         'users/login|profile/*',
 
-                        'card/one/*',
-                        'card/list/*',
+                        'cards/one/*',
+                        'cards/list/*',
                     ]
                 ],
 
@@ -105,20 +105,14 @@ return \yii\helpers\ArrayHelper::merge(require __DIR__ . '/../vendor/dmitrybtn/y
             ],           
             'rules' => [
 
-                '<module>/<controller>/<action>' => '<module>/<controller>/<action>',
-
-                /*
-                '<module:(users)>/<controller>/<action>' => '<module>/<controller>/<action>',
-
                 'site/<action>' => 'site/<action>',
+                'list/<action>' => 'cards/list/<action>',
 
-                'list/<action>' => 'card/list/<action>',
-                'card/admin/<action>' => 'card/admin/<action>',
+                '<module:(users|cards)>/<controller>/<action>' => '<module>/<controller>/<action>',
 
-                '<id_card>' => 'card/one/view/plan',
-                '<id_card>/<action>' => 'card/one/view/<action>',
-                '<id_card>/<controller>/<action>' => 'card/one/<controller>/<action>',
-                */
+                '<id_card>' => 'cards/one/view/plan',
+                '<id_card>/<action>' => 'cards/one/view/<action>',
+                '<id_card>/<controller>/<action>' => 'cards/one/<controller>/<action>',
 
             ],
         ],
