@@ -13,6 +13,17 @@ return \yii\helpers\ArrayHelper::merge(require __DIR__ . '/../vendor/dmitrybtn/y
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
+
+    'modules' => [
+        'cards' => [
+            'class' => 'app\modules\cards\Cards',
+        ],
+
+        'users' => [
+            'class' => 'dmitrybtn\cp\users\Users',
+        ],        
+    ],
+
     'components' => [
 
         'cache' => [
@@ -94,8 +105,9 @@ return \yii\helpers\ArrayHelper::merge(require __DIR__ . '/../vendor/dmitrybtn/y
             ],           
             'rules' => [
 
+                '<module>/<controller>/<action>' => '<module>/<controller>/<action>',
 
-
+                /*
                 '<module:(users)>/<controller>/<action>' => '<module>/<controller>/<action>',
 
                 'site/<action>' => 'site/<action>',
@@ -106,39 +118,12 @@ return \yii\helpers\ArrayHelper::merge(require __DIR__ . '/../vendor/dmitrybtn/y
                 '<id_card>' => 'card/one/view/plan',
                 '<id_card>/<action>' => 'card/one/view/<action>',
                 '<id_card>/<controller>/<action>' => 'card/one/<controller>/<action>',
-
-
-                /*
-                '<id_card:(^site|^users|^list)>/<action>' => 'card/one/view/<action>',
-                '<id_card:(^site|^users|^list)>/<controller>/<action>' => 'card/one/<controller>/<action>',
                 */
-
-
-                /*
-                'cards/<action:(index|create)>' => 'cards/<action>',
-
-                'cards/<id_card>' => 'cards/card/plan',
-                'cards/<id_card>/text' => 'cards/card/text',
-
-                [
-                    'pattern' => 'cards/<id_card>/<controller>/<action>',
-                    'route' => 'cards/<controller>/<action>',
-                    'defaults' => [
-                        'action' => 'view',
-                    ],
-                ],
-                */
-
-
 
             ],
         ],
     ],
-    'modules' => [
-        'users' => [
-            'class' => 'dmitrybtn\cp\users\Users',
-        ],
-    ]
+
 ]);
 
 

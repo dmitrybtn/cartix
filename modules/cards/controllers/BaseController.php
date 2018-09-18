@@ -1,6 +1,6 @@
 <?php
 
-namespace app\controllers\card;
+namespace app\modules\cards\controllers;
 
 use Yii;
 
