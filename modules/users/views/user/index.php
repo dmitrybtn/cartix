@@ -1,0 +1,1 @@
+<?php echo $this->render('@dmitrybtn/cp/users/views/user/index.php', ['model' => $model]) ?>

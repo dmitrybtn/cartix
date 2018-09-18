@@ -20,7 +20,7 @@ return \yii\helpers\ArrayHelper::merge(require __DIR__ . '/../vendor/dmitrybtn/y
         ],
 
         'users' => [
-            'class' => 'dmitrybtn\cp\users\Users',
+            'class' => 'app\modules\users\Users',
         ],        
     ],
 
@@ -31,11 +31,11 @@ return \yii\helpers\ArrayHelper::merge(require __DIR__ . '/../vendor/dmitrybtn/y
         ],
 
         'user' => [
-            'class' => 'dmitrybtn\cp\users\components\User',
+            'class' => 'app\modules\users\components\User',
         ],
 
         'authManager' => [
-            'class' => 'dmitrybtn\cp\users\components\UserAuth',
+            'class' => 'app\modules\users\components\UserAuth',
             'roles' => [
 
                 'guest' => [
@@ -92,7 +92,7 @@ return \yii\helpers\ArrayHelper::merge(require __DIR__ . '/../vendor/dmitrybtn/y
         ],
 
         'assetManager' => [
-            'forceCopy' => true,
+            'forceCopy' => false,
             'appendTimestamp' => true,
         ],
 
