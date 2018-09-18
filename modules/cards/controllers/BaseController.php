@@ -4,7 +4,7 @@ namespace app\modules\cards\controllers;
 
 use Yii;
 
-use app\models\Card;
+use app\modules\cards\models\Card;
 
 use yii\helpers\Url;
 
@@ -96,7 +96,7 @@ class BaseController extends \dmitrybtn\cp\CrudController
 
         // Добавить ссылку на режим
         if ($this->id_mode)
-        	array_unshift($arrBreads, ['label' => static::mode($this->id_mode), 'url' => ['/card/list/index', 'id_mode' => $this->id_mode]]);
+        	array_unshift($arrBreads, ['label' => static::mode($this->id_mode), 'url' => ['/cards/list//index', 'id_mode' => $this->id_mode]]);
 
         return $arrBreads;
     }

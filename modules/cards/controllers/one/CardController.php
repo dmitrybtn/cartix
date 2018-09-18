@@ -4,13 +4,13 @@ namespace app\modules\cards\controllers\one;
 
 use Yii;
 
-use app\models\Card;
+use app\modules\cards\models\Card;
 
 use yii\helpers\Url;
 
 
 //*****************************************************************************
-class CardController extends \app\controllers\card\BaseController
+class CardController extends \app\modules\cards\controllers\BaseController
 //*****************************************************************************
 {
 
@@ -57,7 +57,7 @@ class CardController extends \app\controllers\card\BaseController
 
 			case 'update':
 			case 'outer':
-				$breads[] = ['label' => static::title('view', $modCard), 'url' => ['/card/one/view/plan']];				
+				$breads[] = ['label' => static::title('view', $modCard), 'url' => ['/cards/one/view/plan']];				
 		}
 
 		return $breads;
@@ -87,7 +87,7 @@ class CardController extends \app\controllers\card\BaseController
 				return $this->redirect($returnUrl);
 		}	
 
-		return $this->render('@app/views/card/form.php', ['returnUrl' => $returnUrl]);
+		return $this->render('@app/modules/cards/views/form.php', ['returnUrl' => $returnUrl]);
 	}
 
 	//-------------------------------------------------------------------------
@@ -96,7 +96,7 @@ class CardController extends \app\controllers\card\BaseController
 	{
 		if (Yii::$app->request->isPost || YII_ENV_TEST) {
 
-			$url = ['/card/list/index', 'id_mode' => $this->id_mode];
+			$url = ['/cards/list//index', 'id_mode' => $this->id_mode];
 
 			try {		
 

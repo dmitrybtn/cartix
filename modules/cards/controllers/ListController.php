@@ -4,7 +4,7 @@ namespace app\modules\cards\controllers;
 
 use Yii;
 
-use app\models\Card;
+use app\modules\cards\models\Card;
 
 //*****************************************************************************
 class ListController extends \dmitrybtn\cp\Controller
@@ -61,10 +61,10 @@ class ListController extends \dmitrybtn\cp\Controller
 				return $this->ajaxValidate($this->card);
 
 			if ($this->card->save()) 
-				return $this->redirect(['/card/one/card/view', 'id_card' => $this->card->sid, 'id_mode' => $this->id_mode]); 
+				return $this->redirect(['/cards/one/card/view', 'id_card' => $this->card->sid, 'id_mode' => $this->id_mode]); 
 		}	
 
-		return $this->render('@app/views/card/form.php', ['returnUrl' => $this->getReferrer(['index'])]);
+		return $this->render('@app/modules/cards/views/form.php', ['returnUrl' => $this->getReferrer(['index'])]);
 	}
 
 }

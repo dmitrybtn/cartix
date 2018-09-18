@@ -4,12 +4,12 @@ namespace app\modules\cards\controllers\one;
 
 use Yii;
 use dmitrybtn\cp\SortAction;
-use app\models\CardImage;
+use app\modules\cards\models\CardImage;
 use igogo5yo\uploadfromurl\UploadFromUrl;
 use yii\web\UploadedFile;
 
 //*****************************************************************************
-class ImageController extends \app\controllers\card\BaseController
+class ImageController extends \app\modules\cards\controllers\BaseController
 //*****************************************************************************
 {
 	//-------------------------------------------------------------------------

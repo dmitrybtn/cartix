@@ -4,13 +4,13 @@ namespace app\modules\cards\controllers;
 
 use Yii;
 
-use app\models\Card;
+use app\modules\cards\models\Card;
 
 use yii\helpers\Url;
 
 
 //*****************************************************************************
-class AdminController extends \app\controllers\card\BaseController
+class AdminController extends \app\modules\cards\controllers\BaseController
 //*****************************************************************************
 {
 	//-------------------------------------------------------------------------

@@ -6,7 +6,7 @@ use yii\helpers\Html;
 
 
 
-<?php $this->beginContent('@app/views/card/one/view.php') ?>
+<?php $this->beginContent('@app/modules/cards/views/one/view.php') ?>
 
 	<div class="card">
 

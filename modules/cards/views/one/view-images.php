@@ -4,9 +4,9 @@ use yii\helpers\Html;
 use yii\widgets\Pjax;
 
 use yii\widgets\ActiveForm;
-use app\models\CardImage;
+use app\modules\cards\models\CardImage;
 
-use app\controllers\card\one\ImageController;
+use app\modules\cards\controllers\one\ImageController;
 
 $arrImages = [];
 
@@ -15,11 +15,11 @@ $arrImages = [];
 
 
 
-<?php $this->beginContent('@app/views/card/one/view.php') ?>
+<?php $this->beginContent('@app/modules/cards/views/one/view.php') ?>
 
 		<!-- Форма загрузки картинок -->
 		<?php if (ImageController::checkMy('upload')): ?>
-			<?php echo Html::beginForm($this->context->to(['/card/one/image/upload']), 'post', ['id' => 'form-image-upload', 'data-pjax' => 1, 'enctype' => 'multipart/form-data']) ?>
+			<?php echo Html::beginForm($this->context->to(['/cards/one/image/upload']), 'post', ['id' => 'form-image-upload', 'data-pjax' => 1, 'enctype' => 'multipart/form-data']) ?>
 				
 				
 				<div class="well well-sm">
@@ -62,7 +62,7 @@ $arrImages = [];
 						<div class="caption">
 							<?php echo $modImage->marker ?>
 							<div class="pull-right">
-				            	<?php if ($this->context->card->isMy) echo Html::a('<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>', $this->context->to(['card/one/image/delete', 'id' => $modImage->id]), ['data-confirm' => 'Точно?', 'data-method' => 'post']) ?>					
+				            	<?php if ($this->context->card->isMy) echo Html::a('<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>', $this->context->to(['/cards/one/image/delete', 'id' => $modImage->id]), ['data-confirm' => 'Точно?', 'data-method' => 'post']) ?>					
 							</div>						
 						</div>
 

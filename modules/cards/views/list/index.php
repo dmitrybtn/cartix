@@ -35,7 +35,7 @@ $dataProvider = new ActiveDataProvider(['query' => $modCard->search()->mode($thi
 				'contentOptions' => $h = ['class' => 'action-column action-column-1'],
 				'headerOptions' => $h,
 				'urlCreator' => function($action, $modCard) {					
-					return ['/card/one/view/plan', 'id_card' => $modCard->sid, 'id_mode' => Yii::$app->controller->id_mode];
+					return ['/cards/one/view/plan', 'id_card' => $modCard->sid, 'id_mode' => Yii::$app->controller->id_mode];
 				},
 				'buttons' => [
 				]
@@ -50,7 +50,7 @@ $dataProvider = new ActiveDataProvider(['query' => $modCard->search()->mode($thi
 		'itemOptions' => ['class' => 'item'],
 		'itemView' => function ($modCard, $key, $index, $widget) {
 			return '<div class="well_list-plan well_list well_list-1 card_plan-mobile--transfer">' . 
-						Html::a(Html::encode($modCard->name), ['/card/one/view/plan', 'id_card' => $modCard->sid, 'id_mode' => Yii::$app->controller->id_mode], ['data-pjax' => 0]) . 
+						Html::a(Html::encode($modCard->name), ['/cards/one/view/plan', 'id_card' => $modCard->sid, 'id_mode' => Yii::$app->controller->id_mode], ['data-pjax' => 0]) . 
 						'<div class="well_list--options">' .
 							$modCard->user->name .
 						'</div>' .

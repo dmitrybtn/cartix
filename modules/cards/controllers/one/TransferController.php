@@ -4,10 +4,10 @@ namespace app\modules\cards\controllers\one;
 
 use Yii;
 use dmitrybtn\cp\SortAction;
-use app\models\CardTransfer;
+use app\modules\cards\models\CardTransfer;
 
 //*****************************************************************************
-class TransferController extends \app\controllers\card\BaseController
+class TransferController extends \app\modules\cards\controllers\BaseController
 //*****************************************************************************
 {
 	//-------------------------------------------------------------------------
@@ -53,7 +53,7 @@ class TransferController extends \app\controllers\card\BaseController
 				return $this->ajaxValidate($this->model);
 
 			if ($this->model->save()) 
-				return $this->redirect($this->to(['/card/one/view/plan'])); 
+				return $this->redirect($this->to(['/cards/one/view/plan'])); 
 		}	
 
 		return $this->render('form', ['returnUrl' => $this->getReferrer(['index'])]);
