@@ -4,7 +4,7 @@ namespace app\modules\cards\models;
 
 use Yii;
 
-use dmitrybtn\cp\users\models\User;
+use app\modules\users\models\User;
 
 //*****************************************************************************
 class Card extends \yii\db\ActiveRecord
@@ -17,19 +17,13 @@ class Card extends \yii\db\ActiveRecord
 	//*************************************************************************
 
 	//-------------------------------------------------------------------------
-	public function init()
-	//-------------------------------------------------------------------------
-	{
-		$this->id_user = Yii::$app->user->id;
-	}
-
-	//-------------------------------------------------------------------------
 	public function attributeLabels()
 	//-------------------------------------------------------------------------
 	{
 		return [
 			'name' => 'Наименование',
-			'map' => 'Ссылка на карту',
+			'tst_create' => 'Создана',
+			'tst_update' => 'Изменена',
 		];
 	}
 
@@ -52,8 +46,12 @@ class Card extends \yii\db\ActiveRecord
 	//-------------------------------------------------------------------------
 	{
 		if ($insert) {
-			$this->secret = Yii::$app->security->generateRandomString(7);			
+			$this->secret = strtolower(Yii::$app->security->generateRandomString(7));
+			$this->tst_create = time();
+			$this->id_user = Yii::$app->user->id;			
 		}
+
+		$this->tst_update = time();
 
 		return parent::beforeSave($insert);
 	}

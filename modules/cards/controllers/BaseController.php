@@ -101,16 +101,4 @@ class BaseController extends \dmitrybtn\cp\CrudController
         return $arrBreads;
     }
 
-	//-------------------------------------------------------------------------
-    public function getHeaderMobile()
-	//-------------------------------------------------------------------------
-    {
-        $val = 16;
-
-        if (mb_strlen($title = $this->title, 'utf8') > $val) 
-        	$title = trim(mb_substr($title, 0, $val, 'utf8')) . '...';
-
-        return $this->_headerMobile === null ? $title : $this->_headerMobile;
-    } private $_headerMobile;
-
 }

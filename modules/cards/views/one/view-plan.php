@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\Pjax;
+use yii\widgets\{Pjax, DetailView};
 
 use app\modules\cards\models\CardTransfer;
 
@@ -13,6 +13,37 @@ BootstrapPluginAsset::register($this);
 
 
 <?php $this->beginContent('@app/modules/cards/views/one/view.php') ?>
+
+	<div class="row hidden-xs">
+		<div class="col-md-6">
+		    <?= DetailView::widget([
+		        'model' => $this->context->card,
+		        'attributes' => [
+		            'user.nameFull:text:Автор',
+		            ['label' => 'Статус', 'value' => $this->context->card->is_common ? 'Общая' : 'Личная'],
+		        ],
+		    ]) ?>			
+		</div>
+		<div class="col-md-6">
+		    <?= DetailView::widget([
+		        'model' => $this->context->card,
+		        'attributes' => [
+		            'tst_create:date',
+		            'tst_update:date',
+		        ],
+		    ]) ?>			
+		</div>
+	</div>
+
+	<div class="visible-xs-block">
+	    <?= DetailView::widget([
+	        'model' => $this->context->card,
+	        'attributes' => [
+	            'user.nameInit:text:Автор',
+	            'tst_update:date',
+	        ],
+	    ]) ?>			
+	</div>
 
 	<?php Pjax::begin() ?>
 

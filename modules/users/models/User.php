@@ -16,18 +16,50 @@ class User extends \dmitrybtn\cp\users\models\User
 	public function attributeLabels()
 	//-------------------------------------------------------------------------
 	{
-		return array_merge(parent::attributeLabels(), [
-
-		]);
+		return [
+			'id_role' => 'Роль',
+			'role' => 'Роль',
+			'is_active' => 'Активен',
+			'name' => 'Имя',
+			'surname' => 'Фамилия',
+			'email' => 'Email',
+			'password' => 'Пароль',
+			'confirm' => 'Еще раз пароль',
+			'auth' => 'Auth',
+		];
 	}
+
+
+	//-------------------------------------------------------------------------
+	public function scenarios()
+	//-------------------------------------------------------------------------
+	{
+		return [
+			'create' => ['name', 'surname', 'email', 'id_role', 'password', 'confirm'],
+			'update' => ['name', 'surname', 'email', 'id_role'],
+			'profile' => ['name', 'surname', 'email'],
+			'password' => ['password', 'confirm'],
+		];
+	}
+
 
 	//-------------------------------------------------------------------------
 	public function rules()
 	//-------------------------------------------------------------------------
 	{
-		return array_merge(parent::rules(), [
+		return [
+			[['name', 'surname', 'email', 'id_role'], 'required'],
+			[['name', 'email', 'id_role'], 'string', 'max' => 255],
+			['email', 'email'],
+			['email', 'unique'],
 
-		]);
+			[['password', 'confirm'], 'required'],
+			[['password', 'confirm'], 'string', 'max' => 255],
+
+			[['is_active'], 'integer'],
+
+			[['search_string'], 'safe', 'on' => 'search'],
+		];
 	}
 
 	//*************************************************************************
@@ -43,7 +75,29 @@ class User extends \dmitrybtn\cp\users\models\User
 	public function getTitle()
 	//-------------------------------------------------------------------------
 	{
-		return $this->name;
+		return $this->nameFull;
+	}
+
+	//-------------------------------------------------------------------------
+	public function getNameFull()
+	//-------------------------------------------------------------------------
+	{
+		return $this->name . ' ' . $this->surname;
+	}
+
+	//-------------------------------------------------------------------------
+	public function getNameFullInv()
+	//-------------------------------------------------------------------------
+	{
+		return $this->surname . ' ' . $this->name;
+	}
+
+
+	//-------------------------------------------------------------------------
+	public function getNameInit()
+	//-------------------------------------------------------------------------
+	{
+		return mb_substr($this->name, 0, 1, 'utf8') . '. ' . $this->surname;
 	}
 
 	//*************************************************************************
@@ -56,7 +110,8 @@ class User extends \dmitrybtn\cp\users\models\User
 	{
 		$objQuery = self::find();
 
-		$objQuery->andFilterWhere(['like', 'name', $this->search_string]);
+		$objQuery->orFilterWhere(['like', 'name', $this->search_string]);
+		$objQuery->orFilterWhere(['like', 'surname', $this->search_string]);
 
 		return $objQuery;
 	}

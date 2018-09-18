@@ -27,7 +27,7 @@ $dataProvider = new ActiveDataProvider(['query' => $modCard->search()->mode($thi
 		'layout' => "{items}",
 		'columns' => [
 			['attribute' => 'name', 'contentOptions' => $h = [], 'headerOptions' => $h],
-			['attribute' => 'user.name', 'label' => 'Автор', 'contentOptions' => $h = ['style' => 'width: 250px;'], 'headerOptions' => $h],
+			['attribute' => 'user.nameInit', 'label' => 'Автор', 'contentOptions' => $h = ['style' => 'width: 250px;'], 'headerOptions' => $h],
 
 			[
 				'class' => 'yii\grid\ActionColumn',
@@ -52,7 +52,7 @@ $dataProvider = new ActiveDataProvider(['query' => $modCard->search()->mode($thi
 			return '<div class="well_list-plan well_list well_list-1 card_plan-mobile--transfer">' . 
 						Html::a(Html::encode($modCard->name), ['/cards/one/view/plan', 'id_card' => $modCard->sid, 'id_mode' => Yii::$app->controller->id_mode], ['data-pjax' => 0]) . 
 						'<div class="well_list--options">' .
-							$modCard->user->name .
+							$modCard->user->nameInit .
 						'</div>' .
 				   '</div>';
 		},

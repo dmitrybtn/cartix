@@ -214,7 +214,7 @@
             "source": {
                 "type": "git",
                 "url": "/Users/dmitry/sites/yii2-cp/htdocs/yii2-cp",
-                "reference": "7a9cf286ff0874904c2de670d130360d55e063c3"
+                "reference": "224f9f95df43af3382432071900f4f5d9d5f4c40"
             },
             "require": {
                 "yiisoft/yii2-jui": "~2.0.0"
@@ -225,7 +225,7 @@
                     "dmitrybtn\\cp\\": "src"
                 }
             },
-            "time": "2018-09-18 07:48:42"
+            "time": "2018-09-18 09:10:55"
         },
         {
             "name": "ezyang/htmlpurifier",
