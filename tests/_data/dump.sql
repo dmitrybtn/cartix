@@ -139,6 +139,24 @@ CREATE TABLE `cards_transfers` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `cards_viewings`
+--
+
+DROP TABLE IF EXISTS `cards_viewings`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cards_viewings` (
+  `id_card` int(11) unsigned NOT NULL,
+  `id_user` int(11) unsigned NOT NULL,
+  `timestamp` int(11) unsigned NOT NULL,
+  PRIMARY KEY (`id_card`,`id_user`),
+  KEY `id_user` (`id_user`),
+  CONSTRAINT `cards_viewings_ibfk_1` FOREIGN KEY (`id_card`) REFERENCES `cards` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `cards_viewings_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `users`
 --
 
@@ -166,4 +184,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-09-18 12:08:03
+-- Dump completed on 2018-09-18 13:04:34

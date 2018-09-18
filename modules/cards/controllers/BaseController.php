@@ -20,10 +20,24 @@ class BaseController extends \dmitrybtn\cp\CrudController
 	public function init()
 	//-------------------------------------------------------------------------
 	{
+		// Загрузить карту
+
+		$this->card = Card::find()->bySid(Yii::$app->request->get('id_card'))->one();
+
+		if ($this->card !== null) $this->card->registerViewing();
+		else throw new \yii\web\NotFoundHttpException('Карта не найдена!');
+
+		// Определить режим
+
 		$this->id_mode = Yii::$app->request->get('id_mode');
 
-		if (($this->card = Card::find()->bySid(Yii::$app->request->get('id_card'))->one()) === null)
-			throw new \yii\web\NotFoundHttpException('Карта не найдена!');
+		if ($this->id_mode === null) {
+
+			if ($this->card->isMy) $this->id_mode = 'my';
+			elseif ($this->card->subscribe) $this->id_mode = 'subscr';
+			elseif ($this->card->is_common) $this->id_mode = 'common';
+		}
+
 
         if (Yii::$app->user->isGuest)
         	$this->showBreads = false;
@@ -65,7 +79,7 @@ class BaseController extends \dmitrybtn\cp\CrudController
 			throw new \yii\web\NotFoundHttpException('Некорректное использование построителя ссылок!');
 
 		$url['id_card'] = $this->card->sid;
-		$url['id_mode'] = $this->id_mode;
+		// $url['id_mode'] = $this->id_mode;
 
 		return $url;
 	}

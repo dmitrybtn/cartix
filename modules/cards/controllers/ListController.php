@@ -20,6 +20,7 @@ class ListController extends \dmitrybtn\cp\Controller
 	{
 		return [
 			'create' => 'Добавить техкарту',
+			'recent' => Yii::$app->name,
 		][$actionId];
 	}
 
@@ -30,6 +31,25 @@ class ListController extends \dmitrybtn\cp\Controller
 	{
 		$this->id_mode = Yii::$app->request->get('id_mode');
 	}
+
+
+	//-------------------------------------------------------------------------
+	public function actionRecent()
+	//-------------------------------------------------------------------------
+	{
+		$modCard = new Card;
+
+		$this->showHeader = false;
+		$this->showBreads = false;
+
+		$this->menu = [
+			['label' => 'Опции'],
+			['label' => self::title('create'), 'url' => ['create', 'id_mode' => $this->id_mode], 'visible' => $this->id_mode == 'my'],
+		];
+		
+		return $this->render('recent', ['modCard' => $modCard]);
+	}
+
 
 	//-------------------------------------------------------------------------
 	public function actionIndex($ss = '')

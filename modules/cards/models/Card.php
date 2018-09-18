@@ -155,6 +155,19 @@ class Card extends \yii\db\ActiveRecord
 		return $this->name;
 	}
 
+	//-------------------------------------------------------------------------
+	public function registerViewing()
+	//-------------------------------------------------------------------------
+	{
+		if (!Yii::$app->user->isGuest) {
+			CardViewing::deleteAll(['id_card' => $this->id, 'id_user' => Yii::$app->user->id]);
+
+			$objViewing = new CardViewing;
+			$objViewing->id_card = $this->id;
+			$objViewing->save();
+		}
+	}
+
 	//*************************************************************************
 	// Поиск
 	//*************************************************************************
@@ -186,6 +199,15 @@ class CardQuery extends \yii\db\ActiveQuery
 		return $this->andWhere(['id' => substr($sid, 7), 'secret' => substr($sid, 0, 7)]);
 	}
 
+	//-------------------------------------------------------------------------
+	public function recent($limit = 10)
+	//-------------------------------------------------------------------------
+	{
+		$this->leftJoin('cards_viewings', 'cards.id = cards_viewings.id_card')->andWhere(['cards_viewings.id_user' => Yii::$app->user->id]);
+		$this->addOrderBy('cards_viewings.timestamp DESC');
+
+		return $this->limit($limit);
+	}
 
 	//-------------------------------------------------------------------------
 	public function mode($id_mode)
