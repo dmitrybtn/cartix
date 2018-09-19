@@ -103,7 +103,7 @@ class Card extends \yii\db\ActiveRecord
 	public function getTransfers()
 	//-------------------------------------------------------------------------
 	{
-		return $this->hasMany(CardTransfer::className(), ['id_card' => 'id'])->inverseOf('card');
+		return $this->hasMany(CardTransfer::className(), ['id_card' => 'id'])->sorted()->with('objects')->inverseOf('card');
 	}
 
 	//-------------------------------------------------------------------------

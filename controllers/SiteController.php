@@ -16,13 +16,4 @@ class SiteController extends \dmitrybtn\cp\Controller
 			],
 		];
 	}
-
-	//-------------------------------------------------------------------------
-	public function actionIndex()
-	//-------------------------------------------------------------------------
-	{
-		$this->showBreads = false;
-
-		return $this->render('index');
-	}
 }

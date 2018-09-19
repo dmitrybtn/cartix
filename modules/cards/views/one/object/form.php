@@ -32,6 +32,8 @@
 		]) ?>
 
 		<?php echo $form->field($model, 'instruction')->textarea(['rows' => 6]) ?>
+
+		<?php echo Html::submitButton('Сохранить') ?>
 		
 		<?php echo $form->controls($returnUrl) ?>
 	<?php ActiveForm::end(); ?>

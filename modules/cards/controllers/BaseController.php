@@ -16,6 +16,8 @@ class BaseController extends \dmitrybtn\cp\CrudController
 	public $id_mode;
 	public $card;
 
+	public $layout = '@app/modules/cards/views/layouts/layout';
+
 	//-------------------------------------------------------------------------
 	public function init()
 	//-------------------------------------------------------------------------

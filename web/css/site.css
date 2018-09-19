@@ -39,3 +39,7 @@
 
 .nav-footer-card li {width: 33.33%;}
 .nav-footer-card li a {text-align: center;}
+
+/* Адаптивная история */
+
+.content-desktop {position: relative; height: calc(100vh - 200px); overflow-y: scroll;}

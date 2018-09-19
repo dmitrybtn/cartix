@@ -29,6 +29,7 @@ class AppAsset extends AssetBundle
     ];
     
     public $js = [
+        'js/lib.js',
     ];
     
     public $depends = [

@@ -47,6 +47,11 @@ BootstrapPluginAsset::register($this);
 
 	<?php Pjax::begin() ?>
 
+
+
+	<?php if (0): ?>
+		
+
 		<table class='table table-striped table-bordered hidden-xs card_plan'>
 			<tr>
 				<th>Остановка или объект</th>
@@ -57,7 +62,6 @@ BootstrapPluginAsset::register($this);
 				<?php endif ?>
 			</tr>
 			
-			<?php $arrTransfers = CardTransfer::find()->where(['id_card' => $this->context->card->id])->sorted()->with('objects')->all() ?>
 
 			<?php foreach ($arrTransfers as $modTransfer): ?>
 
@@ -116,9 +120,11 @@ BootstrapPluginAsset::register($this);
 
 		</table>
 
+	<?php endif ?>
+
 		
 		<div class="visible-xs-block">
-			<?php foreach ($arrTransfers as $modTransfer): ?>
+			<?php foreach ($this->context->card->transfers as $modTransfer): ?>
 				<div class="well_list-plan well_list well_list-1 card_plan-mobile--transfer">
 
 					<?php if ($this->context->card->isMy): ?>

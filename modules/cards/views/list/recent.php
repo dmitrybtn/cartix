@@ -4,7 +4,7 @@ use yii\data\ActiveDataProvider;
 
 ?>
 
-<h1 style='text-align: center;'><?php echo $this->context->title ?></h1>
+<h1 style='text-align: center;' class='hidden-xs'><?php echo $this->context->title ?></h1>
 
 <?php echo $this->render('/list', [
 	'modCard' => $modCard,

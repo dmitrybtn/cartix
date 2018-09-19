@@ -13,8 +13,7 @@ use yii\helpers\Html;
 		<?php $arrImages = [] ?>
 		<?php foreach ($this->context->card->getTransfers()->with('objects', 'objects.objectImages', 'objects.objectImages.image')->all() as $modTransfer): ?>
 
-			<?php echo Html::a('', '', ['name' => 'transfer-' . $modTransfer->id, 'style' => 'position: absolute; display: block; top: -48px;']) ?>
-			<div class="card_text--header_transfer" style='position: relative;'>
+			<div id='transfer-<?php echo $modTransfer->id ?>' class="card_text--header_transfer" style='position: relative;'>
 				<?php echo Html::encode($modTransfer->name) ?>		
 			</div>
 
@@ -26,14 +25,15 @@ use yii\helpers\Html;
 
 			<?php foreach ($modTransfer->objects as $modObject): ?>
 
-				<div class="card_text--header_object" style='position: relative;'>
-					<?php echo Html::a('', '', ['name' => 'object-' . $modObject->id, 'style' => 'position: absolute; display: block; top: -48px;']) ?>
+				<div id='object-<?php echo $modObject->id ?>' class="card_text--header_object" style='position: relative;'>
+					
+					<?php // echo Html::a('', '', ['name' => 'object-' . $modObject->id, 'style' => 'position: absolute; display: block; top: -48px;']) ?>
 
 					<?php echo Html::encode($modObject->name) ?>
 					
 					<?php if ($this->context->card->isMy): ?>
-						<span class='pull-right card_text--instruction text-muted'>
-							<?php echo Html::a('<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>', ['/object/update', 'id' => $modObject->id], ['class' => 'update']) ?>
+						<span class='card_text--instruction text-muted'>
+							<?php echo Html::a('<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>', $this->context->to(['/cards/one/object/update', 'id' => $modObject->id]), ['class' => 'update']) ?>
 						</span>
 					<?php endif ?>
 

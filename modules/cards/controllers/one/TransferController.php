@@ -47,13 +47,15 @@ class TransferController extends \app\modules\cards\controllers\BaseController
 		$this->model = new CardTransfer();
 		$this->model->id_card = $this->card->id;
 
+		$returnUrl = Yii::$app->request->post('returnUrl', $this->getReferrer(['view', 'id' => $this->model->id]));
+
 		if ($this->model->load(Yii::$app->request->post()))	{
 
 			if (Yii::$app->request->isAjax) 
 				return $this->ajaxValidate($this->model);
 
 			if ($this->model->save()) 
-				return $this->redirect($this->to(['/cards/one/view/plan'])); 
+				return $this->redirect($returnUrl); 
 		}	
 
 		return $this->render('form', ['returnUrl' => $this->getReferrer(['index'])]);
