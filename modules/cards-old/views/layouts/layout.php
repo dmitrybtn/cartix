@@ -130,16 +130,22 @@
 
 					<div class="col-md-9">
 
-						<!-- Главный заголовок с опциями -->
-						<div class='hidden-xs hidden-sm cards_content_header'>
-							<?php echo $this->blocks['cards_content_header--options'] ?? '' ?>																				
+						<div id='content'>
 
+						
+							<!-- Главный заголовок с опциями -->
 							<?php if ($this->context->showHeader): ?>
-								<h1><?= Html::encode($this->context->header) ?></h1>                        
-							<?php endif ?>
-						</div>
+								<h1 class='hidden-xs hidden-sm page-header'>
+									<?= Html::encode($this->context->header) ?>
 
-						<div id='cards_content'>
+									<?php if (isset($this->blocks['header-options'])): ?>
+										<?php echo $this->blocks['header-options'] ?>
+									<?php endif ?>									
+								</h1>                        
+							<?php endif ?>
+
+
+
 
 							<?= Alert::widget() ?>
 

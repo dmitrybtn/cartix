@@ -1,11 +1,13 @@
 <?php
 
+use app\modules\cards\controllers\ListController;
+
 return [
 	['label' => 'Главное меню'],
 	
-	['label' => 'Мои техкарты', 'url' => ['/cards/list/index', 'id_mode' => 'my'], 'active' => (Yii::$app->controller->id_mode ?? '') == 'my'],	
-	['label' => 'Мои подписки', 'url' => ['/cards/list/index', 'id_mode' => 'subscr'], 'active' => (Yii::$app->controller->id_mode ?? '') == 'subscr'],	
-	['label' => 'Общие техкарты', 'url' => ['/cards/list/index', 'id_mode' => 'common'], 'active' => (Yii::$app->controller->id_mode ?? '') == 'common'],	
+	['label' => ListController::modes['my'], 'url' => ['/cards/list/index', 'id_mode' => 'my']],	
+	['label' => ListController::modes['subscr'], 'url' => ['/cards/list/index', 'id_mode' => 'subscr']],	
+	['label' => ListController::modes['common'], 'url' => ['/cards/list/index', 'id_mode' => 'common']],	
 
 	['label' => 'Учетные записи', 'url' => ['/users/user/index'], 'active' => '/users/user/*'],	
 ];

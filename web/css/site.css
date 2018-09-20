@@ -19,27 +19,41 @@
 	line-height: 1.42857143em;
 }
 
-
+/*
 .well_list {border-top: 1px solid #ecf0f1; padding: 9px; font-size: 17px; line-height: 1.3em;}
 .well_list a {}
 
 .well_list-1 a {font-weight: bold;}
 .well_list-2 {padding-left: 25px;}
 .well_list--options {font-size: 12px; margin-top: 4px; margin-bottom: -4px; color: #7b8a8b;}
+*/
 
+.cards_text--header_transfer {font-size: 25px; line-height: 1.2em; margin: 15px 0 8px; font-weight: bold; text-align: center;}
+.cards_text--header_object {font-size: 20px; font-weight: bold; margin: 15px 0 8px;}
 
+.cards_text--header_object a,
+.cards_text--header_transfer a {color: #2C3E50;}
 
-.card_text--header_transfer {font-size: 25px; line-height: 1.2em; margin: 15px 0 8px; font-weight: bold; text-align: center;}
-.card_text--header_object {font-size: 20px; font-weight: bold; margin: 15px 0 8px;}
+.cards_text--text,
+.cards_text--text blockquote, 
+.cards_text--instruction {font-size: 17px; margin-bottom: 25px;}
+.cards_text--instruction {margin: 0 0 10.5px;}
 
-.card_text--text, 
-.card_text--instruction {font-size: 17px; /*font-family: Times; */ margin-bottom: 25px;}
+.cards_footer li {width: 33.33%;}
+.cards_footer li a {text-align: center;}
 
-.card_text--instruction {margin: 0 0 10.5px;}
-
-.nav-footer-card li {width: 33.33%;}
-.nav-footer-card li a {text-align: center;}
+.cards_form_options {float: right; margin-top: 5px;}
+.cards_form_options .btn {width: 120px;}
 
 /* Адаптивная история */
 
-.content-desktop {position: relative; height: calc(100vh - 200px); overflow-y: scroll;}
+.cards_layout_plan {height: calc(100vh - 150px); overflow-y: scroll;}
+
+.cards_layout_plan--nav li a {padding: 5px 10px;}
+
+
+
+
+.cards_content-desktop {position: relative; height: calc(100vh - 250px); overflow-y: scroll;}
+
+.cards_content_header {height: 60px;}

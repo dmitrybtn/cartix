@@ -32,14 +32,13 @@ class ObjectController extends \app\modules\cards\controllers\BaseController
 		][$actionId];
 	}
 
-	/*
 	//-------------------------------------------------------------------------
 	public static function breads($actionId, $model = null)
 	//-------------------------------------------------------------------------
 	{
 		return CardController::breads('outer', $model->card);
 	}
-	*/
+
 
 	//-------------------------------------------------------------------------
 	public function actionCreate($id)
@@ -67,8 +66,6 @@ class ObjectController extends \app\modules\cards\controllers\BaseController
 		$this->model = $this->find($id);
 
 		$returnUrl = Yii::$app->request->post('returnUrl', $this->getReferrer($this->to(['/cards/one/view/plan', 'id' => $this->model->id])));
-
-		// $returnUrl = $this->to(['/cards/one/view/text', '#' => 'object-' . $this->model->id]);
 
 		if ($this->model->load(Yii::$app->request->post()))	{
 			
