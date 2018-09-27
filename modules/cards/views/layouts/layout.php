@@ -19,6 +19,7 @@
 
 	BootstrapPluginAsset::register($this);
 
+	\yii\jui\JuiAsset::register($this);
 
 	$objMenuMain = new Menu([
 		'items' => '@app/config/menu.php',

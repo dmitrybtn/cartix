@@ -24,8 +24,16 @@ $(function ($) {
 
         $('#cards_content').addClass('cards_content-desktop');
 
+        $( ".sortable-1" ).sortable({
+            axis: 'y',
+        });
+
+        $( ".sortable-2" ).sortable({
+            axis: 'y',
+            connectWith: ".sortable-2"
+        });
         
-        
+
         if (sessionStorage.getItem('scroll-plan') != null)
             $('#cards_layout_plan').scrollTop(sessionStorage.getItem('scroll-plan'));
 

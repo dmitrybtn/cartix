@@ -34,8 +34,6 @@
 
 		<?php echo $form->field($model, 'instruction')->textarea(['rows' => 6]) ?>
 
-		<?php d($returnUrl) ?>
-
 		<?php echo Html::hiddenInput('returnUrl', Url::to($returnUrl)) ?>
 
 		<?php if (YII_ENV_TEST): ?>

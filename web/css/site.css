@@ -47,13 +47,14 @@
 
 /* Адаптивная история */
 
-.cards_layout_plan {height: calc(100vh - 150px); overflow-y: scroll;}
+.cards_layout_plan {height: calc(100vh - 150px); overflow-y: scroll; margin-bottom: 10px;}
 
 .cards_layout_plan--nav li a {padding: 5px 10px;}
 
-
-
-
-.cards_content-desktop {position: relative; height: calc(100vh - 250px); overflow-y: scroll;}
+.cards_content-desktop {position: relative; height: calc(100vh - 162px); overflow-y: scroll;}
 
 .cards_content_header {height: 60px;}
+
+
+.sortable-2 > li {margin-top: 2px; padding-left: 20px;}
+

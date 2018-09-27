@@ -45,11 +45,11 @@
 		<?php $this->endBlock() ?>
 
 		<!-- Опции для десктопов -->
-		<?php $this->beginBlock('header-options'); ?>
+		<?php $this->beginBlock('cards_content_header--options'); ?>
 
-			<div style='float: right;'>
-				<?php echo Html::a('Отменить', $returnUrl, ['style' => 'width: 120px;', 'class' => 'btn btn-default']) ?>
-				<?php echo Html::submitButton('Сохранить', ['style' => 'width: 120px;', 'class' => 'btn btn-success', 'form' => 'card-transfer-form']) ?>				
+			<div class='cards_form_options'>
+				<?php echo Html::a('Отменить', $returnUrl, ['class' => 'btn btn-default']) ?>
+				<?php echo Html::submitButton('Сохранить', ['class' => 'btn btn-success', 'form' => 'card-transfer-form']) ?>				
 			</div>
 
 		<?php $this->endBlock(); ?>
