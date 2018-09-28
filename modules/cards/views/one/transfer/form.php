@@ -15,13 +15,7 @@
 		'validateOnChange' => false,
 	]); ?>
 
-		<div class="row">
-			<div class="col-md-9"><?php echo $form->field($model, 'name')->textInput(['maxlength' => true]) ?></div>
-			<div class="col-md-3"><?php echo $form->field($model, 'time')->textInput() ?></div>
-		</div>
-
-		<?php echo $form->field($model, 'instruction')->textarea(['rows' => 4, 'placeholder' => 'Указания по организации перехода к данной точке']) ?>
-		
+		<?php echo $this->render('form-inputs', ['modTransfer' => $model, 'form' => $form]) ?>
 
 
 		<?php echo Html::hiddenInput('returnUrl', Url::to($returnUrl)) ?>

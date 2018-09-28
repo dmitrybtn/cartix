@@ -24,10 +24,18 @@ class ViewController extends \app\modules\cards\controllers\BaseController
 	}
 
 	//-------------------------------------------------------------------------
+	public function actionRefreshPlan()
+	//-------------------------------------------------------------------------
+	{
+		return $this->renderPartial('@app/modules/cards/views/layouts/layout-plan');
+	}
+
+	//-------------------------------------------------------------------------
 	public function actionPlan()
 	//-------------------------------------------------------------------------
 	{
-		return $this->render('plan');
+		if (Yii::$app->request->isAjax) return $this->renderAjax('plan');
+		else return $this->render('plan');
 	}
 
 	//-------------------------------------------------------------------------

@@ -15,6 +15,36 @@ function findBootstrapEnvironment() {
     }
 }
 
+
+function refreshPlan() {
+    var plan = $('.cards_layout_plan');
+
+        jQuery.ajax({
+            'type': 'GET',
+            'url': plan.attr('data-refresh'),
+            'cache': false,
+            'success':function(html){
+                plan.replaceWith(html);                
+            }       
+        });
+
+}
+
+function refreshContent() {
+
+    jQuery.ajax({
+        'type': 'GET',
+        'url': document.location.href,
+        'cache': false,
+        'success':function(html){
+            $('#cards_content').html(html);           
+        }       
+    });    
+
+    
+}
+
+
 $(function ($) {
 
 	var env = findBootstrapEnvironment();
@@ -24,15 +54,6 @@ $(function ($) {
 
         $('#cards_content').addClass('cards_content-desktop');
 
-        $( ".sortable-1" ).sortable({
-            axis: 'y',
-        });
-
-        $( ".sortable-2" ).sortable({
-            axis: 'y',
-            connectWith: ".sortable-2"
-        });
-        
 
         if (sessionStorage.getItem('scroll-plan') != null)
             $('#cards_layout_plan').scrollTop(sessionStorage.getItem('scroll-plan'));
@@ -45,6 +66,44 @@ $(function ($) {
 	}
 
 
+    // Работа с формами в модальниках
+    $(document).on('submit', '.cards_plan_transfer--modal form', function() {
+        
+        var self = $(this);
+
+        jQuery.ajax({
+            'type': 'POST',
+            'url': self.attr('action'),
+            'data': self.serialize(),
+            'dataType': 'json',
+            'cache': false,
+            'success':function(json){
+                // self.closest('.modal').modal('hide');
+                // $.fn.yiiListView.update('order_list');
+
+                if (json.status == 'error') {
+                    self.closest('.modal-content').html(json.html);
+                } else if (json.status == 'ok') {
+
+                    self.closest('.modal').modal('hide');
+
+                    refreshPlan();
+                    refreshContent();
+
+                }
+
+                
+            }       
+        });
+
+
+
+        return false;
+    })
+
+
+
+    // Плавная прокрутка текста при работе с планом
     $('.cards_layout_plan--link').click(function() {
         
         var link = $(this)

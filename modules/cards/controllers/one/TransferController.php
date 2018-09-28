@@ -42,6 +42,16 @@ class TransferController extends \app\modules\cards\controllers\BaseController
 	*/
 
 	//-------------------------------------------------------------------------
+	public function actionReplace($id_transfer, $index)
+	//-------------------------------------------------------------------------
+	// Смена сортировки
+	{
+		$modTransfer = $this->find($id_transfer);
+		$modTransfer->id_sort = (($index + 1) * 2) - 4;
+		$modTransfer->sortInc();
+	}
+
+	//-------------------------------------------------------------------------
 	public function actionCreate()
 	//-------------------------------------------------------------------------
 	{
@@ -61,6 +71,25 @@ class TransferController extends \app\modules\cards\controllers\BaseController
 
 		return $this->render('form', ['returnUrl' => $this->getReferrer(['index'])]);
 	}
+
+
+	//-------------------------------------------------------------------------
+	public function actionUpdateAjax($id)
+	//-------------------------------------------------------------------------
+	{
+		Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+		// $this->title = '';
+
+		$this->model = $this->find($id);
+
+		if ($this->model->load(Yii::$app->request->post()))	{
+			if ($this->model->save()) return ['status' => 'ok'];
+			else return ['status' => 'error', 'html' => $this->renderPartial('form-modal', ['modTransfer' => $this->model])];
+		}	
+
+	}
+
 
 	//-------------------------------------------------------------------------
 	public function actionUpdate($id)

@@ -4,10 +4,10 @@
 
 	use Yii;
 
-	use yii\helpers\Html;
+	use yii\helpers\{Html, Url};
 ?>
 
-<div class="cards_layout_plan" id='cards_layout_plan'>
+<div class="cards_layout_plan" id='cards_layout_plan' data-refresh='<?= Url::to($this->context->to(['/cards/one/view/refresh-plan'])) ?>'>
 	<nav id='cards_layout_plan--nav' class='cards_layout_plan--nav cards_layout_plan--nav-spy'>
 		<ul class='nav nav-stacked nav-pills sortable-1'>
 			<?php foreach ($this->context->transfers as $modTransfer): ?>
@@ -28,13 +28,4 @@
 			<?php endforeach ?>
 		</ul>		
 	</nav>
-</div>
-
-<div class="row">
-	<div class="col-md-6">
-		<?php echo Html::a('Добавить остановку', $this->context->to(['/cards/one/transfer/create']), ['class' => 'btn btn-success btn-block']) ?>
-	</div>
-	<div class="col-md-6">
-		<?php echo Html::a('Добавить объект', '#', ['class' => 'btn btn-success btn-block']) ?>
-	</div>
 </div>

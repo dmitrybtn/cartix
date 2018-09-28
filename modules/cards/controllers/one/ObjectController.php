@@ -42,6 +42,17 @@ class ObjectController extends \app\modules\cards\controllers\BaseController
 	*/
 
 	//-------------------------------------------------------------------------
+	public function actionReplace($id_object, $id_transfer, $index)
+	//-------------------------------------------------------------------------
+	// Смена сортировки
+	{
+		$modObject = $this->find($id_object);
+		$modObject->id_transfer = $id_transfer;
+		$modObject->id_sort = ($index * 2) - 2;
+		$modObject->sortInc();
+	}
+
+	//-------------------------------------------------------------------------
 	public function actionCreate($id)
 	//-------------------------------------------------------------------------
 	{
