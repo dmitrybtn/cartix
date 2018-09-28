@@ -48,6 +48,7 @@
 /* Адаптивная история */
 
 .cards_layout_plan {height: calc(100vh - 150px); overflow-y: scroll; margin-bottom: 10px;}
+.cards_layout_plan_object {padding-left: 25px;}
 
 .cards_layout_plan--nav li a {padding: 5px 10px;}
 
@@ -55,6 +56,28 @@
 
 .cards_content_header {height: 60px;}
 
+/* cards_plan */
 
-.sortable-2 > li {margin-top: 2px; padding-left: 20px;}
+
+.cards_plan_transfers {list-style-type: none; padding: 0; margin: 0 0 0 15px; z-index: 1000;}
+
+.cards_plan_transfer {margin-bottom: 10px;}
+.cards_plan_transfer--header {font-size: 22px; font-weight: bold; color: #2C3E50;}
+
+
+.cards_plan_objects {list-style-type: none; padding-left: 30px; padding-top: 10px;}
+
+.cards_plan_object {margin-bottom: 10px;}
+.cards_plan_object--header {font-size: 18px; font-weight: bold; color: #2C3E50;}
+.cards_plan_object--create {display: block; margin-left: 30px;}
+
+
+
+
+
+
+
+
+
+
 

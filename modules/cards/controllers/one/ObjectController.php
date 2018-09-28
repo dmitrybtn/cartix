@@ -47,9 +47,11 @@ class ObjectController extends \app\modules\cards\controllers\BaseController
 	// Смена сортировки
 	{
 		$modObject = $this->find($id_object);
+		
+		$changeTransfer = $modObject->id_transfer != $id_transfer;
+
 		$modObject->id_transfer = $id_transfer;
-		$modObject->id_sort = ($index * 2) - 2;
-		$modObject->sortInc();
+		$modObject->sortIndex($index, $changeTransfer);
 	}
 
 	//-------------------------------------------------------------------------

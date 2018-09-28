@@ -37,7 +37,7 @@ function refreshContent() {
         'url': document.location.href,
         'cache': false,
         'success':function(html){
-            $('#cards_content').html(html);           
+            $('#cards_content').html(html);
         }       
     });    
 

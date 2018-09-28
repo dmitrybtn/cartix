@@ -47,8 +47,7 @@ class TransferController extends \app\modules\cards\controllers\BaseController
 	// Смена сортировки
 	{
 		$modTransfer = $this->find($id_transfer);
-		$modTransfer->id_sort = (($index + 1) * 2) - 4;
-		$modTransfer->sortInc();
+		$modTransfer->sortIndex($index);
 	}
 
 	//-------------------------------------------------------------------------
@@ -74,7 +73,24 @@ class TransferController extends \app\modules\cards\controllers\BaseController
 
 
 	//-------------------------------------------------------------------------
-	public function actionUpdateAjax($id)
+	public function actionAjaxCreate()
+	//-------------------------------------------------------------------------
+	{
+		Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+		$this->model = new CardTransfer();
+		$this->model->id_card = $this->card->id;
+
+		if ($this->model->load(Yii::$app->request->post()))	{
+			if ($this->model->save()) return ['status' => 'ok'];
+			else return ['status' => 'error', 'html' => $this->renderPartial('form-modal', ['modTransfer' => $this->model])];
+		}	
+
+	}
+
+
+	//-------------------------------------------------------------------------
+	public function actionAjaxUpdate($id)
 	//-------------------------------------------------------------------------
 	{
 		Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
