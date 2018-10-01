@@ -10,13 +10,24 @@ use app\modules\cards\models\Card;
 class ListController extends \dmitrybtn\cp\CrudController
 //*****************************************************************************
 {
+	public $card;
 
 	public const modes = [
 		'my' => 'Мои техкарты',
 		'common' => 'Общие техкарты',
 		'subscr' => 'Мои подписки',
-		'create' => 'Создать техкарту',
 	];
+
+	//-------------------------------------------------------------------------
+	public static function title($actionId)
+	//-------------------------------------------------------------------------
+	{
+		return [
+			'create' => 'Создать техкарту',
+			'recent' => Yii::$app->name,
+		][$actionId];
+	}
+
 
 	//-------------------------------------------------------------------------
 	public function actionIndex($id_mode, $ss = '')
@@ -27,10 +38,6 @@ class ListController extends \dmitrybtn\cp\CrudController
 
 		$this->title = static::modes[$id_mode];
 
-		$this->menu = [
-			['label' => 'Опции'],
-			['label' => self::title('create'), 'url' => ['create', 'id_mode' => $this->id_mode], 'visible' => $this->id_mode == 'my'],
-		];
 
 		return $this->render('index', ['id_mode' => $id_mode]);
 	}
@@ -46,6 +53,30 @@ class ListController extends \dmitrybtn\cp\CrudController
 		$this->showHeader = false;
 		$this->showBreads = false;
 
+		$this->menu = [
+			['label' => 'Опции'],
+			['label' => self::title('create'), 'url' => ['create']],
+		];
+
 		return $this->render('recent');
 	}	
+
+	//-------------------------------------------------------------------------
+	public function actionCreate()
+	//-------------------------------------------------------------------------
+	{
+		$this->card = new Card();
+
+		if ($this->card->load(Yii::$app->request->post()))	{
+
+			if (Yii::$app->request->isAjax) 
+				return $this->ajaxValidate($this->card);
+
+			if ($this->card->save()) 
+				return $this->redirect(['/cards/one/view/plan', 'id_card' => $this->card->sid]); 
+		}	
+
+		return $this->render('@app/modules/cards/views/form', ['returnUrl' => $this->getReferrer(['index'])]);
+	}
+
 }
