@@ -83,7 +83,7 @@ class TransferController extends \app\modules\cards\controllers\BaseController
 
 		if ($this->model->load(Yii::$app->request->post()))	{
 			if ($this->model->save()) return ['status' => 'ok'];
-			else return ['status' => 'error', 'html' => $this->renderPartial('form-modal', ['modTransfer' => $this->model])];
+			else return ['status' => 'error', 'html' => $this->renderPartial('form-modal-create', ['modTransfer' => $this->model])];
 		}	
 
 	}
@@ -101,7 +101,7 @@ class TransferController extends \app\modules\cards\controllers\BaseController
 
 		if ($this->model->load(Yii::$app->request->post()))	{
 			if ($this->model->save()) return ['status' => 'ok'];
-			else return ['status' => 'error', 'html' => $this->renderPartial('form-modal', ['modTransfer' => $this->model])];
+			else return ['status' => 'error', 'html' => $this->renderPartial('form-modal-update', ['modTransfer' => $this->model])];
 		}	
 
 	}

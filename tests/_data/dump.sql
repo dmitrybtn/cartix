@@ -79,7 +79,7 @@ CREATE TABLE `cards_objects` (
   PRIMARY KEY (`id`),
   KEY `id_card` (`id_transfer`),
   CONSTRAINT `cards_objects_ibfk_1` FOREIGN KEY (`id_transfer`) REFERENCES `cards_transfers` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -135,7 +135,7 @@ CREATE TABLE `cards_transfers` (
   PRIMARY KEY (`id`),
   KEY `id_card` (`id_card`),
   CONSTRAINT `cards_transfers_ibfk_1` FOREIGN KEY (`id_card`) REFERENCES `cards` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -184,4 +184,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-09-18 13:04:34
+-- Dump completed on 2018-10-01 11:20:26

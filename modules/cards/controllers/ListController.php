@@ -15,6 +15,7 @@ class ListController extends \dmitrybtn\cp\CrudController
 		'my' => 'Мои техкарты',
 		'common' => 'Общие техкарты',
 		'subscr' => 'Мои подписки',
+		'create' => 'Создать техкарту',
 	];
 
 	//-------------------------------------------------------------------------
@@ -25,6 +26,11 @@ class ListController extends \dmitrybtn\cp\CrudController
 		$this->model->search_string = $ss;
 
 		$this->title = static::modes[$id_mode];
+
+		$this->menu = [
+			['label' => 'Опции'],
+			['label' => self::title('create'), 'url' => ['create', 'id_mode' => $this->id_mode], 'visible' => $this->id_mode == 'my'],
+		];
 
 		return $this->render('index', ['id_mode' => $id_mode]);
 	}

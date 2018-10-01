@@ -28,27 +28,49 @@
 						</div>
 					</div>
 
-
 					<!-- Объекты -->
 					<ul class='cards_plan_objects' data-id-transfer='<?php echo $modTransfer->id ?>'>
 						<?php foreach ($modTransfer->objects as $modObject): ?>
 							<li class='cards_plan_object' data-id-object='<?php echo $modObject->id ?>'>
-								<?php echo Html::a(Html::encode($modObject->name), '#', ['class' => 'cards_plan_object--header', 'data-target' => '#object-' . $modObject->id]) ?>
+								<?php echo Html::a(Html::encode($modObject->name), '#', ['class' => 'cards_plan_object--header', 'data-toggle' => 'modal', 'data-target' => '.cards_plan_object--modal-' . $modObject->id]) ?>
 							
-								<div>Текст брифа и прочее</div>								
+								<div>Текст брифа и прочее</div>	
+
+								<!-- Объект в модальном окне -->
+								<div class="modal cards_plan_object--modal cards_plan_object--modal-<?php echo $modObject->id ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+									<div class="modal-dialog modal-lg" role="document">
+										<div class="modal-content">
+											<?php echo $this->render('@app/modules/cards/views/one/object/form-modal-update', ['modObject' => $modObject]) ?>
+										</div>
+									</div>
+								</div>
 							</li>
 						<?php endforeach ?>
 					</ul>
-					<?php echo Html::a('[Добавить объект]', '#', ['class' => 'text-muted cards_plan_object--create']) ?>
+
+					<!-- Создание объекта -->
+
+					<?php echo Html::a('[Добавить объект]', '#', ['class' => 'text-muted cards_plan_object--create', 'data-toggle' => 'modal', 'data-target' => '.cards_plan_object--modal-create-' . $modTransfer->id]) ?>
+
+					<div class="modal cards_plan_object--modal cards_plan_object--modal-create-<?php echo $modTransfer->id ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal-dialog modal-lg" role="document">
+							<div class="modal-content">
+								<?php echo $this->render('@app/modules/cards/views/one/object/form-modal-create', ['modTransfer' => $modTransfer]) ?>
+							</div>
+						</div>
+					</div>
+
+
 				</li>
 
 
 			<?php endforeach ?>
 		</ul>		
 
+		<!-- Создание остановки -->
+
 		<?php echo Html::a('[Добавить остановку]', '#', ['class' => 'text-muted', 'data-toggle' => 'modal', 'data-target' => '.cards_plan_transfer--modal-create']) ?>
 
-		<!-- Остановка в модальном окне -->
 		<div class="modal cards_plan_transfer--modal cards_plan_transfer--modal-create" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			<div class="modal-dialog modal-lg" role="document">
 				<div class="modal-content">

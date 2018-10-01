@@ -19,7 +19,11 @@ $config = \yii\helpers\ArrayHelper::merge(require __DIR__ . '/base.php', [
         'request' => [
             'cookieValidationKey' => 'test',
             'enableCsrfValidation' => false,            
-        ],        
+        ],      
+
+        'urlManager' => [
+            'showScriptName' => true,
+        ],          
     ],
 ]);
 
