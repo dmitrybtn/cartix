@@ -11,8 +11,9 @@
 	</div>
 
 	<?php $form = ActiveForm::begin([
-		'id' => 'card-transfer-form',
+		'id' => 'card-transfer-form-' . $modTransfer->id,
 		'action' => $this->context->to(['/cards/one/transfer/ajax-update', 'id' => $modTransfer->id]),
+		'enableClientScript' => false,
 		'enableClientValidation' => false,
 		'enableAjaxValidation' => false,
 		'validateOnBlur' => false,

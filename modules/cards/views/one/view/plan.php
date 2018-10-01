@@ -10,7 +10,7 @@
 ?>
 
 		<!-- Остановки -->
-		<ul class='cards_plan_transfers' data-url='<?php echo Url::to($this->context->to(['/cards/one/transfer/replace'])) ?>'>
+		<ul class='cards_plan_transfers'>
 			<?php foreach ($this->context->transfers as $modTransfer): ?>
 				
 
@@ -32,7 +32,7 @@
 
 
 					<!-- Объекты -->
-					<ul class='cards_plan_objects' data-id-transfer='<?php echo $modTransfer->id ?>' data-url='<?php echo Url::to($this->context->to(['/cards/one/object/replace'])) ?>'>
+					<ul class='cards_plan_objects' data-id-transfer='<?php echo $modTransfer->id ?>'>
 						<?php foreach ($modTransfer->objects as $modObject): ?>
 							<li class='cards_plan_object' data-id-object='<?php echo $modObject->id ?>'>
 								<?php echo Html::a(Html::encode($modObject->name), '#', ['class' => 'cards_plan_object--header', 'data-target' => '#object-' . $modObject->id]) ?>
@@ -64,16 +64,16 @@
 
 		$(document).ready(function(){
 
+
 			// Сортировка остановок
-	        $( ".cards_plan_transfers" ).sortable({
-	        	handle: '.handle',
+	        $(".cards_plan_transfers").sortable({
 	            update: function(event, ui) {
 			        
 	            	var self = $(this);
 
-			        jQuery.ajax({
+			        $.ajax({
 			            'type': 'GET',
-			            'url': self.attr('data-url'),
+			            'url': '<?php echo Url::to($this->context->to(['/cards/one/transfer/replace'])) ?>',
 			            'data': {id_transfer: ui.item.attr('data-id-transfer'), index: ui.item.index()},
 			            'cache': false,
 			            'success':function(html){
@@ -84,7 +84,7 @@
 	        });
 
 	        // Сортировка объектов
-	        $( ".cards_plan_objects" ).sortable({
+	        $(".cards_plan_objects").sortable({
 	            dropOnEmpty: true,
 	            connectWith: ".cards_plan_objects",
 	            update: function(event, ui) {
@@ -98,9 +98,9 @@
 			            	index: ui.item.index()
 			            };
 
-				        jQuery.ajax({
+				        $.ajax({
 				            'type': 'GET',
-				            'url': self.attr('data-url'),
+				            'url': '<?php echo Url::to($this->context->to(['/cards/one/object/replace'])) ?>',
 				            'data': data,
 				            'cache': false,
 				            'success':function(){

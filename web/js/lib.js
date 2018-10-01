@@ -54,7 +54,7 @@ $(function ($) {
 
         $('#cards_content').addClass('cards_content-desktop');
 
-
+        
         if (sessionStorage.getItem('scroll-plan') != null)
             $('#cards_layout_plan').scrollTop(sessionStorage.getItem('scroll-plan'));
 
@@ -69,34 +69,28 @@ $(function ($) {
     // Работа с формами в модальниках
     $(document).on('submit', '.cards_plan_transfer--modal form', function() {
         
-        var self = $(this);
+        var obj = $(this);
 
-        jQuery.ajax({
+        $.ajax({
             'type': 'POST',
-            'url': self.attr('action'),
-            'data': self.serialize(),
+            'url': obj.attr('action'),
+            'data': obj.serialize(),
             'dataType': 'json',
             'cache': false,
             'success':function(json){
-                // self.closest('.modal').modal('hide');
-                // $.fn.yiiListView.update('order_list');
 
                 if (json.status == 'error') {
-                    self.closest('.modal-content').html(json.html);
+                    obj.closest('.modal-content').html(json.html);
                 } else if (json.status == 'ok') {
 
-                    self.closest('.modal').modal('hide');
+                    obj.closest('.modal').modal('hide');
 
                     refreshPlan();
                     refreshContent();
 
                 }
-
-                
             }       
         });
-
-
 
         return false;
     })
