@@ -62,17 +62,21 @@
 .cards_plan_transfers {list-style-type: none; padding: 0; margin: 0 0 0 15px; z-index: 1000;}
 
 .cards_plan_transfer {margin-bottom: 10px;}
-.cards_plan_transfer--header {font-size: 22px; font-weight: bold; color: #2C3E50;}
+.cards_plan_transfer--header {font-size: 22px;}
 
 
 .cards_plan_objects {list-style-type: none; padding-left: 30px; padding-top: 10px;}
 
 .cards_plan_object {margin-bottom: 10px;}
-.cards_plan_object--header {font-size: 18px; font-weight: bold; color: #2C3E50;}
+.cards_plan_object--header {font-size: 18px;}
 .cards_plan_object--create {display: block; margin-left: 30px;}
 
 
+.cards_plan_transfer--header,
+.cards_plan_transfer--header:hover,
 
+.cards_plan_object--header,
+.cards_plan_object--header:hover {font-weight: bold; color: #2C3E50;}
 
 
 

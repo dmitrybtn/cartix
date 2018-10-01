@@ -14,6 +14,7 @@
 	<?php $form = ActiveForm::begin([
 		'id' => 'card-transfer-form-create',
 		'action' => $this->context->to(['/cards/one/transfer/ajax-create']),
+		'options' => ['class' => 'cards_plan_ajax_form'],
 		'enableClientScript' => false,
 		'enableClientValidation' => false,
 		'enableAjaxValidation' => false,

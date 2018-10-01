@@ -67,7 +67,7 @@ $(function ($) {
 
 
     // Работа с формами в модальниках
-    $(document).on('submit', '.cards_plan_transfer--modal form', function() {
+    $(document).on('submit', '.cards_plan_ajax_form', function() {
         
         var obj = $(this);
 
@@ -94,6 +94,37 @@ $(function ($) {
 
         return false;
     })
+
+
+    $(document).on('click', '.cards_plan_ajax_delete', function() {
+
+        if (confirm('Точно?')) {
+
+            var obj = $(this);
+
+            $.ajax({
+                'type': 'POST',
+                'url': obj.attr('href'),
+                'dataType': 'json',
+                'cache': false,
+                'success':function(json){
+
+                    if (json.status == 'error')
+                        alert(json.message);
+
+                    obj.closest('.modal').modal('hide');
+
+                    refreshPlan();
+                    refreshContent();
+                }       
+            });
+
+
+        }
+
+        return false;
+
+    });
 
 
 

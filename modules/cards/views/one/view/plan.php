@@ -19,13 +19,11 @@
 
 					<?php echo Html::a(Html::encode($modTransfer->name), '#', ['class' => 'cards_plan_transfer--header', 'data-toggle' => 'modal', 'data-target' => '.cards_plan_transfer--modal-' . $modTransfer->id]) ?>
 
-					<a href="#" class='handle'><span class='glyphicon glyphicon-move'></span></a>
-
 					<!-- Остановка в модальном окне -->
 					<div class="modal cards_plan_transfer--modal cards_plan_transfer--modal-<?= $modTransfer->id ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 						<div class="modal-dialog modal-lg" role="document">
 							<div class="modal-content">
-								<?php echo $this->render('@app/modules/cards/views/one/transfer/form-modal', ['modTransfer' => $modTransfer]) ?>
+								<?php echo $this->render('@app/modules/cards/views/one/transfer/form-modal-update', ['modTransfer' => $modTransfer]) ?>
 							</div>
 						</div>
 					</div>

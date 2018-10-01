@@ -108,6 +108,27 @@ class TransferController extends \app\modules\cards\controllers\BaseController
 
 
 	//-------------------------------------------------------------------------
+	public function actionAjaxDelete($id)
+	//-------------------------------------------------------------------------
+	{
+		Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+		if (Yii::$app->request->isPost) {
+			try {		
+
+				$this->find($id)->delete();
+				return ['status' => 'ok'];
+
+			} catch (\Exception $e) {
+
+				return ['status' => 'error', 'message' => $e->getMessage()];
+
+			}		
+		} else return ['status' => 'error', 'message' => 'Неверный формат запроса'];
+	}
+
+
+	//-------------------------------------------------------------------------
 	public function actionUpdate($id)
 	//-------------------------------------------------------------------------
 	{
