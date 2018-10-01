@@ -9,7 +9,7 @@ use yii\helpers\Html;
 
 	<?php $this->beginBlock('cards_content_header--options') ?>
 		<?php echo Nav::widget([
-		    'options' => ['class' =>'nav-tabs'],
+		    'options' => ['class' =>'nav-pills'],
 		    'activateItems' => true,
 		    'items' => [
 		        ['label' => 'План', 'url' => $this->context->to(['/cards/one/view/plan'])],

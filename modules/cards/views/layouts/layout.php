@@ -125,15 +125,33 @@
 			<!-- Основная область для десктопов -->
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-md-3 hidden-xs hidden-sm">
-						<?php echo $this->render('@app/modules/cards/views/layouts/layout-plan') ?>
+					<div class="col-md-2 hidden-xs hidden-sm">
+
+						<div class="well well-sidebar">
+
+							<?php echo \dmitrybtn\cp\MenuWidget::widget([
+							    'items' => [
+							    	['label' => 'Навигация'],
+									['label' => 'План', 'url' => $this->context->to(['/cards/one/view/plan'])],
+									['label' => 'Текст', 'url' => $this->context->to(['/cards/one/view/text'])],
+									['label' => 'Картинки', 'url' => $this->context->to(['/cards/one/view/images'])],
+							    ],
+							    'options' => ['class' => 'nav-pills nav-stacked deskmenu'], // set this to nav-tab to get tab-styled navigation
+							]); ?>
+
+						</div>                        
+
+
+	
+
 					</div>
 
-					<div class="col-md-9">
+					<div class="col-md-8">
 
 						<!-- Главный заголовок с опциями -->
 						<div class='hidden-xs hidden-sm cards_content_header'>
-							<?php echo $this->blocks['cards_content_header--options'] ?? '' ?>																				
+							<?php // echo $this->blocks['cards_content_header--options'] ?? '' ?>																				
+
 
 							<?php if ($this->context->showHeader): ?>
 								<h1><?= Html::encode($this->context->header) ?></h1>                        
@@ -149,6 +167,13 @@
 						</div>
 					
 					</div>
+
+					<div class="col-md-2 hidden-xs hidden-sm">
+						<div class="cards_layout_plan--header">Содержание</div>
+						<?php echo $this->render('@app/modules/cards/views/layouts/layout-plan') ?>
+					</div>
+
+
 				</div>
 			</div>
 
