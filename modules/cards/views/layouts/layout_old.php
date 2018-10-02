@@ -1,5 +1,5 @@
 <?php
-	namespace dmitrybtn\cp\views;
+	namespace app\modules\cards\views\layouts;
 
 
 	use Yii;
@@ -20,7 +20,6 @@
 	BootstrapPluginAsset::register($this);
 
 	\yii\jui\JuiAsset::register($this);
-
 
 	$objMenuMain = new Menu([
 		'items' => '@app/config/menu.php',
@@ -123,14 +122,13 @@
 				<?php echo $objMenuContext->render() ?>
 			</div>
 
-			
-			<!-- Главное и контекстное меню для десктопов -->
-			<div class="container-fluid container-sidebars-desktop">
+			<!-- Основная область для десктопов -->
+			<div class="container-fluid">
 				<div class="row">
-					<div class="col-md-3 col-lg-2 hidden-md">
+					<div class="col-md-2 hidden-xs hidden-sm">
 
-						<!-- Навигация по техкарте -->
 						<div class="well well-sidebar">
+
 							<?php echo \dmitrybtn\cp\MenuWidget::widget([
 							    'items' => [
 							    	['label' => 'Навигация'],
@@ -140,125 +138,51 @@
 							    ],
 							    'options' => ['class' => 'nav-pills nav-stacked deskmenu'], // set this to nav-tab to get tab-styled navigation
 							]); ?>
+
 						</div>                        
 
 
-						<!-- Опции техкарты -->
-						<div class="well well-sidebar">
-							<?php echo \dmitrybtn\cp\MenuWidget::widget([
-							    'items' => [
-							    	['label' => 'Опции техкарты'],
-									['label' => 'Настройки', 'url' => '#'],
-									['label' => 'Подписаться', 'url' => '#'],
-									['label' => 'Скопировать', 'url' => '#'],
-									['label' => 'Удалить техкарту', 'url' => '#'],
-							    ],
-							    'options' => ['class' => 'nav-pills nav-stacked deskmenu'], // set this to nav-tab to get tab-styled navigation
-							]); ?>
-						</div>                        
-
+	
 
 					</div>
 
-					<div class="col-md-3 col-md-offset-9 col-lg-2 col-lg-offset-8 <?= $showRightSidebar ? '' : 'hidden-md' ?>">
-						<?php if ($objMenuContext->visible): ?>
-							<div class="well well-sidebar">
-								<?php echo $objMenuContext->render([
-									'options' => ['class' => 'nav-pills nav-stacked deskmenu deskmenu-context']
-								]) ?>                    
-							</div>                        
-						<?php endif ?>
+					<div class="col-md-8">
 
-						<?php if (isset($this->blocks['sidebar-right'])): ?>
-							<?php echo $this->blocks['sidebar-right'] ?>
-						<?php endif ?>
-
-						<?php if ($this->context->showPlan): ?>
-							<div class="cards_layout_plan--header">Содержание</div>
-							<?php echo $this->render('@app/modules/cards/views/layouts/layout-plan') ?>
-						<?php endif ?>
-					</div>
-
-				</div>        
-			</div>
+						<!-- Главный заголовок с опциями -->
+						<div class='hidden-xs hidden-sm cards_content_header'>
+							<?php // echo $this->blocks['cards_content_header--options'] ?? '' ?>																				
 
 
-			<!-- Основная область -->
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-lg-8 col-lg-offset-2 <?= $showRightSidebar ? 'col-md-9' : 'col-md-8 col-md-offset-2' ?>">
-
-						<!-- MAIN AREA -->
-
-						<?php if ($this->context->showHeader): ?>
-							<h1 class='hidden-xs hidden-sm page-header' style='text-align: center;'><?= Html::encode($this->context->header) ?></h1>                        
-						<?php endif ?>
+							<?php if ($this->context->showHeader): ?>
+								<h1><?= Html::encode($this->context->header) ?></h1>                        
+							<?php endif ?>
+						</div>
 
 						<div id='cards_content'>
+
 							<?= Alert::widget() ?>
 
-							<?= $content ?>							
+							<?= $content ?>	
+							
 						</div>
 					
 					</div>
+
+					<div class="col-md-2 hidden-xs hidden-sm">
+						<div class="cards_layout_plan--header">Содержание</div>
+						<?php echo $this->render('@app/modules/cards/views/layouts/layout-plan') ?>
+					</div>
+
+
 				</div>
 			</div>
+
+
 
 			<!-- Футер -->
 			<?php if (isset($this->blocks['footer'])): ?>
 				<?php echo $this->blocks['footer'] ?>
 			<?php endif ?>
-
-			<?php if ($this->context->showNavMobile): ?>
-				<footer class='footer-mobile'>
-					<?php echo Nav::widget([
-					    'options' => ['class' =>'nav-footer cards_footer'],
-					    'activateItems' => true,
-					    'items' => [
-					        ['label' => 'План', 'url' => $this->context->to(['/cards/one/view/plan'])],
-					        ['label' => 'Текст', 'url' => $this->context->to(['/cards/one/view/text'])],
-					        ['label' => 'Картинки', 'url' => $this->context->to(['/cards/one/view/images'])],
-					    ],
-					]); ?>		
-				</footer>					
-			<?php endif ?>
-
-		<!-- Сохранение и восстановление прокрутки в режиме просмотра -->
-		<?php if ($this->context->uniqueid == 'cards/one/view'): ?>
-			<script>
-				var id_action = '<?php echo $this->context->action->id ?>';
-				var id_card = <?php echo $this->context->card->id ?>;
-				
-				var str_scroll = 'scroll-cont-' + id_card;
-				
-				var strScrollAction = sessionStorage.getItem(str_scroll + '-action');
-				var strScrollValue = sessionStorage.getItem(str_scroll + '-value');
-
-
-				$(function ($) {
-
-				    // Определить прокручиваемый объект
-			        if ($('#cards_content').hasClass('cards_content-desktop')) objScrollable = $('#cards_content');
-			        else objScrollable = $('body');
-
-			        // Сохранить прокрутку
-				    $(window).on('beforeunload', function() {
-				        sessionStorage.setItem(str_scroll + '-action', id_action);
-				        sessionStorage.setItem(str_scroll + '-value', objScrollable.scrollTop());
-				    });
-
-				    // Восстановить прокрутку
-				    if (strScrollAction != null && strScrollAction == id_action) 
-				    	objScrollable.scrollTop(strScrollValue);
-
-				});
-
-
-
-
-			</script>			
-		<?php endif ?>
-
 
 		<?php $this->endBody() ?>
 	</body>

@@ -17,6 +17,9 @@ class BaseController extends \dmitrybtn\cp\CrudController
 
 	public $layout = '@app/modules/cards/views/layouts/layout';
 
+	public $showPlan = false;
+	public $showNavMobile = false;
+
 	//-------------------------------------------------------------------------
 	public function init()
 	//-------------------------------------------------------------------------

@@ -36,8 +36,9 @@ class TestCest
         $I->wait(0.5);
         $I->seeRecord(Card::className(), ['name' => 'New card']);
 
+
         // Создание остановки
-        $I->click('Добавить остановку');
+        $I->click('Добавить остановку', '.deskmenu-context'); // '//*[@id="w6"]/li[2]'
         $I->fillField('CardTransfer[name]', 'New transfer');
         $I->click('Сохранить');
         $I->wait(0.5);

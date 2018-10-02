@@ -48,15 +48,16 @@
 /* Адаптивная история */
 
 
-.cards_content-desktop {position: relative; height: calc(100vh - 162px); overflow-y: scroll;}
+.cards_content-desktop {position: relative; height: calc(100vh - 165px); overflow-y: scroll;}
 
 .cards_content_header {height: 60px;}
+
 
 /* cards_layout_plan */
 
 .cards_layout_plan--header {font-weight: 450; font-size: 19px; padding: 15px 10px 8px 10px;}
 
-.cards_layout_plan {height: calc(100vh - 150px); overflow-y: scroll; margin-bottom: 10px;}
+.cards_layout_plan {height: calc(100vh - 147px); overflow-y: scroll; margin-bottom: 10px;}
 .cards_layout_plan_object {padding-left: 25px;}
 
 .cards_layout_plan--nav li a {padding: 5px 15px; margin: 3px 0; line-height: 19px;}

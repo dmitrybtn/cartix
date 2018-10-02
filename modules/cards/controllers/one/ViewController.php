@@ -10,9 +10,11 @@ use app\modules\cards\models\{Card, CardImage};
 class ViewController extends \app\modules\cards\controllers\BaseController
 //*****************************************************************************
 {
-	public $layout = '@app/modules/cards/views/layouts/layout-view';
+	// public $layout = '@app/modules/cards/views/layouts/layout-view';
 
-	public $showHeader = false;
+	// public $showHeader = false;
+
+	public $showNavMobile = true;
 
 	//-------------------------------------------------------------------------
 	public function init()
@@ -34,6 +36,12 @@ class ViewController extends \app\modules\cards\controllers\BaseController
 	public function actionPlan()
 	//-------------------------------------------------------------------------
 	{
+		$this->menu = [
+			['label' => 'Опции'],
+			['label' => TransferController::title('create'), 'url' => '#', 'options' => ['class' => 'hidden-xs hidden-sm'], 'linkOptions' => ['data-toggle' => 'modal', 'data-target' => '.cards_plan_transfer--modal-create']],
+			['label' => TransferController::title('create'), 'url' => $this->to(['/cards/one/transfer/create']), 'options' => ['class' => 'visible-xs-block visible-sm-block']],
+		];
+
 		if (Yii::$app->request->isAjax) return $this->renderAjax('plan');
 		else return $this->render('plan');
 	}
@@ -42,6 +50,8 @@ class ViewController extends \app\modules\cards\controllers\BaseController
 	public function actionText()
 	//-------------------------------------------------------------------------
 	{
+		$this->showPlan = true;
+
 		return $this->render('text');
 	}
 

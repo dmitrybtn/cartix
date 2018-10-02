@@ -68,9 +68,6 @@
 		</ul>		
 
 		<!-- Создание остановки -->
-
-		<?php echo Html::a('[Добавить остановку]', '#', ['class' => 'text-muted', 'data-toggle' => 'modal', 'data-target' => '.cards_plan_transfer--modal-create']) ?>
-
 		<div class="modal cards_plan_transfer--modal cards_plan_transfer--modal-create" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			<div class="modal-dialog modal-lg" role="document">
 				<div class="modal-content">

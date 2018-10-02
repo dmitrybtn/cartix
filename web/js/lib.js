@@ -16,20 +16,6 @@ function findBootstrapEnvironment() {
 }
 
 
-function refreshPlan() {
-    var plan = $('.cards_layout_plan');
-
-        jQuery.ajax({
-            'type': 'GET',
-            'url': plan.attr('data-refresh'),
-            'cache': false,
-            'success':function(html){
-                plan.replaceWith(html);                
-            }       
-        });
-
-}
-
 function refreshContent() {
 
     jQuery.ajax({
@@ -46,25 +32,6 @@ function refreshContent() {
 
 
 $(function ($) {
-
-	var env = findBootstrapEnvironment();
-
-	if (env == 'lg' || env == 'md') {
-
-
-        $('#cards_content').addClass('cards_content-desktop');
-
-        
-        if (sessionStorage.getItem('scroll-plan') != null)
-            $('#cards_layout_plan').scrollTop(sessionStorage.getItem('scroll-plan'));
-
-
-        $(window).on('unload', function() {
-            sessionStorage.setItem('scroll-plan', $('#cards_layout_plan').scrollTop());
-        });
-
-	}
-
 
     // Работа с формами в модальниках
     $(document).on('submit', '.cards_plan_ajax_form', function() {
@@ -85,7 +52,6 @@ $(function ($) {
 
                     obj.closest('.modal').modal('hide');
 
-                    refreshPlan();
                     refreshContent();
 
                 }
@@ -95,7 +61,7 @@ $(function ($) {
         return false;
     })
 
-
+    // Удаление элементов через AJAX
     $(document).on('click', '.cards_plan_ajax_delete', function() {
 
         if (confirm('Точно?')) {
@@ -114,7 +80,6 @@ $(function ($) {
 
                     obj.closest('.modal').modal('hide');
 
-                    refreshPlan();
                     refreshContent();
                 }       
             });
@@ -128,33 +93,7 @@ $(function ($) {
 
 
 
-    // Плавная прокрутка текста при работе с планом
-    $('.cards_layout_plan--link').click(function() {
-        
-        var link = $(this)
-        var target = link.attr('data-target');
-        var coords = $(target).position().top;
 
-        $('#cards_layout_plan--nav').removeClass('cards_layout_plan--nav-spy');
-
-        $('#cards_content').animate({
-            scrollTop: $('#cards_content').scrollTop() + coords
-        }, {
-            duration: 400,
-            easing: "swing",
-            complete: function() {
-                
-                $('.cards_layout_plan--nav li').removeClass('active');
-
-                link.parent().addClass("active");
-
-                $('#cards_layout_plan--nav').addClass('cards_layout_plan--nav-spy');                
-            }
-        });
-       
-
-        return false;
-    })
 
 
 
