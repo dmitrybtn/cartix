@@ -146,13 +146,7 @@
 						<!-- Опции техкарты -->
 						<div class="well well-sidebar">
 							<?php echo \dmitrybtn\cp\MenuWidget::widget([
-							    'items' => [
-							    	['label' => 'Опции техкарты'],
-									['label' => 'Настройки', 'url' => '#'],
-									['label' => 'Подписаться', 'url' => '#'],
-									['label' => 'Скопировать', 'url' => '#'],
-									['label' => 'Удалить техкарту', 'url' => '#'],
-							    ],
+							    'items' => $this->context->menuCard,
 							    'options' => ['class' => 'nav-pills nav-stacked deskmenu'], // set this to nav-tab to get tab-styled navigation
 							]); ?>
 						</div>                        

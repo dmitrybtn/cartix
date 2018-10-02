@@ -5,16 +5,15 @@
 	use Yii;
 
 	use yii\helpers\{Html, Url};
+	use yii\widgets\Pjax;
+
 	use dmitrybtn\cp\ActiveForm;
 
 ?>
 
 		<!-- Остановки -->
-		<ul class='cards_plan_transfers'>
+		<ul class='cards_plan_transfers hidden-xs'>
 			<?php foreach ($this->context->transfers as $modTransfer): ?>
-				
-
-				
 				<li class='cards_plan_transfer' data-id-transfer='<?php echo $modTransfer->id ?>'>
 
 					<?php echo Html::a(Html::encode($modTransfer->name), '#', ['class' => 'cards_plan_transfer--header', 'data-toggle' => 'modal', 'data-target' => '.cards_plan_transfer--modal-' . $modTransfer->id]) ?>
@@ -59,10 +58,7 @@
 							</div>
 						</div>
 					</div>
-
-
 				</li>
-
 
 			<?php endforeach ?>
 		</ul>		
@@ -76,11 +72,88 @@
 			</div>
 		</div>
 
+	<!-- Мобильная версия -->
+	<?php Pjax::begin() ?>
+
+		<div class="visible-xs-block cards_plan_transfers-modal">
+			<?php foreach ($this->context->card->transfers as $modTransfer): ?>
+				<div class="well_list-plan well_list well_list-1 card_plan-mobile--transfer">
+
+					<?php if ($this->context->card->isMy): ?>
+
+						<div class="dropdown">
+							<a href="#" data-toggle="dropdown" class="dropdown-toggle"><?php echo Html::encode($modTransfer->name) ?></a>
+
+							<ul class="dropdown-menu">
+								<li><?php echo Html::a('К тексту', $this->context->to(['/cards/one/view/text', 'id' => $this->context->card->id, '#' => 'transfer-' . $modTransfer->id])) ?></li>
+								<li><?php echo Html::a('Добавить объект', $this->context->to(['/cards/one/object/create', 'id' => $modTransfer->id])) ?></li>
+								<li><?php echo Html::a('Редактировать', $this->context->to(['/cards/one/transfer/update', 'id' => $modTransfer->id])) ?></li>
+								<li><?php echo Html::a('Передвинуть выше', $this->context->to(['/cards/one/transfer/sort', 'id' => $modTransfer->id])) ?></li>
+								<li><?php echo Html::a('Передвинуть ниже', $this->context->to(['/cards/one/transfer/sort', 'id' => $modTransfer->id, 'inv' => 1])) ?></li>
+								<li><?php echo Html::a('Удалить', $this->context->to(['/cards/one/transfer/delete', 'id' => $modTransfer->id]), ['data-confirm' => 'Точно?', 'data-method' => 'post']) ?></li>
+							</ul>						
+						</div>
+					
+					<?php else: ?>
+						<?php echo Html::a(Html::encode($modTransfer->name), $this->context->to(['/cards/one/view/text', '#' => 'transfer-' . $modTransfer->id])) ?>
+					<?php endif ?>
+
+
+
+						<div class="well_list--options">
+							<?php if ($modTransfer->time): ?>
+								Переход: <?php echo $modTransfer->time ?> мин.
+							<?php endif ?>
+
+							<?php if ($t = $modTransfer->objectsTime): ?>
+								Рассказ: <?php echo $t ?> мин.
+							<?php endif ?>
+						</div>					
+				</div>
+
+				<?php foreach ($modTransfer->objects as $modObject): ?>
+					<div class="well_list-plan well_list well_list-2 card_plan-mobile--object">
+
+						<?php if ($this->context->card->isMy): ?>
+
+							<div class="dropdown">
+								<a href="#" data-toggle="dropdown" class="dropdown-toggle"><?php echo Html::encode($modObject->name) ?></a>
+
+								<ul class="dropdown-menu">
+									<li><?php echo Html::a('К тексту', $this->context->to(['/cards/one/view/text', '#' => 'object-' . $modObject->id])) ?></li>
+									<li><?php echo Html::a('Редактировать', $this->context->to(['/cards/one/object/update', 'id' => $modObject->id])) ?></li>
+									<li><?php echo Html::a('Передвинуть выше', $this->context->to(['/cards/one/object/sort', 'id' => $modObject->id])) ?></li>
+									<li><?php echo Html::a('Передвинуть ниже', $this->context->to(['/cards/one/object/sort', 'id' => $modObject->id, 'inv' => 1])) ?></li>
+									<li><?php echo Html::a('Удалить', $this->context->to(['/cards/one/object/delete', 'id' => $modObject->id], ['data-confirm' => 'Точно?', 'data-method' => 'post'])) ?></li>
+								</ul>						
+							</div>
+						<?php else: ?>
+							<?php echo Html::a(Html::encode($modObject->name), $this->context->to(['/cards/one/view/text', '#' => 'object-' . $modObject->id])) ?>							
+						<?php endif ?>
+
+
+
+						<div class="well_list--options">
+							<?php if ($modObject->time): ?>
+								Рассказ: <?php echo $modObject->time ?> мин.
+							<?php endif ?>
+
+							<?php if ($modObject->size): ?>
+								Объем: <?php echo Yii::$app->formatter->asInteger($modObject->size) ?> зн.
+							<?php endif ?>
+						</div>						
+
+					</div>				
+				<?php endforeach ?>
+			<?php endforeach ?>			
+		</div>
+
+	<?php Pjax::end() ?>
+
         
 	<script>
 
 		$(document).ready(function(){
-
 
 			// Сортировка остановок
 	        $(".cards_plan_transfers").sortable({
@@ -127,13 +200,6 @@
 	            	}
 	            }	            
 	        });
-
-
 		});
-
-
-
-
-
 
 	</script>

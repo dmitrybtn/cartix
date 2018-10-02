@@ -20,6 +20,8 @@ class BaseController extends \dmitrybtn\cp\CrudController
 	public $showPlan = false;
 	public $showNavMobile = false;
 
+	public $menuCard;
+
 	//-------------------------------------------------------------------------
 	public function init()
 	//-------------------------------------------------------------------------
@@ -33,6 +35,15 @@ class BaseController extends \dmitrybtn\cp\CrudController
 		// Отключить хлебные крошки
         if (Yii::$app->user->isGuest)
         	$this->showBreads = false;
+
+
+        $this->menuCard = [
+	    	['label' => 'Опции техкарты'],
+			['label' => 'Настройки', 'url' => '#'],
+			['label' => 'Подписаться', 'url' => '#'],
+			['label' => 'Скопировать', 'url' => '#'],
+			['label' => 'Удалить техкарту', 'url' => '#'],        	
+        ];
 	}
 
 	//-------------------------------------------------------------------------
@@ -43,6 +54,19 @@ class BaseController extends \dmitrybtn\cp\CrudController
 
 		return $url;
 	}
+
+	//-------------------------------------------------------------------------
+    public function getBreads()
+	//-------------------------------------------------------------------------
+    {
+        if ($this->_breads === null) {
+            $this->setBreads([
+            	['label' => $this->card->title, 'url' => $this->to(['/cards/one/view/text'])],
+            ]);        	
+        }
+
+        return $this->_breads;
+    }
 
 
 	//-------------------------------------------------------------------------

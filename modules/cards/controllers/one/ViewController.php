@@ -23,6 +23,7 @@ class ViewController extends \app\modules\cards\controllers\BaseController
 		parent::init();
 		
 		$this->title = $this->card->title;
+		$this->breads = [];
 	}
 
 	//-------------------------------------------------------------------------
@@ -59,6 +60,8 @@ class ViewController extends \app\modules\cards\controllers\BaseController
 	public function actionImages()
 	//-------------------------------------------------------------------------
 	{
+		$this->showPlan = true;
+
 		return $this->render('images');
 	}
 

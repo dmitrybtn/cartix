@@ -16,17 +16,71 @@ class TestCest
             'users' => UsersFixture::className(),
         ]);
 
+    }
+
+    public function cardPlanMobile(\AcceptanceTester $I)
+    {
+        Card::deleteAll();
+
+        $I->resizeWindow(640, 1136);
+
+        // Логин
+        $I->amOnPage(Url::to(['/users/login/login']));               
+        $I->fillField('UserLogin[email]', 'root@root.ru');
+        $I->fillField('UserLogin[password]', '123');
+        $I->click('Войти');
+        $I->wait(0.5);        
+
+        // Создание техкарты
+        $I->click('.navbar-icon-context');
+        $I->wait(0.5);        
+
+        $I->click('Создать техкарту');
+        $I->wait(0.5);        
+        
+        $I->fillField('Card[name]', 'New card');
+        $I->click('Сохранить', '#card-form__controls-mobile');
+        $I->wait(0.5);
+
+        $I->seeRecord(Card::className(), ['name' => 'New card']);
+
+        // Создание остановки
+        $I->click('.navbar-icon-context');
+        $I->wait(0.5);        
+
+        $I->click('//*[@id="w3"]/li[3]/a'); // Добавить остановку
+
+        $I->fillField('CardTransfer[name]', 'New transfer');
+        $I->click('Сохранить', '#card-transfer-form__controls-mobile');
+        $I->wait(0.5);
+        $I->seeRecord(CardTransfer::className(), ['name' => 'New transfer']);
+
+
+        $I->click('New transfer', '.cards_plan_transfers-modal');
+        $I->click('Добавить объект');
+        $I->wait(0.5);
+        $I->fillField('CardObject[name]', 'New object');
+        $I->click('Сохранить', '#card-object-form__controls-mobile');
+        $I->wait(0.5);
+        $I->seeRecord(CardObject::className(), ['name' => 'New object']);
+
+
+        $I->wait(5);
+    }
+
+    public function _CardPlan(\AcceptanceTester $I)
+    {
+        Card::deleteAll();
+
+
         $I->amOnPage(Url::to(['/users/login/login']));        
         
         $I->fillField('UserLogin[email]', 'root@root.ru');
         $I->fillField('UserLogin[password]', '123');
         $I->click('Войти');
         $I->wait(0.5);        
-    }
 
-    public function CardPlan(\AcceptanceTester $I)
-    {
-        Card::deleteAll();
+
 
         $I->amOnPage(Url::to(['/cards/list/create']));  
 
@@ -80,9 +134,9 @@ class TestCest
         $I->acceptPopup();
         $I->wait(0.5);
         $I->dontSeeRecord(CardTransfer::className(), ['name' => 'New 2 transfer']);
-
-
     }
+
+
 
     
 

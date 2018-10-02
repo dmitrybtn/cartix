@@ -56,36 +56,6 @@
         }
 
 
-        /*
-	    // В десктопном режиме отслеживать прокрутку
-        if ($('#cards_content').hasClass('cards_content-desktop')) {
-
-			// Открутить на последнее сохраненное значение
-	        if (sessionStorage.getItem('scroll-cont') != null)
-	            $('#cards_content').scrollTop(sessionStorage.getItem('scroll-cont'));
-
-	        // Сохранять значение прокрутки
-		    $(window).on('beforeunload', function() {
-		        sessionStorage.setItem('scroll-cont', $('#cards_content').scrollTop());
-		    });
-
-
-        	$('#cards_content').scrollspy({target: '.cards_layout_plan--nav-spy'});
-        } else {
-
-			// Открутить на последнее сохраненное значение
-	        if (sessionStorage.getItem('scroll-body') != null)
-	            $('body').scrollTop(sessionStorage.getItem('scroll-body'));
-
-	        // Сохранять значение прокрутки
-		    $(window).on('beforeunload', function() {
-		        sessionStorage.setItem('scroll-body', $('body').scrollTop());
-		    });
-
-        }
-
-        */
-
 	    // Плавная прокрутка текста при работе с планом
 	    $('.cards_layout_plan--link').click(function() {
 	        

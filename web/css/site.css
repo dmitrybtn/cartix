@@ -19,14 +19,15 @@
 	line-height: 1.42857143em;
 }
 
-/*
 .well_list {border-top: 1px solid #ecf0f1; padding: 9px; font-size: 17px; line-height: 1.3em;}
 .well_list a {}
 
 .well_list-1 a {font-weight: bold;}
 .well_list-2 {padding-left: 25px;}
 .well_list--options {font-size: 12px; margin-top: 4px; margin-bottom: -4px; color: #7b8a8b;}
-*/
+
+
+/* .cards_text */
 
 .cards_text--header_transfer {font-size: 25px; line-height: 1.2em; margin: 15px 0 8px; font-weight: bold; text-align: center;}
 .cards_text--header_object {font-size: 20px; font-weight: bold; margin: 15px 0 8px;}

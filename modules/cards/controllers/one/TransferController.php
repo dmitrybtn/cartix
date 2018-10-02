@@ -28,18 +28,9 @@ class TransferController extends \app\modules\cards\controllers\BaseController
 		return [
 			'create' => 'Добавить остановку',
 			'update' => 'Редактировать остановку',
-			'delete' => 'Удалить',
+			'delete' => 'Удалить остановку',
 		][$actionId];
 	}
-
-	/*
-	//-------------------------------------------------------------------------
-	public static function breads($actionId, $model = null)
-	//-------------------------------------------------------------------------
-	{
-		return CardController::breads('outer', $model->card);
-	}
-	*/
 
 	//-------------------------------------------------------------------------
 	public function actionReplace($id_transfer, $index)
@@ -85,46 +76,6 @@ class TransferController extends \app\modules\cards\controllers\BaseController
 			if ($this->model->save()) return ['status' => 'ok'];
 			else return ['status' => 'error', 'html' => $this->renderPartial('form-modal-create', ['modTransfer' => $this->model])];
 		}	
-
-	}
-
-
-	//-------------------------------------------------------------------------
-	public function actionAjaxUpdate($id)
-	//-------------------------------------------------------------------------
-	{
-		Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-
-		// $this->title = '';
-
-		$this->model = $this->find($id);
-
-		if ($this->model->load(Yii::$app->request->post()))	{
-			if ($this->model->save()) return ['status' => 'ok'];
-			else return ['status' => 'error', 'html' => $this->renderPartial('form-modal-update', ['modTransfer' => $this->model])];
-		}	
-
-	}
-
-
-	//-------------------------------------------------------------------------
-	public function actionAjaxDelete($id)
-	//-------------------------------------------------------------------------
-	{
-		Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-
-		if (Yii::$app->request->isPost) {
-			try {		
-
-				$this->find($id)->delete();
-				return ['status' => 'ok'];
-
-			} catch (\Exception $e) {
-
-				return ['status' => 'error', 'message' => $e->getMessage()];
-
-			}		
-		} else return ['status' => 'error', 'message' => 'Неверный формат запроса'];
 	}
 
 
@@ -148,6 +99,25 @@ class TransferController extends \app\modules\cards\controllers\BaseController
 		return $this->render('form', [$this->model, 'returnUrl' => $returnUrl]);
 	}
 
+
+	//-------------------------------------------------------------------------
+	public function actionAjaxUpdate($id)
+	//-------------------------------------------------------------------------
+	{
+		Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+		// $this->title = '';
+
+		$this->model = $this->find($id);
+
+		if ($this->model->load(Yii::$app->request->post()))	{
+			if ($this->model->save()) return ['status' => 'ok'];
+			else return ['status' => 'error', 'html' => $this->renderPartial('form-modal-update', ['modTransfer' => $this->model])];
+		}	
+
+	}
+
+
 	//-------------------------------------------------------------------------
 	public function actionDelete($id)
 	//-------------------------------------------------------------------------
@@ -165,6 +135,27 @@ class TransferController extends \app\modules\cards\controllers\BaseController
 
 			}		
 		} throw new \yii\web\MethodNotAllowedHttpException('Неверный формат запроса!');
+	}
+
+
+	//-------------------------------------------------------------------------
+	public function actionAjaxDelete($id)
+	//-------------------------------------------------------------------------
+	{
+		Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+		if (Yii::$app->request->isPost) {
+			try {		
+
+				$this->find($id)->delete();
+				return ['status' => 'ok'];
+
+			} catch (\Exception $e) {
+
+				return ['status' => 'error', 'message' => $e->getMessage()];
+
+			}		
+		} else return ['status' => 'error', 'message' => 'Неверный формат запроса'];
 	}
 
 
