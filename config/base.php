@@ -116,7 +116,7 @@ return \yii\helpers\ArrayHelper::merge(require __DIR__ . '/../vendor/dmitrybtn/y
 
                 '<module:(users|cards|gii)>/<controller>/<action>' => '<module>/<controller>/<action>',
 
-                '<id_card>/<controller>/<action>' => 'cards/one/<controller>/<action>',
+                '<id_card>/<controller>/<action>' => 'cards/owner/<controller>/<action>',
 
             ],
         ],

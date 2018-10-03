@@ -4,7 +4,7 @@ namespace app\modules\cards\controllers;
 
 use Yii;
 
-use app\modules\cards\controllers\one\{TransferController};
+use app\modules\cards\controllers\owner\{TransferController};
 
 use app\modules\cards\models\{Card, CardImage};
 
@@ -45,7 +45,7 @@ class ViewController extends \app\modules\cards\controllers\BaseController
 		$this->menu = [
 			['label' => 'Опции'],
 			['label' => TransferController::title('create'), 'url' => '#', 'options' => ['class' => 'hidden-xs hidden-sm'], 'linkOptions' => ['data-toggle' => 'modal', 'data-target' => '.cards_plan_transfer--modal-create']],
-			['label' => TransferController::title('create'), 'url' => $this->to(['/cards/one/transfer/create']), 'options' => ['class' => 'visible-xs-block visible-sm-block']],
+			['label' => TransferController::title('create'), 'url' => $this->to(['/cards/owner/transfer/create']), 'options' => ['class' => 'visible-xs-block visible-sm-block']],
 		];
 
 		if (Yii::$app->request->isAjax) return $this->renderAjax('plan');

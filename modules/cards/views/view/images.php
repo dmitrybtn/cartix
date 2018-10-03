@@ -6,7 +6,7 @@ use yii\widgets\Pjax;
 use yii\widgets\ActiveForm;
 use app\modules\cards\models\CardImage;
 
-use app\modules\cards\controllers\one\ImageController;
+use app\modules\cards\controllers\owner\ImageController;
 
 $arrImages = [];
 
@@ -14,7 +14,7 @@ $arrImages = [];
 
 	<!-- Форма загрузки картинок -->
 	<?php // if (ImageController::checkMy('upload')): ?>
-		<?php echo Html::beginForm($this->context->to(['/cards/one/image/upload']), 'post', ['id' => 'form-image-upload', 'data-pjax' => 1, 'enctype' => 'multipart/form-data']) ?>
+		<?php echo Html::beginForm($this->context->to(['/cards/owner/image/upload']), 'post', ['id' => 'form-image-upload', 'data-pjax' => 1, 'enctype' => 'multipart/form-data']) ?>
 			
 			
 			<div class="well well-sm">
@@ -58,7 +58,7 @@ $arrImages = [];
 					<div class="caption">
 						<?php echo $modImage->marker ?>
 						<div class="pull-right">
-			            	<?php if ($this->context->card->isMy) echo Html::a('<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>', $this->context->to(['/cards/one/image/delete', 'id' => $modImage->id]), ['data-confirm' => 'Точно?', 'data-method' => 'post']) ?>					
+			            	<?php if ($this->context->card->isMy) echo Html::a('<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>', $this->context->to(['/cards/owner/image/delete', 'id' => $modImage->id]), ['data-confirm' => 'Точно?', 'data-method' => 'post']) ?>					
 						</div>						
 					</div>
 

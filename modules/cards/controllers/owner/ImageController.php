@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\cards\controllers\one;
+namespace app\modules\cards\controllers\owner;
 
 use Yii;
 use dmitrybtn\cp\SortAction;

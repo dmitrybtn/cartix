@@ -22,7 +22,7 @@
 					<div class="modal cards_plan_transfer--modal cards_plan_transfer--modal-<?= $modTransfer->id ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 						<div class="modal-dialog modal-lg" role="document">
 							<div class="modal-content">
-								<?php echo $this->render('@app/modules/cards/views/one/transfer/form-modal-update', ['modTransfer' => $modTransfer]) ?>
+								<?php echo $this->render('@app/modules/cards/views/owner/transfer/form-modal-update', ['modTransfer' => $modTransfer]) ?>
 							</div>
 						</div>
 					</div>
@@ -39,7 +39,7 @@
 								<div class="modal cards_plan_object--modal cards_plan_object--modal-<?php echo $modObject->id ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 									<div class="modal-dialog modal-lg" role="document">
 										<div class="modal-content">
-											<?php echo $this->render('@app/modules/cards/views/one/object/form-modal-update', ['modObject' => $modObject]) ?>
+											<?php echo $this->render('@app/modules/cards/views/owner/object/form-modal-update', ['modObject' => $modObject]) ?>
 										</div>
 									</div>
 								</div>
@@ -54,7 +54,7 @@
 					<div class="modal cards_plan_object--modal cards_plan_object--modal-create-<?php echo $modTransfer->id ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 						<div class="modal-dialog modal-lg" role="document">
 							<div class="modal-content">
-								<?php echo $this->render('@app/modules/cards/views/one/object/form-modal-create', ['modTransfer' => $modTransfer]) ?>
+								<?php echo $this->render('@app/modules/cards/views/owner/object/form-modal-create', ['modTransfer' => $modTransfer]) ?>
 							</div>
 						</div>
 					</div>
@@ -67,7 +67,7 @@
 		<div class="modal cards_plan_transfer--modal cards_plan_transfer--modal-create" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			<div class="modal-dialog modal-lg" role="document">
 				<div class="modal-content">
-					<?php echo $this->render('@app/modules/cards/views/one/transfer/form-modal-create') ?>
+					<?php echo $this->render('@app/modules/cards/views/owner/transfer/form-modal-create') ?>
 				</div>
 			</div>
 		</div>
@@ -86,11 +86,11 @@
 
 							<ul class="dropdown-menu">
 								<li><?php echo Html::a('К тексту', $this->context->to(['/cards/view/text', 'id' => $this->context->card->id, '#' => 'transfer-' . $modTransfer->id])) ?></li>
-								<li><?php echo Html::a('Добавить объект', $this->context->to(['/cards/one/object/create', 'id' => $modTransfer->id])) ?></li>
-								<li><?php echo Html::a('Редактировать', $this->context->to(['/cards/one/transfer/update', 'id' => $modTransfer->id])) ?></li>
-								<li><?php echo Html::a('Передвинуть выше', $this->context->to(['/cards/one/transfer/sort', 'id' => $modTransfer->id])) ?></li>
-								<li><?php echo Html::a('Передвинуть ниже', $this->context->to(['/cards/one/transfer/sort', 'id' => $modTransfer->id, 'inv' => 1])) ?></li>
-								<li><?php echo Html::a('Удалить', $this->context->to(['/cards/one/transfer/delete', 'id' => $modTransfer->id]), ['data-confirm' => 'Точно?', 'data-method' => 'post']) ?></li>
+								<li><?php echo Html::a('Добавить объект', $this->context->to(['/cards/owner/object/create', 'id' => $modTransfer->id])) ?></li>
+								<li><?php echo Html::a('Редактировать', $this->context->to(['/cards/owner/transfer/update', 'id' => $modTransfer->id])) ?></li>
+								<li><?php echo Html::a('Передвинуть выше', $this->context->to(['/cards/owner/transfer/sort', 'id' => $modTransfer->id])) ?></li>
+								<li><?php echo Html::a('Передвинуть ниже', $this->context->to(['/cards/owner/transfer/sort', 'id' => $modTransfer->id, 'inv' => 1])) ?></li>
+								<li><?php echo Html::a('Удалить', $this->context->to(['/cards/owner/transfer/delete', 'id' => $modTransfer->id]), ['data-confirm' => 'Точно?', 'data-method' => 'post']) ?></li>
 							</ul>						
 						</div>
 					
@@ -121,10 +121,10 @@
 
 								<ul class="dropdown-menu">
 									<li><?php echo Html::a('К тексту', $this->context->to(['/cards/view/text', '#' => 'object-' . $modObject->id])) ?></li>
-									<li><?php echo Html::a('Редактировать', $this->context->to(['/cards/one/object/update', 'id' => $modObject->id])) ?></li>
-									<li><?php echo Html::a('Передвинуть выше', $this->context->to(['/cards/one/object/sort', 'id' => $modObject->id])) ?></li>
-									<li><?php echo Html::a('Передвинуть ниже', $this->context->to(['/cards/one/object/sort', 'id' => $modObject->id, 'inv' => 1])) ?></li>
-									<li><?php echo Html::a('Удалить', $this->context->to(['/cards/one/object/delete', 'id' => $modObject->id], ['data-confirm' => 'Точно?', 'data-method' => 'post'])) ?></li>
+									<li><?php echo Html::a('Редактировать', $this->context->to(['/cards/owner/object/update', 'id' => $modObject->id])) ?></li>
+									<li><?php echo Html::a('Передвинуть выше', $this->context->to(['/cards/owner/object/sort', 'id' => $modObject->id])) ?></li>
+									<li><?php echo Html::a('Передвинуть ниже', $this->context->to(['/cards/owner/object/sort', 'id' => $modObject->id, 'inv' => 1])) ?></li>
+									<li><?php echo Html::a('Удалить', $this->context->to(['/cards/owner/object/delete', 'id' => $modObject->id], ['data-confirm' => 'Точно?', 'data-method' => 'post'])) ?></li>
 								</ul>						
 							</div>
 						<?php else: ?>
@@ -163,7 +163,7 @@
 
 			        $.ajax({
 			            'type': 'GET',
-			            'url': '<?php echo Url::to($this->context->to(['/cards/one/transfer/replace'])) ?>',
+			            'url': '<?php echo Url::to($this->context->to(['/cards/owner/transfer/replace'])) ?>',
 			            'data': {id_transfer: ui.item.attr('data-id-transfer'), index: ui.item.index()},
 			            'cache': false,
 			            'success':function(html){
@@ -190,7 +190,7 @@
 
 				        $.ajax({
 				            'type': 'GET',
-				            'url': '<?php echo Url::to($this->context->to(['/cards/one/object/replace'])) ?>',
+				            'url': '<?php echo Url::to($this->context->to(['/cards/owner/object/replace'])) ?>',
 				            'data': data,
 				            'cache': false,
 				            'success':function(){

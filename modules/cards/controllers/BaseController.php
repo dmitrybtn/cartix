@@ -39,10 +39,10 @@ class BaseController extends \dmitrybtn\cp\CrudController
 
         $this->menuCard = [
 	    	['label' => 'Опции техкарты'],
-			['label' => 'Настройки', 'url' => $this->to(['/cards/one/card/update'])],
+			['label' => 'Настройки', 'url' => $this->to(['/cards/owner/card/update'])],
 			['label' => $this->card->isSubscr ? 'Отписаться' : 'Подписаться', 'url' => $this->to(['/cards/card/subscribe']), 'visible' => !$this->card->isMy],
 			['label' => $this->card->is_common ? 'Убрать из базы' : 'Добавить в базу', 'url' => $this->to(['/cards/card/common'])],
-			['label' => 'Удалить техкарту', 'url' => $this->to(['/cards/one/card/delete']), 'linkOptions' => ['data' => ['confirm' => 'Точно?', 'method' => 'POST']]],
+			['label' => 'Удалить техкарту', 'url' => $this->to(['/cards/owner/card/delete']), 'linkOptions' => ['data' => ['confirm' => 'Точно?', 'method' => 'POST']]],
         ];
 	}
 
