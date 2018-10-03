@@ -32,6 +32,11 @@ class BaseController extends \dmitrybtn\cp\CrudController
 		if ($this->card === null)
 			throw new \yii\web\NotFoundHttpException('Карта не найдена!');
 
+		// Открыть доступ для владельцев карт
+		if ($this->card->isMy)
+			Yii::$app->authManager->roles['user']['rights'][] = '/cards/owner/*';
+
+
 		// Отключить хлебные крошки
         if (Yii::$app->user->isGuest)
         	$this->showBreads = false;

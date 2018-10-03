@@ -145,12 +145,14 @@
 
 						<!-- Опции техкарты -->
 						<div class="well well-sidebar">
-							<?php echo \dmitrybtn\cp\MenuWidget::widget([
-							    'items' => $this->context->menuCard,
-							    'options' => ['class' => 'nav-pills nav-stacked deskmenu'], // set this to nav-tab to get tab-styled navigation
+							<?php $objMenuCard = new Menu([
+								'items' => $this->context->menuCard,
+							]); ?>
+
+							<?php echo $objMenuCard->render([
+								'options' => ['class' => 'nav-pills nav-stacked deskmenu']
 							]); ?>
 						</div>                        
-
 
 					</div>
 
@@ -159,7 +161,12 @@
 							<div class="well well-sidebar">
 								<?php echo $objMenuContext->render([
 									'options' => ['class' => 'nav-pills nav-stacked deskmenu deskmenu-context']
-								]) ?>                    
+								]) ?>      
+
+
+
+
+
 							</div>                        
 						<?php endif ?>
 
