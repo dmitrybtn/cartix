@@ -9,7 +9,7 @@ use igogo5yo\uploadfromurl\UploadFromUrl;
 use yii\web\UploadedFile;
 
 //*****************************************************************************
-class ImageController extends \app\modules\cards\controllers\BaseController
+class ImageController extends BaseController
 //*****************************************************************************
 {
 	//-------------------------------------------------------------------------

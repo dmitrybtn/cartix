@@ -7,7 +7,7 @@ use Yii;
 use app\modules\cards\models\Card;
 
 //*****************************************************************************
-class CardController extends \app\modules\cards\controllers\BaseController
+class CardController extends BaseController
 //*****************************************************************************
 {
 

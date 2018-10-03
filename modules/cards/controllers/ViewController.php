@@ -12,10 +12,6 @@ use app\modules\cards\models\{Card, CardImage};
 class ViewController extends \app\modules\cards\controllers\BaseController
 //*****************************************************************************
 {
-	// public $layout = '@app/modules/cards/views/layouts/layout-view';
-
-	// public $showHeader = false;
-
 	public $showNavMobile = true;
 
 	//-------------------------------------------------------------------------
@@ -32,6 +28,18 @@ class ViewController extends \app\modules\cards\controllers\BaseController
 	}
 
 	//-------------------------------------------------------------------------
+	public function actions()
+	//-------------------------------------------------------------------------
+	{
+		return [
+			'error' => [
+				'class' => 'dmitrybtn\cp\ErrorAction',
+				'view' => 'error',
+			],
+		];
+	}
+
+	//-------------------------------------------------------------------------
 	public function actionRefreshPlan()
 	//-------------------------------------------------------------------------
 	{
@@ -44,7 +52,7 @@ class ViewController extends \app\modules\cards\controllers\BaseController
 	{
 		$this->menu = [
 			['label' => 'Опции'],
-			['label' => TransferController::title('create'), 'url' => '#', 'options' => ['class' => 'hidden-xs hidden-sm'], 'linkOptions' => ['data-toggle' => 'modal', 'data-target' => '.cards_plan_transfer--modal-create']],
+			['label' => TransferController::title('create'), 'url' => $this->to(['/cards/owner/transfer/create']), 'options' => ['class' => 'hidden-xs hidden-sm'], 'linkOptions' => ['data-toggle' => 'modal', 'data-target' => '.cards_plan_transfer--modal-create']],
 			['label' => TransferController::title('create'), 'url' => $this->to(['/cards/owner/transfer/create']), 'options' => ['class' => 'visible-xs-block visible-sm-block']],
 		];
 
@@ -69,5 +77,4 @@ class ViewController extends \app\modules\cards\controllers\BaseController
 
 		return $this->render('images');
 	}
-
 }

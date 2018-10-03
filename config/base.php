@@ -54,8 +54,7 @@ return \yii\helpers\ArrayHelper::merge(require __DIR__ . '/../vendor/dmitrybtn/y
                         'site/index',
                         'users/login|profile/*',
 
-                        'cards/one/*',
-                        'cards/list/*',
+                        'cards/card/*',
                     ]
                 ],
 

@@ -7,7 +7,7 @@ use dmitrybtn\cp\SortAction;
 use app\modules\cards\models\CardTransfer;
 
 //*****************************************************************************
-class TransferController extends \app\modules\cards\controllers\BaseController
+class TransferController extends BaseController
 //*****************************************************************************
 {
 	//-------------------------------------------------------------------------

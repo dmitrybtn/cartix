@@ -7,7 +7,7 @@ use dmitrybtn\cp\SortAction;
 use app\modules\cards\models\CardObject;
 
 //*****************************************************************************
-class ObjectController extends \app\modules\cards\controllers\BaseController
+class ObjectController extends BaseController
 //*****************************************************************************
 {
 	//-------------------------------------------------------------------------
