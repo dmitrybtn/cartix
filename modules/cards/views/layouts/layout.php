@@ -144,16 +144,18 @@
 
 
 						<!-- Опции техкарты -->
-						<div class="well well-sidebar">
-							<?php $objMenuCard = new Menu([
-								'items' => $this->context->menuCard,
-							]); ?>
+						<?php $objMenuCard = new Menu([
+							'items' => $this->context->menuCard,
+						]); ?>
 
-							<?php echo $objMenuCard->render([
-								'options' => ['class' => 'nav-pills nav-stacked deskmenu']
-							]); ?>
-						</div>                        
-
+						<?php if ($objMenuCard->visible): ?>
+							<div class="well well-sidebar">
+								<?php echo $objMenuCard->render([
+									'options' => ['class' => 'nav-pills nav-stacked deskmenu']
+								]); ?>								
+							</div>                        
+						<?php endif ?>
+			
 					</div>
 
 					<div class="col-md-3 col-md-offset-9 col-lg-2 col-lg-offset-8 <?= $showRightSidebar ? '' : 'hidden-md' ?>">
