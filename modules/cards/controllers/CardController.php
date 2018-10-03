@@ -7,7 +7,7 @@ use Yii;
 use app\modules\cards\models\Card;
 
 //*****************************************************************************
-class ListController extends \dmitrybtn\cp\CrudController
+class CardController extends \dmitrybtn\cp\CrudController
 //*****************************************************************************
 {
 	public $card;
@@ -37,6 +37,13 @@ class ListController extends \dmitrybtn\cp\CrudController
 		$this->model->search_string = $ss;
 
 		$this->title = static::modes[$id_mode];
+
+		if ($id_mode == 'my') {
+			$this->menu = [
+				['label' => 'Опции'],
+				['label' => self::title('create'), 'url' => ['create']],
+			];			
+		}
 
 
 		return $this->render('index', ['id_mode' => $id_mode]);

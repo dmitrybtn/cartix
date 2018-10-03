@@ -28,9 +28,7 @@ class TestCest
         $I->click('Войти');
         $I->wait(0.5);        
 
-
-
-        $I->amOnPage(Url::to(['/cards/list/create']));  
+        $I->amOnPage(Url::to(['/cards/card/create']));  
 
         // Создание техкарты
         $I->fillField('Card[name]', 'New card');

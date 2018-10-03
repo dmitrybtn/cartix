@@ -1,13 +1,13 @@
 <?php
 
-use app\modules\cards\controllers\ListController;
+use app\modules\cards\controllers\CardController;
 
 return [
 	['label' => 'Главное меню'],
 	
-	['label' => ListController::modes['my'], 'url' => ['/cards/list/index', 'id_mode' => 'my']],	
-	['label' => ListController::modes['subscr'], 'url' => ['/cards/list/index', 'id_mode' => 'subscr']],	
-	['label' => ListController::modes['common'], 'url' => ['/cards/list/index', 'id_mode' => 'common']],	
+	['label' => CardController::modes['my'], 'url' => ['/cards/card/index', 'id_mode' => 'my']],	
+	['label' => CardController::modes['subscr'], 'url' => ['/cards/card/index', 'id_mode' => 'subscr']],	
+	['label' => CardController::modes['common'], 'url' => ['/cards/card/index', 'id_mode' => 'common']],	
 
 	['label' => 'Учетные записи', 'url' => ['/users/user/index'], 'active' => '/users/user/*'],	
 ];
