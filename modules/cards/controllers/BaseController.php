@@ -29,8 +29,8 @@ class BaseController extends \dmitrybtn\cp\CrudController
 		// Загрузить карту
 		$this->card = Card::find()->bySid(Yii::$app->request->get('id_card'))->one();
 
-		if ($this->card !== null) $this->card->registerViewing();
-		else throw new \yii\web\NotFoundHttpException('Карта не найдена!');
+		if ($this->card === null)
+			throw new \yii\web\NotFoundHttpException('Карта не найдена!');
 
 		// Отключить хлебные крошки
         if (Yii::$app->user->isGuest)
@@ -39,10 +39,10 @@ class BaseController extends \dmitrybtn\cp\CrudController
 
         $this->menuCard = [
 	    	['label' => 'Опции техкарты'],
-			['label' => 'Настройки', 'url' => '#'],
-			['label' => 'Подписаться', 'url' => '#'],
-			['label' => 'Скопировать', 'url' => '#'],
-			['label' => 'Удалить техкарту', 'url' => '#'],        	
+			['label' => 'Настройки', 'url' => $this->to(['/cards/one/card/update'])],
+			['label' => $this->card->isSubscr ? 'Отписаться' : 'Подписаться', 'url' => $this->to(['/cards/card/subscribe']), 'visible' => !$this->card->isMy],
+			['label' => $this->card->is_common ? 'Убрать из базы' : 'Добавить в базу', 'url' => $this->to(['/cards/card/common'])],
+			['label' => 'Удалить техкарту', 'url' => $this->to(['/cards/one/card/delete']), 'linkOptions' => ['data' => ['confirm' => 'Точно?', 'method' => 'POST']]],
         ];
 	}
 

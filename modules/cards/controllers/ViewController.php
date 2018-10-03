@@ -24,6 +24,9 @@ class ViewController extends \app\modules\cards\controllers\BaseController
 	{
 		parent::init();
 		
+		$this->card->viewer->tst_view = time();
+		$this->card->viewer->save();
+
 		$this->title = $this->card->title;
 		$this->breads = [];
 	}

@@ -34,7 +34,7 @@ CREATE TABLE `cards` (
   PRIMARY KEY (`id`),
   KEY `id_user` (`id_user`),
   CONSTRAINT `cards_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -74,12 +74,13 @@ CREATE TABLE `cards_objects` (
   `time` int(11) unsigned DEFAULT NULL,
   `name` varchar(255) NOT NULL,
   `instruction` text NOT NULL,
+  `annotation` text NOT NULL,
   `text` text NOT NULL,
   `size` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_card` (`id_transfer`),
   CONSTRAINT `cards_objects_ibfk_1` FOREIGN KEY (`id_transfer`) REFERENCES `cards_transfers` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -135,7 +136,23 @@ CREATE TABLE `cards_transfers` (
   PRIMARY KEY (`id`),
   KEY `id_card` (`id_card`),
   CONSTRAINT `cards_transfers_ibfk_1` FOREIGN KEY (`id_card`) REFERENCES `cards` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `cards_viewers`
+--
+
+DROP TABLE IF EXISTS `cards_viewers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cards_viewers` (
+  `id_card` int(11) unsigned NOT NULL,
+  `id_user` int(11) unsigned NOT NULL,
+  `is_subscr` int(11) NOT NULL,
+  `tst_view` int(11) NOT NULL,
+  PRIMARY KEY (`id_card`,`id_user`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -184,4 +201,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-01 11:20:26
+-- Dump completed on 2018-10-03 12:36:55

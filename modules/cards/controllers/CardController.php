@@ -86,4 +86,27 @@ class CardController extends \dmitrybtn\cp\CrudController
 		return $this->render('@app/modules/cards/views/form', ['returnUrl' => $this->getReferrer(['index'])]);
 	}
 
+	//-------------------------------------------------------------------------
+	public function actionSubscribe($id_card)
+	//-------------------------------------------------------------------------
+	{
+		$modCard = Card::find()->bySid($id_card)->one();
+		$modCard->viewer->is_subscr = ($modCard->viewer->is_subscr + 1) % 2;
+		$modCard->viewer->save();
+
+		return $this->goReferrer();
+	}
+
+	//-------------------------------------------------------------------------
+	public function actionCommon($id_card)
+	//-------------------------------------------------------------------------
+	{
+		$modCard = Card::find()->bySid($id_card)->one();
+
+		$modCard->is_common = ($modCard->is_common + 1) % 2;
+		$modCard->save();
+
+		return $this->goReferrer();
+	}
+
 }

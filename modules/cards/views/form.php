@@ -13,7 +13,6 @@
 	]); ?>
 
 		<?php echo $form->field($this->context->card, 'name')->textInput(['maxlength' => true]) ?>
-		<?php echo $form->field($this->context->card, 'map')->textInput(['maxlength' => true]) ?>
 		
 		<?php echo $form->controls($returnUrl) ?>
 	<?php ActiveForm::end(); ?>

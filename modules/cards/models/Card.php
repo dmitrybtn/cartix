@@ -56,37 +56,8 @@ class Card extends \yii\db\ActiveRecord
 		return parent::beforeSave($insert);
 	}
 
-	//-------------------------------------------------------------------------
-	public function getSubscribe()
-	//-------------------------------------------------------------------------
-	{
-		if ($this->_subscribe === null) {
-			$this->_subscribe = CardSubscribe::findOne(['id_card' => $this->id, 'id_user' => Yii::$app->user->id]);
-
-			if ($this->_subscribe === null)
-				$this->_subscribe = false;
-		}
-
-		return $this->_subscribe;
-
-	} private $_subscribe;
 
 
-	//-------------------------------------------------------------------------
-	public function subscribeToggle()
-	//-------------------------------------------------------------------------
-	{
-		if ($this->subscribe === false) {
-
-			$modSubscribe = new CardSubscribe;
-			$modSubscribe->id_card = $this->id;
-			$modSubscribe->id_user = Yii::$app->user->id;
-			$modSubscribe->save();
-
-		} else $this->subscribe->delete();
-
-		$this->_subscribe = null;
-	}
 
 	//*************************************************************************
 	// Связанные записи
@@ -156,17 +127,31 @@ class Card extends \yii\db\ActiveRecord
 	}
 
 	//-------------------------------------------------------------------------
-	public function registerViewing()
+	public function getIsSubscr()
 	//-------------------------------------------------------------------------
 	{
-		if (!Yii::$app->user->isGuest) {
-			CardViewing::deleteAll(['id_card' => $this->id, 'id_user' => Yii::$app->user->id]);
-
-			$objViewing = new CardViewing;
-			$objViewing->id_card = $this->id;
-			$objViewing->save();
-		}
+		return $this->viewer->is_subscr;
 	}
+
+	//-------------------------------------------------------------------------
+	public function getViewer()
+	//-------------------------------------------------------------------------
+	{
+		if ($this->_viewer === null) {
+
+			$this->_viewer = CardViewer::findOne(['id_card' => $this->id, 'id_user' => Yii::$app->user->id]);
+
+			if ($this->_viewer === null) {
+				$this->_viewer = new CardViewer;
+				$this->_viewer->id_card = $this->id;
+			}
+		}
+
+
+		return $this->_viewer;
+
+	} private $_viewer;
+
 
 	//*************************************************************************
 	// Поиск
@@ -203,8 +188,8 @@ class CardQuery extends \yii\db\ActiveQuery
 	public function recent($limit = 10)
 	//-------------------------------------------------------------------------
 	{
-		$this->leftJoin('cards_viewings', 'cards.id = cards_viewings.id_card')->andWhere(['cards_viewings.id_user' => Yii::$app->user->id]);
-		$this->addOrderBy('cards_viewings.timestamp DESC');
+		$this->leftJoin('cards_viewers', 'cards.id = cards_viewers.id_card')->andWhere(['cards_viewers.id_user' => Yii::$app->user->id]);
+		$this->addOrderBy('cards_viewers.tst_view DESC');
 
 		return $this->limit($limit);
 	}
@@ -224,7 +209,7 @@ class CardQuery extends \yii\db\ActiveQuery
 
 			case 'subscr':
 				
-				return $this->leftJoin('cards_subscribes', 'cards.id = cards_subscribes.id_card')->andWhere(['cards_subscribes.id_user' => Yii::$app->user->id]);
+				return $this->leftJoin('cards_viewers', 'cards.id = cards_viewers.id_card')->andWhere(['cards_viewers.id_user' => Yii::$app->user->id, 'cards_viewers.is_subscr' => 1]);
 		}
 	}
 

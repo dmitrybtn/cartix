@@ -33,7 +33,7 @@
 							<li class='cards_plan_object' data-id-object='<?php echo $modObject->id ?>'>
 								<?php echo Html::a(Html::encode($modObject->name), '#', ['class' => 'cards_plan_object--header', 'data-toggle' => 'modal', 'data-target' => '.cards_plan_object--modal-' . $modObject->id]) ?>
 							
-								<div>Текст брифа и прочее</div>	
+								<div><?php echo Html::encode($modObject->annotation) ?></div>	
 
 								<!-- Объект в модальном окне -->
 								<div class="modal cards_plan_object--modal cards_plan_object--modal-<?php echo $modObject->id ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -73,7 +73,7 @@
 		</div>
 
 	<!-- Мобильная версия -->
-	<?php Pjax::begin() ?>
+	<?php // Pjax::begin() ?>
 
 		<div class="visible-xs-block cards_plan_transfers-modal">
 			<?php foreach ($this->context->card->transfers as $modTransfer): ?>
@@ -148,7 +148,7 @@
 			<?php endforeach ?>			
 		</div>
 
-	<?php Pjax::end() ?>
+	<?php // Pjax::end() ?>
 
         
 	<script>
@@ -167,7 +167,7 @@
 			            'data': {id_transfer: ui.item.attr('data-id-transfer'), index: ui.item.index()},
 			            'cache': false,
 			            'success':function(html){
-			                refreshPlan();	                
+			                // refreshPlan();	                
 			            }       
 			        });
 	            }
@@ -194,7 +194,7 @@
 				            'data': data,
 				            'cache': false,
 				            'success':function(){
-				                refreshPlan();	                
+				                // refreshPlan();	                
 				            }       
 				        });	            		
 	            	}

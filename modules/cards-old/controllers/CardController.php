@@ -87,4 +87,6 @@ class ListController extends \dmitrybtn\cp\Controller
 		return $this->render('@app/modules/cards/views/form.php', ['returnUrl' => $this->getReferrer(['index'])]);
 	}
 
+
+
 }
