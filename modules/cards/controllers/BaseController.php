@@ -61,7 +61,7 @@ class BaseController extends \dmitrybtn\cp\CrudController
     {
         if ($this->_breads === null) {
             $this->setBreads([
-            	['label' => $this->card->title, 'url' => $this->to(['/cards/one/view/text'])],
+            	['label' => $this->card->title, 'url' => $this->to(['/cards/view/text'])],
             ]);        	
         }
 

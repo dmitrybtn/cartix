@@ -53,7 +53,7 @@ class ObjectController extends \app\modules\cards\controllers\BaseController
 				return $this->ajaxValidate($this->model);
 
 			if ($this->model->save()) 
-				return $this->redirect($this->to(['/cards/one/view/plan'])); 
+				return $this->redirect($this->to(['/cards/view/plan'])); 
 		}	
 
 		return $this->render('form', ['returnUrl' => $this->getReferrer(['index'])]);
@@ -65,7 +65,7 @@ class ObjectController extends \app\modules\cards\controllers\BaseController
 	{
 		$this->model = $this->find($id);
 
-		$returnUrl = Yii::$app->request->post('returnUrl', $this->getReferrer($this->to(['/cards/one/view/plan', 'id' => $this->model->id])));
+		$returnUrl = Yii::$app->request->post('returnUrl', $this->getReferrer($this->to(['/cards/view/plan', 'id' => $this->model->id])));
 
 		if ($this->model->load(Yii::$app->request->post()))	{
 			

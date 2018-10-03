@@ -7,7 +7,7 @@
 	use yii\helpers\{Html, Url};
 ?>
 
-<div class="cards_layout_plan" id='cards_layout_plan' data-refresh='<?= Url::to($this->context->to(['/cards/one/view/refresh-plan'])) ?>'>
+<div class="cards_layout_plan" id='cards_layout_plan' data-refresh='<?= Url::to($this->context->to(['/cards/view/refresh-plan'])) ?>'>
 	<nav id='cards_layout_plan--nav' class='cards_layout_plan--nav cards_layout_plan--nav-spy'>
 		<ul class='nav nav-stacked nav-pills'>
 			<?php foreach ($this->context->transfers as $modTransfer): ?>

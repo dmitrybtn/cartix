@@ -134,9 +134,9 @@
 							<?php echo \dmitrybtn\cp\MenuWidget::widget([
 							    'items' => [
 							    	['label' => 'Навигация'],
-									['label' => 'План', 'url' => $this->context->to(['/cards/one/view/plan'])],
-									['label' => 'Текст', 'url' => $this->context->to(['/cards/one/view/text'])],
-									['label' => 'Картинки', 'url' => $this->context->to(['/cards/one/view/images'])],
+									['label' => 'План', 'url' => $this->context->to(['/cards/view/plan'])],
+									['label' => 'Текст', 'url' => $this->context->to(['/cards/view/text'])],
+									['label' => 'Картинки', 'url' => $this->context->to(['/cards/view/images'])],
 							    ],
 							    'options' => ['class' => 'nav-pills nav-stacked deskmenu'], // set this to nav-tab to get tab-styled navigation
 							]); ?>
@@ -209,16 +209,16 @@
 					    'options' => ['class' =>'nav-footer cards_footer'],
 					    'activateItems' => true,
 					    'items' => [
-					        ['label' => 'План', 'url' => $this->context->to(['/cards/one/view/plan'])],
-					        ['label' => 'Текст', 'url' => $this->context->to(['/cards/one/view/text'])],
-					        ['label' => 'Картинки', 'url' => $this->context->to(['/cards/one/view/images'])],
+					        ['label' => 'План', 'url' => $this->context->to(['/cards/view/plan'])],
+					        ['label' => 'Текст', 'url' => $this->context->to(['/cards/view/text'])],
+					        ['label' => 'Картинки', 'url' => $this->context->to(['/cards/view/images'])],
 					    ],
 					]); ?>		
 				</footer>					
 			<?php endif ?>
 
 		<!-- Сохранение и восстановление прокрутки в режиме просмотра -->
-		<?php if ($this->context->uniqueid == 'cards/one/view'): ?>
+		<?php if ($this->context->uniqueid == 'cards/view'): ?>
 			<script>
 				var id_action = '<?php echo $this->context->action->id ?>';
 				var id_card = <?php echo $this->context->card->id ?>;

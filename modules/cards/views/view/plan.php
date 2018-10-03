@@ -85,7 +85,7 @@
 							<a href="#" data-toggle="dropdown" class="dropdown-toggle"><?php echo Html::encode($modTransfer->name) ?></a>
 
 							<ul class="dropdown-menu">
-								<li><?php echo Html::a('К тексту', $this->context->to(['/cards/one/view/text', 'id' => $this->context->card->id, '#' => 'transfer-' . $modTransfer->id])) ?></li>
+								<li><?php echo Html::a('К тексту', $this->context->to(['/cards/view/text', 'id' => $this->context->card->id, '#' => 'transfer-' . $modTransfer->id])) ?></li>
 								<li><?php echo Html::a('Добавить объект', $this->context->to(['/cards/one/object/create', 'id' => $modTransfer->id])) ?></li>
 								<li><?php echo Html::a('Редактировать', $this->context->to(['/cards/one/transfer/update', 'id' => $modTransfer->id])) ?></li>
 								<li><?php echo Html::a('Передвинуть выше', $this->context->to(['/cards/one/transfer/sort', 'id' => $modTransfer->id])) ?></li>
@@ -95,7 +95,7 @@
 						</div>
 					
 					<?php else: ?>
-						<?php echo Html::a(Html::encode($modTransfer->name), $this->context->to(['/cards/one/view/text', '#' => 'transfer-' . $modTransfer->id])) ?>
+						<?php echo Html::a(Html::encode($modTransfer->name), $this->context->to(['/cards/view/text', '#' => 'transfer-' . $modTransfer->id])) ?>
 					<?php endif ?>
 
 
@@ -120,7 +120,7 @@
 								<a href="#" data-toggle="dropdown" class="dropdown-toggle"><?php echo Html::encode($modObject->name) ?></a>
 
 								<ul class="dropdown-menu">
-									<li><?php echo Html::a('К тексту', $this->context->to(['/cards/one/view/text', '#' => 'object-' . $modObject->id])) ?></li>
+									<li><?php echo Html::a('К тексту', $this->context->to(['/cards/view/text', '#' => 'object-' . $modObject->id])) ?></li>
 									<li><?php echo Html::a('Редактировать', $this->context->to(['/cards/one/object/update', 'id' => $modObject->id])) ?></li>
 									<li><?php echo Html::a('Передвинуть выше', $this->context->to(['/cards/one/object/sort', 'id' => $modObject->id])) ?></li>
 									<li><?php echo Html::a('Передвинуть ниже', $this->context->to(['/cards/one/object/sort', 'id' => $modObject->id, 'inv' => 1])) ?></li>
@@ -128,7 +128,7 @@
 								</ul>						
 							</div>
 						<?php else: ?>
-							<?php echo Html::a(Html::encode($modObject->name), $this->context->to(['/cards/one/view/text', '#' => 'object-' . $modObject->id])) ?>							
+							<?php echo Html::a(Html::encode($modObject->name), $this->context->to(['/cards/view/text', '#' => 'object-' . $modObject->id])) ?>							
 						<?php endif ?>
 
 

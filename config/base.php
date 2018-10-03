@@ -43,7 +43,7 @@ return \yii\helpers\ArrayHelper::merge(require __DIR__ . '/../vendor/dmitrybtn/y
                     'rights' => [
                         'users/login/login',
 
-                        'cards/one/view/*',
+                        'cards/view/*',
                     ]
                 ],
 
@@ -108,10 +108,12 @@ return \yii\helpers\ArrayHelper::merge(require __DIR__ . '/../vendor/dmitrybtn/y
                 'site/<action>' => 'site/<action>',
                 'list/<action>' => 'cards/list/<action>',
 
+
+                '<id_card>' => 'cards/view/plan',
+                '<id_card>/<action>' => 'cards/view/<action>',
+
                 '<module:(users|cards|gii)>/<controller>/<action>' => '<module>/<controller>/<action>',
 
-                '<id_card>' => 'cards/one/view/plan',
-                '<id_card>/<action>' => 'cards/one/view/<action>',
                 '<id_card>/<controller>/<action>' => 'cards/one/<controller>/<action>',
 
             ],

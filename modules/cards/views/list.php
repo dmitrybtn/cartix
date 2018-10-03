@@ -27,7 +27,7 @@ use yii\widgets\ListView;
 				'contentOptions' => $h = ['class' => 'action-column action-column-1'],
 				'headerOptions' => $h,
 				'urlCreator' => function($action, $modCard) {					
-					return ['/cards/one/view/plan', 'id_card' => $modCard->sid];
+					return ['/cards/view/plan', 'id_card' => $modCard->sid];
 				},
 				'buttons' => [
 				]
@@ -42,7 +42,7 @@ use yii\widgets\ListView;
 		'itemOptions' => ['class' => 'item'],
 		'itemView' => function ($modCard, $key, $index, $widget) {
 			return '<div class="well_list-plan well_list well_list-1 card_plan-mobile--transfer">' . 
-						Html::a(Html::encode($modCard->name), ['/cards/one/view/plan', 'id_card' => $modCard->sid], ['data-pjax' => 0]) . 
+						Html::a(Html::encode($modCard->name), ['/cards/view/plan', 'id_card' => $modCard->sid], ['data-pjax' => 0]) . 
 						'<div class="well_list--options">' .
 							$modCard->user->nameInit .
 						'</div>' .

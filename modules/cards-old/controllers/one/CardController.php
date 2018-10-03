@@ -57,7 +57,7 @@ class CardController extends \app\modules\cards\controllers\BaseController
 
 			case 'update':
 			case 'outer':
-				$breads[] = ['label' => static::title('view', $modCard), 'url' => ['/cards/one/view/plan']];				
+				$breads[] = ['label' => static::title('view', $modCard), 'url' => ['/cards/view/plan']];				
 		}
 
 		return $breads;

@@ -1,8 +1,10 @@
 <?php
 
-namespace app\modules\cards\controllers\one;
+namespace app\modules\cards\controllers;
 
 use Yii;
+
+use app\modules\cards\controllers\one\{TransferController};
 
 use app\modules\cards\models\{Card, CardImage};
 

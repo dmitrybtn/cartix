@@ -80,7 +80,7 @@ class CardController extends \dmitrybtn\cp\CrudController
 				return $this->ajaxValidate($this->card);
 
 			if ($this->card->save()) 
-				return $this->redirect(['/cards/one/view/plan', 'id_card' => $this->card->sid]); 
+				return $this->redirect(['/cards/view/plan', 'id_card' => $this->card->sid]); 
 		}	
 
 		return $this->render('@app/modules/cards/views/form', ['returnUrl' => $this->getReferrer(['index'])]);
