@@ -6,7 +6,7 @@ use Yii;
 
 use app\modules\cards\models\Card;
 
-use yii\helpers\Url;
+use yii\helpers\{Url, Html};
 
 
 //*****************************************************************************
@@ -58,6 +58,16 @@ class BaseController extends \dmitrybtn\cp\CrudController
 		$url['id_card'] = $this->card->sid;
 
 		return $url;
+	}
+
+	//-------------------------------------------------------------------------
+	public function a($text, $url = null, $options = [])
+	//-------------------------------------------------------------------------
+	{
+		$url = $this->to($url);
+
+		if (Yii::$app->user->can($url[0])) return Html::a($text, $url, $options);
+		else return Html::tag('span', $text, $options);
 	}
 
 	//-------------------------------------------------------------------------

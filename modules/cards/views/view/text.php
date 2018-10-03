@@ -11,7 +11,7 @@ use yii\helpers\Html;
 		
 
 			<div id='transfer-<?php echo $modTransfer->id ?>' class="cards_text--header_transfer">
-				<?php echo Html::a(Html::encode($modTransfer->name), $this->context->to(['/cards/owner/transfer/update', 'id' => $modTransfer->id])) ?>		
+				<?php echo $this->context->a(Html::encode($modTransfer->name), $this->context->to(['/cards/owner/transfer/update', 'id' => $modTransfer->id])) ?>		
 			</div>
 
 			<?php if ($modTransfer->instruction): ?>
@@ -23,7 +23,7 @@ use yii\helpers\Html;
 			<?php foreach ($modTransfer->objects as $modObject): ?>
 
 				<div id='object-<?php echo $modObject->id ?>' class="cards_text--header_object">
-					<?php echo Html::a(Html::encode($modObject->name), $this->context->to(['/cards/owner/object/update', 'id' => $modObject->id])) ?>
+					<?php echo $this->context->a(Html::encode($modObject->name), $this->context->to(['/cards/owner/object/update', 'id' => $modObject->id])) ?>
 				</div>
 
 				<?php if ($modObject->instruction): ?>

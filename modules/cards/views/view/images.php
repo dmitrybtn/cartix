@@ -13,7 +13,7 @@ $arrImages = [];
 ?>
 
 	<!-- Форма загрузки картинок -->
-	<?php // if (ImageController::checkMy('upload')): ?>
+	<?php if (Yii::$app->user->can('cards/owner')): ?>
 		<?php echo Html::beginForm($this->context->to(['/cards/owner/image/upload']), 'post', ['id' => 'form-image-upload', 'data-pjax' => 1, 'enctype' => 'multipart/form-data']) ?>
 			
 			
@@ -43,7 +43,7 @@ $arrImages = [];
 			</div>
 		<?php endif ?>
 
-	<?php // endif ?>
+	<?php endif ?>
 
 
 	<!-- Неиспользованные картинки -->
@@ -58,7 +58,7 @@ $arrImages = [];
 					<div class="caption">
 						<?php echo $modImage->marker ?>
 						<div class="pull-right">
-			            	<?php if ($this->context->card->isMy) echo Html::a('<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>', $this->context->to(['/cards/owner/image/delete', 'id' => $modImage->id]), ['data-confirm' => 'Точно?', 'data-method' => 'post']) ?>					
+			            	<?php if (Yii::$app->user->can('cards/owner')) echo Html::a('<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>', $this->context->to(['/cards/owner/image/delete', 'id' => $modImage->id]), ['data-confirm' => 'Точно?', 'data-method' => 'post']) ?>					
 						</div>						
 					</div>
 

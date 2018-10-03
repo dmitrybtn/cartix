@@ -74,7 +74,6 @@ $(function ($) {
                 'dataType': 'json',
                 'cache': false,
                 'success':function(json){
-
                     if (json.status == 'error')
                         alert(json.message);
 
@@ -83,17 +82,27 @@ $(function ($) {
                     refreshContent();
                 }       
             });
-
-
         }
 
         return false;
-
     });
 
 
 
+    // Ссылки через AJAX
+    $(document).on('click', '.cards_plan_ajax_link', function() {
 
+        $.ajax({
+            'type': 'GET',
+            'url': $(this).attr('href'),
+            'cache': false,
+            'success':function(){
+                refreshContent();
+            }       
+        });
+
+        return false;
+    });
 
 
 

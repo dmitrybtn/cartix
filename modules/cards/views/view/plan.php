@@ -16,70 +16,86 @@
 			<?php foreach ($this->context->transfers as $modTransfer): ?>
 				<li class='cards_plan_transfer' data-id-transfer='<?php echo $modTransfer->id ?>'>
 
-					<?php echo Html::a(Html::encode($modTransfer->name), '#', ['class' => 'cards_plan_transfer--header', 'data-toggle' => 'modal', 'data-target' => '.cards_plan_transfer--modal-' . $modTransfer->id]) ?>
+					<?php if (Yii::$app->user->can('cards/owner')): ?>
+						<?php echo Html::a(Html::encode($modTransfer->name), '#', ['class' => 'cards_plan_transfer--header', 'data-toggle' => 'modal', 'data-target' => '.cards_plan_transfer--modal-' . $modTransfer->id]) ?>
 
-					<!-- Остановка в модальном окне -->
-					<div class="modal cards_plan_transfer--modal cards_plan_transfer--modal-<?= $modTransfer->id ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-						<div class="modal-dialog modal-lg" role="document">
-							<div class="modal-content">
-								<?php echo $this->render('@app/modules/cards/views/owner/transfer/form-modal-update', ['modTransfer' => $modTransfer]) ?>
+						<!-- Остановка в модальном окне -->
+						<div class="modal cards_plan_transfer--modal cards_plan_transfer--modal-<?= $modTransfer->id ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+							<div class="modal-dialog modal-lg" role="document">
+								<div class="modal-content">
+									<?php echo $this->render('@app/modules/cards/views/owner/transfer/form-modal-update', ['modTransfer' => $modTransfer]) ?>
+								</div>
 							</div>
 						</div>
-					</div>
+
+					<?php else: ?>
+						<?php echo Html::tag('span', Html::encode($modTransfer->name), ['class' => 'cards_plan_transfer--header']) ?>
+					<?php endif ?>
+
 
 					<!-- Объекты -->
 					<ul class='cards_plan_objects' data-id-transfer='<?php echo $modTransfer->id ?>'>
 						<?php foreach ($modTransfer->objects as $modObject): ?>
 							<li class='cards_plan_object' data-id-object='<?php echo $modObject->id ?>'>
-								<?php echo Html::a(Html::encode($modObject->name), '#', ['class' => 'cards_plan_object--header', 'data-toggle' => 'modal', 'data-target' => '.cards_plan_object--modal-' . $modObject->id]) ?>
-							
-								<div><?php echo Html::encode($modObject->annotation) ?></div>	
+								
+								<?php if (Yii::$app->user->can('cards/owner')): ?>
+									<?php echo Html::a(Html::encode($modObject->name), '#', ['class' => 'cards_plan_object--header', 'data-toggle' => 'modal', 'data-target' => '.cards_plan_object--modal-' . $modObject->id]) ?>
 
-								<!-- Объект в модальном окне -->
-								<div class="modal cards_plan_object--modal cards_plan_object--modal-<?php echo $modObject->id ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-									<div class="modal-dialog modal-lg" role="document">
-										<div class="modal-content">
-											<?php echo $this->render('@app/modules/cards/views/owner/object/form-modal-update', ['modObject' => $modObject]) ?>
+									<!-- Объект в модальном окне -->
+									<div class="modal cards_plan_object--modal cards_plan_object--modal-<?php echo $modObject->id ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+										<div class="modal-dialog modal-lg" role="document">
+											<div class="modal-content">
+												<?php echo $this->render('@app/modules/cards/views/owner/object/form-modal-update', ['modObject' => $modObject]) ?>
+											</div>
 										</div>
 									</div>
-								</div>
+								<?php else: ?>
+									<?php echo Html::tag('span', Html::encode($modObject->name), ['class' => 'cards_plan_object--header']) ?>
+								<?php endif ?>
+
+
+								<div><?php echo Html::encode($modObject->annotation) ?></div>	
 							</li>
 						<?php endforeach ?>
 					</ul>
 
-					<!-- Создание объекта -->
+					<!-- Создание объекта -->					
+					<?php if (Yii::$app->user->can('cards/owner')): ?>
+						<?php echo Html::a('[Добавить объект]', '#', ['class' => 'text-muted cards_plan_object--create', 'data-toggle' => 'modal', 'data-target' => '.cards_plan_object--modal-create-' . $modTransfer->id]) ?>
 
-					<?php echo Html::a('[Добавить объект]', '#', ['class' => 'text-muted cards_plan_object--create', 'data-toggle' => 'modal', 'data-target' => '.cards_plan_object--modal-create-' . $modTransfer->id]) ?>
-
-					<div class="modal cards_plan_object--modal cards_plan_object--modal-create-<?php echo $modTransfer->id ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-						<div class="modal-dialog modal-lg" role="document">
-							<div class="modal-content">
-								<?php echo $this->render('@app/modules/cards/views/owner/object/form-modal-create', ['modTransfer' => $modTransfer]) ?>
+						<div class="modal cards_plan_object--modal cards_plan_object--modal-create-<?php echo $modTransfer->id ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+							<div class="modal-dialog modal-lg" role="document">
+								<div class="modal-content">
+									<?php echo $this->render('@app/modules/cards/views/owner/object/form-modal-create', ['modTransfer' => $modTransfer]) ?>
+								</div>
 							</div>
-						</div>
-					</div>
+						</div>						
+					<?php endif ?>
+
+
 				</li>
 
 			<?php endforeach ?>
 		</ul>		
 
 		<!-- Создание остановки -->
-		<div class="modal cards_plan_transfer--modal cards_plan_transfer--modal-create" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-			<div class="modal-dialog modal-lg" role="document">
-				<div class="modal-content">
-					<?php echo $this->render('@app/modules/cards/views/owner/transfer/form-modal-create') ?>
+		<?php if (Yii::$app->user->can('cards/owner')): ?>
+			<div class="modal cards_plan_transfer--modal cards_plan_transfer--modal-create" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal-dialog modal-lg" role="document">
+					<div class="modal-content">
+						<?php echo $this->render('@app/modules/cards/views/owner/transfer/form-modal-create') ?>
+					</div>
 				</div>
 			</div>
-		</div>
+		<?php endif ?>
 
-	<!-- Мобильная версия -->
-	<?php // Pjax::begin() ?>
+		<!-- Мобильная версия -->
 
 		<div class="visible-xs-block cards_plan_transfers-modal">
 			<?php foreach ($this->context->card->transfers as $modTransfer): ?>
 				<div class="well_list-plan well_list well_list-1 card_plan-mobile--transfer">
 
-					<?php if ($this->context->card->isMy): ?>
+					<?php if (Yii::$app->user->can('cards/owner')): ?>
 
 						<div class="dropdown">
 							<a href="#" data-toggle="dropdown" class="dropdown-toggle"><?php echo Html::encode($modTransfer->name) ?></a>
@@ -88,9 +104,9 @@
 								<li><?php echo Html::a('К тексту', $this->context->to(['/cards/view/text', 'id' => $this->context->card->id, '#' => 'transfer-' . $modTransfer->id])) ?></li>
 								<li><?php echo Html::a('Добавить объект', $this->context->to(['/cards/owner/object/create', 'id' => $modTransfer->id])) ?></li>
 								<li><?php echo Html::a('Редактировать', $this->context->to(['/cards/owner/transfer/update', 'id' => $modTransfer->id])) ?></li>
-								<li><?php echo Html::a('Передвинуть выше', $this->context->to(['/cards/owner/transfer/sort', 'id' => $modTransfer->id])) ?></li>
-								<li><?php echo Html::a('Передвинуть ниже', $this->context->to(['/cards/owner/transfer/sort', 'id' => $modTransfer->id, 'inv' => 1])) ?></li>
-								<li><?php echo Html::a('Удалить', $this->context->to(['/cards/owner/transfer/delete', 'id' => $modTransfer->id]), ['data-confirm' => 'Точно?', 'data-method' => 'post']) ?></li>
+								<li><?php echo Html::a('Передвинуть выше', $this->context->to(['/cards/owner/transfer/sort', 'id' => $modTransfer->id]), ['class' => 'cards_plan_ajax_link']) ?></li>
+								<li><?php echo Html::a('Передвинуть ниже', $this->context->to(['/cards/owner/transfer/sort', 'id' => $modTransfer->id, 'inv' => 1]), ['class' => 'cards_plan_ajax_link']) ?></li>
+								<li><?php echo Html::a('Удалить', $this->context->to(['/cards/owner/transfer/ajax-delete', 'id' => $modTransfer->id]), ['class' => 'cards_plan_ajax_delete']) ?></li>
 							</ul>						
 						</div>
 					
@@ -114,7 +130,7 @@
 				<?php foreach ($modTransfer->objects as $modObject): ?>
 					<div class="well_list-plan well_list well_list-2 card_plan-mobile--object">
 
-						<?php if ($this->context->card->isMy): ?>
+						<?php if (Yii::$app->user->can('cards/owner')): ?>
 
 							<div class="dropdown">
 								<a href="#" data-toggle="dropdown" class="dropdown-toggle"><?php echo Html::encode($modObject->name) ?></a>
@@ -122,9 +138,9 @@
 								<ul class="dropdown-menu">
 									<li><?php echo Html::a('К тексту', $this->context->to(['/cards/view/text', '#' => 'object-' . $modObject->id])) ?></li>
 									<li><?php echo Html::a('Редактировать', $this->context->to(['/cards/owner/object/update', 'id' => $modObject->id])) ?></li>
-									<li><?php echo Html::a('Передвинуть выше', $this->context->to(['/cards/owner/object/sort', 'id' => $modObject->id])) ?></li>
-									<li><?php echo Html::a('Передвинуть ниже', $this->context->to(['/cards/owner/object/sort', 'id' => $modObject->id, 'inv' => 1])) ?></li>
-									<li><?php echo Html::a('Удалить', $this->context->to(['/cards/owner/object/delete', 'id' => $modObject->id], ['data-confirm' => 'Точно?', 'data-method' => 'post'])) ?></li>
+									<li><?php echo Html::a('Передвинуть выше', $this->context->to(['/cards/owner/object/sort', 'id' => $modObject->id]), ['class' => 'cards_plan_ajax_link']) ?></li>
+									<li><?php echo Html::a('Передвинуть ниже', $this->context->to(['/cards/owner/object/sort', 'id' => $modObject->id, 'inv' => 1]), ['class' => 'cards_plan_ajax_link']) ?></li>
+									<li><?php echo Html::a('Удалить', $this->context->to(['/cards/owner/object/ajax-delete', 'id' => $modObject->id]), ['class' => 'cards_plan_ajax_delete']) ?></li>
 								</ul>						
 							</div>
 						<?php else: ?>
@@ -148,58 +164,56 @@
 			<?php endforeach ?>			
 		</div>
 
-	<?php // Pjax::end() ?>
+   
+	<?php if (Yii::$app->user->can('cards/owner')): ?>
+		<script>
+			$(document).ready(function(){
 
-        
-	<script>
-
-		$(document).ready(function(){
-
-			// Сортировка остановок
-	        $(".cards_plan_transfers").sortable({
-	            update: function(event, ui) {
-			        
-	            	var self = $(this);
-
-			        $.ajax({
-			            'type': 'GET',
-			            'url': '<?php echo Url::to($this->context->to(['/cards/owner/transfer/replace'])) ?>',
-			            'data': {id_transfer: ui.item.attr('data-id-transfer'), index: ui.item.index()},
-			            'cache': false,
-			            'success':function(html){
-			                // refreshPlan();	                
-			            }       
-			        });
-	            }
-	        });
-
-	        // Сортировка объектов
-	        $(".cards_plan_objects").sortable({
-	            dropOnEmpty: true,
-	            connectWith: ".cards_plan_objects",
-	            update: function(event, ui) {
-	            	if (ui.sender == null) {
-	            		
-	            		var self = $(this);
-
-	            		var data = {
-			            	id_object: ui.item.attr('data-id-object'),
-			            	id_transfer: ui.item.closest('ul').attr('data-id-transfer'),
-			            	index: ui.item.index()
-			            };
+				// Сортировка остановок
+		        $(".cards_plan_transfers").sortable({
+		            update: function(event, ui) {
+				        
+		            	var self = $(this);
 
 				        $.ajax({
 				            'type': 'GET',
-				            'url': '<?php echo Url::to($this->context->to(['/cards/owner/object/replace'])) ?>',
-				            'data': data,
+				            'url': '<?php echo Url::to($this->context->to(['/cards/owner/transfer/replace'])) ?>',
+				            'data': {id_transfer: ui.item.attr('data-id-transfer'), index: ui.item.index()},
 				            'cache': false,
-				            'success':function(){
+				            'success':function(html){
 				                // refreshPlan();	                
 				            }       
-				        });	            		
-	            	}
-	            }	            
-	        });
-		});
+				        });
+		            }
+		        });
 
-	</script>
+		        // Сортировка объектов
+		        $(".cards_plan_objects").sortable({
+		            dropOnEmpty: true,
+		            connectWith: ".cards_plan_objects",
+		            update: function(event, ui) {
+		            	if (ui.sender == null) {
+		            		
+		            		var self = $(this);
+
+		            		var data = {
+				            	id_object: ui.item.attr('data-id-object'),
+				            	id_transfer: ui.item.closest('ul').attr('data-id-transfer'),
+				            	index: ui.item.index()
+				            };
+
+					        $.ajax({
+					            'type': 'GET',
+					            'url': '<?php echo Url::to($this->context->to(['/cards/owner/object/replace'])) ?>',
+					            'data': data,
+					            'cache': false,
+					            'success':function(){
+					                // refreshPlan();	                
+					            }       
+					        });	            		
+		            	}
+		            }	            
+		        });
+			});
+		</script>
+	<?php endif ?>

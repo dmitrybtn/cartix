@@ -54,7 +54,7 @@ return \yii\helpers\ArrayHelper::merge(require __DIR__ . '/../vendor/dmitrybtn/y
                         'site/index',
                         'users/login|profile/*',
 
-                        'cards/card/*',
+                        'cards/card/index|recent|create|subscribe',
                     ]
                 ],
 
@@ -62,7 +62,8 @@ return \yii\helpers\ArrayHelper::merge(require __DIR__ . '/../vendor/dmitrybtn/y
                     'name' => 'Администратор',
                     'parent' => 'user',
                     'rights' => [
-
+                        'users/*',
+                        'cards/card/*',
                     ]
                 ],
 
