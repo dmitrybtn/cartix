@@ -49,7 +49,7 @@
 /* Адаптивная история */
 
 
-.cards_content-desktop {position: relative; height: calc(100vh - 165px); overflow-y: scroll;}
+.cards_content-desktop {position: relative; height: calc(100vh - 97px); overflow-y: scroll;}
 
 .cards_content_header {height: 60px;}
 

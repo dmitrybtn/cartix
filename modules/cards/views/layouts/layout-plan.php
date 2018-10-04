@@ -38,9 +38,7 @@
 		// Включить прокрутку основной области для десктопов
 		env = findBootstrapEnvironment();
 
-        if (env == 'lg' || env == 'md') {
-
-            $('#cards_content').addClass('cards_content-desktop');
+        if ($('#cards_content').hasClass('cards_content-desktop')) {
 
             // Сохранение прокрутки плана
             $(window).on('unload', function() {
@@ -51,12 +49,13 @@
             if (sessionStorage.getItem('scroll-plan-' + id_card) != null)
                 $('#cards_layout_plan').scrollTop(sessionStorage.getItem('scroll-plan-' + id_card));
 
-
+            // Отслеживание прокрутки
             $('#cards_content').scrollspy({target: '.cards_layout_plan--nav-spy'});
+
         }
 
 
-	    // Плавная прокрутка текста при работе с планом
+	    // Плавная прокрутка текста
 	    $('.cards_layout_plan--link').click(function() {
 	        
 	        var link = $(this)

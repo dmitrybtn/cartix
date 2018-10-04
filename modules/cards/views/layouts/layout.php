@@ -192,12 +192,11 @@
 					<div class="col-lg-8 col-lg-offset-2 <?= $showRightSidebar ? 'col-md-9' : 'col-md-8 col-md-offset-2' ?>">
 
 						<!-- MAIN AREA -->
+						<div id='cards_content' class='cards_content-desktop'>
+							<?php if ($this->context->showHeader): ?>
+								<h1 class='hidden-xs hidden-sm page-header' style='text-align: center;'><?= Html::encode($this->context->header) ?></h1>                        
+							<?php endif ?>
 
-						<?php if ($this->context->showHeader): ?>
-							<h1 class='hidden-xs hidden-sm page-header' style='text-align: center;'><?= Html::encode($this->context->header) ?></h1>                        
-						<?php endif ?>
-
-						<div id='cards_content'>
 							<?= Alert::widget() ?>
 
 							<?= $content ?>							
@@ -226,6 +225,20 @@
 				</footer>					
 			<?php endif ?>
 
+
+		<script>
+
+			$(function ($) {
+
+				env = findBootstrapEnvironment();
+
+				if (env == 'sm' || env == 'xs')
+					$('#cards_content').removeClass('cards_content-desktop');
+				
+			});
+		
+
+		</script>
 
 		<!-- Сохранение и восстановление прокрутки в режиме просмотра -->
 		<?php if ($this->context->uniqueid == 'cards/view'): ?>
