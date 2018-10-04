@@ -79,4 +79,22 @@ class ViewController extends \app\modules\cards\controllers\BaseController
 
 		return $this->render('images');
 	}
+
+	//-------------------------------------------------------------------------
+	public function actionQuotes()
+	//-------------------------------------------------------------------------
+	{
+		$this->showPlan = true;
+
+		return $this->render('quotes');
+	}
+
+
+	//-------------------------------------------------------------------------
+	public function actionOptions()
+	//-------------------------------------------------------------------------
+	{
+		return $this->render('options');
+	}
+
 }

@@ -21,6 +21,9 @@ class BaseController extends \dmitrybtn\cp\CrudController
 	public $showNavMobile = false;
 
 	public $menuCard;
+	
+	public $menuNav;
+	public $menuNavMobile;
 
 	//-------------------------------------------------------------------------
 	public function init()
@@ -48,6 +51,22 @@ class BaseController extends \dmitrybtn\cp\CrudController
 			['label' => $this->card->isSubscr ? 'Отписаться' : 'Подписаться', 'url' => $this->to(['/cards/card/subscribe']), 'visible' => !$this->card->isMy],
 			['label' => $this->card->is_common ? 'Убрать из базы' : 'Добавить в базу', 'url' => $this->to(['/cards/card/common'])],
 			['label' => 'Удалить техкарту', 'url' => $this->to(['/cards/owner/card/delete']), 'linkOptions' => ['data' => ['confirm' => 'Точно?', 'method' => 'POST']]],
+        ];
+
+        $this->menuNav =  [
+	    	['label' => 'Навигация'],
+			['label' => 'План', 'url' => $this->to(['/cards/view/plan'])],
+			['label' => 'Текст', 'url' => $this->to(['/cards/view/text'])],
+			['label' => 'Картинки', 'url' => $this->to(['/cards/view/images'])],
+			['label' => 'Цитаты', 'url' => $this->to(['/cards/view/quotes'])],
+	    ];
+
+        $this->menuNavMobile = [
+	        ['label' => '<span class="glyphicon glyphicon-th-list"></span>', 'url' => $this->to(['/cards/view/plan'])],
+	        ['label' => '<span class="glyphicon glyphicon-text-size"></span>', 'url' => $this->to(['/cards/view/text'])],
+	        ['label' => '<span class="glyphicon glyphicon-picture"></span>', 'url' => $this->to(['/cards/view/images'])],
+	        ['label' => '<span class="glyphicon glyphicon-bullhorn"></span>', 'url' => $this->to(['/cards/view/quotes'])],
+	        ['label' => '<span class="glyphicon glyphicon-cog"></span>', 'url' => $this->to(['/cards/view/options'])],
         ];
 	}
 

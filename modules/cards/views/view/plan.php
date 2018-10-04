@@ -113,7 +113,7 @@
 									<span class="glyphicon glyphicon-menu-down"></span>
 								</a>
 
-								<ul class="dropdown-menu">
+								<ul class="dropdown-menu pull-right">
 									<li><?php echo Html::a('Добавить объект', $this->context->to(['/cards/owner/object/create', 'id' => $modTransfer->id])) ?></li>
 									<li><?php echo Html::a('Редактировать', $this->context->to(['/cards/owner/transfer/update', 'id' => $modTransfer->id])) ?></li>
 									<li><?php echo Html::a('Передвинуть выше', $this->context->to(['/cards/owner/transfer/sort', 'id' => $modTransfer->id]), ['class' => 'cards_plan_ajax_link']) ?></li>

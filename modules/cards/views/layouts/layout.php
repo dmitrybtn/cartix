@@ -99,8 +99,7 @@
 					<?php endif ?>
 
 					<?php if ($this->context->showBreads): ?>
-						<?php $url = isset($this->context->breads[count($this->context->breads) - 1]['url']) ? $this->context->breads[count($this->context->breads) - 1]['url'] : Url::home() ?>
-						<?php echo Html::a('<div class="back"><</div>' . Html::encode($this->context->headerMobile), $url, ['class' => 'navbar-mobile-brand']) ?>
+						<?php echo Html::a('<div class="back"><</div>' . Html::encode($this->context->headerMobile), '/', ['class' => 'navbar-mobile-brand']) ?>
 					<?php else: ?>
 						<div class="navbar-mobile-brand"><?php echo Html::encode($this->context->headerMobile) ?></div>
 					<?php endif ?>
@@ -132,12 +131,7 @@
 						<!-- Навигация по техкарте -->
 						<div class="well well-sidebar">
 							<?php echo \dmitrybtn\cp\MenuWidget::widget([
-							    'items' => [
-							    	['label' => 'Навигация'],
-									['label' => 'План', 'url' => $this->context->to(['/cards/view/plan'])],
-									['label' => 'Текст', 'url' => $this->context->to(['/cards/view/text'])],
-									['label' => 'Картинки', 'url' => $this->context->to(['/cards/view/images'])],
-							    ],
+							    'items' => $this->context->menuNav,
 							    'options' => ['class' => 'nav-pills nav-stacked deskmenu'], // set this to nav-tab to get tab-styled navigation
 							]); ?>
 						</div>                        
@@ -155,7 +149,9 @@
 								]); ?>								
 							</div>                        
 						<?php endif ?>
-			
+						
+						<!-- Информация о техкарте -->
+						<?php echo $this->render('layout-info') ?>
 					</div>
 
 					<div class="col-md-3 col-md-offset-9 col-lg-2 col-lg-offset-8 <?= $showRightSidebar ? '' : 'hidden-md' ?>">
@@ -164,11 +160,6 @@
 								<?php echo $objMenuContext->render([
 									'options' => ['class' => 'nav-pills nav-stacked deskmenu deskmenu-context']
 								]) ?>      
-
-
-
-
-
 							</div>                        
 						<?php endif ?>
 
@@ -212,15 +203,15 @@
 			<?php endif ?>
 
 			<?php if ($this->context->showNavMobile): ?>
-				<footer class='footer-mobile'>
+
+				<div class="footer-mobile"></div>
+
+				<footer class='footer-mobile cards_footer'>
 					<?php echo Nav::widget([
-					    'options' => ['class' =>'nav-footer cards_footer'],
+					    'options' => ['class' =>'nav-footer'],
 					    'activateItems' => true,
-					    'items' => [
-					        ['label' => 'План', 'url' => $this->context->to(['/cards/view/plan'])],
-					        ['label' => 'Текст', 'url' => $this->context->to(['/cards/view/text'])],
-					        ['label' => 'Картинки', 'url' => $this->context->to(['/cards/view/images'])],
-					    ],
+					    'encodeLabels' => false,
+					    'items' => $this->context->menuNavMobile,
 					]); ?>		
 				</footer>					
 			<?php endif ?>
