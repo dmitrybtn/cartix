@@ -46,7 +46,7 @@ class TestCest
 
 
         // Создание объекта
-        $I->click('Добавить объект', '.cards_plan_transfers');
+        $I->click('Добавить объект', '.cards_plan');
         $I->fillField('CardObject[name]', 'New object');
         $I->click('Сохранить', '.cards_plan_object--modal');
         $I->wait(0.5);
@@ -117,7 +117,7 @@ class TestCest
         $I->seeRecord(CardTransfer::className(), ['name' => 'New transfer']);
 
 
-        $I->click('New transfer', '.cards_plan_transfers-modal');
+        $I->click('.dropdown-toggle', '.cards_plan-mobile');
         $I->click('Добавить объект');
         $I->wait(0.5);
         $I->fillField('CardObject[name]', 'New object');

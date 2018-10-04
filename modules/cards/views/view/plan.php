@@ -12,7 +12,7 @@
 ?>
 
 		<!-- Остановки -->
-		<ul class='cards_plan_transfers hidden-xs'>
+		<ul class='cards_plan hidden-xs'>
 			<?php foreach ($this->context->transfers as $modTransfer): ?>
 				<li class='cards_plan_transfer' data-id-transfer='<?php echo $modTransfer->id ?>'>
 
@@ -99,18 +99,19 @@
 
 		<!-- Мобильная версия -->
 
-		<div class="visible-xs-block cards_plan_transfers-modal">
+		<div class="visible-xs-block cards_plan-mobile">
 			<?php foreach ($this->context->card->transfers as $modTransfer): ?>
-				<div class="well_list-plan well_list well_list-1 card_plan-mobile--transfer">
+				<div class="well_list-plan well_list well_list-1 <?php if (Yii::$app->user->can('cards/owner')) echo 'cards_plan-mobile--item-options' ?>">
 
 					<?php echo Html::a(Html::encode($modTransfer->name), $this->context->to(['/cards/view/text', '#' => 'scroll-transfer-' . $modTransfer->id])) ?>
 
 
 					<?php if (Yii::$app->user->can('cards/owner')): ?>
-						<div class="well_list--options">
-
+						<div class='cards_plan-mobile--item_options_block'>
 							<div class="dropdown">
-								<a href="#" data-toggle="dropdown" class="dropdown-toggle text-muted">[Опции]</a>
+								<a href="#" data-toggle="dropdown" class="dropdown-toggle">
+									<span class="glyphicon glyphicon-menu-down"></span>
+								</a>
 
 								<ul class="dropdown-menu">
 									<li><?php echo Html::a('Добавить объект', $this->context->to(['/cards/owner/object/create', 'id' => $modTransfer->id])) ?></li>
@@ -128,49 +129,30 @@
 				</div>
 
 				<?php foreach ($modTransfer->objects as $modObject): ?>
-					<div class="well_list-plan well_list well_list-2 card_plan-mobile--object" style='padding-right: 30px;'>
+					<div class="well_list-plan well_list well_list-2 <?php if (Yii::$app->user->can('cards/owner')) echo 'cards_plan-mobile--item-options' ?>">
 
-						<div style='float: right; margin-right: -30px; width: 30px; text-align: right;'>
-
+						<?php if (Yii::$app->user->can('cards/owner')): ?>
+							<div class='cards_plan-mobile--item_options_block'>
 								<div class="dropdown">
-									<a href="#" data-toggle="dropdown" class="dropdown-toggle text-muted">
+									<a href="#" data-toggle="dropdown" class="dropdown-toggle">
 										<span class="glyphicon glyphicon-menu-down"></span>
 									</a>
 
 									<ul class="dropdown-menu pull-right">
-										<li><?php echo Html::a('К тексту', $this->context->to(['/cards/view/text', '#' => 'scroll-object-' . $modObject->id])) ?></li>
 										<li><?php echo Html::a('Редактировать', $this->context->to(['/cards/owner/object/update', 'id' => $modObject->id])) ?></li>
 										<li><?php echo Html::a('Передвинуть выше', $this->context->to(['/cards/owner/object/sort', 'id' => $modObject->id]), ['class' => 'cards_plan_ajax_link']) ?></li>
 										<li><?php echo Html::a('Передвинуть ниже', $this->context->to(['/cards/owner/object/sort', 'id' => $modObject->id, 'inv' => 1]), ['class' => 'cards_plan_ajax_link']) ?></li>
 										<li><?php echo Html::a('Удалить', $this->context->to(['/cards/owner/object/ajax-delete', 'id' => $modObject->id]), ['class' => 'cards_plan_ajax_delete']) ?></li>
 									</ul>						
 								</div>
-							
-						</div>
-
-						<?php echo Html::a(Html::encode($modObject->name), $this->context->to(['/cards/view/text', '#' => 'scroll-object-' . $modObject->id])) ?>							
-
-
-						<?php if (false && Yii::$app->user->can('cards/owner')): ?>
-							<div class="well_list--options">
-
-								<div class="dropdown">
-									<a href="#" data-toggle="dropdown" class="dropdown-toggle text-muted">[Опции]</a>
-
-									<ul class="dropdown-menu">
-										<li><?php echo Html::a('К тексту', $this->context->to(['/cards/view/text', '#' => 'scroll-object-' . $modObject->id])) ?></li>
-										<li><?php echo Html::a('Редактировать', $this->context->to(['/cards/owner/object/update', 'id' => $modObject->id])) ?></li>
-										<li><?php echo Html::a('Передвинуть выше', $this->context->to(['/cards/owner/object/sort', 'id' => $modObject->id]), ['class' => 'cards_plan_ajax_link']) ?></li>
-										<li><?php echo Html::a('Передвинуть ниже', $this->context->to(['/cards/owner/object/sort', 'id' => $modObject->id, 'inv' => 1]), ['class' => 'cards_plan_ajax_link']) ?></li>
-										<li><?php echo Html::a('Удалить', $this->context->to(['/cards/owner/object/ajax-delete', 'id' => $modObject->id]), ['class' => 'cards_plan_ajax_delete']) ?></li>
-									</ul>						
-								</div>
-							</div>						
-
+							</div>
 						<?php endif ?>
 
-
-
+						<?php echo Html::a(Html::encode($modObject->name), $this->context->to(['/cards/view/text', '#' => 'scroll-object-' . $modObject->id])) ?>							
+					
+							<div class="cards_plan-mobile--item_info">
+								<?php echo Html::encode($modObject->annotation) ?>
+							</div>						
 
 					</div>				
 				<?php endforeach ?>
@@ -183,7 +165,7 @@
 			$(document).ready(function(){
 
 				// Сортировка остановок
-		        $(".cards_plan_transfers").sortable({
+		        $(".cards_plan").sortable({
 		            handle: '.cards_plan--sort',
 		            cursor: 'move',
 		            update: function(event, ui) {

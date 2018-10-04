@@ -66,15 +66,19 @@
 
 /* cards_plan */
 
-.cards_plan--option {color: #b4bcc2; font-size: 13px;}
+.cards_plan {list-style-type: none; padding: 0; margin: 0 0 0 15px; z-index: 1000;}
 
 .cards_plan--sort {cursor: move;}
+.cards_plan--option {color: #b4bcc2; font-size: 13px;}
 
-.cards_plan_transfers {list-style-type: none; padding: 0; margin: 0 0 0 15px; z-index: 1000;}
+.cards_plan-mobile--item-options {padding-right: 30px;}
+.cards_plan-mobile--item_options_block {float: right; margin-right: -30px; width: 30px; text-align: right;}
+.cards_plan-mobile--item_options_block .dropdown-toggle {color: lightgray;}
+.cards_plan-mobile--item_info {font-size: 13px; margin-top: 4px; margin-bottom: -4px; color: #7b8a8b; line-height: 16px;}
+
 
 .cards_plan_transfer {margin-bottom: 10px;}
 .cards_plan_transfer--header {font-size: 22px;}
-
 
 .cards_plan_objects {list-style-type: none; padding-left: 30px; padding-top: 10px;}
 
