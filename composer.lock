@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "e9e878a72b625efcf55964a21dfa29a5",
+    "content-hash": "774627833a64b2cd7a76f3559430ac6f",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -207,6 +207,54 @@
                 "markdown-extra"
             ],
             "time": "2017-07-16T21:13:23+00:00"
+        },
+        {
+            "name": "darkdrim/yii2-simplehtmldom",
+            "version": "v1.2",
+            "source": {
+                "type": "hg",
+                "url": "https://bitbucket.org/DarkDrim/yii2-simplehtmldom",
+                "reference": "a0a3db4691ca1a55cd551fe6c569f96246bc8d65"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://bitbucket.org/DarkDrim/yii2-simplehtmldom/get/a0a3db4691ca1a55cd551fe6c569f96246bc8d65.zip",
+                "reference": "a0a3db4691ca1a55cd551fe6c569f96246bc8d65",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "darkdrim\\simplehtmldom\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "darkdrim",
+                    "email": "drimd@ukr.net"
+                }
+            ],
+            "description": "Simple HTML Dom parser for Yii2 + cURL",
+            "homepage": "https://bitbucket.org/DarkDrim/yii2-simplehtmldom",
+            "keywords": [
+                "curl",
+                "dom",
+                "extension",
+                "parse",
+                "parser",
+                "simple_html_dom",
+                "simplehtmldom",
+                "yii",
+                "yii2"
+            ],
+            "time": "2017-12-02T18:17:54+00:00"
         },
         {
             "name": "dmitrybtn/yii2-cp",

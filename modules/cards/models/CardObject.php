@@ -5,6 +5,7 @@ namespace app\modules\cards\models;
 use Yii;
 use dmitrybtn\cp\SortBehavior;
 use yii\helpers\Html;
+use darkdrim\simplehtmldom\SimpleHTMLDom;
 
 //*****************************************************************************
 class CardObject extends \yii\db\ActiveRecord
@@ -142,25 +143,28 @@ class CardObject extends \yii\db\ActiveRecord
 	public function getTextParsed()
 	//-------------------------------------------------------------------------
 	{
-		/*
-		$arrCardImages = $this->card->getImagesKeys();
-
-		$arrSearch = [];
-		$arrReplace = [];
-
-		foreach (CardImage::extract($this->text, true) as $id_image) {
-			
-			$strMarker = CardImage::marker($id_image);
-
-			$arrSearch[] = $strMarker;
-			$arrReplace[] = in_array($id_image, $arrCardImages) ? Html::a($strMarker, '#', ['class' => 'lightbox']) : Html::tag('span', $strMarker, ['class' => 'text-danger']);
-		}
-
-		return str_replace($arrSearch, $arrReplace, $this->text);
-		*/
-
 		return CardImage::replace($this->text, $this->card->getImagesKeys(), Html::a('$0', '#', ['class' => 'photoswipe']), Html::tag('span', '$0', ['class' => 'text-danger']));
 	}
+
+
+	//-------------------------------------------------------------------------
+	public function getQuotes()
+	//-------------------------------------------------------------------------
+	{
+		if ($this->_quotes === null) {
+			$objDom = (new SimpleHTMLDom)->str_get_html($this->text);
+
+			$this->_quotes = [];
+
+			foreach ($objDom->find('blockquote') as $objNode) {
+				$this->_quotes[] = $objNode->outertext;
+			}
+
+		}
+
+		return $this->_quotes;
+
+	} private $_quotes;
 
 	//*************************************************************************
 	// Поиск

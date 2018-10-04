@@ -22,7 +22,8 @@
         "dmitrybtn/yii2-cp": "dev-master",
         "igogo5yo/yii2-upload-from-url": "^1.4",
         "vova07/yii2-imperavi-widget": "*",
-        "bower-asset/photoswipe" : "~4.1.0"
+        "bower-asset/photoswipe" : "~4.1.0",
+        "darkdrim/yii2-simplehtmldom": "^1.2"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

@@ -22,7 +22,7 @@ class CardTransfer extends \yii\db\ActiveRecord
 		return [
 			'time' => 'Время до точки (мин)',
 			'name' => 'Адрес',
-			'instruction' => 'Организационные указания',
+			'annotation' => 'Аннотация',
 		];
 	}
 
@@ -33,7 +33,7 @@ class CardTransfer extends \yii\db\ActiveRecord
 		return [
 			[['name'], 'required'],
 			[['time'], 'integer'],
-			[['instruction'], 'string'],
+			[['annotation'], 'string'],
 			[['name'], 'string', 'max' => 255],
 
 			[['id_card'], 'exist', 'skipOnError' => true, 'targetClass' => Card::className(), 'targetAttribute' => ['id_card' => 'id']],
