@@ -66,6 +66,9 @@
 
 /* cards_plan */
 
+.cards_plan--option {color: #b4bcc2; font-size: 13px;}
+
+.cards_plan--sort {cursor: move;}
 
 .cards_plan_transfers {list-style-type: none; padding: 0; margin: 0 0 0 15px; z-index: 1000;}
 

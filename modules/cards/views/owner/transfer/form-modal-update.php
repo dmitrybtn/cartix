@@ -26,10 +26,6 @@
 		<?php echo $this->render('@app/modules/cards/views/owner/transfer/form-inputs', ['modTransfer' => $modTransfer, 'form' => $form]) ?>
 	</div>
 	<div class="modal-footer">
-
-		<?php echo Html::a('Удалить остановку', $this->context->to(['/cards/owner/transfer/ajax-delete', 'id' => $modTransfer->id]), ['class' => 'cards_plan_ajax_delete btn btn-danger pull-left']) ?>
-
-
 		<?php echo Html::a('Отменить', '#', ['class' => 'btn btn-default', 'data-dismiss' => 'modal']) ?>
 		<?php echo Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
 	</div>

@@ -229,6 +229,9 @@
 		<!-- Сохранение и восстановление прокрутки в режиме просмотра -->
 		<?php if ($this->context->uniqueid == 'cards/view'): ?>
 			<script>
+
+			$(function ($) {
+
 				var id_action = '<?php echo $this->context->action->id ?>';
 				var id_card = <?php echo $this->context->card->id ?>;
 				
@@ -238,7 +241,20 @@
 				var strScrollValue = sessionStorage.getItem(str_scroll + '-value');
 
 
-				$(function ($) {
+				strUrl = document.location.href;
+
+				if ((i = strUrl.indexOf("#")) != -1) {
+					
+					strHash = strUrl.substring(i + 1);
+					intTop = $('#' + strHash).position().top;
+
+			        if ($('#cards_content').hasClass('cards_content-desktop')) $('#cards_content').scrollTop(intTop);
+			        else $('body').scrollTop($('body').scrollTop() - 50);
+
+					history.pushState({}, null, strUrl.substring(0, i));
+
+				} else {
+
 
 				    // Определить прокручиваемый объект
 			        if ($('#cards_content').hasClass('cards_content-desktop')) objScrollable = $('#cards_content');
@@ -251,13 +267,18 @@
 				    });
 
 				    // Восстановить прокрутку
-				    if (strScrollAction != null && strScrollAction == id_action) 
+				    if (strScrollAction != null && strScrollAction == id_action) {
 				    	objScrollable.scrollTop(strScrollValue);
+				    }
 
-				});
+				}
 
+				
+			});
 
+				
 
+				
 
 			</script>			
 		<?php endif ?>

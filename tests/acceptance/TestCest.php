@@ -53,7 +53,7 @@ class TestCest
         $I->seeRecord(CardObject::className(), ['name' => 'New object']);
 
         // Редактирование остановки
-        $I->click('New transfer', '.cards_plan_transfers');
+        $I->click('[Редактировать]', '.cards_plan_transfer');
         $I->fillField('CardTransfer[name]', 'New 2 transfer');
         $I->click('Сохранить');
         $I->wait(0.5);
@@ -61,7 +61,7 @@ class TestCest
 
 
         // Редактирование объекта
-        $I->click('New object', '.cards_plan_transfers');
+        $I->click('[Редактировать]', '.cards_plan_object');
         $I->fillField('CardObject[name]', 'New 2 object');
         $I->click('Сохранить', '.cards_plan_object--modal');
         $I->wait(0.5);
@@ -69,15 +69,13 @@ class TestCest
 
 
         // Удаление объекта
-        $I->click('New 2 object', '.cards_plan_transfers');
-        $I->click('Удалить объект', '.cards_plan_object--modal');
+        $I->click('[Удалить]', '.cards_plan_object');
         $I->acceptPopup();
         $I->wait(0.5);
         $I->dontSeeRecord(CardObject::className(), ['name' => 'New 2 object']);
 
         // Удаление остановки
-        $I->click('New 2 transfer', '.cards_plan_transfers');
-        $I->click('Удалить остановку', '.cards_plan_transfer--modal');
+        $I->click('[Удалить]', '.cards_plan_transfer');
         $I->acceptPopup();
         $I->wait(0.5);
         $I->dontSeeRecord(CardTransfer::className(), ['name' => 'New 2 transfer']);

@@ -26,10 +26,6 @@
 		<?php echo $this->render('@app/modules/cards/views/owner/object/form-inputs', ['modObject' => $modObject, 'form' => $form]) ?>
 	</div>
 	<div class="modal-footer">
-
-		<?php echo Html::a('Удалить объект', $this->context->to(['/cards/owner/object/ajax-delete', 'id' => $modObject->id]), ['class' => 'cards_plan_ajax_delete btn btn-danger pull-left']) ?>
-
-
 		<?php echo Html::a('Отменить', '#', ['class' => 'btn btn-default', 'data-dismiss' => 'modal']) ?>
 		<?php echo Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
 	</div>
