@@ -226,63 +226,56 @@
 				</footer>					
 			<?php endif ?>
 
+
 		<!-- Сохранение и восстановление прокрутки в режиме просмотра -->
 		<?php if ($this->context->uniqueid == 'cards/view'): ?>
 			<script>
 
-			$(function ($) {
+				$(function ($) {
 
-				var id_action = '<?php echo $this->context->action->id ?>';
-				var id_card = <?php echo $this->context->card->id ?>;
-				
-				var str_scroll = 'scroll-cont-' + id_card;
-				
-				var strScrollAction = sessionStorage.getItem(str_scroll + '-action');
-				var strScrollValue = sessionStorage.getItem(str_scroll + '-value');
-
-
-				strUrl = document.location.href;
-
-				if ((i = strUrl.indexOf("#")) != -1) {
+					var id_action = '<?php echo $this->context->action->id ?>';
+					var id_card = <?php echo $this->context->card->id ?>;
 					
-					strHash = strUrl.substring(i + 1);
-					intTop = $('#' + strHash).position().top;
+					var str_scroll = 'scroll-cont-' + id_card;
+					
+					var strScrollAction = sessionStorage.getItem(str_scroll + '-action');
+					var strScrollValue = sessionStorage.getItem(str_scroll + '-value');
 
-			        if ($('#cards_content').hasClass('cards_content-desktop')) $('#cards_content').scrollTop(intTop);
-			        else $('body').scrollTop($('body').scrollTop() - 50);
+					strUrl = document.location.href;
 
-					history.pushState({}, null, strUrl.substring(0, i));
+					if ((i = strUrl.indexOf("#scroll-")) != -1) {
+						strHash = strUrl.substring(i + 8);
+						intTop = $('#' + strHash).position().top;
 
-				} else {
+				        if ($('#cards_content').hasClass('cards_content-desktop')) $('#cards_content').scrollTop(intTop);
+				        else $('body').scrollTop(intTop + 30);
+
+					} else {
+
+					    // Определить прокручиваемый объект
+				        if ($('#cards_content').hasClass('cards_content-desktop')) objScrollable = $('#cards_content');
+				        else objScrollable = $('body');
+
+				        // Сохранить прокрутку
+					    $(window).on('beforeunload', function() {
+					        sessionStorage.setItem(str_scroll + '-action', id_action);
+					        sessionStorage.setItem(str_scroll + '-value', objScrollable.scrollTop());
+					    });
 
 
-				    // Определить прокручиваемый объект
-			        if ($('#cards_content').hasClass('cards_content-desktop')) objScrollable = $('#cards_content');
-			        else objScrollable = $('body');
+					    // Восстановить прокрутку
+					    if (strScrollAction != null && strScrollValue > 0 && strScrollAction == id_action) {
+					    	objScrollable.scrollTop(strScrollValue);
+					    }
 
-			        // Сохранить прокрутку
-				    $(window).on('beforeunload', function() {
-				        sessionStorage.setItem(str_scroll + '-action', id_action);
-				        sessionStorage.setItem(str_scroll + '-value', objScrollable.scrollTop());
-				    });
+					}
 
-				    // Восстановить прокрутку
-				    if (strScrollAction != null && strScrollAction == id_action) {
-				    	objScrollable.scrollTop(strScrollValue);
-				    }
-
-				}
-
-				
-			});
-
-				
-
-				
+					
+				});
+			
 
 			</script>			
 		<?php endif ?>
-
 
 		<?php $this->endBody() ?>
 	</body>

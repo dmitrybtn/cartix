@@ -16,7 +16,7 @@
 			<?php foreach ($this->context->transfers as $modTransfer): ?>
 				<li class='cards_plan_transfer' data-id-transfer='<?php echo $modTransfer->id ?>'>
 
-					<?php echo Html::a(Html::encode($modTransfer->name), $this->context->to(['/cards/view/text', '#' => 'transfer-' . $modTransfer->id]), ['class' => 'cards_plan_transfer--header']) ?>
+					<?php echo Html::a(Html::encode($modTransfer->name), $this->context->to(['/cards/view/text', '#' => 'scroll-transfer-' . $modTransfer->id]), ['class' => 'cards_plan_transfer--header']) ?>
 
 
 					<?php if (Yii::$app->user->can('cards/owner')): ?>
@@ -43,7 +43,7 @@
 						<?php foreach ($modTransfer->objects as $modObject): ?>
 							<li class='cards_plan_object' data-id-object='<?php echo $modObject->id ?>'>
 
-								<?php echo Html::a(Html::encode($modObject->name), $this->context->to(['/cards/view/text', '#' => 'object-' . $modObject->id]), ['class' => 'cards_plan_object--header']) ?>
+								<?php echo Html::a(Html::encode($modObject->name), $this->context->to(['/cards/view/text', '#' => 'scroll-object-' . $modObject->id]), ['class' => 'cards_plan_object--header']) ?>
 								
 								<div><?php echo Html::encode($modObject->annotation) ?></div>	
 
@@ -109,7 +109,7 @@
 							<a href="#" data-toggle="dropdown" class="dropdown-toggle"><?php echo Html::encode($modTransfer->name) ?></a>
 
 							<ul class="dropdown-menu">
-								<li><?php echo Html::a('К тексту', $this->context->to(['/cards/view/text', '#' => 'transfer-' . $modTransfer->id])) ?></li>
+								<li><?php echo Html::a('К тексту', $this->context->to(['/cards/view/text', '#' => 'scroll-transfer-' . $modTransfer->id])) ?></li>
 								<li><?php echo Html::a('Добавить объект', $this->context->to(['/cards/owner/object/create', 'id' => $modTransfer->id])) ?></li>
 								<li><?php echo Html::a('Редактировать', $this->context->to(['/cards/owner/transfer/update', 'id' => $modTransfer->id])) ?></li>
 								<li><?php echo Html::a('Передвинуть выше', $this->context->to(['/cards/owner/transfer/sort', 'id' => $modTransfer->id]), ['class' => 'cards_plan_ajax_link']) ?></li>
@@ -121,8 +121,6 @@
 					<?php else: ?>
 						<?php echo Html::a(Html::encode($modTransfer->name), $this->context->to(['/cards/view/text', '#' => 'transfer-' . $modTransfer->id])) ?>
 					<?php endif ?>
-
-
 
 						<div class="well_list--options">
 							<?php if ($modTransfer->time): ?>
@@ -144,7 +142,7 @@
 								<a href="#" data-toggle="dropdown" class="dropdown-toggle"><?php echo Html::encode($modObject->name) ?></a>
 
 								<ul class="dropdown-menu">
-									<li><?php echo Html::a('К тексту', $this->context->to(['/cards/view/text', '#' => 'object-' . $modObject->id])) ?></li>
+									<li><?php echo Html::a('К тексту', $this->context->to(['/cards/view/text', '#' => 'scroll-object-' . $modObject->id])) ?></li>
 									<li><?php echo Html::a('Редактировать', $this->context->to(['/cards/owner/object/update', 'id' => $modObject->id])) ?></li>
 									<li><?php echo Html::a('Передвинуть выше', $this->context->to(['/cards/owner/object/sort', 'id' => $modObject->id]), ['class' => 'cards_plan_ajax_link']) ?></li>
 									<li><?php echo Html::a('Передвинуть ниже', $this->context->to(['/cards/owner/object/sort', 'id' => $modObject->id, 'inv' => 1]), ['class' => 'cards_plan_ajax_link']) ?></li>
