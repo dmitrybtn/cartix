@@ -4,7 +4,7 @@ namespace app\modules\cards\controllers;
 
 use Yii;
 
-use app\modules\cards\models\Card;
+use app\modules\cards\models\{Card, CardLog};
 
 use yii\helpers\{Url, Html};
 
@@ -43,7 +43,6 @@ class BaseController extends \dmitrybtn\cp\CrudController
 		// Отключить хлебные крошки
         if (Yii::$app->user->isGuest)
         	$this->showBreads = false;
-
 
         $this->menuCard = [
 	    	['label' => 'Опции техкарты'],
@@ -117,4 +116,22 @@ class BaseController extends \dmitrybtn\cp\CrudController
 
 	} private $_transfers;
 
+
+	//-------------------------------------------------------------------------
+	public function beforeAction($action)
+	//-------------------------------------------------------------------------
+	{
+	    if (!parent::beforeAction($action))
+	        return false;
+
+	    if (Yii::$app->user->id != 1) {
+	    	$modLog = new CardLog;
+	    	$modLog->id_card = $this->card->id;
+	    	$modLog->route = $action->uniqueId;
+	    	$modLog->save();	    	
+	    }
+
+
+	    return true;
+	}
 }

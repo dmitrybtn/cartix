@@ -15,10 +15,12 @@
 		'validateOnChange' => false,
 	]); ?>
 
-	<div class="row">
-		<div class="col-md-10"><?php echo $form->field($model, 'name')->textInput(['maxlength' => true]) ?></div>
-		<div class="col-md-2"><?php echo $form->field($model, 'time')->textInput() ?></div>
-	</div>
+		<div class="row">
+			<div class="col-md-10"><?php echo $form->field($model, 'name')->textInput(['maxlength' => true]) ?></div>
+			<div class="col-md-2"><?php echo $form->field($model, 'time')->textInput() ?></div>
+		</div>
+
+		<?php echo $form->field($model, 'annotation')->textarea(['rows' => 6]) ?>
 
 		<?php echo $form->field($model, 'text')->widget(Imperavi::className(), [
 			'settings' => [
@@ -32,7 +34,6 @@
 			]
 		]) ?>
 
-		<?php echo $form->field($model, 'instruction')->textarea(['rows' => 6]) ?>
 
 		<?php echo $form->controls($returnUrl) ?>
 

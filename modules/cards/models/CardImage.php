@@ -3,7 +3,7 @@
 namespace app\modules\cards\models;
 
 use Yii;
-use dmitrybtn\cp\SortBehavior;
+use dmitrybtn\sort\SortBehavior;
 
 use igogo5yo\uploadfromurl\FileFromUrlValidator;
 use igogo5yo\uploadfromurl\UploadFromUrl;

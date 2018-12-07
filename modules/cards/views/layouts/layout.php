@@ -189,8 +189,10 @@
 							<?php endif ?>
 
 							<?= Alert::widget() ?>
-
-							<?= $content ?>							
+							
+							<div class="cards_content--wrap">
+								<?= $content ?>														
+							</div>
 						</div>
 					
 					</div>

@@ -162,8 +162,10 @@ class Card extends \yii\db\ActiveRecord
 	//-------------------------------------------------------------------------
 	{
 		$objQuery = self::find();
+		$objQuery->joinWith('user');
 
-		// $objQuery->andFilterWhere(['like', '', $this->search_string]);
+		$objQuery->orFilterWhere(['like', 'cards.name', $this->search_string]);
+		$objQuery->orFilterWhere(['like', 'users.surname', $this->search_string]);
 
 		return $objQuery;
 	}

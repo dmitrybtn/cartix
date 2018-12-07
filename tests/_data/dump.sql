@@ -34,7 +34,7 @@ CREATE TABLE `cards` (
   PRIMARY KEY (`id`),
   KEY `id_user` (`id_user`),
   CONSTRAINT `cards_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -61,6 +61,30 @@ CREATE TABLE `cards_images` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `cards_logs`
+--
+
+DROP TABLE IF EXISTS `cards_logs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cards_logs` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id_user` int(10) unsigned DEFAULT NULL,
+  `id_card` int(10) unsigned NOT NULL,
+  `timestamp` int(11) NOT NULL,
+  `route` varchar(255) NOT NULL,
+  `ip` varchar(255) NOT NULL,
+  `device` varchar(255) NOT NULL,
+  `agent` varchar(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  KEY `id_user` (`id_user`),
+  KEY `id_card` (`id_card`),
+  CONSTRAINT `cards_logs_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `cards_logs_ibfk_3` FOREIGN KEY (`id_card`) REFERENCES `cards` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `cards_objects`
 --
 
@@ -73,7 +97,6 @@ CREATE TABLE `cards_objects` (
   `id_sort` int(11) NOT NULL,
   `time` int(11) unsigned DEFAULT NULL,
   `name` varchar(255) NOT NULL,
-  `instruction` text NOT NULL,
   `annotation` text NOT NULL,
   `text` text NOT NULL,
   `size` int(11) unsigned NOT NULL,
@@ -132,7 +155,7 @@ CREATE TABLE `cards_transfers` (
   `id_sort` int(11) NOT NULL,
   `time` int(11) unsigned DEFAULT NULL,
   `name` varchar(255) NOT NULL,
-  `instruction` text NOT NULL,
+  `annotation` text NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_card` (`id_card`),
   CONSTRAINT `cards_transfers_ibfk_1` FOREIGN KEY (`id_card`) REFERENCES `cards` (`id`) ON DELETE CASCADE
@@ -189,7 +212,7 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `auth` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -201,4 +224,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-03 12:36:55
+-- Dump completed on 2018-11-15 19:15:11

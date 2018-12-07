@@ -3,7 +3,7 @@
 namespace app\modules\cards\models;
 
 use Yii;
-use dmitrybtn\cp\SortBehavior;
+use dmitrybtn\sort\SortBehavior;
 use yii\helpers\Html;
 use darkdrim\simplehtmldom\SimpleHTMLDom;
 
@@ -24,7 +24,6 @@ class CardObject extends \yii\db\ActiveRecord
 		return [
 			'time' => 'Время (мин)',
 			'name' => 'Наименование объекта',
-			'instruction' => 'Методические указания',
 			'annotation' => 'Аннотация',
 			'text' => 'Рассказ',
 		];
@@ -37,7 +36,7 @@ class CardObject extends \yii\db\ActiveRecord
 		return [
 			[['name'], 'required'],
 			[['time'], 'integer'],
-			[['instruction', 'annotation', 'text'], 'string'],
+			[['annotation', 'text'], 'string'],
 			[['name'], 'string', 'max' => 255],
 
 			[['id_transfer'], 'exist', 'skipOnError' => true, 'targetClass' => CardTransfer::className(), 'targetAttribute' => ['id_transfer' => 'id']],

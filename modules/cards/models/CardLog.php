@@ -3,10 +3,12 @@
 namespace app\modules\cards\models;
 
 use Yii;
-use dmitrybtn\sort\SortBehavior;
+
+use app\modules\users\models\User;
+use Detection\MobileDetect;
 
 //*****************************************************************************
-class CardTransfer extends \yii\db\ActiveRecord
+class CardLog extends \yii\db\ActiveRecord
 //*****************************************************************************
 {
 	public $search_string;
@@ -16,13 +18,33 @@ class CardTransfer extends \yii\db\ActiveRecord
 	//*************************************************************************
 
 	//-------------------------------------------------------------------------
+	public function init()
+	//-------------------------------------------------------------------------
+	{
+		$this->timestamp = time();
+		$this->ip = Yii::$app->request->userIp;
+		$this->agent = Yii::$app->request->userAgent;
+
+		$objDetect = new MobileDetect;
+
+		if ($objDetect->isMobile()) $this->device = 'mobile';
+		elseif ($objDetect->isTablet()) $this->device = 'tablet';
+		else $this->device = 'desktop';
+
+		if (!Yii::$app->user->isGuest) 
+			$this->id_user = Yii::$app->user->id;
+	}
+
+	//-------------------------------------------------------------------------
 	public function attributeLabels()
 	//-------------------------------------------------------------------------
 	{
 		return [
-			'time' => 'Время до точки (мин)',
-			'name' => 'Адрес',
-			'annotation' => 'Аннотация',
+			'id' => 'ID',
+			'id_card' => 'Id Card',
+			'id_user' => 'Id User',
+			'timestamp' => 'Timestamp',
+			'route' => 'Route',
 		];
 	}
 
@@ -31,56 +53,26 @@ class CardTransfer extends \yii\db\ActiveRecord
 	//-------------------------------------------------------------------------
 	{
 		return [
-			[['name'], 'required'],
-			[['time'], 'integer'],
-			[['annotation'], 'string'],
-			[['name'], 'string', 'max' => 255],
-
-			[['id_card'], 'exist', 'skipOnError' => true, 'targetClass' => Card::className(), 'targetAttribute' => ['id_card' => 'id']],
-
 			[['search_string'], 'safe', 'on' => 'search'],
 		];
 	}	
-	
-	//-------------------------------------------------------------------------
-	public function behaviors()
-	//-------------------------------------------------------------------------
-	{
-		return [
-			'sort' => [
-				'class' => SortBehavior::class,
-				'attribute' => 'id_sort',
-				'group' => 'id_card',
-			]
-		];
-	}
-
 	//*************************************************************************
 	// Связанные записи
 	//*************************************************************************
+
 
 	//-------------------------------------------------------------------------
 	public function getCard()
 	//-------------------------------------------------------------------------
 	{
-		return $this->hasOne(Card::className(), ['id' => 'id_card'])->inverseOf('transfers');
+		return $this->hasOne(Card::className(), ['id' => 'id_card']);
 	}
 
 	//-------------------------------------------------------------------------
-	public function getObjects()
+	public function getUser()
 	//-------------------------------------------------------------------------
 	{
-		return $this->hasMany(CardObject::className(), ['id_transfer' => 'id'])->inverseOf('transfer')->sorted();
-	}
-
-	public function getObjectsTime()
-	{
-		$r = 0;
-
-		foreach ($this->objects as $modObject) 
-			$r += $modObject->time;
-
-		return $r;
+		return $this->hasOne(User::className(), ['id' => 'id_user']);
 	}
 
 	//*************************************************************************
@@ -91,7 +83,7 @@ class CardTransfer extends \yii\db\ActiveRecord
 	public function getTitle()
 	//-------------------------------------------------------------------------
 	{
-		return $this->name;
+		return $this->id;
 	}
 
 	//*************************************************************************
@@ -103,25 +95,21 @@ class CardTransfer extends \yii\db\ActiveRecord
 	//-------------------------------------------------------------------------
 	{
 		$objQuery = self::find();
+		$objQuery->with = ['card', 'user'];
+		$objQuery->orderBy = ['timestamp' => SORT_DESC];
 
-		// $objQuery->andFilterWhere(['like', '', $this->search_string]);
+		$objQuery->orFilterWhere(['like', 'ip', $this->search_string]);
 
 		return $objQuery;
 	}
 
-	public static function find() {return new CardTransferQuery(get_called_class());}
-	public static function tableName() {return 'cards_transfers';}
+	public static function find() {return new CardLogQuery(get_called_class());}
+	public static function tableName() {return 'cards_logs';}
 }
 
 
 //*****************************************************************************
-class CardTransferQuery extends \yii\db\ActiveQuery
+class CardLogQuery extends \yii\db\ActiveQuery
 //*****************************************************************************
 {
-	//-------------------------------------------------------------------------
-	public function sorted()
-	//-------------------------------------------------------------------------
-	{
-		return $this->addOrderBy('id_sort');
-	}
 }

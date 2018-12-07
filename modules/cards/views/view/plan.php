@@ -18,6 +18,7 @@
 
 					<?php echo Html::a(Html::encode($modTransfer->name), $this->context->to(['/cards/view/text', '#' => 'scroll-transfer-' . $modTransfer->id]), ['class' => 'cards_plan_transfer--header']) ?>
 
+					<div><?php echo Html::encode($modTransfer->annotation) ?></div>	
 
 					<?php if (Yii::$app->user->can('cards/owner')): ?>
 						<div>
@@ -103,8 +104,6 @@
 			<?php foreach ($this->context->card->transfers as $modTransfer): ?>
 				<div class="well_list-plan well_list well_list-1 <?php if (Yii::$app->user->can('cards/owner')) echo 'cards_plan-mobile--item-options' ?>">
 
-					<?php echo Html::a(Html::encode($modTransfer->name), $this->context->to(['/cards/view/text', '#' => 'scroll-transfer-' . $modTransfer->id])) ?>
-
 
 					<?php if (Yii::$app->user->can('cards/owner')): ?>
 						<div class='cards_plan-mobile--item_options_block'>
@@ -121,9 +120,14 @@
 									<li><?php echo Html::a('Удалить', $this->context->to(['/cards/owner/transfer/ajax-delete', 'id' => $modTransfer->id]), ['class' => 'cards_plan_ajax_delete']) ?></li>
 								</ul>						
 							</div>
-						</div>					
-					
+						</div>										
 					<?php endif ?>
+
+					<?php echo Html::a(Html::encode($modTransfer->name), $this->context->to(['/cards/view/text', '#' => 'scroll-transfer-' . $modTransfer->id])) ?>
+
+					<div class="cards_plan-mobile--item_info">
+						<?php echo Html::encode($modTransfer->annotation) ?>
+					</div>	
 
 
 				</div>
@@ -150,9 +154,9 @@
 
 						<?php echo Html::a(Html::encode($modObject->name), $this->context->to(['/cards/view/text', '#' => 'scroll-object-' . $modObject->id])) ?>							
 					
-							<div class="cards_plan-mobile--item_info">
-								<?php echo Html::encode($modObject->annotation) ?>
-							</div>						
+						<div class="cards_plan-mobile--item_info">
+							<?php echo Html::encode($modObject->annotation) ?>
+						</div>						
 
 					</div>				
 				<?php endforeach ?>

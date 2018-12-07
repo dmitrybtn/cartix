@@ -20,9 +20,11 @@
         "yiisoft/yii2-swiftmailer": "~2.0.0",
         "yiisoft/yii2-imagine": "*",
         "dmitrybtn/yii2-cp": "dev-master",
+        "dmitrybtn/yii2-sort": "dev-master",
         "igogo5yo/yii2-upload-from-url": "^1.4",
         "vova07/yii2-imperavi-widget": "*",
         "bower-asset/photoswipe" : "~4.1.0",
+        "mobiledetect/mobiledetectlib": "^2.8",
         "darkdrim/yii2-simplehtmldom": "^1.2"
     },
     "require-dev": {
@@ -70,10 +72,6 @@
         {
             "type": "composer",
             "url": "https://asset-packagist.org"
-        },
-        {
-            "type": "git",
-            "url": "/Users/dmitry/sites/yii2-cp/htdocs/yii2-cp"           
-        }          
+        }             
     ]
 }

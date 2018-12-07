@@ -3,7 +3,7 @@
 namespace app\modules\cards\controllers\owner;
 
 use Yii;
-use dmitrybtn\cp\SortAction;
+use dmitrybtn\sort\SortAction;
 use app\modules\cards\models\CardObject;
 
 //*****************************************************************************

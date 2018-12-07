@@ -17,17 +17,14 @@ function findBootstrapEnvironment() {
 
 
 function refreshContent() {
-
     jQuery.ajax({
         'type': 'GET',
         'url': document.location.href,
         'cache': false,
         'success':function(html){
-            $('#cards_content').html(html);
+            $('.cards_content--wrap').html(html);
         }       
-    });    
-
-    
+    });       
 }
 
 

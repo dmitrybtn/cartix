@@ -37,8 +37,8 @@
 
 .cards_text--text,
 .cards_text--text blockquote, 
-.cards_text--instruction {font-size: 17px; margin-bottom: 25px; text-align: justify;}
-.cards_text--instruction {margin: 0 0 10.5px;}
+.cards_text--annotation {font-size: 17px; margin-bottom: 25px; text-align: justify;}
+.cards_text--annotation {margin: 0 0 10.5px; color: #b4bcc2;}
 
 .cards_footer li {width: 20%;}
 .cards_footer li a {text-align: center; font-size: 20px;}

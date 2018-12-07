@@ -5,8 +5,12 @@ $config = \yii\helpers\ArrayHelper::merge(require __DIR__ . '/base.php', [
     'controllerNamespace' => 'app\commands',
 
     'controllerMap' => [
+        'reftdb' => [
+            'class' => 'dmitrybtn\cp\commands\ReftdbController',
+        ],
+
         'deploy' => [
-            'class' => 'app\commands\DeployController',
+            'class' => 'dmitrybtn\cp\commands\DeployController',
 
 			'username' => 'u0495829',
 			'host' => 'dbtn.ru',

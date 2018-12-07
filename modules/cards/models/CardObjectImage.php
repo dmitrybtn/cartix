@@ -3,7 +3,7 @@
 namespace app\modules\cards\models;
 
 use Yii;
-use dmitrybtn\cp\SortBehavior;
+use dmitrybtn\sort\SortBehavior;
 
 //*****************************************************************************
 class CardObjectImage extends \yii\db\ActiveRecord

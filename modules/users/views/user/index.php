@@ -27,7 +27,7 @@ $dataProvider = new ActiveDataProvider(['query' => $model->search()->sorted(), '
 		'layout' => "{items}",
 		'columns' => [
 			['attribute' => 'nameFullInv', 'header' => 'ФИО', 'contentOptions' => $h = [], 'headerOptions' => $h],
-			['attribute' => 'email', 'format' => 'email', 'contentOptions' => $h = ['style' => 'width: 200px;'], 'headerOptions' => $h],
+			['attribute' => 'email', 'format' => 'email', 'contentOptions' => $h = ['style' => ''], 'headerOptions' => $h],
 			['attribute' => 'role', 'contentOptions' => $h = ['style' => 'width: 200px;'], 'headerOptions' => $h],
 
 			[

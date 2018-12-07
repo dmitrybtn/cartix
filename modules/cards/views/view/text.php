@@ -14,9 +14,9 @@ use yii\helpers\Html;
 				<?php echo $this->context->a(Html::encode($modTransfer->name), $this->context->to(['/cards/owner/transfer/update', 'id' => $modTransfer->id])) ?>		
 			</div>
 
-			<?php if ($modTransfer->instruction): ?>
-				<div class="cards_text--instruction text-muted">
-					<?php echo Yii::$app->formatter->asHtml($modTransfer->instruction) ?>
+			<?php if ($modTransfer->annotation): ?>
+				<div class="cards_text--annotation">
+					<?php echo Yii::$app->formatter->asHtml($modTransfer->annotation) ?>
 				</div>
 			<?php endif ?>
 
@@ -26,9 +26,9 @@ use yii\helpers\Html;
 					<?php echo $this->context->a(Html::encode($modObject->name), $this->context->to(['/cards/owner/object/update', 'id' => $modObject->id])) ?>
 				</div>
 
-				<?php if ($modObject->instruction): ?>
-					<div class="cards_text--instruction text-muted">
-						<?php echo Yii::$app->formatter->asHtml($modObject->instruction) ?>
+				<?php if ($modObject->annotation): ?>
+					<div class="cards_text--annotation">
+						<?php echo Yii::$app->formatter->asHtml($modObject->annotation) ?>
 					</div>
 				<?php endif ?>
 
