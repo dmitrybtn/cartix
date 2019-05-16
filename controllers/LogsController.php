@@ -6,7 +6,7 @@ use Yii;
 use app\modules\cards\models\{Card, CardLog};
 
 //*****************************************************************************
-class SpyController extends \dmitrybtn\cp\Controller
+class LogsController extends \dmitrybtn\cp\Controller
 //*****************************************************************************
 {
 	//-------------------------------------------------------------------------

@@ -108,7 +108,7 @@ return \yii\helpers\ArrayHelper::merge(require __DIR__ . '/../vendor/dmitrybtn/y
                 'gii' => 'gii/default/index',
 
                 'site/<action>' => 'site/<action>',
-                'spy/<action>' => 'spy/<action>',
+                'logs/<action>' => 'logs/<action>',
 
                 'list/<action>' => 'cards/list/<action>',
 

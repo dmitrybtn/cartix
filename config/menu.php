@@ -11,7 +11,7 @@ return [
 
 	['label' => 'Администрирование', 'visible' => Yii::$app->user->can('users/user')],
 	['label' => 'Учетные записи', 'url' => ['/users/user/index'], 'active' => '/users/user/*'],	
-	['label' => 'Все техкарты', 'url' => ['/spy/cards']],	
-	['label' => 'Логи', 'url' => ['/spy/logs']],	
+	['label' => 'Все техкарты', 'url' => ['/logs/cards']],	
+	['label' => 'Логи', 'url' => ['/logs/logs']],	
 
 ];
