@@ -151,14 +151,14 @@ class CardObject extends \yii\db\ActiveRecord
 	//-------------------------------------------------------------------------
 	{
 		if ($this->_quotes === null) {
-			$objDom = (new SimpleHTMLDom)->str_get_html($this->text);
 
 			$this->_quotes = [];
 
-			foreach ($objDom->find('blockquote') as $objNode) {
-				$this->_quotes[] = $objNode->outertext;
+			if ($objDom = (new SimpleHTMLDom)->str_get_html($this->text)) {
+				foreach ($objDom->find('blockquote') as $objNode) {
+					$this->_quotes[] = $objNode->outertext;
+				}
 			}
-
 		}
 
 		return $this->_quotes;
